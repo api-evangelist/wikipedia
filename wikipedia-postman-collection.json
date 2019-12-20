@@ -1,0 +1,1632 @@
+{
+    "id": "b203c608eb0195e507f52404d48023dd",
+    "name": "Wikipedia",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "b8e2b406da60b915059e2d4adaa107f1",
+            "name": "Check and normalize a TeX formula.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/media\/math\/check\/{type}",
+            "description": "Checks the supplied TeX formula for correctness and returns the\nnormalised formula representation as well as information about\nidentifiers. Available types are tex and inline-tex. The response\ncontains the `x-resource-location` header which can be used to retrieve\nthe render of the checked formula in one of the supported rendering\nformats. Just append the value of the header to `\/media\/math\/{format}\/`\nand perform a GET request against that URL.\n\nStability: [stable](https:\/\/www.mediawiki.org\/wiki",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "type",
+                    "description": "The input type of the given formula; can be tex or inline-tex",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "q",
+                    "description": "The formula to check",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "62cd513ea1b2513e3f37c7c2a31cc94c",
+            "name": "Get a previously-stored formula",
+            "url": "httpswikimedia.org\/api\/rest_v1\/media\/math\/formula\/{hash}",
+            "description": "Returns the previously-stored formula via `\/media\/math\/check\/{type}` for\nthe given hash.\n\nStability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "hash",
+                    "description": "The hash string of the previous POST data",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "d894872488f264c0ee5025795f884713",
+            "name": "Get rendered formula in the given format.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/media\/math\/render\/{format}\/{hash}",
+            "description": "Given a request hash, renders a TeX formula into its mathematic\nrepresentation in the given format. When a request is issued to the\n`\/media\/math\/check\/{format}` POST endpoint, the response contains the\n`x-resource-location` header denoting the hash ID of the POST data. Once\nobtained, this endpoint has to be used to obtain the actual render.\n\nStability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "format",
+                    "description": "The output format; can be svg or mml",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "hash",
+                    "description": "The hash string of the previous POST data",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "bf12eaaa335d58815242e95ee328ea1a",
+            "name": "Get the sum of absolute value of text bytes difference between current edit and\nprevious one.\n",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/bytes-difference\/absolute\/aggregate\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of absolute bytes\ndifference sums. You can filter by editors-type (all-editor-types, anonymous, group-bot,\nname-bot, user) and page-type (all-page-types, content, non-content). You can choose\nbetween daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 lice",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "4474291ea4d62d2409a2ca176660594b",
+            "name": "Get the sum of net text bytes difference between current edit and previous one.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/bytes-difference\/net\/aggregate\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of bytes difference net\nsums. You can filter by editors-type (all-editor-types, anonymous, group-bot, name-bot,\nuser) and page-type (all-page-types, content or non-content). You can choose between\ndaily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "f2a8799257ea9f080c77a9984d436663",
+            "name": "Get edited-pages counts for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/aggregate\/{project}\/{editor-type}\/{page-type}\/{activity-level}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of its edited-pages counts.\nYou can filter by editor-type (all-editor-types, anonymous, group-bot, name-bot, user),\npage-type (all-page-types, content or non-content) or activity-level (1..4-edits,\n5..24-edits, 25..99-edits, 100..-edits). You can choose between daily and monthly\ngranularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data acces",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "activity",
+                    "description": "If you want to filter by activity-level, use one of 1..4-edits, 5..24-edits,\n25..99-edits or 100..-edits. If you are interested in edited-pages regardless\nof their activity level, use all-activity-levels.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "fc888b3151f290c4d2effc74a8e01ddf",
+            "name": "Get new pages counts for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/new\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of its new pages counts.\nYou can filter by editor type (all-editor-types, anonymous, group-bot, name-bot, user)\nor page-type (all-page-types, content or non-content). You can choose between daily and\nmonthly granularity as well.\nThe new pages value is computed as follow:\n  [number of created pages] - [number of deleted pages] + [number of restored pages]\nfor the chosen filters.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "2de41dd0fc94d12cf646d99d7bf8ac58",
+            "name": "Get top 100 edited-pages by absolute bytes-difference.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/top-by-absolute-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages\nby absolute bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can\nchoose between daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available un",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "dbace338db274246672a3252a8761347",
+            "name": "Get top 100 edited-pages by edits count.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/top-by-edits\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages\nby edits count. You can filter by editor-type (all-editor-types, anonymous, group-bot,\nname-bot, user) or page-type (all-page-types, content or non-content). You can choose\nbetween daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "8598f9e70ce093dc368bbe193ac646f2",
+            "name": "Get top 100 edited-pages by net bytes-difference.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/top-by-net-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages\nby net bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can\nchoose between daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under t",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "114de4bcfc232cec89e526d0fd2b79b4",
+            "name": "Get editors counts for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/aggregate\/{project}\/{editor-type}\/{page-type}\/{activity-level}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of its editors counts.\nYou can filter by editory-type (all-editor-types, anonymous, group-bot, name-bot, user),\npage-type (all-page-types, content or non-content) or activity-level (1..4-edits,\n5..24-edits, 25..99-edits or 100..-edits). You can choose between daily and monthly\ngranularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessi",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "activity",
+                    "description": "If you want to filter by activity-level, use one of 1..4-edits, 5..24-edits,\n25..99-edits or 100..-edits. If you are interested in edited-pages regardless\nof their activity level, use all-activity-levels.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "7927729a3b22b6e9c178d531b58add88",
+            "name": "Get top 100 editors by absolute bytes-difference.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/top-by-absolute-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by\nabsolute bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can\nchoose between daily and monthly granularity as well. The user_id returned is either the\nmediawiki user_id if user is registered, or his\/her IP if the user is anonymous.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/AP",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "22f15436a30390b8898e5b8bed60fa70",
+            "name": "Get top 100 editors by edits count.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/top-by-edits\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by\nedits count. You can filter by editor-type (all-editor-types, anonymous, group-bot,\nname-bot, user) or page-type (all-page-types, content or non-content). You can choose\nbetween daily and monthly granularity as well. The user_id returned is either the\nmediawiki user_id if user is registered, or his\/her IP if the user is anonymous.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#E",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "fae6b07c93a57ea57bfef4815c6b54df",
+            "name": "Get top 100 editors by net bytes-difference.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/top-by-net-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by\nnet bytes-difference. You can filter by editor-type (all-editor-types, anonymous, group-bot,\nname-bot, user) or page-type (all-page-types, content or non-content). You can choose\nbetween daily and monthly granularity as well. The user_id returned is either the mediawiki\nuser_id if user is registered, or his\/her IP if the user is anonymous.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_ver",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "bf0633a64851c50ac8fb634066f7cc2d",
+            "name": "Get edits counts for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edits\/aggregate\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of edits counts.\nYou can filter by editors-type (all-editor-types, anonymous, bot, registered) and\npage-type (all-page-types, content or non-content). You can choose between daily and\nmonthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommo",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "editor",
+                    "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "page",
+                    "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "0dfd36f9d3bd3c9c6a7196727070c5ce",
+            "name": "Given a project and a date range, returns a timeseries of pagecounts. You can filter by access site (mobile or desktop) and you can choose between monthly, daily and hourly granularity as well.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/legacy\/pagecounts\/aggregate\/{project}\/{access-site}\/{granularity}\/{start}\/{end}",
+            "description": "Given a project and a date range, returns a timeseries of pagecounts.\nYou can filter by access site (mobile or desktop) and you can choose between monthly,\ndaily and hourly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access",
+                    "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "93811aedeb058ca1800fc2a14b554bb9",
+            "name": "Get pageview counts for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/aggregate\/{project}\/{access}\/{agent}\/{granularity}\/{start}\/{end}",
+            "description": "Given a date range, returns a timeseries of pageview counts. You can filter by project,\naccess method and\/or agent type. You can choose between daily and hourly granularity\nas well.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access",
+                    "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "agent",
+                    "description": "If you want to filter by agent type, use one of user or spider. If you are interested\nin pageviews regardless of agent type, use all-agents.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "6a42bd903a9616de18d054cbe356a813",
+            "name": "Get pageview counts for a page.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/per-article\/{project}\/{access}\/{agent}\/{article}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki article and a date range, returns a daily timeseries of its pageview\ncounts. You can also filter by access method and\/or agent type.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access",
+                    "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "agent",
+                    "description": "If you want to filter by agent type, use one of user or spider. If you are interested\nin pageviews regardless of agent type, use all-agents.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "article",
+                    "description": "'The title of any article in the specified project. Any spaces should be replaced\nwith underscores. It also should be URI-encoded, so that non-URI-safe characters like\n%, \/ or ? are accepted. Example: Are_You_the_One%3F'.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "e062e20f108f4fa54bb8cb084474093d",
+            "name": "Get pageviews by country and access method.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/top-by-country\/{project}\/{access}\/{year}\/{month}",
+            "description": "Lists the pageviews to this project, split by country of origin for a given month.\nBecause of privacy reasons, pageviews are given in a bucketed format, and countries\nwith less than 100 views do not get reported.\nStability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access",
+                    "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "year",
+                    "description": "The year of the date for which to retrieve top countries, in YYYY format.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "month",
+                    "description": "The month of the date for which to retrieve top countries, in MM format.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "0cd63b3507db16c3533726e5d9511751",
+            "name": "Get the most viewed articles for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/top\/{project}\/{access}\/{year}\/{month}\/{day}",
+            "description": "Lists the 1000 most viewed articles for a given project and timespan (month or day).\nYou can filter by access method.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access",
+                    "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "year",
+                    "description": "The year of the date for which to retrieve top countries, in YYYY format.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "month",
+                    "description": "The month of the date for which to retrieve top countries, in MM format.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "day",
+                    "description": "The day of the date for which to retrieve top articles, in DD format.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "da27b6482b673b998949ea04747c890b",
+            "name": "Get newly registered users counts for a project.",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/registered-users\/new\/{project}\/{granularity}\/{start}\/{end}",
+            "description": "Given a Mediawiki project and a date range, returns a timeseries of its newly registered\nusers counts. You can choose between daily and monthly granularity. The newly registered\nusers value is computed with self-created users only, not auto-login created ones.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdoma",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "8fadb1c87210b1734c68eebbd4dba6ce",
+            "name": "Get unique devices count per project",
+            "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/unique-devices\/{project}\/{access-site}\/{granularity}\/{start}\/{end}",
+            "description": "Given a project and a date range, returns a timeseries of unique devices counts.\nYou need to specify a project, and can filter by accessed site (mobile or desktop).\nYou can choose between daily and hourly granularity as well.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "project",
+                    "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "access",
+                    "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "granularity",
+                    "description": "Time unit for the response data. As of today, supported values are daily and monthly\n",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "start",
+                    "description": "The date of the first day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "end",
+                    "description": "The date of the last day to include, in YYYYMMDD format",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "bf1d74d87f40f550e1e6796995b34259",
+            "name": "Machine-translate content",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/html\/from\/{from_lang}\/to\/{to_lang}",
+            "description": "Fetches the machine translation for the posted content from the source\nto the destination language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "from_lang",
+                    "description": "The source language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "to_lang",
+                    "description": "The target language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "html",
+                    "description": "The HTML content to translate",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "472da6342e6b04b12663282ef085cc3e",
+            "name": "Machine-translate content",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/html\/from\/{from_lang}\/to\/{to_lang}\/{provider}",
+            "description": "Fetches the machine translation for the posted content from the source\nto the destination language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "from_lang",
+                    "description": "The source language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "to_lang",
+                    "description": "The target language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "provider",
+                    "description": "The machine translation provider id",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "html",
+                    "description": "The HTML content to translate",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "e69c9e51884bccc9da90d04f5908f9e3",
+            "name": "Lists the language pairs supported by the back-end",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/list\/languagepairs\/",
+            "description": "Fetches the list of language pairs the back-end service can translate\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "a1b199bce1236833ee57c642d86fc3b9",
+            "name": "Lists the tools available for a language pair",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/list\/pair\/{from}\/{to}\/",
+            "description": "Fetches the list of tools that are available for the given pair of languages.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "from",
+                    "description": "The source language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "to",
+                    "description": "The target language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "2c969f10662120938e5832ba8c662866",
+            "name": "Lists the tools and language pairs available for the given tool category",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/list\/tool\/{tool}\/",
+            "description": "Fetches the list of tools and all of the language pairs it can translate\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "tool",
+                    "description": "The tool category to list tools and language pairs for",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "1bf673602be6438d8439d4e437113eaf",
+            "name": "Fetch the dictionary meaning of a word",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/word\/from\/{from_lang}\/to\/{to_lang}\/{word}",
+            "description": "Fetches the dictionary meaning of a word from a language and displays\nit in the target language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "from_lang",
+                    "description": "The source language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "to_lang",
+                    "description": "The target language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "word",
+                    "description": "The word to lookup",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        },
+        {
+            "id": "c42b841320879d239848e16ae9ea20b4",
+            "name": "Fetch the dictionary meaning of a word",
+            "url": "httpswikimedia.org\/api\/rest_v1\/transform\/word\/from\/{from_lang}\/to\/{to_lang}\/{word}\/{provider}",
+            "description": "Fetches the dictionary meaning of a word from a language and displays\nit in the target language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "from_lang",
+                    "description": "The source language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "to_lang",
+                    "description": "The target language code",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "word",
+                    "description": "The word to lookup",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "provider",
+                    "description": "The machine translation provider id",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "rawModeData": ""
+        }
+    ]
+}
