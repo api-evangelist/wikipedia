@@ -1,5 +1,5 @@
 {
-    "id": "b203c608eb0195e507f52404d48023dd",
+    "id": "c05c9f789367c975ef6d663bb31c5119",
     "name": "Wikipedia",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "b8e2b406da60b915059e2d4adaa107f1",
+            "id": "79bcc1fb5c609b118b7dfeec73916c24",
             "name": "Check and normalize a TeX formula.",
             "url": "httpswikimedia.org\/api\/rest_v1\/media\/math\/check\/{type}",
             "description": "Checks the supplied TeX formula for correctness and returns the\nnormalised formula representation as well as information about\nidentifiers. Available types are tex and inline-tex. The response\ncontains the `x-resource-location` header which can be used to retrieve\nthe render of the checked formula in one of the supported rendering\nformats. Just append the value of the header to `\/media\/math\/{format}\/`\nand perform a GET request against that URL.\n\nStability: [stable](https:\/\/www.mediawiki.org\/wiki",
@@ -44,11 +44,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "62cd513ea1b2513e3f37c7c2a31cc94c",
+            "id": "0db4d432bdf5e6fa9793648a41f89962",
             "name": "Get a previously-stored formula",
             "url": "httpswikimedia.org\/api\/rest_v1\/media\/math\/formula\/{hash}",
             "description": "Returns the previously-stored formula via `\/media\/math\/check\/{type}` for\nthe given hash.\n\nStability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable).\n",
@@ -75,11 +75,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "d894872488f264c0ee5025795f884713",
+            "id": "f3a6027c611ad65ab6f23393dc22fcea",
             "name": "Get rendered formula in the given format.",
             "url": "httpswikimedia.org\/api\/rest_v1\/media\/math\/render\/{format}\/{hash}",
             "description": "Given a request hash, renders a TeX formula into its mathematic\nrepresentation in the given format. When a request is issued to the\n`\/media\/math\/check\/{format}` POST endpoint, the response contains the\n`x-resource-location` header denoting the hash ID of the POST data. Once\nobtained, this endpoint has to be used to obtain the actual render.\n\nStability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable).\n",
@@ -113,11 +113,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "bf12eaaa335d58815242e95ee328ea1a",
+            "id": "331d1a9114367781080c39c5aee7a10e",
             "name": "Get the sum of absolute value of text bytes difference between current edit and\nprevious one.\n",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/bytes-difference\/absolute\/aggregate\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of absolute bytes\ndifference sums. You can filter by editors-type (all-editor-types, anonymous, group-bot,\nname-bot, user) and page-type (all-page-types, content, non-content). You can choose\nbetween daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 lice",
@@ -179,11 +179,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "4474291ea4d62d2409a2ca176660594b",
+            "id": "b884cee011a0821d925068f398362581",
             "name": "Get the sum of net text bytes difference between current edit and previous one.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/bytes-difference\/net\/aggregate\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of bytes difference net\nsums. You can filter by editors-type (all-editor-types, anonymous, group-bot, name-bot,\nuser) and page-type (all-page-types, content or non-content). You can choose between\ndaily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license",
@@ -245,11 +245,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "f2a8799257ea9f080c77a9984d436663",
+            "id": "b65506aff2148d887af29f8807473e13",
             "name": "Get edited-pages counts for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/aggregate\/{project}\/{editor-type}\/{page-type}\/{activity-level}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of its edited-pages counts.\nYou can filter by editor-type (all-editor-types, anonymous, group-bot, name-bot, user),\npage-type (all-page-types, content or non-content) or activity-level (1..4-edits,\n5..24-edits, 25..99-edits, 100..-edits). You can choose between daily and monthly\ngranularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data acces",
@@ -318,11 +318,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "fc888b3151f290c4d2effc74a8e01ddf",
+            "id": "b475ea862fc0b8cbe1e435b7773dc018",
             "name": "Get new pages counts for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/new\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of its new pages counts.\nYou can filter by editor type (all-editor-types, anonymous, group-bot, name-bot, user)\nor page-type (all-page-types, content or non-content). You can choose between daily and\nmonthly granularity as well.\nThe new pages value is computed as follow:\n  [number of created pages] - [number of deleted pages] + [number of restored pages]\nfor the chosen filters.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org",
@@ -384,11 +384,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "2de41dd0fc94d12cf646d99d7bf8ac58",
+            "id": "13999623585ff6fa9a50004ebcb98051",
             "name": "Get top 100 edited-pages by absolute bytes-difference.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/top-by-absolute-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages\nby absolute bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can\nchoose between daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available un",
@@ -450,11 +450,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "dbace338db274246672a3252a8761347",
+            "id": "2b1af3413a36a7f620d63956012c88b5",
             "name": "Get top 100 edited-pages by edits count.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/top-by-edits\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages\nby edits count. You can filter by editor-type (all-editor-types, anonymous, group-bot,\nname-bot, user) or page-type (all-page-types, content or non-content). You can choose\nbetween daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0",
@@ -516,11 +516,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "8598f9e70ce093dc368bbe193ac646f2",
+            "id": "6fa7ed8640654381970e7d84c5b3305b",
             "name": "Get top 100 edited-pages by net bytes-difference.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edited-pages\/top-by-net-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages\nby net bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can\nchoose between daily and monthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under t",
@@ -582,11 +582,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "114de4bcfc232cec89e526d0fd2b79b4",
+            "id": "71378c0279803e2b330b30392505e2e0",
             "name": "Get editors counts for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/aggregate\/{project}\/{editor-type}\/{page-type}\/{activity-level}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of its editors counts.\nYou can filter by editory-type (all-editor-types, anonymous, group-bot, name-bot, user),\npage-type (all-page-types, content or non-content) or activity-level (1..4-edits,\n5..24-edits, 25..99-edits or 100..-edits). You can choose between daily and monthly\ngranularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessi",
@@ -655,11 +655,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "7927729a3b22b6e9c178d531b58add88",
+            "id": "1bedb63d2ac7d7236431a3f24dfe29e1",
             "name": "Get top 100 editors by absolute bytes-difference.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/top-by-absolute-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by\nabsolute bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can\nchoose between daily and monthly granularity as well. The user_id returned is either the\nmediawiki user_id if user is registered, or his\/her IP if the user is anonymous.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/AP",
@@ -721,11 +721,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "22f15436a30390b8898e5b8bed60fa70",
+            "id": "28337e968aecc35612613838ae379029",
             "name": "Get top 100 editors by edits count.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/top-by-edits\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by\nedits count. You can filter by editor-type (all-editor-types, anonymous, group-bot,\nname-bot, user) or page-type (all-page-types, content or non-content). You can choose\nbetween daily and monthly granularity as well. The user_id returned is either the\nmediawiki user_id if user is registered, or his\/her IP if the user is anonymous.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#E",
@@ -787,11 +787,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "fae6b07c93a57ea57bfef4815c6b54df",
+            "id": "b0899e66000c652d31114c0714e1b483",
             "name": "Get top 100 editors by net bytes-difference.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/editors\/top-by-net-bytes-difference\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by\nnet bytes-difference. You can filter by editor-type (all-editor-types, anonymous, group-bot,\nname-bot, user) or page-type (all-page-types, content or non-content). You can choose\nbetween daily and monthly granularity as well. The user_id returned is either the mediawiki\nuser_id if user is registered, or his\/her IP if the user is anonymous.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_ver",
@@ -853,11 +853,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "bf0633a64851c50ac8fb634066f7cc2d",
+            "id": "e59cca2b85cf19cf6cadea87caf00d90",
             "name": "Get edits counts for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/edits\/aggregate\/{project}\/{editor-type}\/{page-type}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of edits counts.\nYou can filter by editors-type (all-editor-types, anonymous, bot, registered) and\npage-type (all-page-types, content or non-content). You can choose between daily and\nmonthly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommo",
@@ -919,11 +919,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "0dfd36f9d3bd3c9c6a7196727070c5ce",
+            "id": "7a91c21fd8010efd2ec2d3167c7c2fd8",
             "name": "Given a project and a date range, returns a timeseries of pagecounts. You can filter by access site (mobile or desktop) and you can choose between monthly, daily and hourly granularity as well.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/legacy\/pagecounts\/aggregate\/{project}\/{access-site}\/{granularity}\/{start}\/{end}",
             "description": "Given a project and a date range, returns a timeseries of pagecounts.\nYou can filter by access site (mobile or desktop) and you can choose between monthly,\ndaily and hourly granularity as well.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
@@ -978,11 +978,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "93811aedeb058ca1800fc2a14b554bb9",
+            "id": "b85d3539765bcca63ff37bab9e3aef68",
             "name": "Get pageview counts for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/aggregate\/{project}\/{access}\/{agent}\/{granularity}\/{start}\/{end}",
             "description": "Given a date range, returns a timeseries of pageview counts. You can filter by project,\naccess method and\/or agent type. You can choose between daily and hourly granularity\nas well.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
@@ -1044,11 +1044,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "6a42bd903a9616de18d054cbe356a813",
+            "id": "e9364631619681a4d6f5f640107c1292",
             "name": "Get pageview counts for a page.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/per-article\/{project}\/{access}\/{agent}\/{article}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki article and a date range, returns a daily timeseries of its pageview\ncounts. You can also filter by access method and\/or agent type.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
@@ -1117,11 +1117,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "e062e20f108f4fa54bb8cb084474093d",
+            "id": "c9ea0bc757102fa8ed2a22930afc6886",
             "name": "Get pageviews by country and access method.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/top-by-country\/{project}\/{access}\/{year}\/{month}",
             "description": "Lists the pageviews to this project, split by country of origin for a given month.\nBecause of privacy reasons, pageviews are given in a bucketed format, and countries\nwith less than 100 views do not get reported.\nStability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
@@ -1169,11 +1169,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "0cd63b3507db16c3533726e5d9511751",
+            "id": "1a71955b98a7a57543f0d36bf38bc04d",
             "name": "Get the most viewed articles for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/pageviews\/top\/{project}\/{access}\/{year}\/{month}\/{day}",
             "description": "Lists the 1000 most viewed articles for a given project and timespan (month or day).\nYou can filter by access method.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
@@ -1228,11 +1228,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "da27b6482b673b998949ea04747c890b",
+            "id": "547b13f0f034ee9e8e26646ad22eea44",
             "name": "Get newly registered users counts for a project.",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/registered-users\/new\/{project}\/{granularity}\/{start}\/{end}",
             "description": "Given a Mediawiki project and a date range, returns a timeseries of its newly registered\nusers counts. You can choose between daily and monthly granularity. The newly registered\nusers value is computed with self-created users only, not auto-login created ones.\n\n- Stability: [experimental](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Experimental)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdoma",
@@ -1280,11 +1280,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "8fadb1c87210b1734c68eebbd4dba6ce",
+            "id": "38957c6bac2b089351087178500c0f97",
             "name": "Get unique devices count per project",
             "url": "httpswikimedia.org\/api\/rest_v1\/metrics\/unique-devices\/{project}\/{access-site}\/{granularity}\/{start}\/{end}",
             "description": "Given a project and a date range, returns a timeseries of unique devices counts.\nYou need to specify a project, and can filter by accessed site (mobile or desktop).\nYou can choose between daily and hourly granularity as well.\n\n- Stability: [stable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Stable)\n- Rate limit: 100 req\/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https:\/\/creativecommons.org\/publicdomain\/zero\/1.0\/).\n",
@@ -1339,11 +1339,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "bf1d74d87f40f550e1e6796995b34259",
+            "id": "b8964b767d84c3fbebc8cae6e2ed1103",
             "name": "Machine-translate content",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/html\/from\/{from_lang}\/to\/{to_lang}",
             "description": "Fetches the machine translation for the posted content from the source\nto the destination language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1384,11 +1384,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "472da6342e6b04b12663282ef085cc3e",
+            "id": "1b297f3c4b90dd2b0496e7d1919aa0d6",
             "name": "Machine-translate content",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/html\/from\/{from_lang}\/to\/{to_lang}\/{provider}",
             "description": "Fetches the machine translation for the posted content from the source\nto the destination language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1436,11 +1436,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "e69c9e51884bccc9da90d04f5908f9e3",
+            "id": "eb0e0c8c3c88778ed19c43426d0502ed",
             "name": "Lists the language pairs supported by the back-end",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/list\/languagepairs\/",
             "description": "Fetches the list of language pairs the back-end service can translate\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1459,11 +1459,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "a1b199bce1236833ee57c642d86fc3b9",
+            "id": "b47cd470cc98ac7d2d0f87b446662d34",
             "name": "Lists the tools available for a language pair",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/list\/pair\/{from}\/{to}\/",
             "description": "Fetches the list of tools that are available for the given pair of languages.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1497,11 +1497,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "2c969f10662120938e5832ba8c662866",
+            "id": "49395b7a6e6e1a915d9748c7e60d2fb5",
             "name": "Lists the tools and language pairs available for the given tool category",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/list\/tool\/{tool}\/",
             "description": "Fetches the list of tools and all of the language pairs it can translate\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1528,11 +1528,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "1bf673602be6438d8439d4e437113eaf",
+            "id": "751e4b8aa1107bea5bd6781f24070163",
             "name": "Fetch the dictionary meaning of a word",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/word\/from\/{from_lang}\/to\/{to_lang}\/{word}",
             "description": "Fetches the dictionary meaning of a word from a language and displays\nit in the target language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1573,11 +1573,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         },
         {
-            "id": "c42b841320879d239848e16ae9ea20b4",
+            "id": "5abf8f64f797432ddd52a55c5261e9c4",
             "name": "Fetch the dictionary meaning of a word",
             "url": "httpswikimedia.org\/api\/rest_v1\/transform\/word\/from\/{from_lang}\/to\/{to_lang}\/{word}\/{provider}",
             "description": "Fetches the dictionary meaning of a word from a language and displays\nit in the target language.\n\nStability: [unstable](https:\/\/www.mediawiki.org\/wiki\/API_versioning#Unstable)\n",
@@ -1625,7 +1625,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "b203c608eb0195e507f52404d48023dd",
+            "collectionId": "c05c9f789367c975ef6d663bb31c5119",
             "rawModeData": ""
         }
     ]
