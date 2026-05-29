@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/mediawiki-core-rest-update-page-request-structure.json",
+  "name": "UpdatePageRequest",
+  "description": "UpdatePageRequest schema from MediaWiki Core REST API",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "content_model": {
+      "type": "string"
+    },
+    "latest": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "int32",
+          "description": "Latest revision ID known to the client (for optimistic concurrency)"
+        }
+      }
+    },
+    "token": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "comment",
+    "latest"
+  ]
+}

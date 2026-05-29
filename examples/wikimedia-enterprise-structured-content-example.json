@@ -1,0 +1,26 @@
+{
+  "name": "Earth",
+  "identifier": 9228,
+  "abstract": "Earth",
+  "description": "Brief encyclopedic description.",
+  "url": "https://en.wikipedia.org/wiki/Earth",
+  "date_created": "Earth",
+  "date_modified": "Earth",
+  "infoboxes": [
+    null
+  ],
+  "sections": [
+    null
+  ],
+  "main_entity": null,
+  "additional_entities": [
+    null
+  ],
+  "image": null,
+  "version": null,
+  "is_part_of": null,
+  "in_language": null,
+  "license": null,
+  "references": null,
+  "tables": null
+}

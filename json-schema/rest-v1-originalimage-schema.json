@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-originalimage-schema.json",
+  "title": "originalimage",
+  "description": "originalimage schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Original image URI"
+    },
+    "width": {
+      "type": "integer",
+      "description": "Original image width"
+    },
+    "height": {
+      "type": "integer",
+      "description": "Original image height"
+    }
+  },
+  "required": [
+    "height",
+    "source",
+    "width"
+  ]
+}

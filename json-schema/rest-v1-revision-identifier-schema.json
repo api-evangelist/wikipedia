@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-revision-identifier-schema.json",
+  "title": "revisionIdentifier",
+  "description": "Unique revision identifier",
+  "type": "object",
+  "properties": {
+    "revision": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "tid": {
+      "type": "string"
+    }
+  }
+}

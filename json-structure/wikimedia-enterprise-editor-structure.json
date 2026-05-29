@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-editor-structure.json",
+  "name": "editor",
+  "description": "editor schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "date_started": {
+      "type": "string"
+    },
+    "edit_count": {
+      "type": "int32"
+    },
+    "groups": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "identifier": {
+      "type": "int32"
+    },
+    "is_anonymous": {
+      "type": "boolean"
+    },
+    "is_bot": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

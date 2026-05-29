@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-result-structure.json",
+  "name": "result",
+  "description": "result schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "itemType": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "url",
+    "itemType"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-language-link-schema.json",
+  "title": "LanguageLink",
+  "description": "LanguageLink schema from MediaWiki Core REST API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "example": "de",
+      "description": "Language code"
+    },
+    "name": {
+      "type": "string",
+      "example": "Deutsch"
+    },
+    "key": {
+      "type": "string",
+      "example": "Erde"
+    },
+    "title": {
+      "type": "string",
+      "example": "Erde"
+    }
+  }
+}

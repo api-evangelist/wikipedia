@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-revertrisk-structure.json",
+  "name": "revertrisk",
+  "description": "revertrisk schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "prediction": {
+      "type": "boolean"
+    },
+    "probability": {
+      "properties": {
+        "false": {
+          "type": "double"
+        },
+        "true": {
+          "type": "double"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-reference-structure.json",
+  "name": "reference",
+  "description": "reference schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string"
+    },
+    "group": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/link"
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/link"
+          }
+        }
+      }
+    },
+    "parent_reference": {
+      "type": "string"
+    }
+  }
+}

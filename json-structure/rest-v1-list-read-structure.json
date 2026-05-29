@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-list-read-structure.json",
+  "name": "list_read",
+  "description": "list_read schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "example": 42
+    },
+    "name": {
+      "type": "string",
+      "example": "Planets"
+    },
+    "description": {
+      "type": "string",
+      "example": "Planets of the Solar System"
+    },
+    "created": {
+      "type": "datetime",
+      "description": "Creation date (in ISO 8601)"
+    },
+    "updated": {
+      "type": "datetime",
+      "description": "Last modification date (in ISO 8601)"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "created",
+    "updated"
+  ]
+}

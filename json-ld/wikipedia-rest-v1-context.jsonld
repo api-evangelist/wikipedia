@@ -1,0 +1,254 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "wm": "https://wikimedia.org/api/vocab/",
+    "wd": "https://www.wikidata.org/entity/",
+    "wdt": "https://www.wikidata.org/prop/direct/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "source": {
+      "@id": "wm:source",
+      "@type": "xsd:string"
+    },
+    "translations": {
+      "@id": "wm:translations",
+      "@container": "@set"
+    },
+    "phrase": {
+      "@id": "wm:phrase",
+      "@type": "xsd:string"
+    },
+    "info": {
+      "@id": "wm:info",
+      "@type": "xsd:string"
+    },
+    "sources": {
+      "@id": "wm:sources",
+      "@type": "xsd:string"
+    },
+    "contents": {
+      "@id": "wm:contents",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "wm:id",
+      "@type": "xsd:integer"
+    },
+    "project": {
+      "@id": "wm:project",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "wm:created",
+      "@type": "xsd:dateTime"
+    },
+    "updated": {
+      "@id": "wm:updated",
+      "@type": "xsd:dateTime"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "items": {
+      "@id": "wm:items",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "Links": {
+      "@id": "wm:_links",
+      "@type": "@id"
+    },
+    "next": {
+      "@id": "wm:next",
+      "@type": "@id"
+    },
+    "href": {
+      "@id": "wm:href",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "wm:type",
+      "@type": "xsd:string"
+    },
+    "sectionId": {
+      "@id": "wm:section_id",
+      "@type": "xsd:integer"
+    },
+    "showInGallery": {
+      "@id": "wm:showInGallery",
+      "@type": "xsd:boolean"
+    },
+    "caption": {
+      "@id": "wm:caption",
+      "@type": "@id"
+    },
+    "html": {
+      "@id": "wm:html",
+      "@type": "xsd:string"
+    },
+    "text": {
+      "@id": "wm:text",
+      "@type": "xsd:string"
+    },
+    "original": {
+      "@id": "wm:original",
+      "@type": "@id"
+    },
+    "mime": {
+      "@id": "wm:mime",
+      "@type": "xsd:string"
+    },
+    "revision": "wm:revision",
+    "tid": {
+      "@id": "wm:tid",
+      "@type": "xsd:string"
+    },
+    "width": {
+      "@id": "wm:width",
+      "@type": "xsd:integer"
+    },
+    "height": {
+      "@id": "wm:height",
+      "@type": "xsd:integer"
+    },
+    "detail": {
+      "@id": "wm:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "wm:instance",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "wm:count",
+      "@type": "xsd:integer"
+    },
+    "itemType": {
+      "@id": "wm:itemType",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "xsd:string"
+    },
+    "pageId": {
+      "@id": "wm:page_id"
+    },
+    "rev": {
+      "@id": "wm:rev"
+    },
+    "comment": {
+      "@id": "wm:comment",
+      "@type": "xsd:string"
+    },
+    "restrictions": {
+      "@id": "wm:restrictions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "wm:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "wm:user_id"
+    },
+    "userText": {
+      "@id": "wm:user_text",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "wm:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "redirect": {
+      "@id": "wm:redirect",
+      "@type": "xsd:boolean"
+    },
+    "pageLanguage": {
+      "@id": "wm:page_language",
+      "@type": "xsd:string"
+    },
+    "titles": {
+      "@id": "wm:titles"
+    },
+    "displaytitle": {
+      "@id": "wm:displaytitle",
+      "@type": "xsd:string"
+    },
+    "pageid": {
+      "@id": "wm:pageid",
+      "@type": "xsd:integer"
+    },
+    "extract": {
+      "@id": "wm:extract",
+      "@type": "xsd:string"
+    },
+    "extractHtml": {
+      "@id": "wm:extract_html",
+      "@type": "xsd:string"
+    },
+    "thumbnail": "wm:thumbnail",
+    "originalimage": "wm:originalimage",
+    "lang": {
+      "@id": "wm:lang",
+      "@type": "xsd:string"
+    },
+    "dir": {
+      "@id": "wm:dir",
+      "@type": "xsd:string"
+    },
+    "coordinates": {
+      "@id": "wm:coordinates",
+      "@type": "@id"
+    },
+    "lat": {
+      "@id": "wm:lat",
+      "@type": "xsd:decimal"
+    },
+    "lon": {
+      "@id": "wm:lon",
+      "@type": "xsd:decimal"
+    },
+    "canonical": {
+      "@id": "wm:canonical",
+      "@type": "xsd:string"
+    },
+    "normalized": {
+      "@id": "wm:normalized",
+      "@type": "xsd:string"
+    },
+    "display": {
+      "@id": "wm:display",
+      "@type": "xsd:string"
+    },
+    "cx_dict": "wm:cx_dict",
+    "cx_mt": "wm:cx_mt",
+    "list_entry_read": "wm:list_entry_read",
+    "list_entry_write": "wm:list_entry_write",
+    "list_read": "wm:list_read",
+    "list_write": "wm:list_write",
+    "listing": "wm:listing",
+    "media_item": "wm:media_item",
+    "media_list": "wm:media_list",
+    "problem": "wm:problem",
+    "recommendation_result": "wm:recommendation_result",
+    "result": "wm:result",
+    "revisionIdentifier": "wm:revisionIdentifier",
+    "revisionInfo": "wm:revisionInfo",
+    "revisions": "wm:revisions",
+    "summary": "wm:summary",
+    "titles_set": "wm:titles_set"
+  }
+}

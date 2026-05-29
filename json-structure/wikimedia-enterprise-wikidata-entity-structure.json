@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-entity-structure.json",
+  "name": "wikidata_entity",
+  "description": "wikidata_entity schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "description": "Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)",
+      "example": "Q42"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "item",
+        "property"
+      ],
+      "description": "The type of entity, either \"item\" or \"property\"",
+      "example": "item"
+    },
+    "labels": {
+      "$ref": "#/components/schemas/wikidata_labels"
+    },
+    "descriptions": {
+      "type": "object",
+      "description": "Key-value pairs with descriptions in different languages",
+      "example": {
+        "en": "Championship held at Balbir Singh Juneja Indoor Stadium"
+      }
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Key-value pairs with aliases in different languages. Every language may have multiple aliases",
+      "example": {
+        "eo": [
+          "Douglas ADAMS",
+          "Douglas Noel ADAMS"
+        ]
+      }
+    },
+    "statements": {
+      "$ref": "#/components/schemas/wikidata_statements"
+    },
+    "sitelinks": {
+      "$ref": "#/components/schemas/wikidata_sitelinks"
+    }
+  },
+  "required": [
+    "identifier",
+    "type"
+  ]
+}

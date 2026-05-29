@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-revision-info-structure.json",
+  "name": "revisionInfo",
+  "description": "Complete information about the revision",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "page_id": {
+      "type": "int32"
+    },
+    "rev": {
+      "type": "int32"
+    },
+    "tid": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "user_id": {
+      "type": "int32"
+    },
+    "user_text": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "datetime"
+    },
+    "redirect": {
+      "type": "boolean"
+    },
+    "page_language": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-search-result-schema.json",
+  "title": "SearchResult",
+  "description": "A search result page entry.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "key": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "HTML snippet with <span class=\"searchmatch\"> highlights"
+    },
+    "matched_title": {
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "type": "string",
+      "nullable": true
+    },
+    "thumbnail": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "mimetype": {
+          "type": "string",
+          "example": "image/jpeg"
+        }
+      }
+    }
+  }
+}

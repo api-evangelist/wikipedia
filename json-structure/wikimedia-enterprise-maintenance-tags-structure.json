@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-maintenance-tags-structure.json",
+  "name": "maintenance_tags",
+  "description": "maintenance_tags schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "citation_needed_count": {
+      "type": "int32"
+    },
+    "pov_count": {
+      "type": "int32"
+    },
+    "clarification_needed_count": {
+      "type": "int32"
+    },
+    "update_count": {
+      "type": "int32"
+    }
+  }
+}

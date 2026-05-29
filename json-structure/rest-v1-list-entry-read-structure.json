@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-list-entry-read-structure.json",
+  "name": "list_entry_read",
+  "description": "list_entry_read schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "example": 64
+    },
+    "project": {
+      "type": "string",
+      "description": "Domain of the wiki containing the page.",
+      "example": "https://en.wikipedia.org"
+    },
+    "name": {
+      "type": "string",
+      "description": "Title of the page containing the page, in database format.",
+      "example": "Barack_Obama"
+    },
+    "created": {
+      "type": "datetime",
+      "description": "Creation date (in ISO 8601)"
+    },
+    "updated": {
+      "type": "datetime",
+      "description": "Last modification date (in ISO 8601)"
+    }
+  }
+}

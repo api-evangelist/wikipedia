@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-revision-identifier-structure.json",
+  "name": "revisionIdentifier",
+  "description": "Unique revision identifier",
+  "type": "object",
+  "properties": {
+    "revision": {
+      "type": "int32"
+    },
+    "tid": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-image-schema.json",
+  "title": "image",
+  "description": "image schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "content_url": {
+      "description": "Image URL",
+      "format": "uri",
+      "type": "string",
+      "example": "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png"
+    },
+    "identifier": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the image",
+      "example": "6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0"
+    },
+    "name": {
+      "type": "string",
+      "description": "Filename of the image",
+      "example": "./File:Flag_of_Italy.svg"
+    },
+    "width": {
+      "description": "image width in pixels",
+      "type": "integer",
+      "example": 156
+    },
+    "height": {
+      "description": "image height in pixels",
+      "type": "integer",
+      "example": 255
+    },
+    "thumbnail": {
+      "$ref": "#/components/schemas/thumbnail"
+    },
+    "caption": {
+      "type": "string",
+      "description": "caption describing the image",
+      "example": "Flag of Italy"
+    },
+    "alternative_text": {
+      "type": "string",
+      "description": "Alternative text description of the image for accessibility",
+      "example": "a flag divided in three vertical sections colored green, white, and red from left to right"
+    },
+    "encoding_format": {
+      "type": "string",
+      "format": "mime_type",
+      "description": "MIME type or encoding format of the image, constructed from the url",
+      "example": "image/png"
+    },
+    "media_type": {
+      "type": "string",
+      "enum": "unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive",
+      "description": "Mediawiki media type of the image",
+      "example": "drawing"
+    }
+  }
+}

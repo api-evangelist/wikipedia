@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-license-structure.json",
+  "name": "license",
+  "description": "license schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "example": "CC-BY-SA-4.0"
+    },
+    "name": {
+      "type": "string",
+      "example": "Creative Commons Attribution-ShareAlike License 4.0"
+    },
+    "url": {
+      "type": "string",
+      "example": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  }
+}

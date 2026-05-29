@@ -1,0 +1,772 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Wikimedia Enterprise Snapshot And Realtime
+  description: 'Commercial Wikimedia Enterprise surface: list / download Snapshot batches, fetch On-demand articles and structured contents, list realtime batches. Self-contained Naftiko capability covering
+    one Wikimedia Enterprise business surface.'
+  tags:
+  - Wikimedia Enterprise
+  - Snapshot
+  - Realtime
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    WIKIMEDIA_ENTERPRISE_TOKEN: WIKIMEDIA_ENTERPRISE_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: wikipedia-enterprise-snapshot
+    baseUri: https://api.enterprise.wikimedia.com
+    description: Wikimedia Enterprise Snapshot And Realtime business capability. Self-contained, no shared references.
+    resources:
+    - name: listcodes
+      path: /v2/codes
+      operations:
+      - name: listCodes
+        method: GET
+        description: List enterprise content codes
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: listlanguages
+      path: /v2/languages
+      operations:
+      - name: listLanguages
+        method: GET
+        description: List supported languages
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: listprojects
+      path: /v2/projects
+      operations:
+      - name: listProjects
+        method: GET
+        description: List Wikimedia projects
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: listnamespaces
+      path: /v2/namespaces
+      operations:
+      - name: listNamespaces
+        method: GET
+        description: List MediaWiki namespaces
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: listsnapshots
+      path: /v2/snapshots
+      operations:
+      - name: listSnapshots
+        method: GET
+        description: List available snapshots
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getsnapshot
+      path: /v2/snapshots/{identifier}
+      operations:
+      - name: getSnapshot
+        method: GET
+        description: Get a snapshot manifest
+        inputParameters:
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: downloadsnapshot
+      path: /v2/snapshots/{identifier}/download
+      operations:
+      - name: downloadSnapshot
+        method: GET
+        description: Download a snapshot
+        inputParameters:
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: listsnapshotchunks
+      path: /v2/snapshots/{identifier}/chunks
+      operations:
+      - name: listSnapshotChunks
+        method: GET
+        description: List snapshot chunks
+        inputParameters:
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: downloadsnapshotchunk
+      path: /v2/snapshots/{snapshot_identifier}/chunks/{identifier}/download
+      operations:
+      - name: downloadSnapshotChunk
+        method: GET
+        description: Download a snapshot chunk
+        inputParameters:
+        - name: snapshot_identifier
+          in: path
+          type: string
+          required: true
+          description: snapshot_identifier path parameter
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: liststructuredsnapshots
+      path: /v2/snapshots/structured-contents
+      operations:
+      - name: listStructuredSnapshots
+        method: GET
+        description: List structured-contents snapshots
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getondemandarticle
+      path: /v2/articles/{name}
+      operations:
+      - name: getOnDemandArticle
+        method: POST
+        description: On-demand article retrieval
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: name path parameter
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getondemandstructuredcontent
+      path: /v2/structured-contents/{name}
+      operations:
+      - name: getOnDemandStructuredContent
+        method: POST
+        description: On-demand structured-contents retrieval
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: name path parameter
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getwikidataitem
+      path: /v2/wikidata/items/{identifier}
+      operations:
+      - name: getWikidataItem
+        method: POST
+        description: Fetch a Wikidata item by ID
+        inputParameters:
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getwikidataproperty
+      path: /v2/wikidata/properties/{identifier}
+      operations:
+      - name: getWikidataProperty
+        method: POST
+        description: Fetch a Wikidata property by ID
+        inputParameters:
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getwikidatalabel
+      path: /v2/wikidata/labels/{identifier}
+      operations:
+      - name: getWikidataLabel
+        method: POST
+        description: Fetch a Wikidata label by ID
+        inputParameters:
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: listrealtimebatches
+      path: /v2/batches/{date}/{hour}
+      operations:
+      - name: listRealtimeBatches
+        method: GET
+        description: List realtime batches for a date/hour
+        inputParameters:
+        - name: date
+          in: path
+          type: string
+          required: true
+          description: date path parameter
+        - name: hour
+          in: path
+          type: string
+          required: true
+          description: hour path parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: downloadrealtimebatch
+      path: /v2/batches/{date}/{hour}/{identifier}/download
+      operations:
+      - name: downloadRealtimeBatch
+        method: GET
+        description: Download a realtime batch
+        inputParameters:
+        - name: date
+          in: path
+          type: string
+          required: true
+          description: date path parameter
+        - name: hour
+          in: path
+          type: string
+          required: true
+          description: hour path parameter
+        - name: identifier
+          in: path
+          type: string
+          required: true
+          description: identifier path parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WIKIMEDIA_ENTERPRISE_TOKEN}}'
+  exposes:
+  - type: rest
+    namespace: wikipedia-enterprise-snapshot-rest
+    port: 8083
+    description: REST adapter for Wikimedia Enterprise Snapshot And Realtime. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/codes
+      name: listcodes
+      description: List enterprise content codes
+      operations:
+      - method: GET
+        name: listCodes
+        description: List enterprise content codes
+        call: wikipedia-enterprise-snapshot.listCodes
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/languages
+      name: listlanguages
+      description: List supported languages
+      operations:
+      - method: GET
+        name: listLanguages
+        description: List supported languages
+        call: wikipedia-enterprise-snapshot.listLanguages
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects
+      name: listprojects
+      description: List Wikimedia projects
+      operations:
+      - method: GET
+        name: listProjects
+        description: List Wikimedia projects
+        call: wikipedia-enterprise-snapshot.listProjects
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/namespaces
+      name: listnamespaces
+      description: List MediaWiki namespaces
+      operations:
+      - method: GET
+        name: listNamespaces
+        description: List MediaWiki namespaces
+        call: wikipedia-enterprise-snapshot.listNamespaces
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/snapshots
+      name: listsnapshots
+      description: List available snapshots
+      operations:
+      - method: GET
+        name: listSnapshots
+        description: List available snapshots
+        call: wikipedia-enterprise-snapshot.listSnapshots
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/snapshots/{identifier}
+      name: getsnapshot
+      description: Get a snapshot manifest
+      operations:
+      - method: GET
+        name: getSnapshot
+        description: Get a snapshot manifest
+        call: wikipedia-enterprise-snapshot.getSnapshot
+        with:
+          identifier: rest.identifier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/snapshots/{identifier}/download
+      name: downloadsnapshot
+      description: Download a snapshot
+      operations:
+      - method: GET
+        name: downloadSnapshot
+        description: Download a snapshot
+        call: wikipedia-enterprise-snapshot.downloadSnapshot
+        with:
+          identifier: rest.identifier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/snapshots/{identifier}/chunks
+      name: listsnapshotchunks
+      description: List snapshot chunks
+      operations:
+      - method: GET
+        name: listSnapshotChunks
+        description: List snapshot chunks
+        call: wikipedia-enterprise-snapshot.listSnapshotChunks
+        with:
+          identifier: rest.identifier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/snapshots/{snapshot_identifier}/chunks/{identifier}/download
+      name: downloadsnapshotchunk
+      description: Download a snapshot chunk
+      operations:
+      - method: GET
+        name: downloadSnapshotChunk
+        description: Download a snapshot chunk
+        call: wikipedia-enterprise-snapshot.downloadSnapshotChunk
+        with:
+          snapshot_identifier: rest.snapshot_identifier
+          identifier: rest.identifier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/snapshots/structured-contents
+      name: liststructuredsnapshots
+      description: List structured-contents snapshots
+      operations:
+      - method: GET
+        name: listStructuredSnapshots
+        description: List structured-contents snapshots
+        call: wikipedia-enterprise-snapshot.listStructuredSnapshots
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/articles/{name}
+      name: getondemandarticle
+      description: On-demand article retrieval
+      operations:
+      - method: POST
+        name: getOnDemandArticle
+        description: On-demand article retrieval
+        call: wikipedia-enterprise-snapshot.getOnDemandArticle
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/structured-contents/{name}
+      name: getondemandstructuredcontent
+      description: On-demand structured-contents retrieval
+      operations:
+      - method: POST
+        name: getOnDemandStructuredContent
+        description: On-demand structured-contents retrieval
+        call: wikipedia-enterprise-snapshot.getOnDemandStructuredContent
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/wikidata/items/{identifier}
+      name: getwikidataitem
+      description: Fetch a Wikidata item by ID
+      operations:
+      - method: POST
+        name: getWikidataItem
+        description: Fetch a Wikidata item by ID
+        call: wikipedia-enterprise-snapshot.getWikidataItem
+        with:
+          identifier: rest.identifier
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/wikidata/properties/{identifier}
+      name: getwikidataproperty
+      description: Fetch a Wikidata property by ID
+      operations:
+      - method: POST
+        name: getWikidataProperty
+        description: Fetch a Wikidata property by ID
+        call: wikipedia-enterprise-snapshot.getWikidataProperty
+        with:
+          identifier: rest.identifier
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/wikidata/labels/{identifier}
+      name: getwikidatalabel
+      description: Fetch a Wikidata label by ID
+      operations:
+      - method: POST
+        name: getWikidataLabel
+        description: Fetch a Wikidata label by ID
+        call: wikipedia-enterprise-snapshot.getWikidataLabel
+        with:
+          identifier: rest.identifier
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/batches/{date}/{hour}
+      name: listrealtimebatches
+      description: List realtime batches for a date/hour
+      operations:
+      - method: GET
+        name: listRealtimeBatches
+        description: List realtime batches for a date/hour
+        call: wikipedia-enterprise-snapshot.listRealtimeBatches
+        with:
+          date: rest.date
+          hour: rest.hour
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/batches/{date}/{hour}/{identifier}/download
+      name: downloadrealtimebatch
+      description: Download a realtime batch
+      operations:
+      - method: GET
+        name: downloadRealtimeBatch
+        description: Download a realtime batch
+        call: wikipedia-enterprise-snapshot.downloadRealtimeBatch
+        with:
+          date: rest.date
+          hour: rest.hour
+          identifier: rest.identifier
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: wikipedia-enterprise-snapshot-mcp
+    port: 9093
+    transport: http
+    description: MCP adapter for Wikimedia Enterprise Snapshot And Realtime. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-enterprise-content-codes
+      description: List enterprise content codes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listCodes
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-supported-languages
+      description: List supported languages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listLanguages
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-wikimedia-projects
+      description: List Wikimedia projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listProjects
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-mediawiki-namespaces
+      description: List MediaWiki namespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listNamespaces
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-available-snapshots
+      description: List available snapshots
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listSnapshots
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-snapshot-manifest
+      description: Get a snapshot manifest
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.getSnapshot
+      with:
+        identifier: tools.identifier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-snapshot
+      description: Download a snapshot
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.downloadSnapshot
+      with:
+        identifier: tools.identifier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-snapshot-chunks
+      description: List snapshot chunks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listSnapshotChunks
+      with:
+        identifier: tools.identifier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-snapshot-chunk
+      description: Download a snapshot chunk
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.downloadSnapshotChunk
+      with:
+        snapshot_identifier: tools.snapshot_identifier
+        identifier: tools.identifier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-structured-contents-snapshots
+      description: List structured-contents snapshots
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listStructuredSnapshots
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demand-article-retrieval
+      description: On-demand article retrieval
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-enterprise-snapshot.getOnDemandArticle
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: demand-structured-contents-retrieval
+      description: On-demand structured-contents retrieval
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-enterprise-snapshot.getOnDemandStructuredContent
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-wikidata-item-id
+      description: Fetch a Wikidata item by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: wikipedia-enterprise-snapshot.getWikidataItem
+      with:
+        identifier: tools.identifier
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-wikidata-property-id
+      description: Fetch a Wikidata property by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: wikipedia-enterprise-snapshot.getWikidataProperty
+      with:
+        identifier: tools.identifier
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-wikidata-label-id
+      description: Fetch a Wikidata label by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: wikipedia-enterprise-snapshot.getWikidataLabel
+      with:
+        identifier: tools.identifier
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-realtime-batches-date-hour
+      description: List realtime batches for a date/hour
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.listRealtimeBatches
+      with:
+        date: tools.date
+        hour: tools.hour
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-realtime-batch
+      description: Download a realtime batch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-enterprise-snapshot.downloadRealtimeBatch
+      with:
+        date: tools.date
+        hour: tools.hour
+        identifier: tools.identifier
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-statements-structure.json",
+  "name": "wikidata_statements",
+  "description": "Array of statement objects for this property",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/wikidata_statement"
+  }
+}

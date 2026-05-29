@@ -1,0 +1,394 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "wm": "https://wikimedia.org/api/vocab/",
+    "wd": "https://www.wikidata.org/entity/",
+    "wdt": "https://www.wikidata.org/prop/direct/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "html": {
+      "@id": "wm:html",
+      "@type": "xsd:string"
+    },
+    "wikitext": {
+      "@id": "wm:wikitext",
+      "@type": "xsd:string"
+    },
+    "identifier": {
+      "@id": "dcterms:identifier",
+      "@type": "xsd:decimal"
+    },
+    "event": "wm:event",
+    "additionalEntities": {
+      "@id": "wm:additional_entities",
+      "@container": "@set"
+    },
+    "articleBody": {
+      "@id": "wm:article_body"
+    },
+    "hasParts": {
+      "@id": "wm:has_parts",
+      "@container": "@set"
+    },
+    "categories": {
+      "@id": "wm:categories",
+      "@container": "@set"
+    },
+    "date_modified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:string"
+    },
+    "inLanguage": {
+      "@id": "wm:in_language"
+    },
+    "isPartOf": {
+      "@id": "wm:is_part_of"
+    },
+    "license": "wm:license",
+    "mainEntity": {
+      "@id": "wm:main_entity"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "abstract": {
+      "@id": "wm:abstract",
+      "@type": "xsd:string"
+    },
+    "namespace": "wm:namespace",
+    "protection": "wm:protection",
+    "redirects": {
+      "@id": "wm:redirects",
+      "@container": "@set"
+    },
+    "templates": {
+      "@id": "wm:templates",
+      "@container": "@set"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "xsd:string"
+    },
+    "version": "wm:version",
+    "visibility": "wm:visibility",
+    "size": "wm:size",
+    "group": {
+      "@id": "wm:group",
+      "@type": "xsd:string"
+    },
+    "text": {
+      "@id": "wm:text",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "dateStarted": {
+      "@id": "wm:date_started",
+      "@type": "xsd:string"
+    },
+    "editCount": {
+      "@id": "wm:edit_count",
+      "@type": "xsd:integer"
+    },
+    "groups": {
+      "@id": "wm:groups",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "isAnonymous": {
+      "@id": "wm:is_anonymous",
+      "@type": "xsd:boolean"
+    },
+    "isBot": {
+      "@id": "wm:is_bot",
+      "@type": "xsd:boolean"
+    },
+    "type": {
+      "@id": "wm:type",
+      "@type": "xsd:string"
+    },
+    "date_created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:string"
+    },
+    "field": {
+      "@id": "wm:field",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "wm:value",
+      "@type": "xsd:string"
+    },
+    "contentUrl": {
+      "@id": "wm:contentUrl"
+    },
+    "width": {
+      "@id": "wm:width",
+      "@type": "xsd:integer"
+    },
+    "height": {
+      "@id": "wm:height",
+      "@type": "xsd:integer"
+    },
+    "thumbnail": "wm:thumbnail",
+    "caption": {
+      "@id": "wm:caption",
+      "@type": "xsd:string"
+    },
+    "alternativeText": {
+      "@id": "wm:alternative_text",
+      "@type": "xsd:string"
+    },
+    "encodingFormat": {
+      "@id": "wm:encoding_format"
+    },
+    "mediaType": {
+      "@id": "wm:media_type",
+      "@type": "xsd:string"
+    },
+    "alternateName": {
+      "@id": "wm:alternate_name",
+      "@type": "xsd:string"
+    },
+    "direction": {
+      "@id": "wm:direction",
+      "@type": "xsd:string"
+    },
+    "images": {
+      "@id": "wm:images",
+      "@container": "@set"
+    },
+    "citationNeededCount": {
+      "@id": "wm:citation_needed_count",
+      "@type": "xsd:integer"
+    },
+    "povCount": {
+      "@id": "wm:pov_count",
+      "@type": "xsd:integer"
+    },
+    "clarificationNeededCount": {
+      "@id": "wm:clarification_needed_count",
+      "@type": "xsd:integer"
+    },
+    "updateCount": {
+      "@id": "wm:update_count",
+      "@type": "xsd:integer"
+    },
+    "values": {
+      "@id": "wm:values",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "links": {
+      "@id": "wm:links",
+      "@container": "@set"
+    },
+    "citations": {
+      "@id": "wm:citations",
+      "@container": "@set"
+    },
+    "code": "wm:code",
+    "expiry": {
+      "@id": "wm:expiry",
+      "@type": "xsd:string"
+    },
+    "level": {
+      "@id": "wm:level",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "wm:metadata",
+      "@type": "@id"
+    },
+    "source": {
+      "@id": "wm:source",
+      "@type": "@id"
+    },
+    "parentReference": {
+      "@id": "wm:parent_reference",
+      "@type": "xsd:string"
+    },
+    "referenceNeedScore": {
+      "@id": "wm:reference_need_score",
+      "@type": "xsd:decimal"
+    },
+    "referenceRiskScore": {
+      "@id": "wm:reference_risk_score",
+      "@type": "xsd:decimal"
+    },
+    "prediction": {
+      "@id": "wm:prediction",
+      "@type": "xsd:boolean"
+    },
+    "probability": {
+      "@id": "wm:probability",
+      "@type": "@id"
+    },
+    "false": {
+      "@id": "wm:false",
+      "@type": "xsd:decimal"
+    },
+    "true": {
+      "@id": "wm:true",
+      "@type": "xsd:decimal"
+    },
+    "revertrisk": "wm:revertrisk",
+    "referencerisk": "wm:referencerisk",
+    "referenceneed": "wm:referenceneed",
+    "unitText": {
+      "@id": "wm:unit_text",
+      "@type": "xsd:string"
+    },
+    "chunks": {
+      "@id": "wm:chunks",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "infoboxes": {
+      "@id": "wm:infoboxes",
+      "@container": "@set"
+    },
+    "sections": {
+      "@id": "wm:sections",
+      "@container": "@set"
+    },
+    "image": "wm:image",
+    "references": {
+      "@id": "wm:references"
+    },
+    "tables": {
+      "@id": "wm:tables"
+    },
+    "headers": {
+      "@id": "wm:headers",
+      "@container": "@set"
+    },
+    "rows": {
+      "@id": "wm:rows",
+      "@container": "@set"
+    },
+    "confidenceScore": {
+      "@id": "wm:confidence_score",
+      "@type": "xsd:decimal"
+    },
+    "comment": {
+      "@id": "wm:comment",
+      "@type": "xsd:string"
+    },
+    "editor": "wm:editor",
+    "isFlaggedStable": {
+      "@id": "wm:is_flagged_stable",
+      "@type": "xsd:boolean"
+    },
+    "isMinorEdit": {
+      "@id": "wm:is_minor_edit",
+      "@type": "xsd:boolean"
+    },
+    "noindex": {
+      "@id": "wm:noindex",
+      "@type": "xsd:boolean"
+    },
+    "scores": "wm:scores",
+    "maintenanceTags": {
+      "@id": "wm:maintenance_tags"
+    },
+    "tags": {
+      "@id": "wm:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "wm:user",
+      "@type": "xsd:boolean"
+    },
+    "datePreviouslyModified": {
+      "@id": "wm:date_previously_modified",
+      "@type": "xsd:dateTime"
+    },
+    "entity": "wm:entity",
+    "dataType": {
+      "@id": "wm:data_type",
+      "@type": "xsd:string"
+    },
+    "labels": {
+      "@id": "wm:labels",
+      "@type": "@id"
+    },
+    "property": {
+      "@id": "wm:property"
+    },
+    "descriptions": {
+      "@id": "wm:descriptions",
+      "@type": "@id"
+    },
+    "aliases": {
+      "@id": "wm:aliases",
+      "@type": "@id"
+    },
+    "statements": {
+      "@id": "wm:statements"
+    },
+    "sitelinks": {
+      "@id": "wm:sitelinks"
+    },
+    "parts": {
+      "@id": "wm:parts",
+      "@container": "@set"
+    },
+    "content": {
+      "@id": "wm:content",
+      "@type": "xsd:string"
+    },
+    "contentData": {
+      "@id": "wm:content_data",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "badges": {
+      "@id": "wm:badges",
+      "@container": "@set"
+    },
+    "rank": {
+      "@id": "wm:rank",
+      "@type": "xsd:string"
+    },
+    "qualifiers": {
+      "@id": "wm:qualifiers"
+    },
+    "article_body": "wm:article_body",
+    "article_namespace": "wm:article_namespace",
+    "article": "wm:article",
+    "batch": "wm:batch",
+    "category": "wm:category",
+    "citation": "wm:citation",
+    "filter": "wm:filter",
+    "language": "wm:language",
+    "link": "wm:link",
+    "maintenance_tags": "wm:maintenance_tags",
+    "part": "wm:part",
+    "project": "wm:project",
+    "redirect": "wm:redirect",
+    "reference": "wm:reference",
+    "snapshot": "wm:snapshot",
+    "structured-content": "wm:structured-content",
+    "table": "wm:table",
+    "template": "wm:template",
+    "wikidata_article": "wm:wikidata_article",
+    "wikidata_entity_property": "wm:wikidata_entity_property",
+    "wikidata_entity_qualifier": "wm:wikidata_entity_qualifier",
+    "wikidata_entity_reference_part": "wm:wikidata_entity_reference_part",
+    "wikidata_entity": "wm:wikidata_entity",
+    "wikidata_entity_statement_reference": "wm:wikidata_entity_statement_reference",
+    "wikidata_entity_value": "wm:wikidata_entity_value",
+    "wikidata_labels": "wm:wikidata_labels",
+    "wikidata_sitelinks": "wm:wikidata_sitelinks",
+    "wikidata_statement": "wm:wikidata_statement"
+  }
+}

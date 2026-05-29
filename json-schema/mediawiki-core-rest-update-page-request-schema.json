@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-update-page-request-schema.json",
+  "title": "UpdatePageRequest",
+  "description": "UpdatePageRequest schema from MediaWiki Core REST API",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "content_model": {
+      "type": "string"
+    },
+    "latest": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Latest revision ID known to the client (for optimistic concurrency)"
+        }
+      }
+    },
+    "token": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "comment",
+    "latest"
+  ]
+}

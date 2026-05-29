@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/mediawiki-core-rest-file-structure.json",
+  "name": "File",
+  "description": "A media file descriptor.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "File:Earth_Eastern_Hemisphere.jpg"
+    },
+    "file_description_url": {
+      "type": "uri"
+    },
+    "latest": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "datetime"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "int32"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "preferred": {
+      "type": "object",
+      "properties": {
+        "mediatype": {
+          "type": "string",
+          "example": "BITMAP"
+        },
+        "size": {
+          "type": "int32"
+        },
+        "width": {
+          "type": "int32"
+        },
+        "height": {
+          "type": "int32"
+        },
+        "url": {
+          "type": "uri"
+        }
+      }
+    },
+    "original": {
+      "type": "object",
+      "properties": {
+        "mediatype": {
+          "type": "string"
+        },
+        "size": {
+          "type": "int32"
+        },
+        "width": {
+          "type": "int32"
+        },
+        "height": {
+          "type": "int32"
+        },
+        "url": {
+          "type": "uri"
+        }
+      }
+    }
+  }
+}

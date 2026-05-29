@@ -1,0 +1,14 @@
+{
+  "head": {
+    "vars": [
+      "item",
+      "itemLabel"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {}
+    ]
+  },
+  "boolean": true
+}

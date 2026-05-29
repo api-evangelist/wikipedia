@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-list-entry-write-structure.json",
+  "name": "list_entry_write",
+  "description": "list_entry_write schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Domain of the wiki containing the page.",
+      "example": "https://en.wikipedia.org"
+    },
+    "name": {
+      "type": "string",
+      "description": "Title of the page containing the page, in database format.",
+      "example": "Barack_Obama"
+    }
+  },
+  "required": [
+    "project",
+    "title"
+  ]
+}

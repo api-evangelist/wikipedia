@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Wikidata Knowledge Graph
+  description: Wikidata SPARQL query surface for traversing the 100M+ item structured knowledge graph. Self-contained Naftiko capability covering one Wikidata business surface.
+  tags:
+  - Wikidata
+  - SPARQL
+  - Knowledge Graph
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds: []
+capability:
+  consumes:
+  - type: http
+    namespace: wikipedia-knowledge-graph
+    baseUri: https://query.wikidata.org
+    description: Wikidata Knowledge Graph business capability. Self-contained, no shared references.
+    resources:
+    - name: executesparqlqueryget
+      path: /sparql
+      operations:
+      - name: executeSparqlQueryGet
+        method: GET
+        description: Execute a SPARQL query (GET)
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: executesparqlquerypost
+      path: /sparql
+      operations:
+      - name: executeSparqlQueryPost
+        method: POST
+        description: Execute a SPARQL query (POST)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: wikipedia-knowledge-graph-rest
+    port: 8082
+    description: REST adapter for Wikidata Knowledge Graph. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/sparql
+      name: executesparqlqueryget
+      description: Execute a SPARQL query (GET)
+      operations:
+      - method: GET
+        name: executeSparqlQueryGet
+        description: Execute a SPARQL query (GET)
+        call: wikipedia-knowledge-graph.executeSparqlQueryGet
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sparql
+      name: executesparqlquerypost
+      description: Execute a SPARQL query (POST)
+      operations:
+      - method: POST
+        name: executeSparqlQueryPost
+        description: Execute a SPARQL query (POST)
+        call: wikipedia-knowledge-graph.executeSparqlQueryPost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: wikipedia-knowledge-graph-mcp
+    port: 9092
+    transport: http
+    description: MCP adapter for Wikidata Knowledge Graph. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: execute-sparql-query-get
+      description: Execute a SPARQL query (GET)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-knowledge-graph.executeSparqlQueryGet
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: execute-sparql-query-post
+      description: Execute a SPARQL query (POST)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: wikipedia-knowledge-graph.executeSparqlQueryPost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

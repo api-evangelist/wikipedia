@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-edit-counts-schema.json",
+  "title": "EditCounts",
+  "description": "EditCounts schema from MediaWiki Core REST API",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer",
+      "description": "Edit count of requested type"
+    },
+    "limit": {
+      "type": "boolean",
+      "description": "Whether the count was truncated"
+    }
+  }
+}

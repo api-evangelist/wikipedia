@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-structured-content-schema.json",
+  "title": "structured-content",
+  "description": "structured-content schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "integer"
+    },
+    "abstract": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "date_modified": {
+      "type": "string"
+    },
+    "infoboxes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/part"
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/part"
+      }
+    },
+    "main_entity": {
+      "$ref": "#/components/schemas/entity"
+    },
+    "additional_entities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/entity"
+      }
+    },
+    "image": {
+      "$ref": "#/components/schemas/image"
+    },
+    "version": {
+      "$ref": "#/components/schemas/version"
+    },
+    "is_part_of": {
+      "$ref": "#/components/schemas/project"
+    },
+    "in_language": {
+      "$ref": "#/components/schemas/language"
+    },
+    "license": {
+      "$ref": "#/components/schemas/license"
+    },
+    "references": {
+      "$ref": "#/components/schemas/reference"
+    },
+    "tables": {
+      "$ref": "#/components/schemas/table"
+    }
+  }
+}

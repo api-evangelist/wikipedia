@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-visibility-schema.json",
+  "title": "visibility",
+  "description": "visibility schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "comment": {
+      "type": "boolean",
+      "example": true
+    },
+    "text": {
+      "type": "boolean",
+      "example": true
+    },
+    "user": {
+      "type": "boolean",
+      "example": false
+    }
+  }
+}

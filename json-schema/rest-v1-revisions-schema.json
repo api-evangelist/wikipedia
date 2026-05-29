@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-revisions-schema.json",
+  "title": "revisions",
+  "description": "The result format for revision listing",
+  "type": "object",
+  "properties": {
+    "items": {
+      "$ref": "#/components/schemas/revisionIdentifier"
+    }
+  },
+  "required": [
+    "items"
+  ]
+}

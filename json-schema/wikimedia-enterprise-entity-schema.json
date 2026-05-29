@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-entity-schema.json",
+  "title": "entity",
+  "description": "entity schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

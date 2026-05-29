@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/mediawiki-action-api-action-api-write-request-structure.json",
+  "name": "ActionApiWriteRequest",
+  "description": "ActionApiWriteRequest schema from MediaWiki Action API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Page title for edit/move/delete/protect"
+    },
+    "pageid": {
+      "type": "int32",
+      "description": "Alternative to title"
+    },
+    "text": {
+      "type": "string",
+      "description": "Full wikitext content for action=edit"
+    },
+    "appendtext": {
+      "type": "string"
+    },
+    "prependtext": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Edit summary"
+    },
+    "token": {
+      "type": "string",
+      "description": "CSRF token from query&meta=tokens"
+    },
+    "basetimestamp": {
+      "type": "datetime",
+      "description": "Timestamp of base revision for edit conflict detection"
+    },
+    "starttimestamp": {
+      "type": "datetime"
+    },
+    "bot": {
+      "type": "boolean",
+      "description": "Mark as bot edit (requires bot right)"
+    },
+    "minor": {
+      "type": "boolean"
+    },
+    "recreate": {
+      "type": "boolean"
+    },
+    "createonly": {
+      "type": "boolean"
+    },
+    "nocreate": {
+      "type": "boolean"
+    },
+    "lgname": {
+      "type": "string",
+      "description": "Login username (action=login)"
+    },
+    "lgpassword": {
+      "type": "string",
+      "description": "Login password (action=login)"
+    },
+    "lgtoken": {
+      "type": "string",
+      "description": "Login token"
+    },
+    "filename": {
+      "type": "string",
+      "description": "Destination filename for action=upload"
+    },
+    "file": {
+      "type": "string",
+      "format": "binary",
+      "description": "File contents for action=upload (multipart)"
+    },
+    "url": {
+      "type": "uri",
+      "description": "Source URL for action=upload (sideload)"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Upload comment"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Pipe-separated change tags"
+    }
+  },
+  "required": [
+    "token"
+  ]
+}

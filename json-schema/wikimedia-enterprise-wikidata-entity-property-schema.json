@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-wikidata-entity-property-schema.json",
+  "title": "wikidata_entity_property",
+  "description": "wikidata_entity_property schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "description": "Wikidata Property identifier (P-number, e.g. P31).",
+      "example": "P31"
+    },
+    "data_type": {
+      "type": "string",
+      "description": "The expected data type of the value for this property, e.g. time, quantity, wikibase-item, url, string. The actual data type of the value for this property is found in statements.PID.property.value.type",
+      "example": "time"
+    },
+    "labels": {
+      "type": "object",
+      "description": "Key-value pairs with property labels in different languages",
+      "example": {
+        "en": "instance of",
+        "de": "Instanz von",
+        "fr": "instance de"
+      }
+    }
+  },
+  "required": [
+    "identifier",
+    "data_type"
+  ]
+}

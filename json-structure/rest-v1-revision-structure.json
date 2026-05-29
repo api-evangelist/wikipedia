@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-revision-structure.json",
+  "name": "revision",
+  "description": "Result format for revision items",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "int32"
+    },
+    "items": {
+      "$ref": "#/components/schemas/revisionInfo"
+    }
+  },
+  "required": [
+    "count",
+    "items"
+  ]
+}

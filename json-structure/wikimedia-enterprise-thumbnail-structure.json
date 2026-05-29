@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-thumbnail-structure.json",
+  "name": "thumbnail",
+  "description": "thumbnail schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "contentUrl": {
+      "type": "uri",
+      "description": "Thumbnail URL"
+    },
+    "width": {
+      "description": "Thumbnail width in pixels",
+      "type": "int32",
+      "example": 156
+    },
+    "height": {
+      "description": "Thumbnail height in pixels",
+      "type": "int32",
+      "example": 255
+    }
+  }
+}

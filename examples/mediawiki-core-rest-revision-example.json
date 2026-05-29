@@ -1,0 +1,21 @@
+{
+  "id": 1356767710,
+  "page": {
+    "id": 9228,
+    "title": "Earth"
+  },
+  "size": 12345,
+  "minor": true,
+  "timestamp": "2026-05-29T18:21:47Z",
+  "content_model": "wikitext",
+  "license": {
+    "url": "https://en.wikipedia.org/wiki/Earth",
+    "title": "Earth"
+  },
+  "user": {
+    "id": 9228,
+    "name": "Jimbo Wales"
+  },
+  "comment": "Initial revision.",
+  "delta": 42
+}

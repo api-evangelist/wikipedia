@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-referenceneed-structure.json",
+  "name": "referenceneed",
+  "description": "referenceneed schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "reference_need_score": {
+      "type": "double"
+    }
+  }
+}

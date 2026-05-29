@@ -1,0 +1,170 @@
+openapi: 3.0.3
+info:
+  title: Wikidata Query Service SPARQL API
+  description: 'SPARQL 1.1 endpoint for Wikidata - the structured knowledge graph underpinning Wikipedia infoboxes, Wikimedia Commons captions, and 100M+ items.
+
+
+    Requests are limited to 60 seconds per query and 5 concurrent queries per IP. Set a contactable User-Agent. Heavy / federated workloads should use the Scholarly or non-Scholarly split graphs at query-scholarly.wikidata.org
+    and query-main.wikidata.org.'
+  version: 1.0.0
+  x-generated-from: documentation
+  x-source-url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  x-last-validated: '2026-05-29'
+  license:
+    name: CC0 1.0
+    url: https://creativecommons.org/publicdomain/zero/1.0/
+servers:
+- url: https://query.wikidata.org
+  description: Wikidata Query Service - full graph
+- url: https://query-main.wikidata.org
+  description: WDQS - non-scholarly (main) graph split
+- url: https://query-scholarly.wikidata.org
+  description: WDQS - scholarly graph split
+tags:
+- name: SPARQL
+  description: SPARQL 1.1 query endpoint
+paths:
+  /sparql:
+    get:
+      operationId: executeSparqlQueryGet
+      summary: Wikidata Query Service SPARQL Execute a SPARQL Query (GET)
+      description: Execute a SPARQL 1.1 SELECT/ASK/CONSTRUCT/DESCRIBE query against the Wikidata graph. Pass the query in the 'query' parameter. Use Accept header to control result format (JSON, XML, 
+        CSV, TSV, RDF/XML, Turtle).
+      tags:
+      - SPARQL
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        description: SPARQL query text
+        example: SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q146 . SERVICE wikibase:label { bd:serviceParam wikibase:language "en" } } LIMIT 10
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+        description: Optional inline format override
+      - name: Accept
+        in: header
+        schema:
+          type: string
+          enum:
+          - application/sparql-results+json
+          - application/sparql-results+xml
+          - text/csv
+          - text/tab-separated-values
+          - application/rdf+xml
+          - text/turtle
+        description: Result format
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/sparql-results+json:
+              schema:
+                $ref: '#/components/schemas/SparqlResults'
+            application/sparql-results+xml:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+            text/tab-separated-values:
+              schema:
+                type: string
+        '400':
+          description: Malformed query
+        '500':
+          description: Query execution failed
+        '503':
+          description: Query exceeded the 60s budget
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: executeSparqlQueryPost
+      summary: Wikidata Query Service SPARQL Execute a SPARQL Query (POST)
+      description: Submit a SPARQL query in the request body. Useful when the query is too long for a URL.
+      tags:
+      - SPARQL
+      requestBody:
+        required: true
+        content:
+          application/sparql-query:
+            schema:
+              type: string
+              description: SPARQL query text
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                  description: SPARQL query text
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/sparql-results+json:
+              schema:
+                $ref: '#/components/schemas/SparqlResults'
+        '400':
+          description: Malformed query
+        '503':
+          description: Query timeout
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SparqlResults:
+      type: object
+      description: SPARQL 1.1 JSON results format (W3C).
+      properties:
+        head:
+          type: object
+          properties:
+            vars:
+              type: array
+              items:
+                type: string
+              example:
+              - item
+              - itemLabel
+        results:
+          type: object
+          properties:
+            bindings:
+              type: array
+              items:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - uri
+                      - literal
+                      - bnode
+                      - typed-literal
+                      example: uri
+                    value:
+                      type: string
+                      example: http://www.wikidata.org/entity/Q146
+                    datatype:
+                      type: string
+                      nullable: true
+                    xml:lang:
+                      type: string
+                      nullable: true
+        boolean:
+          type: boolean
+          description: Result of an ASK query
+          nullable: true

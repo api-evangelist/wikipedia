@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-event-structure.json",
+  "name": "event",
+  "description": "event schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "example": "f7c737db-4b50-4982-8804-7c2b9fa89020"
+    },
+    "type": {
+      "type": "string",
+      "example": "update",
+      "enum": [
+        "update",
+        "delete"
+      ]
+    },
+    "date_created": {
+      "type": "string",
+      "example": "2026-03-18T12:38:23.437225+00:00"
+    }
+  }
+}

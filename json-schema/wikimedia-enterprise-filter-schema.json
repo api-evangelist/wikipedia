@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-filter-schema.json",
+  "title": "filter",
+  "description": "filter schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "field": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

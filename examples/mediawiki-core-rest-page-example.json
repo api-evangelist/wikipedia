@@ -1,0 +1,17 @@
+{
+  "id": 9228,
+  "key": "Earth",
+  "title": "Earth",
+  "latest": {
+    "id": 1356767710,
+    "timestamp": "2026-05-29T18:21:47Z"
+  },
+  "content_model": "wikitext",
+  "license": {
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "title": "Creative Commons Attribution-Share Alike 4.0"
+  },
+  "html_url": "https://en.wikipedia.org/wiki/Earth",
+  "source": "Earth",
+  "html": "Earth"
+}

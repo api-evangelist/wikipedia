@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-listing-structure.json",
+  "name": "listing",
+  "description": "The result format for listings",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "description": "Relative link to next result page."
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "items"
+  ]
+}

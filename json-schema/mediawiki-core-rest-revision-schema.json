@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-revision-schema.json",
+  "title": "Revision",
+  "description": "A page revision.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 1356767710
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "size": {
+      "type": "integer",
+      "description": "Byte size of revision"
+    },
+    "minor": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "content_model": {
+      "type": "string",
+      "example": "wikitext"
+    },
+    "license": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jimbo Wales"
+        }
+      }
+    },
+    "comment": {
+      "type": "string",
+      "description": "Edit summary"
+    },
+    "delta": {
+      "type": "integer",
+      "description": "Byte delta from previous revision"
+    }
+  }
+}

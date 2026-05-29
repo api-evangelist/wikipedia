@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-version-structure.json",
+  "name": "version",
+  "description": "version schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "comment": {
+      "type": "string"
+    },
+    "editor": {
+      "$ref": "#/components/schemas/editor"
+    },
+    "identifier": {
+      "type": "int32"
+    },
+    "is_flagged_stable": {
+      "type": "boolean"
+    },
+    "is_minor_edit": {
+      "type": "boolean"
+    },
+    "noindex": {
+      "type": "boolean"
+    },
+    "scores": {
+      "$ref": "#/components/schemas/scores"
+    },
+    "maintenance_tags": {
+      "$ref": "#/components/schemas/maintenance_tags"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  }
+}

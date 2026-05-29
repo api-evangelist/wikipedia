@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/mediawiki-action-api-action-result-structure.json",
+  "name": "ActionResult",
+  "description": "Generic envelope for Action API responses. Concrete payload shape depends on action and prop/list/meta selection.",
+  "type": "object",
+  "properties": {
+    "batchcomplete": {
+      "type": "string",
+      "description": "Present when the batch completed in one round-trip"
+    },
+    "continue": {
+      "type": "object",
+      "description": "Continuation tokens for paginated responses"
+    },
+    "query": {
+      "type": "object",
+      "description": "Result body for action=query"
+    },
+    "parse": {
+      "type": "object",
+      "description": "Result body for action=parse"
+    },
+    "edit": {
+      "type": "object",
+      "description": "Result body for action=edit"
+    },
+    "login": {
+      "type": "object",
+      "description": "Result body for action=login"
+    },
+    "error": {
+      "$ref": "#/components/schemas/ActionApiError"
+    },
+    "warnings": {
+      "type": "object"
+    }
+  }
+}

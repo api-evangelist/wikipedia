@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-recommendation-result-structure.json",
+  "name": "recommendation_result",
+  "description": "recommendation_result schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "int32",
+      "description": "the number of recommendations returned"
+    },
+    "items": {
+      "type": "array",
+      "description": "the list of articles recommended for translation",
+      "items": {
+        "type": "object",
+        "properties": {
+          "wikidata_id": {
+            "type": "string",
+            "description": "wikidata id for the item"
+          },
+          "name": {
+            "type": "string",
+            "description": "title of the article in the source language"
+          },
+          "sitelink_count": {
+            "type": "int32",
+            "description": "count of sites the wikidata item is linked to"
+          }
+        }
+      }
+    }
+  }
+}

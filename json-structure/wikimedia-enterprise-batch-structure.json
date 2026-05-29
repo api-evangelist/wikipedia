@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-batch-structure.json",
+  "name": "batch",
+  "description": "batch schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "in_language": {
+      "$ref": "#/components/schemas/language"
+    },
+    "is_part_of": {
+      "$ref": "#/components/schemas/project"
+    },
+    "namespace": {
+      "$ref": "#/components/schemas/article_namespace"
+    },
+    "size": {
+      "$ref": "#/components/schemas/size"
+    }
+  }
+}

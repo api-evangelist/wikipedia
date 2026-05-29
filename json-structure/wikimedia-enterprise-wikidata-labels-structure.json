@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-labels-structure.json",
+  "name": "wikidata_labels",
+  "description": "key-value pairs with labels in different languages",
+  "type": "object",
+  "example": {
+    "ce": "\u041e\u044c\u0437\u043b\u0435\u0440",
+    "en": "\u00d6zler"
+  }
+}

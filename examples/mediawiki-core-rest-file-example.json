@@ -1,0 +1,25 @@
+{
+  "title": "File:Earth_Eastern_Hemisphere.jpg",
+  "file_description_url": "https://en.wikipedia.org/wiki/Earth",
+  "latest": {
+    "timestamp": "2026-05-29T18:21:47Z",
+    "user": {
+      "id": 9228,
+      "name": "Earth"
+    }
+  },
+  "preferred": {
+    "mediatype": "BITMAP",
+    "size": 12345,
+    "width": 9228,
+    "height": 720,
+    "url": "https://en.wikipedia.org/wiki/Earth"
+  },
+  "original": {
+    "mediatype": "BITMAP",
+    "size": 12345,
+    "width": 9228,
+    "height": 720,
+    "url": "https://en.wikipedia.org/wiki/Earth"
+  }
+}

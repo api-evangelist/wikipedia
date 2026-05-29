@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-result-schema.json",
+  "title": "result",
+  "description": "result schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "itemType": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "url",
+    "itemType"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-thumbnail-schema.json",
+  "title": "thumbnail",
+  "description": "thumbnail schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "contentUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Thumbnail URL"
+    },
+    "width": {
+      "description": "Thumbnail width in pixels",
+      "type": "integer",
+      "example": 156
+    },
+    "height": {
+      "description": "Thumbnail height in pixels",
+      "type": "integer",
+      "example": 255
+    }
+  }
+}

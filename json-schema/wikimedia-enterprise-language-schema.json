@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-language-schema.json",
+  "title": "language",
+  "description": "language schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "example": "en"
+    },
+    "name": {
+      "type": "string",
+      "example": "English"
+    },
+    "alternate_name": {
+      "type": "string",
+      "example": "English"
+    },
+    "direction": {
+      "type": "string",
+      "example": "ltr"
+    }
+  }
+}

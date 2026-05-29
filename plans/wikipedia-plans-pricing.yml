@@ -1,0 +1,250 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+
+provider: Wikipedia / MediaWiki
+providerId: wikipedia
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+
+tags:
+  - Open Knowledge
+  - Encyclopedia
+  - Knowledge Graph
+  - Enterprise
+  - Snapshot
+  - Realtime
+
+description: >-
+  Wikipedia and all native Wikimedia Foundation APIs (MediaWiki Action API, MediaWiki Core REST API,
+  Wikimedia REST API v1, Wikidata Query Service) are free of charge under the Wikimedia API usage
+  guidelines - the only requirement is a contactable User-Agent and respect for rate limits. The
+  commercial tier is operated separately by Wikimedia LLC under the Wikimedia Enterprise brand,
+  with a Free developer plan and a Paid plan whose pricing is custom (contact sales) and based on
+  data egress beyond the free allocation.
+
+sources:
+  - https://api.wikimedia.org/wiki/Main_Page
+  - https://enterprise.wikimedia.com/pricing/
+  - https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_API_Usage_Guidelines
+
+plans:
+  - id: wikipedia-foundation-free
+    name: Wikimedia Foundation Free APIs
+    type: freemium
+    description: Free use of all native Wikimedia Foundation APIs subject to the usage guidelines.
+    entries:
+      - label: Action API requests
+        name: action_api_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Core REST API requests
+        name: core_rest_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: REST API v1 requests
+        name: rest_v1_requests
+        type: metered
+        metric: request
+        limit: 200
+        timeFrame: second
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Wikidata SPARQL queries
+        name: sparql_queries
+        type: metered
+        metric: request
+        limit: 5
+        timeFrame: second
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: EventStreams (SSE)
+        name: event_streams
+        type: metered
+        metric: stream
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Bulk database dumps
+        name: bulk_dumps
+        type: flat
+        metric: download
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+    elements:
+      - name: Anonymous read access
+      - name: OAuth 2.0 write access
+      - name: Cached anonymous reads at ~200 RPS
+      - name: 300+ language editions
+      - name: Real-time SSE EventStream
+      - name: Bulk dumps at dumps.wikimedia.org
+      - name: SPARQL 1.1 over 100M+ Wikidata items
+
+  - id: wikipedia-enterprise-free
+    name: Wikimedia Enterprise Free Developer Plan
+    type: freemium
+    description: Free developer tier of Wikimedia Enterprise. No credit card required.
+    entries:
+      - label: Snapshot API requests
+        name: enterprise_snapshot_requests
+        type: quota
+        metric: request
+        limit: 15
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Snapshot chunks
+        name: enterprise_snapshot_chunks
+        type: quota
+        metric: chunk
+        limit: 1500
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: On-demand API requests
+        name: enterprise_ondemand_requests
+        type: quota
+        metric: request
+        limit: 5000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Snapshot update frequency
+        name: enterprise_snapshot_frequency
+        type: subscription
+        metric: cadence
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'twice-monthly'
+        userMultiplied: false
+      - label: Structured Contents beta access
+        name: enterprise_structured_contents
+        type: flat
+        metric: feature
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+    elements:
+      - name: 920+ datasets across 360+ languages
+      - name: Help center / FAQ support
+      - name: Open feedback form
+      - name: Machine-readable license info on every response
+
+  - id: wikipedia-enterprise-paid
+    name: Wikimedia Enterprise Paid Plan
+    type: enterprise
+    description: Commercial tier of Wikimedia Enterprise with unlimited usage, daily/hourly cadence, realtime stream, and SLA support. Price is custom - pay only for data egress beyond free allocation; contact sales.
+    entries:
+      - label: Snapshot API requests
+        name: enterprise_snapshot_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'see vendor / data egress based'
+        userMultiplied: false
+      - label: Snapshot update frequency
+        name: enterprise_snapshot_frequency
+        type: subscription
+        metric: cadence
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'daily'
+        userMultiplied: false
+      - label: On-demand API requests
+        name: enterprise_ondemand_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'see vendor / data egress based'
+        userMultiplied: false
+      - label: Realtime API streamed updates
+        name: enterprise_realtime_stream
+        type: subscription
+        metric: stream
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'see vendor / data egress based'
+        userMultiplied: false
+      - label: Realtime API hourly batches
+        name: enterprise_realtime_batches
+        type: subscription
+        metric: batch
+        limit: -1
+        timeFrame: hour
+        geo: global
+        unit: 1
+        price: 'see vendor / data egress based'
+        userMultiplied: false
+      - label: SLA
+        name: enterprise_sla
+        type: flat
+        metric: availability
+        limit: 99
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'up to 99% SLA'
+        userMultiplied: false
+      - label: Dedicated support team
+        name: enterprise_support
+        type: flat
+        metric: support
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'included'
+        userMultiplied: false
+    elements:
+      - name: Unlimited Snapshot, On-demand, Realtime requests
+      - name: Daily snapshots
+      - name: Streamed + hourly batched realtime feed
+      - name: Up to 99% SLA
+      - name: Dedicated support team
+      - name: Priority feedback recognition
+      - name: Structured Contents beta access

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-sitelinks-structure.json",
+  "name": "wikidata_sitelinks",
+  "description": "Mapping of this Wikidata item to other Wikimedia project site URLs",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Title of the linked page",
+      "example": "Pentominium"
+    },
+    "badges": {
+      "type": "array",
+      "description": "Badge identifiers for this sitelink",
+      "example": [
+        "Q17437796",
+        "Q6540326"
+      ]
+    },
+    "url": {
+      "type": "uri",
+      "description": "URL to the linked page",
+      "example": "https://de.wikipedia.org/wiki/Pentominium"
+    }
+  },
+  "required": [
+    "title",
+    "badges",
+    "url"
+  ]
+}

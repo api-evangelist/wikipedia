@@ -1,0 +1,414 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Wikipedia Content Authoring
+  description: 'Write surface for Wikipedia / MediaWiki: create pages, update pages, upload files, authenticate. Self-contained Naftiko capability covering one Wikipedia / MediaWiki business surface.'
+  tags:
+  - Wikipedia
+  - Write
+  - Authoring
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    WIKIPEDIA_OAUTH_TOKEN: WIKIPEDIA_OAUTH_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: wikipedia-content-authoring
+    baseUri: https://en.wikipedia.org
+    description: Wikipedia Content Authoring business capability. Self-contained, no shared references.
+    resources:
+    - name: createpage
+      path: /w/rest.php/v1/page
+      operations:
+      - name: createPage
+        method: POST
+        description: Create a new wiki page
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: updatepage
+      path: /w/rest.php/v1/page/{title}
+      operations:
+      - name: updatePage
+        method: PUT
+        description: Update or create a page
+        inputParameters:
+        - name: title
+          in: path
+          type: string
+          required: true
+          description: title path parameter
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: editpage
+      path: /w/api.php?action=edit
+      operations:
+      - name: editPage
+        method: POST
+        description: Edit page via Action API (with CSRF token)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (always use json)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: uploadfile
+      path: /w/api.php?action=upload
+      operations:
+      - name: uploadFile
+        method: POST
+        description: Upload a file via Action API
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (always use json)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: login
+      path: /w/api.php?action=login
+      operations:
+      - name: login
+        method: POST
+        description: Action API login (legacy)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (always use json)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clientlogin
+      path: /w/api.php?action=clientlogin
+      operations:
+      - name: clientLogin
+        method: POST
+        description: Action API client login
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (always use json)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: getcsrftoken
+      path: /w/api.php?action=query&meta=tokens
+      operations:
+      - name: getCsrfToken
+        method: GET
+        description: Get a CSRF token for write operations
+        inputParameters:
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (always use json)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: patroledit
+      path: /w/api.php?action=patrol
+      operations:
+      - name: patrolEdit
+        method: POST
+        description: Mark an edit as patrolled
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (always use json)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WIKIPEDIA_OAUTH_TOKEN}}'
+  exposes:
+  - type: rest
+    namespace: wikipedia-content-authoring-rest
+    port: 8081
+    description: REST adapter for Wikipedia Content Authoring. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/page
+      name: createpage
+      description: Create a new wiki page
+      operations:
+      - method: POST
+        name: createPage
+        description: Create a new wiki page
+        call: wikipedia-content-authoring.createPage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/page/{title}
+      name: updatepage
+      description: Update or create a page
+      operations:
+      - method: PUT
+        name: updatePage
+        description: Update or create a page
+        call: wikipedia-content-authoring.updatePage
+        with:
+          title: rest.title
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api.php
+      name: editpage
+      description: Edit page via Action API (with CSRF token)
+      operations:
+      - method: POST
+        name: editPage
+        description: Edit page via Action API (with CSRF token)
+        call: wikipedia-content-authoring.editPage
+        with:
+          body: rest.body
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api.php
+      name: uploadfile
+      description: Upload a file via Action API
+      operations:
+      - method: POST
+        name: uploadFile
+        description: Upload a file via Action API
+        call: wikipedia-content-authoring.uploadFile
+        with:
+          body: rest.body
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api.php
+      name: login
+      description: Action API login (legacy)
+      operations:
+      - method: POST
+        name: login
+        description: Action API login (legacy)
+        call: wikipedia-content-authoring.login
+        with:
+          body: rest.body
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api.php
+      name: clientlogin
+      description: Action API client login
+      operations:
+      - method: POST
+        name: clientLogin
+        description: Action API client login
+        call: wikipedia-content-authoring.clientLogin
+        with:
+          body: rest.body
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api.php
+      name: getcsrftoken
+      description: Get a CSRF token for write operations
+      operations:
+      - method: GET
+        name: getCsrfToken
+        description: Get a CSRF token for write operations
+        call: wikipedia-content-authoring.getCsrfToken
+        with:
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api.php
+      name: patroledit
+      description: Mark an edit as patrolled
+      operations:
+      - method: POST
+        name: patrolEdit
+        description: Mark an edit as patrolled
+        call: wikipedia-content-authoring.patrolEdit
+        with:
+          body: rest.body
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: wikipedia-content-authoring-mcp
+    port: 9091
+    transport: http
+    description: MCP adapter for Wikipedia Content Authoring. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: create-new-wiki-page
+      description: Create a new wiki page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-content-authoring.createPage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-create-page
+      description: Update or create a page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: wikipedia-content-authoring.updatePage
+      with:
+        title: tools.title
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-page-action-api-csrf
+      description: Edit page via Action API (with CSRF token)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-content-authoring.editPage
+      with:
+        body: tools.body
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-file-action-api
+      description: Upload a file via Action API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-content-authoring.uploadFile
+      with:
+        body: tools.body
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: action-api-login-legacy
+      description: Action API login (legacy)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-content-authoring.login
+      with:
+        body: tools.body
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: action-api-client-login
+      description: Action API client login
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-content-authoring.clientLogin
+      with:
+        body: tools.body
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-csrf-token-write-operations
+      description: Get a CSRF token for write operations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: wikipedia-content-authoring.getCsrfToken
+      with:
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mark-edit-patrolled
+      description: Mark an edit as patrolled
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: wikipedia-content-authoring.patrolEdit
+      with:
+        body: tools.body
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.

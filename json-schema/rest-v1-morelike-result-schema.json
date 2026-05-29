@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-morelike-result-schema.json",
+  "title": "morelike_result",
+  "description": "the prioritized list of Wikidata IDs recommended for creation as Wikipedia articles",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "wikidata_id": {
+        "type": "string",
+        "description": "Wikidata ID for the item"
+      },
+      "score": {
+        "type": "number",
+        "description": "Score of the recommendation. The higher the score, the more important the recommendation is."
+      },
+      "source_language": {
+        "type": "string",
+        "description": "Source of the recommendation -- which wiki is recommending the current article."
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-entity-statement-reference-structure.json",
+  "name": "wikidata_entity_statement_reference",
+  "description": "Reference supporting a Wikidata statement",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "description": "unique identifier for the reference",
+      "example": "63309730314f4c20bf6b1008fe8ffd2b155272b3"
+    },
+    "parts": {
+      "type": "array",
+      "description": "Parts that make up this reference",
+      "items": {
+        "$ref": "#/components/schemas/wikidata_entity_reference_part"
+      }
+    }
+  },
+  "required": [
+    "identifier",
+    "parts"
+  ]
+}

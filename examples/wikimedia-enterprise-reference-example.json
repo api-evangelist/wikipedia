@@ -1,0 +1,19 @@
+{
+  "identifier": "enwiki_namespace_0",
+  "group": "Earth",
+  "type": "Earth",
+  "metadata": {},
+  "text": {
+    "value": "Earth",
+    "links": [
+      null
+    ]
+  },
+  "source": {
+    "value": "Earth",
+    "links": [
+      null
+    ]
+  },
+  "parent_reference": "Earth"
+}

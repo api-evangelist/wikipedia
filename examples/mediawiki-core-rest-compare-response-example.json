@@ -1,0 +1,18 @@
+{
+  "from": null,
+  "to": null,
+  "diff": [
+    {
+      "type": 42,
+      "lineNumber": 42,
+      "text": "Earth",
+      "offset": {
+        "from": {},
+        "to": {}
+      },
+      "highlightRanges": [
+        {}
+      ]
+    }
+  ]
+}

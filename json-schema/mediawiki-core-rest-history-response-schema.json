@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-history-response-schema.json",
+  "title": "HistoryResponse",
+  "description": "HistoryResponse schema from MediaWiki Core REST API",
+  "type": "object",
+  "properties": {
+    "revisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Revision"
+      }
+    },
+    "latest": {
+      "type": "string",
+      "format": "uri",
+      "description": "Link to latest revisions page"
+    },
+    "older": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true
+    },
+    "newer": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true
+    }
+  }
+}

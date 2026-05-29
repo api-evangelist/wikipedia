@@ -1,0 +1,432 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Wikipedia / MediaWiki"
+  description: >-
+    Vocabulary mapping the operational (OpenAPI) and capability (Naftiko) dimensions of the
+    Wikipedia / MediaWiki / Wikidata / Wikimedia Enterprise API surface.
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+operational:
+  apis:
+    - name: MediaWiki Action API
+      namespace: mediawiki-action-api
+      version: "1.45"
+      baseUrl: https://en.wikipedia.org/w/api.php
+      status: active
+    - name: MediaWiki Core REST API
+      namespace: mediawiki-core-rest
+      version: "1.0.0"
+      baseUrl: https://en.wikipedia.org/w/rest.php/v1
+      status: active
+    - name: Wikimedia REST API v1
+      namespace: rest-v1
+      version: "1.0.0"
+      baseUrl: https://en.wikipedia.org/api/rest_v1
+      status: active
+    - name: Wikidata Query Service SPARQL API
+      namespace: wikidata-sparql
+      version: "1.0.0"
+      baseUrl: https://query.wikidata.org
+      status: active
+    - name: Wikimedia Enterprise API
+      namespace: wikimedia-enterprise
+      version: "2.0.0"
+      baseUrl: https://api.enterprise.wikimedia.com
+      status: active
+
+  resources:
+    - name: Page
+      apis: [mediawiki-action-api, mediawiki-core-rest, rest-v1, wikimedia-enterprise]
+      actions: [search, get, create, update, summary, html, transform]
+    - name: Revision
+      apis: [mediawiki-action-api, mediawiki-core-rest]
+      actions: [get, list, compare, source, html, bare, withHtml]
+    - name: File
+      apis: [mediawiki-action-api, mediawiki-core-rest]
+      actions: [get, upload, list]
+    - name: Search
+      apis: [mediawiki-action-api, mediawiki-core-rest]
+      actions: [page, title, opensearch]
+    - name: User
+      apis: [mediawiki-action-api]
+      actions: [login, clientLogin, logout, info, getRateLimits]
+    - name: Token
+      apis: [mediawiki-action-api]
+      actions: [csrf, login, watch, patrol, rollback]
+    - name: LanguageLink
+      apis: [mediawiki-core-rest]
+      actions: [list]
+    - name: WikidataItem
+      apis: [wikidata-sparql, wikimedia-enterprise]
+      actions: [query, get, label, property]
+    - name: WikidataProperty
+      apis: [wikidata-sparql, wikimedia-enterprise]
+      actions: [get, list]
+    - name: Snapshot
+      apis: [wikimedia-enterprise]
+      actions: [list, get, download, chunks]
+    - name: StructuredContent
+      apis: [wikimedia-enterprise]
+      actions: [list, get, download, onDemand]
+    - name: Batch
+      apis: [wikimedia-enterprise]
+      actions: [list, download]
+    - name: Project
+      apis: [wikimedia-enterprise]
+      actions: [list, get]
+    - name: Language
+      apis: [wikimedia-enterprise]
+      actions: [list, get]
+    - name: Namespace
+      apis: [wikimedia-enterprise]
+      actions: [list, get]
+    - name: Transform
+      apis: [mediawiki-core-rest]
+      actions: [wikitextToHtml, htmlToWikitext, lint]
+    - name: Citation
+      apis: [rest-v1]
+      actions: [extract]
+    - name: Math
+      apis: [rest-v1]
+      actions: [render, hash]
+    - name: ReadingList
+      apis: [rest-v1]
+      actions: [list, create, update, delete]
+    - name: Recommendation
+      apis: [rest-v1]
+      actions: [suggest, related]
+
+  actions:
+    - name: search
+      httpMethod: GET
+      pattern: query
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: list
+      httpMethod: GET
+      pattern: query
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: update
+      httpMethod: PUT
+      pattern: write
+    - name: edit
+      httpMethod: POST
+      pattern: write
+    - name: upload
+      httpMethod: POST
+      pattern: write
+    - name: download
+      httpMethod: GET
+      pattern: read
+    - name: compare
+      httpMethod: POST
+      pattern: query
+    - name: transform
+      httpMethod: POST
+      pattern: query
+    - name: query
+      httpMethod: GET
+      pattern: sparql
+    - name: login
+      httpMethod: POST
+      pattern: auth
+    - name: patrol
+      httpMethod: POST
+      pattern: moderate
+
+  schemas:
+    core:
+      - Page
+      - Revision
+      - File
+      - SearchResult
+    knowledgeGraph:
+      - WikidataItem
+      - WikidataProperty
+      - WikidataLabel
+      - SparqlResults
+    enterprise:
+      - Snapshot
+      - StructuredContent
+      - Batch
+      - Article
+      - Project
+      - Language
+      - Namespace
+    auth:
+      - Token
+      - OAuthBearer
+    moderation:
+      - RevertRisk
+      - ReferenceRisk
+      - ReferenceNeed
+      - Scores
+
+  parameters:
+    pagination:
+      - older_than
+      - newer_than
+      - continue
+      - limit
+    identifiers:
+      - title
+      - pageid
+      - id
+      - identifier
+      - name
+    filters:
+      - filter
+      - redirect
+      - prop
+      - list
+      - meta
+      - action
+    format:
+      - format
+      - smaxage
+      - maxage
+    safety:
+      - maxlag
+      - User-Agent
+
+  enums:
+    actions:
+      - query
+      - parse
+      - edit
+      - upload
+      - login
+      - clientlogin
+      - logout
+      - patrol
+      - rollback
+      - move
+      - delete
+      - protect
+      - block
+      - unblock
+      - thank
+      - opensearch
+      - feedrecentchanges
+    formats:
+      - json
+      - jsonfm
+      - xml
+      - xmlfm
+      - php
+      - rawfm
+    historyCounts:
+      - anonymous
+      - bot
+      - editors
+      - edits
+      - minor
+      - reverted
+    sparqlAcceptTypes:
+      - application/sparql-results+json
+      - application/sparql-results+xml
+      - text/csv
+      - text/tab-separated-values
+      - application/rdf+xml
+      - text/turtle
+
+  authentication:
+    schemes:
+      - name: OAuth2
+        flow: authorizationCode
+        appliesTo:
+          - mediawiki-action-api
+          - mediawiki-core-rest
+          - rest-v1
+        tokenUrl: https://meta.wikimedia.org/wiki/Special:OAuth/token
+      - name: Bearer
+        appliesTo:
+          - wikimedia-enterprise
+        tokenSource: https://enterprise.wikimedia.com/account
+      - name: None
+        appliesTo:
+          - wikidata-sparql
+          - rest-v1 (read-only)
+          - mediawiki-core-rest (read-only)
+        notes: All read operations are anonymous; require a contactable User-Agent.
+
+capability:
+  workflows:
+    - id: wikipedia-knowledge-research
+      file: capabilities/wikipedia-knowledge-research.yaml
+      description: Read-only research surface across Wikipedia
+      apisCombined: [mediawiki-core-rest, rest-v1]
+      toolCount: 10
+      personas: [ai-researcher, content-aggregator, rag-builder]
+      domains: [Knowledge, Search, Content]
+    - id: wikipedia-content-authoring
+      file: capabilities/wikipedia-content-authoring.yaml
+      description: Write surface for Wikipedia / MediaWiki
+      apisCombined: [mediawiki-core-rest, mediawiki-action-api]
+      toolCount: 8
+      personas: [editor, bot-operator, automated-curator]
+      domains: [Content, Moderation, Authoring]
+    - id: wikipedia-knowledge-graph
+      file: capabilities/wikipedia-knowledge-graph.yaml
+      description: Wikidata SPARQL query surface
+      apisCombined: [wikidata-sparql]
+      toolCount: 2
+      personas: [data-researcher, linked-data-publisher]
+      domains: [KnowledgeGraph, LinkedData]
+    - id: wikipedia-enterprise-snapshot
+      file: capabilities/wikipedia-enterprise-snapshot.yaml
+      description: Commercial Wikimedia Enterprise Snapshot, On-demand, Realtime surface
+      apisCombined: [wikimedia-enterprise]
+      toolCount: 17
+      personas: [ai-lab, search-platform, enterprise-consumer]
+      domains: [Enterprise, Snapshot, Realtime, StructuredContent]
+
+  personas:
+    - id: ai-researcher
+      name: AI Researcher / RAG Builder
+      description: Grounds LLM responses in Wikipedia content; needs cached, anonymous reads.
+      workflows: [wikipedia-knowledge-research, wikipedia-knowledge-graph]
+    - id: editor
+      name: Wikipedia Editor
+      description: Edits, patrols, and uploads via the Action API with OAuth.
+      workflows: [wikipedia-content-authoring]
+    - id: bot-operator
+      name: Bot Operator
+      description: Runs maintenance, anti-vandalism, and curation bots against the Action API.
+      workflows: [wikipedia-content-authoring]
+    - id: data-researcher
+      name: Knowledge-Graph Researcher
+      description: Queries Wikidata SPARQL for academic, journalistic, or linked-data work.
+      workflows: [wikipedia-knowledge-graph]
+    - id: linked-data-publisher
+      name: Linked-Data Publisher
+      description: Uses Wikidata as identifier-of-truth source for entity reconciliation.
+      workflows: [wikipedia-knowledge-graph]
+    - id: ai-lab
+      name: AI Lab / Foundation Model Trainer
+      description: Consumes Wikimedia Enterprise Snapshot + Structured Contents for training data.
+      workflows: [wikipedia-enterprise-snapshot]
+    - id: search-platform
+      name: Search Platform / Content Aggregator
+      description: Ingests realtime updates for breaking-news and knowledge-panel use cases.
+      workflows: [wikipedia-enterprise-snapshot, wikipedia-knowledge-research]
+    - id: rag-builder
+      name: RAG / Agent Builder
+      description: Builds retrieval-augmented agents using one of the many community Wikipedia MCP servers.
+      workflows: [wikipedia-knowledge-research]
+    - id: automated-curator
+      name: Automated Curator
+      description: Performs automated content moderation, citation insertion, and link recommendation.
+      workflows: [wikipedia-content-authoring]
+    - id: enterprise-consumer
+      name: Enterprise Data Consumer
+      description: Pays for SLA-backed snapshots and realtime feed for downstream products.
+      workflows: [wikipedia-enterprise-snapshot]
+
+  domains:
+    - id: Knowledge
+      description: Encyclopedic content
+      resources: [Page, Revision, Search]
+    - id: KnowledgeGraph
+      description: Structured Wikidata items, properties, labels
+      resources: [WikidataItem, WikidataProperty]
+    - id: Content
+      description: Page CRUD and transforms
+      resources: [Page, Revision, Transform]
+    - id: Authoring
+      description: Write surface
+      resources: [Page, File, Token, User]
+    - id: Moderation
+      description: Patrol, rollback, scores
+      resources: [Revision, Token, User]
+    - id: Enterprise
+      description: Commercial bulk + on-demand
+      resources: [Snapshot, StructuredContent, Batch, Article]
+    - id: LinkedData
+      description: Cross-language IDs, schema.org alignment
+      resources: [WikidataItem, LanguageLink]
+    - id: Search
+      description: Title and full-text search
+      resources: [Search]
+    - id: Snapshot
+      description: Bulk snapshot retrieval
+      resources: [Snapshot]
+    - id: Realtime
+      description: Streamed updates
+      resources: [Batch]
+    - id: StructuredContent
+      description: Pre-parsed article structure
+      resources: [StructuredContent]
+
+  namespaces:
+    - id: mediawiki-action-api
+      consumed: true
+      rest: false
+      mcp: false
+    - id: wikipedia-content-authoring
+      consumed: true
+      rest: true
+      mcp: true
+      restPort: 8081
+      mcpPort: 9091
+    - id: wikipedia-knowledge-research
+      consumed: true
+      rest: true
+      mcp: true
+      restPort: 8080
+      mcpPort: 9090
+    - id: wikipedia-knowledge-graph
+      consumed: true
+      rest: true
+      mcp: true
+      restPort: 8082
+      mcpPort: 9092
+    - id: wikipedia-enterprise-snapshot
+      consumed: true
+      rest: true
+      mcp: true
+      restPort: 8083
+      mcpPort: 9093
+
+  binds:
+    - envVar: WIKIPEDIA_OAUTH_TOKEN
+      description: OAuth 2.0 bearer for write operations on en.wikipedia.org / commons / wikidata
+      workflows: [wikipedia-content-authoring]
+    - envVar: WIKIMEDIA_ENTERPRISE_TOKEN
+      description: Bearer token from enterprise.wikimedia.com
+      workflows: [wikipedia-enterprise-snapshot]
+
+crossReference:
+  - resource: Page
+    operations: [getPage, getPageBare, getPageHtml, getPageWithHtml, createPage, updatePage, getPageSummary, searchPages, searchTitles]
+    workflows: [wikipedia-knowledge-research, wikipedia-content-authoring]
+    personas: [ai-researcher, editor, bot-operator, rag-builder]
+  - resource: Revision
+    operations: [getRevision, getRevisionBare, getRevisionSource, getRevisionHtml, getRevisionWithHtml, getPageHistory, compareRevisions]
+    workflows: [wikipedia-knowledge-research]
+    personas: [ai-researcher, data-researcher]
+  - resource: WikidataItem
+    operations: [executeSparqlQueryGet, executeSparqlQueryPost, getWikidataItem, getWikidataLabel, getWikidataProperty]
+    workflows: [wikipedia-knowledge-graph, wikipedia-enterprise-snapshot]
+    personas: [data-researcher, linked-data-publisher, ai-lab]
+  - resource: Snapshot
+    operations: [listSnapshots, getSnapshot, downloadSnapshot, listSnapshotChunks, downloadSnapshotChunk]
+    workflows: [wikipedia-enterprise-snapshot]
+    personas: [ai-lab, search-platform, enterprise-consumer]
+  - resource: StructuredContent
+    operations: [listStructuredSnapshots, getOnDemandStructuredContent]
+    workflows: [wikipedia-enterprise-snapshot]
+    personas: [ai-lab, enterprise-consumer]
+  - resource: File
+    operations: [getFile, uploadFile]
+    workflows: [wikipedia-knowledge-research, wikipedia-content-authoring]
+    personas: [editor, bot-operator]
+  - resource: Token
+    operations: [getCsrfToken, login, clientLogin]
+    workflows: [wikipedia-content-authoring]
+    personas: [editor, bot-operator, automated-curator]

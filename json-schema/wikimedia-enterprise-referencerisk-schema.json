@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-referencerisk-schema.json",
+  "title": "referencerisk",
+  "description": "referencerisk schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "reference_risk_score": {
+      "type": "number"
+    }
+  }
+}

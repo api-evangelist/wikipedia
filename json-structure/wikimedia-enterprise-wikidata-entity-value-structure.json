@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-entity-value-structure.json",
+  "name": "wikidata_entity_value",
+  "description": "This object represents the actual value in a statement or qualifier",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string",
+      "description": "String representation of the value. If the value is too complex to represent as a string or integer, this will be replaced by statements.PID.value.content_data",
+      "example": "Adams, Douglas (1952-2001)"
+    },
+    "type": {
+      "type": "string",
+      "description": "The actual data type of the value for this property. Should match statements.PID.property.data_type, but might not.",
+      "example": "wikibase-item"
+    },
+    "content_data": {
+      "type": "object",
+      "description": "An object holding the representation of the value. If the value can be represented simply as a string or integer, this will be replaced by statements.PID.value.content",
+      "example": {
+        "after": "0",
+        "before": "0",
+        "Calendarmodel": "http://www.wikidata.org/entity/Q1985727",
+        "precision": "9",
+        "Time": "+1861-00-00T00:00:00Z",
+        "timezone": "0"
+      }
+    },
+    "labels": {
+      "$ref": "#/components/schemas/wikidata_labels"
+    }
+  },
+  "required": [
+    "type",
+    "labels"
+  ]
+}

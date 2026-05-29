@@ -1,0 +1,9 @@
+{
+  "identifier": "P31",
+  "data_type": "time",
+  "labels": {
+    "en": "instance of",
+    "de": "Instanz von",
+    "fr": "instance de"
+  }
+}

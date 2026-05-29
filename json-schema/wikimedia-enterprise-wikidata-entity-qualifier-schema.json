@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-wikidata-entity-qualifier-schema.json",
+  "title": "wikidata_entity_qualifier",
+  "description": "Qualifier further describing or refining the value of a property in a statement",
+  "type": "object",
+  "properties": {
+    "property": {
+      "$ref": "#/components/schemas/wikidata_entity_property"
+    },
+    "value": {
+      "$ref": "#/components/schemas/wikidata_entity_value"
+    }
+  },
+  "required": [
+    "property",
+    "value"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-protection-structure.json",
+  "name": "protection",
+  "description": "protection schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "expiry": {
+      "type": "string",
+      "enum": [
+        "infinite",
+        "indefinite",
+        "infinity",
+        "never"
+      ],
+      "example": "infinity"
+    },
+    "level": {
+      "type": "string",
+      "example": "extendedconfirmed"
+    },
+    "type": {
+      "type": "string",
+      "example": "edit"
+    }
+  }
+}

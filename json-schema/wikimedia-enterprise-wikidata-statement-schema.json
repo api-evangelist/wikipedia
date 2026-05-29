@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-wikidata-statement-schema.json",
+  "title": "wikidata_statement",
+  "description": "Statement connecting a value to a Wikidata entity through a property. Each statement corresponds to a single claim on the Wikidata entity, and includes the value of the claim and metadata about the claim such as references, qualifiers, and ranks",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the statement",
+      "example": "Q56603478$B070CCDB-B608-492C-B15A-4ABC5CED7AF6"
+    },
+    "rank": {
+      "type": "string",
+      "description": "Rank of the statement among other similar statements. Possible values are normal, preferred, and deprecated",
+      "enum": [
+        "normal",
+        "preferred",
+        "deprecated"
+      ],
+      "example": "normal"
+    },
+    "property": {
+      "$ref": "#/components/schemas/wikidata_entity_property"
+    },
+    "value": {
+      "$ref": "#/components/schemas/wikidata_entity_value"
+    },
+    "qualifiers": {
+      "$ref": "#/components/schemas/wikidata_entity_qualifier"
+    },
+    "references": {
+      "$ref": "#/components/schemas/wikidata_entity_statement_reference"
+    }
+  },
+  "required": [
+    "identifier",
+    "rank",
+    "property",
+    "value",
+    "qualifiers",
+    "references"
+  ]
+}

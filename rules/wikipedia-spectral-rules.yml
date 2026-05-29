@@ -1,0 +1,197 @@
+extends:
+- - spectral:oas
+  - recommended
+rules:
+  info-title-prefix:
+    description: Spec title should begin with "Wikipedia", "MediaWiki", "Wikimedia", or "Wikidata".
+    message: 'info.title should start with one of: Wikipedia, MediaWiki, Wikimedia, Wikidata.'
+    given: $.info
+    severity: warn
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: ^(Wikipedia|MediaWiki|Wikimedia|Wikidata)\b
+  info-description-required:
+    description: info.description must be present and non-trivial.
+    given: $.info
+    severity: error
+    then:
+      field: description
+      function: truthy
+  info-license-required:
+    description: info.license must be defined (CC BY-SA, CC0, or commercial).
+    given: $.info
+    severity: warn
+    then:
+      field: license
+      function: truthy
+  openapi-version-3:
+    description: OpenAPI version must be 3.x.
+    given: $.openapi
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: ^3\.
+  servers-required:
+    description: At least one server must be declared.
+    given: $
+    severity: error
+    then:
+      field: servers
+      function: truthy
+  server-https:
+    description: Servers must use https://.
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  path-no-trailing-slash:
+    description: Paths should not end with a trailing slash.
+    given: $.paths
+    severity: warn
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        notMatch: .+/$
+  path-snake-or-kebab:
+    description: Path segments should use snake_case or kebab-case (lowercase, digits, dashes, underscores, or templated params).
+    given: $.paths
+    severity: warn
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^(/[a-z0-9_\-]+|/\{[A-Za-z_]+\})+$|^/$|^/api\.php$|^/sparql$
+  operation-operationid-required:
+    description: Every operation must have a camelCase operationId.
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+    - field: operationId
+      function: truthy
+    - field: operationId
+      function: pattern
+      functionOptions:
+        match: ^[a-z][a-zA-Z0-9]*$
+  operation-summary-required:
+    description: Every operation must have a summary in Title Case prefixed with the provider name.
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: summary
+      function: truthy
+  operation-description-required:
+    description: Every operation must have a description.
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+  operation-tags-required:
+    description: Every operation must have at least one tag.
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+  operation-microcks-extension:
+    description: Every operation should declare x-microcks-operation for mock-server compatibility.
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: info
+    then:
+      field: x-microcks-operation
+      function: truthy
+  tags-title-case:
+    description: Tag names should be Title Case (multi-word) or PascalCase.
+    given: $.tags[*].name
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[A-Z][A-Za-z0-9 ]*$
+  parameter-description-required:
+    description: Every parameter should have a description.
+    given: $.paths[*][*].parameters[*]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+  parameter-schema-required:
+    description: Every parameter must have a schema with a type.
+    given: $.paths[*][*].parameters[*]
+    severity: error
+    then:
+      field: schema
+      function: truthy
+  parameter-snake-case:
+    description: Query and path parameters should use snake_case.
+    given: $.paths[*][*].parameters[?(@.in=='query' || @.in=='path')]
+    severity: info
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: ^[a-z][a-z0-9_]*$|^[A-Z][A-Za-z]+$
+  request-body-content-required:
+    description: Request bodies must declare a content media type.
+    given: $.paths[*][post,put,patch].requestBody
+    severity: error
+    then:
+      field: content
+      function: truthy
+  response-success-required:
+    description: Every operation must declare at least one 2xx response.
+    given: $.paths[*][get,post,put,patch,delete].responses
+    severity: error
+    then:
+      function: truthy
+  response-description-required:
+    description: Every response must have a description.
+    given: $.paths[*][*].responses[*]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+  schema-property-snake-case:
+    description: Schema properties should use snake_case (MediaWiki convention).
+    given: $.components.schemas[*].properties
+    severity: info
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^[a-z][a-z0-9_]*$|^\*$|^[A-Z][A-Za-z]*$|^[a-z][a-zA-Z0-9]*$|^xml:lang$
+  schema-type-required:
+    description: Each top-level component schema should declare a type.
+    given: $.components.schemas[*]
+    severity: warn
+    then:
+      field: type
+      function: truthy
+  security-schemes-defined:
+    description: Components must define securitySchemes if security is referenced.
+    given: $
+    severity: info
+    then:
+      field: components.securitySchemes
+      function: truthy
+  no-empty-description:
+    description: Descriptions must not be empty when present.
+    given: $..description
+    severity: warn
+    then:
+      function: truthy
+  user-agent-required-note:
+    description: API description should mention contactable User-Agent requirement (Wikimedia policy).
+    given: $.info
+    severity: info
+    then:
+      field: description
+      function: pattern
+      functionOptions:
+        match: (?i)User[- ]Agent

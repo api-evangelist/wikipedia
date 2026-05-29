@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-snapshot-schema.json",
+  "title": "snapshot",
+  "description": "snapshot schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "date_modified": {
+      "type": "string"
+    },
+    "in_language": {
+      "$ref": "#/components/schemas/language"
+    },
+    "is_part_of": {
+      "$ref": "#/components/schemas/project"
+    },
+    "namespace": {
+      "$ref": "#/components/schemas/article_namespace"
+    },
+    "size": {
+      "$ref": "#/components/schemas/size"
+    },
+    "chunks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

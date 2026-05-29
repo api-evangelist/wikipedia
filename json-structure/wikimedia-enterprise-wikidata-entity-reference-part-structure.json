@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-wikidata-entity-reference-part-structure.json",
+  "name": "wikidata_entity_reference_part",
+  "description": "wikidata_entity_reference_part schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "property": {
+      "description": "The property this reference part refers to. Has the same substructure as statements.PID.property",
+      "$ref": "#/components/schemas/wikidata_entity_property"
+    },
+    "value": {
+      "description": "The value of the reference part. Has the same substructure as statements.PROPERTYID.value",
+      "$ref": "#/components/schemas/wikidata_entity_value"
+    }
+  },
+  "required": [
+    "property",
+    "value"
+  ]
+}

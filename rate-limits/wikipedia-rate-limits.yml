@@ -1,0 +1,142 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+
+provider: Wikipedia / MediaWiki
+providerId: wikipedia
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+
+tags:
+  - Rate Limiting
+  - Open Knowledge
+  - Encyclopedia
+  - Knowledge Graph
+  - Enterprise
+
+description: >-
+  Wikimedia projects have no hard published per-second number for the Action API or REST APIs, but
+  publish a clear etiquette: serial (not parallel) requests, a contactable User-Agent header, use
+  of maxlag for non-interactive jobs, and exponential backoff on the ratelimited error code. The
+  cached REST API v1 documents a soft 200 requests/s ceiling per client. The Wikidata SPARQL
+  endpoint enforces 60s per query and 5 concurrent queries per IP. Wikimedia Enterprise applies
+  per-account QPS and throughput limits with the actual numbers documented per-plan.
+
+sources:
+  - https://api.wikimedia.org/wiki/Documentation/Rate_limits
+  - https://www.mediawiki.org/wiki/API:Etiquette
+  - https://en.wikipedia.org/api/rest_v1/
+  - https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - https://enterprise.wikimedia.com/docs/
+
+headers:
+  retryAfter: Retry-After
+  rateLimitRemaining: X-RateLimit-Remaining
+  rateLimitReset: X-RateLimit-Reset
+
+responseCodes:
+  throttled: 429
+  rateLimited: 429
+  serverBusy: 503
+  queryTimeout: 503
+
+limits:
+  - name: REST API v1 - cached anonymous reads
+    scope: client
+    metric: requests_per_second
+    limit: 200
+    timeFrame: second
+    notes: >-
+      Soft per-client cap documented in the REST API v1 OpenAPI description. Heavily Varnish-cached
+      so the limit applies primarily to cold paths.
+
+  - name: Action API - read operations
+    scope: client
+    metric: requests_per_second
+    limit: 'serial (one in flight)'
+    notes: >-
+      No hard speed limit; Wikimedia explicitly asks clients to issue requests serially rather
+      than in parallel. Use generators and pipe-separated batches to reduce round-trips.
+
+  - name: Action API - write operations
+    scope: account/right
+    metric: varies
+    limit: 'see action=query&meta=userinfo&uiprop=ratelimits'
+    notes: >-
+      Per-user-right rate limits enforced server-side. Returns `ratelimited` error code; retry with
+      exponential backoff and increased delays.
+
+  - name: Wikidata SPARQL - query execution time
+    scope: client/query
+    metric: seconds
+    limit: 60
+    timeFrame: second
+    notes: 'Queries exceeding 60s wall-clock are killed and return 503.'
+
+  - name: Wikidata SPARQL - concurrent queries
+    scope: IP
+    metric: concurrent_requests
+    limit: 5
+    notes: 'Per-IP concurrency cap on query.wikidata.org.'
+
+  - name: Wikimedia Enterprise Free - Snapshot
+    scope: account
+    metric: requests_per_month
+    limit: 15
+    timeFrame: month
+    notes: 'Free developer plan ceiling. Bumped to unlimited on paid plans.'
+
+  - name: Wikimedia Enterprise Free - Snapshot chunks
+    scope: account
+    metric: chunks_per_month
+    limit: 1500
+    timeFrame: month
+    notes: 'Free developer plan ceiling.'
+
+  - name: Wikimedia Enterprise Free - On-demand
+    scope: account
+    metric: requests_per_month
+    limit: 5000
+    timeFrame: month
+    notes: 'Free developer plan ceiling. Bumped to unlimited on paid plans.'
+
+  - name: Wikimedia Enterprise Paid - QPS
+    scope: account
+    metric: requests_per_second
+    limit: 'plan-specific'
+    notes: 'All accounts face QPS and throughput limits; the exact numbers depend on the negotiated paid plan.'
+
+policies:
+  - name: Contactable User-Agent
+    description: >-
+      Every request must include a meaningful User-Agent header of the form
+      "clientname/version (contact: email or URL) framework/version". Requests without an
+      identifiable User-Agent may be blocked at any time without warning.
+
+  - name: Use maxlag for non-interactive jobs
+    description: >-
+      Pass maxlag=5 (or similar) on bot / batch traffic so MediaWiki returns 'maxlag exceeded'
+      rather than running during replication backlog. Treat the maxlag response as a signal to
+      pause for several seconds.
+
+  - name: Serial requests preferred
+    description: >-
+      Issue read requests one at a time. Batch multiple titles into a single call using the pipe
+      character (titles=A|B|C) and use list/generator queries to avoid sequential calls.
+
+  - name: Exponential backoff on ratelimited
+    description: >-
+      When the Action API returns errorcode=ratelimited or the REST APIs return HTTP 429, retry
+      with exponential backoff and longer delays between attempts. Honour Retry-After if present.
+
+  - name: Cache and prefer GET
+    description: >-
+      Prefer GET (cacheable) over POST for read operations. Cache responses locally and honour
+      smaxage/maxage parameters. Send Accept-Encoding: gzip.
+
+  - name: SPARQL graph split for heavy workloads
+    description: >-
+      For Wikidata SPARQL workloads, use the scholarly / non-scholarly endpoint split
+      (query-scholarly.wikidata.org, query-main.wikidata.org) to avoid contention on the full
+      query.wikidata.org endpoint.

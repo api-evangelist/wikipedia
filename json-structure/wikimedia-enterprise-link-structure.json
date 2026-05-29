@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-link-structure.json",
+  "name": "link",
+  "description": "link schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/image"
+      }
+    }
+  }
+}

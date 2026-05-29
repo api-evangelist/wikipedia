@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-list-write-schema.json",
+  "title": "list_write",
+  "description": "list_write schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Planets"
+    },
+    "description": {
+      "type": "string",
+      "example": "Planets of the Solar System"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

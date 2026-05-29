@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/mediawiki-core-rest-search-response-schema.json",
+  "title": "SearchResponse",
+  "description": "SearchResponse schema from MediaWiki Core REST API",
+  "type": "object",
+  "properties": {
+    "pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchResult"
+      }
+    }
+  }
+}

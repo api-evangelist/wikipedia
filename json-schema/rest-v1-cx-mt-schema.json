@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-cx-mt-schema.json",
+  "title": "cx_mt",
+  "description": "cx_mt schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "contents": {
+      "type": "string",
+      "description": "the translated content"
+    }
+  }
+}

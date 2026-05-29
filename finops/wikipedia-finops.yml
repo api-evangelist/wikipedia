@@ -1,0 +1,136 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+
+provider: Wikimedia Enterprise
+providerId: wikipedia
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+
+tags:
+  - FinOps
+  - FOCUS
+  - Enterprise
+  - Open Knowledge
+  - Snapshot
+  - Realtime
+
+description: >-
+  FOCUS-aligned FinOps for Wikimedia Enterprise - the commercial tier operated by Wikimedia LLC.
+  Pricing is data-egress based above the free allocation; paid plans add unlimited usage, daily
+  snapshots, realtime streaming, and up to 99% SLA. The native Wikimedia Foundation APIs
+  (Action / Core REST / REST v1 / SPARQL / EventStreams) remain free at point of use and do not
+  produce billing lines.
+
+sources:
+  - https://enterprise.wikimedia.com/pricing/
+  - https://enterprise.wikimedia.com/docs/
+  - https://focus.finops.org/focus-specification/v1-3/
+
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+
+publisherName: Wikimedia LLC
+serviceCategory: Open Knowledge Data Feeds
+
+billingModel:
+  pricingCategory: Pay-As-You-Go (Data Egress)
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Adjustment
+    - Credit
+
+focusColumns:
+  ServiceName: Wikimedia Enterprise
+  ServiceCategory: Open Knowledge Data Feeds
+  ServiceSubcategory: Snapshot / On-demand / Realtime
+  ProviderName: Wikimedia LLC
+  PublisherName: Wikimedia LLC
+  InvoiceIssuerName: Wikimedia LLC
+  BillingCurrency: USD
+  ChargeCategory: Usage
+
+meters:
+  - name: snapshot_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - project
+      - language
+      - snapshot_identifier
+  - name: snapshot_chunks
+    unit: chunk
+    aggregation: sum
+    dimensions:
+      - snapshot_identifier
+      - chunk_identifier
+  - name: ondemand_article_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - project
+      - language
+      - structured_contents
+  - name: realtime_stream_hours
+    unit: hour
+    aggregation: sum
+    dimensions:
+      - project
+      - language
+  - name: realtime_batch_downloads
+    unit: download
+    aggregation: sum
+    dimensions:
+      - project
+      - language
+      - date
+      - hour
+  - name: structured_contents_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - project
+      - language
+  - name: data_egress_gb
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api_surface
+      - region
+  - name: sla_credit
+    unit: credit
+    aggregation: sum
+    dimensions:
+      - month
+      - incident
+
+principles:
+  - name: Visibility
+    description: >-
+      Wikimedia Enterprise accounts can see usage at https://enterprise.wikimedia.com/account/ -
+      monthly request and chunk counts per API surface. Snapshot manifests include byte sizes,
+      letting customers track egress per dataset.
+  - name: Allocation
+    description: >-
+      Tag spend by API surface (Snapshot, On-demand, Realtime), by project (enwiki, dewiki, ...)
+      and by language. Each meter above carries those dimensions; combine with the wikidata-scholarly
+      vs main split to allocate research vs production load.
+  - name: Optimization
+    description: >-
+      Use Snapshot rather than On-demand for predictable bulk loads; use the free Foundation REST
+      v1 endpoint for low-cardinality cached reads; subscribe to Realtime only for use cases that
+      truly need sub-hour freshness; cache structured contents locally and refresh on the documented
+      cadence to avoid repeated egress.
+  - name: Accountability
+    description: >-
+      Wikimedia Enterprise customers should designate an owner per dataset family; review monthly
+      usage versus the negotiated plan ceiling; configure alerting on the SLA breach Retry-After
+      and 429 response codes. Cross-charge teams that bypass the cache layer or pull realtime when
+      hourly batches would suffice.

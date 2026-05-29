@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-article-structure.json",
+  "name": "article",
+  "description": "article schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "event": {
+      "$ref": "#/components/schemas/event"
+    },
+    "additional_entities": {
+      "items": {
+        "$ref": "#/components/schemas/entity"
+      },
+      "type": "array"
+    },
+    "article_body": {
+      "$ref": "#/components/schemas/article_body"
+    },
+    "has_parts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/part"
+      }
+    },
+    "categories": {
+      "items": {
+        "$ref": "#/components/schemas/category"
+      },
+      "type": "array"
+    },
+    "date_modified": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "int32"
+    },
+    "in_language": {
+      "$ref": "#/components/schemas/language"
+    },
+    "is_part_of": {
+      "$ref": "#/components/schemas/project"
+    },
+    "license": {
+      "items": {
+        "$ref": "#/components/schemas/license"
+      },
+      "type": "array"
+    },
+    "main_entity": {
+      "$ref": "#/components/schemas/entity"
+    },
+    "name": {
+      "type": "string"
+    },
+    "abstract": {
+      "type": "string"
+    },
+    "namespace": {
+      "$ref": "#/components/schemas/article_namespace"
+    },
+    "protection": {
+      "items": {
+        "$ref": "#/components/schemas/protection"
+      },
+      "type": "array"
+    },
+    "redirects": {
+      "items": {
+        "$ref": "#/components/schemas/redirect"
+      },
+      "type": "array"
+    },
+    "templates": {
+      "items": {
+        "$ref": "#/components/schemas/template"
+      },
+      "type": "array"
+    },
+    "url": {
+      "type": "string"
+    },
+    "version": {
+      "$ref": "#/components/schemas/version"
+    },
+    "visibility": {
+      "$ref": "#/components/schemas/visibility"
+    }
+  }
+}

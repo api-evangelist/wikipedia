@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/mediawiki-action-api-action-api-error-structure.json",
+  "name": "ActionApiError",
+  "description": "ActionApiError schema from MediaWiki Action API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "example": "ratelimited"
+    },
+    "info": {
+      "type": "string",
+      "description": "Human-readable error description"
+    },
+    "*": {
+      "type": "string",
+      "description": "Legacy error text"
+    },
+    "docref": {
+      "type": "string",
+      "description": "Pointer to docs for this error class"
+    }
+  }
+}

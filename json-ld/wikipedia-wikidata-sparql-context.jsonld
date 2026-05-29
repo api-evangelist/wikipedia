@@ -1,0 +1,33 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "wm": "https://wikimedia.org/api/vocab/",
+    "wd": "https://www.wikidata.org/entity/",
+    "wdt": "https://www.wikidata.org/prop/direct/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "head": {
+      "@id": "wm:head",
+      "@type": "@id"
+    },
+    "vars": {
+      "@id": "wm:vars",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "results": {
+      "@id": "wm:results",
+      "@type": "@id"
+    },
+    "bindings": {
+      "@id": "wm:bindings",
+      "@container": "@set"
+    },
+    "boolean": {
+      "@id": "wm:boolean",
+      "@type": "xsd:boolean"
+    },
+    "SparqlResults": "wm:SparqlResults"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-originalimage-structure.json",
+  "name": "originalimage",
+  "description": "originalimage schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Original image URI"
+    },
+    "width": {
+      "type": "int32",
+      "description": "Original image width"
+    },
+    "height": {
+      "type": "int32",
+      "description": "Original image height"
+    }
+  },
+  "required": [
+    "height",
+    "source",
+    "width"
+  ]
+}

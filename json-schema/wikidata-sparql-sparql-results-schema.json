@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikidata-sparql-sparql-results-schema.json",
+  "title": "SparqlResults",
+  "description": "SPARQL 1.1 JSON results format (W3C).",
+  "type": "object",
+  "properties": {
+    "head": {
+      "type": "object",
+      "properties": {
+        "vars": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "item",
+            "itemLabel"
+          ]
+        }
+      }
+    },
+    "results": {
+      "type": "object",
+      "properties": {
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "uri",
+                    "literal",
+                    "bnode",
+                    "typed-literal"
+                  ],
+                  "example": "uri"
+                },
+                "value": {
+                  "type": "string",
+                  "example": "http://www.wikidata.org/entity/Q146"
+                },
+                "datatype": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "xml:lang": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "boolean": {
+      "type": "boolean",
+      "description": "Result of an ASK query",
+      "nullable": true
+    }
+  }
+}

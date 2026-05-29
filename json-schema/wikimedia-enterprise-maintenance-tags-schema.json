@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/wikimedia-enterprise-maintenance-tags-schema.json",
+  "title": "maintenance_tags",
+  "description": "maintenance_tags schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "citation_needed_count": {
+      "type": "integer"
+    },
+    "pov_count": {
+      "type": "integer"
+    },
+    "clarification_needed_count": {
+      "type": "integer"
+    },
+    "update_count": {
+      "type": "integer"
+    }
+  }
+}

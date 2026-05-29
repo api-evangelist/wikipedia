@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/rest-v1-media-list-structure.json",
+  "name": "media_list",
+  "description": "media_list schema from Wikimedia REST API",
+  "type": "object",
+  "properties": {
+    "revision": {
+      "type": "string",
+      "description": "the revision ID used to create the list"
+    },
+    "tid": {
+      "type": "string",
+      "description": "the time uuid of the page rendering used to create the list"
+    },
+    "items": {
+      "type": "array",
+      "description": "a list of media items",
+      "items": {
+        "$ref": "#/components/schemas/media_item"
+      }
+    }
+  },
+  "required": [
+    "items",
+    "revision",
+    "tid"
+  ]
+}

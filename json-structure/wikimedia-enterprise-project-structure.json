@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-structure/wikimedia-enterprise-project-structure.json",
+  "name": "project",
+  "description": "project schema from Wikimedia Enterprise API spec",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "example": "enwiki"
+    },
+    "code": {
+      "type": "string",
+      "example": "wiki"
+    },
+    "name": {
+      "type": "string",
+      "example": "Wikipedia"
+    },
+    "url": {
+      "type": "string",
+      "example": "https://en.wikipedia.org"
+    },
+    "in_language": {
+      "$ref": "#/components/schemas/language"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/wikipedia/refs/heads/main/json-schema/rest-v1-revision-info-schema.json",
+  "title": "revisionInfo",
+  "description": "Complete information about the revision",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "page_id": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "rev": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "tid": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "user_id": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "user_text": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "redirect": {
+      "type": "boolean"
+    },
+    "page_language": {
+      "type": "string"
+    }
+  }
+}
