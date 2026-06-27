@@ -148,10 +148,10 @@ apis:
         url: https://enterprise.wikimedia.com/docs/data-dictionary/
       - type: Pricing
         url: https://enterprise.wikimedia.com/pricing/
-      - type: SDK
+      - type: SDKs
         title: Python SDK
         url: https://github.com/wikimedia-enterprise/wme-sdk-python
-      - type: SDK
+      - type: SDKs
         title: Go SDK
         url: https://github.com/wikimedia-enterprise/wme-sdk-go
       - type: Postman
@@ -236,19 +236,19 @@ common:
     url: rate-limits/wikipedia-rate-limits.yml
   - type: FinOps
     url: finops/wikipedia-finops.yml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/wikipedia-knowledge-research.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/wikipedia-content-authoring.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/wikipedia-knowledge-graph.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/wikipedia-enterprise-snapshot.yaml
   - type: Rules
     url: rules/wikipedia-spectral-rules.yml
   - type: Vocabulary
     url: vocabulary/wikipedia-vocabulary.yaml
-  - type: JsonLD
+  - type: JSONLD
     url: json-ld/wikipedia-context.jsonld
 
 features:
