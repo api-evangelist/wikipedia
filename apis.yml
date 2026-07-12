@@ -158,6 +158,12 @@ apis:
         url: https://github.com/wikimedia-enterprise/postman
 
 common:
+  - type: VulnerabilityDisclosure
+    url: security/wikipedia-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/wikipedia-domain-security.yml
+  - type: Authentication
+    url: authentication/wikipedia-authentication.yml
   - type: Website
     url: https://www.wikipedia.org
   - type: APIPortal
@@ -250,6 +256,8 @@ common:
     url: vocabulary/wikipedia-vocabulary.yaml
   - type: JSONLD
     url: json-ld/wikipedia-context.jsonld
+  - url: https://wikimediafoundation.org/news/feed/
+    type: Blog
 
 features:
   - name: 300+ Languages
