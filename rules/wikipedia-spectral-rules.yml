@@ -1,6 +1,22 @@
+# wikipedia — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - path-params-casing: snake @ 100% (n=128)
+#   - query-params-casing: snake @ 100% (n=81)
+#   - operationid-casing: camel @ 88% (n=34)
+#   - schema-names-casing: snake @ 77% (n=83)
+#   - schema-properties-casing: snake @ 98% (n=376)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ActionApiError
+#   - pagination params observed: ['count', 'limit']
+#   - merge: kept 25 existing, added 5 measured, upgraded 0
+#   - added: query-params-casing, operationid-casing, schema-names-casing, security-schemes-defined, error-schema-defined
 extends:
-- - spectral:oas
-  - recommended
+  - spectral:oas
 rules:
   info-title-prefix:
     description: Spec title should begin with "Wikipedia", "MediaWiki", "Wikimedia", or "Wikidata".
@@ -59,7 +75,8 @@ rules:
       functionOptions:
         notMatch: .+/$
   path-snake-or-kebab:
-    description: Path segments should use snake_case or kebab-case (lowercase, digits, dashes, underscores, or templated params).
+    description: Path segments should use snake_case or kebab-case (lowercase, digits, dashes, underscores,
+      or templated params).
     given: $.paths
     severity: warn
     then:
@@ -174,11 +191,11 @@ rules:
       field: type
       function: truthy
   security-schemes-defined:
-    description: Components must define securitySchemes if security is referenced.
-    given: $
-    severity: info
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
     then:
-      field: components.securitySchemes
+      field: securitySchemes
       function: truthy
   no-empty-description:
     description: Descriptions must not be empty when present.
@@ -195,3 +212,36 @@ rules:
       function: pattern
       functionOptions:
         match: (?i)User[- ]Agent
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  error-schema-defined:
+    description: A shared error schema (ActionApiError) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ActionApiError
+      function: truthy
