@@ -158,6 +158,8 @@ apis:
         url: https://github.com/wikimedia-enterprise/postman
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/wikipedia-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/wikipedia-vulnerability-disclosure.yml
   - type: DomainSecurity
