@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles Citation API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: Citation
+  description: generation of citation data
+paths:
+  /data/citation/{format}/{query}:
+    get:
+      tags:
+      - Citation
+      summary: Wikimedia REST Get Citation Data Given an Article Identifier.
+      description: "Generates citation data given a URL, DOI, PMID, or PMCID.\n\nAutomated requests can be made at a rate of 1 request per second (rps).\n\nSee more at [Citoid service documentation](https://www.mediawiki.org/wiki/Citoid)\n\nThe citation data can be requested in one of the following formats:\n  - `mediawiki`: format designed for MediaWiki to be used with `templateData`.\n    Uses [Zotero field names](https://aurimasv.github.io/z2csl/typeMap.xml).\n  - `mediawiki-basefields`: `mediawiki` format with Zotero `basefield` field names.\n  - `zotero`: format used by [Zotero](https://www.zotero.org/).\n  - `bibtex`: format used in conjunction with LaTeX documents.\n    See [bibtex.org](http://www.bibtex.org/).\n  - `wikibase`: format designed for [Wikibase](https://www.mediawiki.org/wiki/Extension:Wikibase_Repository).\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)\n"
+      parameters:
+      - name: format
+        in: path
+        description: The format to use for the resulting citation data
+        schema:
+          type: string
+          enum:
+          - mediawiki
+          - mediawiki-basefields
+          - zotero
+          - bibtex
+          - wikibase
+        required: true
+      - name: query
+        in: path
+        description: 'URL of an article, DOI, PMCID or PMID in the URL-encoded format. Note that on the Swagger-UI doc page you don''t need to URI-encode the parameter manually, it will be done by the docs engine.
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: Accept-Language
+        in: header
+        description: 'For some articles the result depends on the `Accept-Language` header, so provide it if localized content is required.
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The citation data in the requested format
+          content:
+            application/json; charset=utf-8;:
+              schema:
+                $ref: '#/components/schemas/result'
+            application/x-bibtex; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/result'
+        '404':
+          description: Citation data was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      operationId: getCitation
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    result:
+      required:
+      - title
+      - url
+      - itemType
+      type: object
+      properties:
+        itemType:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

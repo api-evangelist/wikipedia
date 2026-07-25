@@ -1,0 +1,1034 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles wikidata API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: wikidata
+paths:
+  /v2/wikidata/items/{identifier}:
+    summary: Wikidata Item Lookup (Beta)
+    description: Returns data and metadata about the last revision of a given Wikidata Item identifier (Q-number, e.g. Q42). Only gives access to the Main Wikidata graph.
+    get:
+      tags:
+      - wikidata
+      parameters:
+      - in: path
+        name: identifier
+        description: Wikidata Item identifier (Q-number, e.g. Q42).
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: Q42
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - wikidata
+      parameters:
+      - in: path
+        name: identifier
+        description: Wikidata Item identifier (Q-number, e.g. Q42).
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: Q42
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/wikidata/properties/{identifier}:
+    summary: Wikidata Property Lookup (Beta)
+    description: Returns data and metadata about the last revision of a given Wikidata Property identifier (P-number, e.g. P31).
+    get:
+      tags:
+      - wikidata
+      parameters:
+      - in: path
+        name: identifier
+        description: Wikidata Property identifier (P-number, e.g. P31).
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: P31
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - wikidata
+      parameters:
+      - in: path
+        name: identifier
+        description: Wikidata Property identifier (P-number, e.g. P31).
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: P31
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: '#/components/schemas/wikidata_article'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/wikidata/labels/{identifier}:
+    summary: Wikidata Labels List (Beta)
+    description: Returns a single JSON object of key-value pairs, where the key is the Wikimedia language code and the value is the label for that language code. Works for Wikidata item identifiers (Q-number) and property identifiers (P-number). Only gives access to the Main Wikidata graph for item identifiers. Gives access to all property identifiers.
+    get:
+      tags:
+      - wikidata
+      parameters:
+      - in: path
+        name: identifier
+        description: Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: Q42
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: '#/components/schemas/wikidata_labels'
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: '#/components/schemas/wikidata_labels'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - wikidata
+      parameters:
+      - in: path
+        name: identifier
+        description: Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: Q42
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: '#/components/schemas/wikidata_labels'
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: '#/components/schemas/wikidata_labels'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    wikidata_entity_property:
+      type: object
+      required:
+      - identifier
+      - data_type
+      properties:
+        identifier:
+          type: string
+          description: Wikidata Property identifier (P-number, e.g. P31).
+          example: P31
+        data_type:
+          type: string
+          description: The expected data type of the value for this property, e.g. time, quantity, wikibase-item, url, string. The actual data type of the value for this property is found in statements.PID.property.value.type
+          example: time
+        labels:
+          type: object
+          description: Key-value pairs with property labels in different languages
+          example:
+            en: instance of
+            de: Instanz von
+            fr: instance de
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    event:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: f7c737db-4b50-4982-8804-7c2b9fa89020
+        type:
+          type: string
+          example: update
+          enum:
+          - update
+          - delete
+        date_created:
+          type: string
+          example: 2026-03-18 12:38:23.437225+00:00
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    wikidata_article:
+      type: object
+      required:
+      - name
+      - identifier
+      - url
+      - protection
+      - redirects
+      - license
+      properties:
+        name:
+          type: string
+          example: P31
+          description: Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)
+        identifier:
+          type: integer
+          format: uuid
+          description: unique numeric identifier of the article
+          example: 104546757
+        date_created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the article was first created
+          example: '2024-04-01T12:00:00Z'
+        date_modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the article was last modified
+          example: '2024-06-01T12:00:00Z'
+        date_previously_modified:
+          type: string
+          format: date-time
+          description: Timestamp of the before-last revision in RFC3339 format
+          example: '2024-05-01T12:00:00Z'
+        protection:
+          $ref: '#/components/schemas/protection'
+        url:
+          type: string
+          format: uri
+          description: URL to the article
+          example: https://www.wikidata.org/wiki/Q109388644
+        namespace:
+          $ref: '#/components/schemas/article_namespace'
+        is_part_of:
+          $ref: '#/components/schemas/project'
+        entity:
+          $ref: '#/components/schemas/wikidata_entity'
+        visibility:
+          $ref: '#/components/schemas/visibility'
+        license:
+          $ref: '#/components/schemas/license'
+        event:
+          $ref: '#/components/schemas/event'
+    wikidata_statement:
+      type: object
+      description: Statement connecting a value to a Wikidata entity through a property. Each statement corresponds to a single claim on the Wikidata entity, and includes the value of the claim and metadata about the claim such as references, qualifiers, and ranks
+      required:
+      - identifier
+      - rank
+      - property
+      - value
+      - qualifiers
+      - references
+      properties:
+        identifier:
+          type: string
+          format: uuid
+          description: Unique identifier for the statement
+          example: Q56603478$B070CCDB-B608-492C-B15A-4ABC5CED7AF6
+        rank:
+          type: string
+          description: Rank of the statement among other similar statements. Possible values are normal, preferred, and deprecated
+          enum:
+          - normal
+          - preferred
+          - deprecated
+          example: normal
+        property:
+          $ref: '#/components/schemas/wikidata_entity_property'
+        value:
+          $ref: '#/components/schemas/wikidata_entity_value'
+        qualifiers:
+          $ref: '#/components/schemas/wikidata_entity_qualifier'
+        references:
+          $ref: '#/components/schemas/wikidata_entity_statement_reference'
+    wikidata_entity_reference_part:
+      type: object
+      required:
+      - property
+      - value
+      properties:
+        property:
+          description: The property this reference part refers to. Has the same substructure as statements.PID.property
+          $ref: '#/components/schemas/wikidata_entity_property'
+        value:
+          description: The value of the reference part. Has the same substructure as statements.PROPERTYID.value
+          $ref: '#/components/schemas/wikidata_entity_value'
+    wikidata_sitelinks:
+      type: object
+      description: Mapping of this Wikidata item to other Wikimedia project site URLs
+      required:
+      - title
+      - badges
+      - url
+      properties:
+        title:
+          type: string
+          description: Title of the linked page
+          example: Pentominium
+        badges:
+          type: array
+          description: Badge identifiers for this sitelink
+          example:
+          - Q17437796
+          - Q6540326
+        url:
+          type: string
+          format: uri
+          description: URL to the linked page
+          example: https://de.wikipedia.org/wiki/Pentominium
+    wikidata_entity_statement_reference:
+      type: object
+      description: Reference supporting a Wikidata statement
+      required:
+      - identifier
+      - parts
+      properties:
+        identifier:
+          type: string
+          description: unique identifier for the reference
+          example: 63309730314f4c20bf6b1008fe8ffd2b155272b3
+        parts:
+          type: array
+          description: Parts that make up this reference
+          items:
+            $ref: '#/components/schemas/wikidata_entity_reference_part'
+    wikidata_entity:
+      type: object
+      required:
+      - identifier
+      - type
+      properties:
+        identifier:
+          type: string
+          description: Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)
+          example: Q42
+        type:
+          type: string
+          enum:
+          - item
+          - property
+          description: The type of entity, either "item" or "property"
+          example: item
+        labels:
+          $ref: '#/components/schemas/wikidata_labels'
+        descriptions:
+          type: object
+          description: Key-value pairs with descriptions in different languages
+          example:
+            en: Championship held at Balbir Singh Juneja Indoor Stadium
+        aliases:
+          type: object
+          description: Key-value pairs with aliases in different languages. Every language may have multiple aliases
+          example:
+            eo:
+            - Douglas ADAMS
+            - Douglas Noel ADAMS
+        statements:
+          $ref: '#/components/schemas/wikidata_statements'
+        sitelinks:
+          $ref: '#/components/schemas/wikidata_sitelinks'
+    visibility:
+      type: object
+      properties:
+        comment:
+          type: boolean
+          example: true
+        text:
+          type: boolean
+          example: true
+        user:
+          type: boolean
+          example: false
+    license:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: CC-BY-SA-4.0
+        name:
+          type: string
+          example: Creative Commons Attribution-ShareAlike License 4.0
+        url:
+          type: string
+          example: https://creativecommons.org/licenses/by-sa/4.0/
+    wikidata_entity_qualifier:
+      type: object
+      description: Qualifier further describing or refining the value of a property in a statement
+      required:
+      - property
+      - value
+      properties:
+        property:
+          $ref: '#/components/schemas/wikidata_entity_property'
+        value:
+          $ref: '#/components/schemas/wikidata_entity_value'
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+    wikidata_statements:
+      type: array
+      description: Array of statement objects for this property
+      items:
+        $ref: '#/components/schemas/wikidata_statement'
+    wikidata_labels:
+      type: object
+      description: key-value pairs with labels in different languages
+      example:
+        ce: Оьзлер
+        en: Özler
+    wikidata_entity_value:
+      type: object
+      description: This object represents the actual value in a statement or qualifier
+      required:
+      - type
+      - labels
+      properties:
+        content:
+          type: string
+          description: String representation of the value. If the value is too complex to represent as a string or integer, this will be replaced by statements.PID.value.content_data
+          example: Adams, Douglas (1952-2001)
+        type:
+          type: string
+          description: The actual data type of the value for this property. Should match statements.PID.property.data_type, but might not.
+          example: wikibase-item
+        content_data:
+          type: object
+          description: An object holding the representation of the value. If the value can be represented simply as a string or integer, this will be replaced by statements.PID.value.content
+          example:
+            after: '0'
+            before: '0'
+            Calendarmodel: http://www.wikidata.org/entity/Q1985727
+            precision: '9'
+            Time: +1861-00-00T00:00:00Z
+            timezone: '0'
+        labels:
+          $ref: '#/components/schemas/wikidata_labels'
+    protection:
+      type: object
+      properties:
+        expiry:
+          type: string
+          enum:
+          - infinite
+          - indefinite
+          - infinity
+          - never
+          example: infinity
+        level:
+          type: string
+          example: extendedconfirmed
+        type:
+          type: string
+          example: edit
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

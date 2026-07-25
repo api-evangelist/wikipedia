@@ -1,0 +1,739 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles structured-snapshots API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: structured-snapshots
+  description: (BETA) Structured Contents Snapshot API
+  externalDocs:
+    description: enterprise docs - structured snapshot api
+    url: https://enterprise.wikimedia.com/docs/snapshot/
+paths:
+  /v2/snapshots/structured-contents:
+    summary: Structured Contents Snapshots Available (Beta)
+    description: Returns a list of available project structured contents snapshots.
+    get:
+      tags:
+      - structured-snapshots
+      parameters:
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      - in: query
+        name: filters
+        description: Select which projects and languages to receive in your response.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/filter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/snapshot'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size": {"value": "float" , "unit_text": "string"}} {"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size": {"value": "float" , "unit_text": "string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - structured-snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+                filters:
+                  type: array
+                  description: Select which projects and languages to receive in your response.
+                  items:
+                    $ref: '#/components/schemas/filter'
+                  example: '[{"field": "is_part_of.identifier","value": "enwiki"}]'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/snapshot'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size": {"value": "float" , "unit_text": "string"}} {"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size": {"value": "float" , "unit_text": "string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/structured-contents/{identifier}:
+    summary: Structured Contents Snapshot Info (Beta)
+    description: Information on a specific structured contents snapshot bundle.
+    get:
+      tags:
+      - structured-snapshots
+      parameters:
+      - in: path
+        name: identifier
+        description: 'Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`, `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`.'
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/snapshot'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+              example: '{"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size": {"value": "float" , "unit_text": "string"}}
+
+                '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - structured-snapshots
+      parameters:
+      - in: path
+        name: identifier
+        description: 'Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`, `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`.'
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/snapshot'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+              example: '{"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size": {"value": "float" , "unit_text": "string"}}
+
+                '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/structured-contents/{identifier}/download:
+    summary: Structured Contents Snapshot Download (Beta)
+    description: Downloadable bundle of structured contents of all current revisions in a specified project and namespace. Updated daily at 12:00 UTC.
+    head:
+      summary: Wikimedia Enterprise Project Structured Contents Snapshot Headers
+      description: Set of headers that describe the structured contents snapshot download.
+      tags:
+      - structured-snapshots
+      parameters:
+      - in: path
+        name: identifier
+        description: 'Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration.'
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        200:
+          description: OK
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+              description: HTTP response header is a marker used by the server to advertise its support for partial requests.
+            Last-Modified:
+              schema:
+                type: string
+              description: Response HTTP header contains a date and time when the origin server believes the resource was last modified.
+            Content-Length:
+              schema:
+                type: string
+              description: Header indicates the size of the message body, in bytes, sent to the recipient.
+            ETag:
+              schema:
+                type: string
+              description: Entity tag - HTTP response header is an identifier for a specific version of a resource.
+            Content-Disposition:
+              schema:
+                type: string
+              description: Header indicating if the content is expected to be displayed in the browser  or as an attachment, that is downloaded and saved locally.
+            Content-Encoding:
+              schema:
+                type: string
+              description: Lists any encodings that have been applied to the representation (message payload), and in what order.
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource (prior to any content encoding applied for sending).
+            Expires:
+              schema:
+                type: string
+              description: Contains the date/time after which the response is considered expired.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - structured-snapshots
+      parameters:
+      - in: path
+        name: identifier
+        description: 'Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`, `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`.'
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: header
+        name: Range
+        description: The Range HTTP request header indicates the part of a document that the server should return.
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    snapshot:
+      type: object
+      properties:
+        identifier:
+          type: string
+        version:
+          type: string
+        date_modified:
+          type: string
+        in_language:
+          $ref: '#/components/schemas/language'
+        is_part_of:
+          $ref: '#/components/schemas/project'
+        namespace:
+          $ref: '#/components/schemas/article_namespace'
+        size:
+          $ref: '#/components/schemas/size'
+        chunks:
+          type: array
+          items:
+            type: string
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

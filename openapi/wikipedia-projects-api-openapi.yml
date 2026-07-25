@@ -1,0 +1,491 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles projects API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: projects
+  description: Metadata
+  externalDocs:
+    description: enterprise docs - metadata
+    url: https://enterprise.wikimedia.com/docs/metadata/
+paths:
+  /v2/projects:
+    summary: Projects Available
+    description: List of available projects. Includes project identifier, name, language and other relevant metadata.
+    get:
+      tags:
+      - projects
+      parameters:
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      - in: query
+        name: filters
+        description: Select which projects and languages to receive in your response.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/filter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/project'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}} {"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+                filters:
+                  type: array
+                  description: Select which projects and languages to receive in your response.
+                  items:
+                    $ref: '#/components/schemas/filter'
+                  example: '[{"field": "identifier","value": "enwiki"}]'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/project'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}} {"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/projects/{identifier}:
+    summary: Project Info
+    description: Information on specific project. Includes identifier, name, language and other relevant metadata.
+    get:
+      tags:
+      - projects
+      parameters:
+      - in: path
+        name: identifier
+        description: Project identifier.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - projects
+      parameters:
+      - in: path
+        name: identifier
+        description: Project identifier.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

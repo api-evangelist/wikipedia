@@ -1,0 +1,265 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles Math API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: Math
+  description: formula rendering
+paths:
+  /media/math/check/{type}:
+    post:
+      deprecated: true
+      tags:
+      - Math
+      summary: Wikimedia REST Check and Normalize a TeX Formula.
+      description: 'Checks the supplied TeX formula for correctness and returns the
+
+        normalised formula representation as well as information about
+
+        identifiers. Available types are tex and inline-tex. The response
+
+        contains the `x-resource-location` header which can be used to retrieve
+
+        the render of the checked formula in one of the supported rendering
+
+        formats. Just append the value of the header to `/media/math/{format}/`
+
+        and perform a GET request against that URL.
+
+
+        **NOTE**: the use of this endpoint is *strongly discouraged*. Instead, use the identical endpoint of the (canonical) Math API on the `wikimedia.org` domain.
+
+
+        Stability: [deprecated](https://www.mediawiki.org/wiki/API_versioning#Deprecated).
+
+        '
+      parameters:
+      - name: type
+        in: path
+        description: The input type of the given formula; can be tex or inline-tex
+        required: true
+        schema:
+          type: string
+          enum:
+          - tex
+          - inline-tex
+          - chem
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - q
+              properties:
+                q:
+                  type: string
+                  description: The formula to check
+        required: true
+      responses:
+        '200':
+          description: Information about the checked formula
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: true
+      x-amples:
+      - title: Mathoid - check test formula
+        request:
+          params:
+            domain: wikimedia.org
+            type: tex
+          body:
+            q: E=mc^{2}
+        response:
+          status: 200
+          headers:
+            content-type: /^application\/json/
+            x-resource-location: /.+/
+            cache-control: no-cache
+          body:
+            success: true
+            checked: /.+/
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /media/math/formula/{hash}:
+    get:
+      deprecated: true
+      tags:
+      - Math
+      summary: Wikimedia REST Get a Previously-stored Formula
+      description: 'Returns the previously-stored formula via `/media/math/check/{type}` for
+
+        the given hash.
+
+
+        **NOTE**: the use of this endpoint is *strongly discouraged*. Instead, use the identical endpoint of the (canonical) Math API on the `wikimedia.org` domain.
+
+
+        Stability: [deprecated](https://www.mediawiki.org/wiki/API_versioning#Deprecated).
+
+        '
+      parameters:
+      - name: hash
+        in: path
+        description: The hash string of the previous POST data
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Information about the checked formula
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Data for the given hash cannot be found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /media/math/render/{format}/{hash}:
+    get:
+      deprecated: true
+      tags:
+      - Math
+      summary: Wikimedia REST Get Rendered Formula in the Given Format.
+      description: 'Given a request hash, renders a TeX formula into its mathematic
+
+        representation in the given format. When a request is issued to the
+
+        `/media/math/check/{format}` POST endpoint, the response contains the
+
+        `x-resource-location` header denoting the hash ID of the POST data. Once
+
+        obtained, this endpoint has to be used to obtain the actual render.
+
+
+        **NOTE**: the use of this endpoint is *strongly discouraged*. Instead, use the identical endpoint of the (canonical) Math API on the `wikimedia.org` domain.
+
+
+        Stability: [deprecated](https://www.mediawiki.org/wiki/API_versioning#Deprecated).
+
+        '
+      parameters:
+      - name: format
+        in: path
+        description: The output format; can be svg or mml
+        required: true
+        schema:
+          type: string
+          enum:
+          - svg
+          - mml
+          - png
+      - name: hash
+        in: path
+        description: The hash string of the previous POST data
+        required: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: The rendered formula
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+            application/mathml+xml:
+              schema:
+                type: string
+        '404':
+          description: Unknown format or hash ID
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

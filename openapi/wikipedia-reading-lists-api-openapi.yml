@@ -1,0 +1,927 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles Reading lists API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: Reading lists
+  description: Private lists of selected pages
+  externalDocs:
+    description: Project documentation
+    url: https://www.mediawiki.org/wiki/Reading/Reading_Lists
+paths:
+  /data/lists/setup:
+    post:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Opt in to Use Reading Lists.
+      description: 'Must precede other list operations.
+
+
+        Request must be authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/teardown:
+    post:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Opt Out from Using Reading Lists.
+      description: 'Deletes all data. User needs to opt in again before being able to do anything.
+
+
+        Request must be authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/:
+    get:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Get All Lists of the Current User.
+      description: 'Returns metadata describing the lists of the current user. Might be truncated and include
+
+        a continuation token.
+
+
+        Request must be authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: next
+        in: query
+        description: Continuation parameter from previous request
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort order
+
+          - `name`: by name, ascending;
+
+          - `updated`: by last modification date, descending.
+
+          '
+        schema:
+          type: string
+          default: updated
+          enum:
+          - name
+          - updated
+      responses:
+        '200':
+          description: An array of list metadata.
+          content:
+            application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Lists/0.1":
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/list_read'
+                  next:
+                    type: string
+                    description: Continuation token.
+                  continue-from:
+                    type: string
+                    format: date-time
+                    description: 'Timestamp to sync from, to be used with the `GET /lists/changes/since/{date}`
+
+                      endpoint.
+
+                      '
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Create a New List for the Current User.
+      description: 'Creates a new empty list. On name conflict, does nothing and returns the data of an
+
+        existing list.
+
+
+        Request must be authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+
+        This endpoint is deprecated and might be removed without warning. Use the batch version
+
+        instead.
+
+        '
+      x-maxsize: 5000
+      parameters:
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/list_write'
+        required: true
+      responses:
+        '200':
+          description: The data for the new list.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 'List ID.
+
+
+                      Deprecated, will be removed. Use the full list object.
+
+                      '
+                    example: 7
+                  list:
+                    $ref: '#/components/schemas/list_read'
+                required:
+                - id
+                - list
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/{id}:
+    put:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Update a List.
+      description: 'List must belong to current user and request must be authenticated with
+
+        a MediaWiki session cookie. If the name is changed, the new name must not be in use.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 42
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/list_write'
+        required: false
+      responses:
+        '200':
+          description: The updated data for the list.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 'List ID.
+
+
+                      Deprecated, will be removed. Use the full list object.
+
+                      '
+                    example: 7
+                  list:
+                    $ref: '#/components/schemas/list_read'
+                required:
+                - id
+                - list
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Delete a List.
+      description: 'List must belong to current user and request must be authenticated with
+
+        a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 42
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/batch:
+    post:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Create Multiple New Lists for the Current User.
+      description: 'See `POST /lists/`.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      x-maxsize: 5000
+      parameters:
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              title: batch
+              required:
+              - batch
+              type: object
+              properties:
+                batch:
+                  maxItems: 500
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/list_write'
+        required: true
+      responses:
+        '200':
+          description: The data for the new lists (in the same order as the inputs).
+          content:
+            application/json; charset=utf-8:
+              schema:
+                title: list_create_batch
+                type: object
+                properties:
+                  batch:
+                    type: array
+                    description: Deprecated, will be removed. Use the full list objects instead.
+                    items:
+                      title: list_id
+                      type: object
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: integer
+                          description: List ID
+                          example: 7
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/list_read'
+                required:
+                - batch
+                - lists
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/{id}/entries/:
+    get:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Get All Entries of a Given List.
+      description: 'Returns pages contained by the given list. Might be truncated and include
+
+        a continuation token.
+
+
+        List must belong to current user and request must be authenticated with
+
+        a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 42
+      - name: next
+        in: query
+        description: Continuation parameter from previous request
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort order
+
+          - `name`: by page title, ascending;
+
+          - `updated`: by last modification date, descending.
+
+          '
+        schema:
+          type: string
+          default: updated
+          enum:
+          - name
+          - updated
+      responses:
+        '200':
+          description: An array of list entries.
+          content:
+            application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Lists/0.1":
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/list_entry_read'
+                  next:
+                    type: string
+                    description: Continuation token.
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      operationId: getListEntries
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Create a New List Entry.
+      description: 'Creates a new list entry in the given list. On conflict, does nothing and returns the
+
+        data of an existing list.
+
+
+        The list must belong to the current user and the request must be
+
+        authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+
+        This endpoint is deprecated and might be removed without warning. Use the batch version
+
+        instead.
+
+        '
+      x-maxsize: 100
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 42
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/list_entry_write'
+        required: true
+      responses:
+        '200':
+          description: The data for the new list entry.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 'List entry ID
+
+
+                      Deprecated, will be removed. Use the full entry object instead.
+
+                      '
+                    example: 13
+                  entry:
+                    $ref: '#/components/schemas/list_entry_read'
+                required:
+                - id
+                - entry
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/{id}/entries/{entry_id}:
+    delete:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Delete a List Entry.
+      description: 'Deletes a given list entry.
+
+
+        The list must belong to the current user and the request must be
+
+        authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 42
+      - name: entry_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 64
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/{id}/entries/batch:
+    post:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Create Multiple New List Entries.
+      description: 'See `POST /lists/{id}/entries/`.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      x-maxsize: 100
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 42
+      - name: csrf_token
+        in: query
+        required: true
+        schema:
+          type: string
+          example: f63c343876da566045e6b59c4532450559c828d3+\
+        description: The CRSF edit token provided by the MediaWiki API
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: object
+              required:
+              - batch
+              properties:
+                batch:
+                  title: list_entries
+                  type: array
+                  maxItems: 500
+                  items:
+                    $ref: '#/components/schemas/list_entry_write'
+        required: true
+      responses:
+        '200':
+          description: The data for the new list entries (in the same order as the inputs).
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  batch:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: List entry ID
+                          example: 13
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/list_entry_read'
+                required:
+                - entries
+                - batch
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/pages/{project}/{title}:
+    get:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Get Lists of the Current User Which Contain a Given Page.
+      description: 'Request must be authenticated with a MediaWiki session cookie.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: project
+        in: path
+        schema:
+          type: string
+          description: Domain of the wiki containing the page.
+          example: https://en.wikipedia.org
+        required: true
+      - name: title
+        in: path
+        schema:
+          type: string
+          description: Title of the page containing the page, in database format.
+          example: Barack_Obama
+        required: true
+      - name: next
+        in: query
+        description: Continuation parameter from previous request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of list metadata.
+          content:
+            application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Lists/0.1":
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/list_read'
+                  next:
+                    type: string
+                    description: Continuation token.
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/lists/changes/since/{date}:
+    get:
+      tags:
+      - Reading lists
+      summary: Wikimedia REST Get Recent Changes to the Lists
+      description: 'Returns metadata describing lists and entries which have changed. Might be truncated
+
+        and include a continuation token.
+
+
+        Request must be authenticated with a MediaWiki session cookie.
+
+
+        For safe synchronization, the date parameter should be taken from the `continue-from`
+
+        field of a previous `GET /lists/` or `GET /lists/changes/since/{date}` request. This will
+
+        ensure that no changes are skipped, at the cost of sometimes receiving the same change
+
+        multitple times. Clients should handle changes in an idempotent way.
+
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+
+        '
+      parameters:
+      - name: date
+        in: path
+        description: 'Cutoff date (in ISO 8601). To ensure reliable synchronization, the API
+
+          might return changes which are slightly older than the cutoff date.
+
+          '
+        schema:
+          type: string
+          format: date-time
+        required: true
+      - name: next
+        in: query
+        description: Continuation parameter from previous request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of list and entry metadata.
+          content:
+            application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Lists/0.1":
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/list_read'
+                  next:
+                    type: string
+                    description: Continuation token.
+                  continue-from:
+                    type: string
+                    format: date-time
+                    description: 'Timestamp to sync from, to be used with the `GET /lists/changes/since/{date}`
+
+                      endpoint.
+
+                      '
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      x-monitor: false
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    list_entry_read:
+      title: list_entry
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 64
+        project:
+          type: string
+          description: Domain of the wiki containing the page.
+          example: https://en.wikipedia.org
+        title:
+          type: string
+          description: Title of the page containing the page, in database format.
+          example: Barack_Obama
+        created:
+          type: string
+          format: date-time
+          description: Creation date (in ISO 8601)
+        updated:
+          type: string
+          format: date-time
+          description: Last modification date (in ISO 8601)
+    list_write:
+      title: list
+      type: object
+      properties:
+        name:
+          type: string
+          example: Planets
+        description:
+          type: string
+          example: Planets of the Solar System
+      required:
+      - name
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+    list_read:
+      title: list
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        name:
+          type: string
+          example: Planets
+        description:
+          type: string
+          example: Planets of the Solar System
+        created:
+          type: string
+          format: date-time
+          description: Creation date (in ISO 8601)
+        updated:
+          type: string
+          format: date-time
+          description: Last modification date (in ISO 8601)
+      required:
+      - id
+      - name
+      - created
+      - updated
+    list_entry_write:
+      type: object
+      properties:
+        project:
+          type: string
+          description: Domain of the wiki containing the page.
+          example: https://en.wikipedia.org
+        title:
+          type: string
+          description: Title of the page containing the page, in database format.
+          example: Barack_Obama
+      required:
+      - project
+      - title
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

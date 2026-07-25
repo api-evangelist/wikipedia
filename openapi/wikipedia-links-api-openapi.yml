@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles Links API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: Links
+  description: Page relationships - language and media links
+paths:
+  /page/{title}/links/language:
+    get:
+      operationId: getPageLanguageLinks
+      summary: MediaWiki Core REST Get Language Links for a Page
+      description: Return interlanguage links (same topic in other languages) for a page.
+      tags:
+      - Links
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: title
+        in: path
+        required: true
+        schema:
+          type: string
+        description: URL-encoded page title
+        example: Earth
+      responses:
+        '200':
+          description: Language links
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LanguageLink'
+  /page/{title}/links/media:
+    get:
+      operationId: getPageMediaLinks
+      summary: MediaWiki Core REST Get Media Files Used on a Page
+      description: List media files referenced from a page.
+      tags:
+      - Links
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: title
+        in: path
+        required: true
+        schema:
+          type: string
+        description: URL-encoded page title
+        example: Earth
+      responses:
+        '200':
+          description: Files used on the page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/File'
+components:
+  schemas:
+    LanguageLink:
+      type: object
+      properties:
+        code:
+          type: string
+          example: de
+          description: Language code
+        name:
+          type: string
+          example: Deutsch
+        key:
+          type: string
+          example: Erde
+        title:
+          type: string
+          example: Erde
+    File:
+      type: object
+      description: A media file descriptor.
+      properties:
+        title:
+          type: string
+          example: File:Earth_Eastern_Hemisphere.jpg
+        file_description_url:
+          type: string
+          format: uri
+        latest:
+          type: object
+          properties:
+            timestamp:
+              type: string
+              format: date-time
+            user:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+        preferred:
+          type: object
+          properties:
+            mediatype:
+              type: string
+              example: BITMAP
+            size:
+              type: integer
+            width:
+              type: integer
+            height:
+              type: integer
+            url:
+              type: string
+              format: uri
+        original:
+          type: object
+          properties:
+            mediatype:
+              type: string
+            size:
+              type: integer
+            width:
+              type: integer
+            height:
+              type: integer
+            url:
+              type: string
+              format: uri
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

@@ -1,0 +1,846 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles batches API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: batches
+  description: Realtime Batch API
+  externalDocs:
+    description: enterprise docs - realtime api
+    url: https://enterprise.wikimedia.com/docs/realtime/
+paths:
+  /v2/batches/{date}/{hour}:
+    summary: Hourly Batch Files Available
+    description: Returns a list of available Realtime (Batch) bundles by date and hour (00, 01, ..., 23). Includes identifiers, file sizes and other relevant metadata.
+    get:
+      tags:
+      - batches
+      parameters:
+      - in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '2023-02-28'
+      - in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '00'
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      - in: query
+        name: filters
+        description: Select which projects and languages to receive in your response.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/filter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/batch'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}} {"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - batches
+      parameters:
+      - in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '2023-02-28'
+      - in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '00'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+                filters:
+                  type: array
+                  description: Select which projects and languages to receive in your response.
+                  items:
+                    $ref: '#/components/schemas/filter'
+                  example: '[{"field": "namespace.identifier","value": 0}]'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/batch'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}} {"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/batches/{date}/{hour}/{identifier}:
+    summary: Hourly Batch File Info
+    description: Information on specific hourly batch. Includes identifier, file size and other relevant metadata.
+    get:
+      tags:
+      - batches
+      parameters:
+      - in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '2023-02-28'
+      - in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '00'
+      - in: path
+        name: identifier
+        required: true
+        description: Batch identifier.
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/batch'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - batches
+      parameters:
+      - in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '2023-02-28'
+      - in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '00'
+      - in: path
+        name: identifier
+        required: true
+        description: Batch identifier.
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/batch'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/batches/{date}/{hour}/{identifier}/download:
+    summary: Hourly Batch File Download
+    description: Downloadable bundle of updated articles by project, namespace, date, and hour. Generated hourly starting at 00:00 UTC each day.
+    head:
+      summary: Wikimedia Enterprise Project Updates (Batch) Headers
+      description: Set of headers that describe the hourly download.
+      tags:
+      - batches
+      parameters:
+      - in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '2023-02-28'
+      - in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '00'
+      - in: path
+        name: identifier
+        required: true
+        description: Batch identifier.
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        200:
+          description: OK
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+              description: HTTP response header is a marker used by the server to advertise its support for partial requests.
+            Last-Modified:
+              schema:
+                type: string
+              description: Response HTTP header contains a date and time when the origin server believes the resource was last modified.
+            Content-Length:
+              schema:
+                type: string
+              description: Header indicates the size of the message body, in bytes, sent to the recipient.
+            ETag:
+              schema:
+                type: string
+              description: Entity tag - HTTP response header is an identifier for a specific version of a resource.
+            Content-Disposition:
+              schema:
+                type: string
+              description: Header indicating if the content is expected to be displayed in the browser  or as an attachment, that is downloaded and saved locally.
+            Content-Encoding:
+              schema:
+                type: string
+              description: Lists any encodings that have been applied to the representation (message payload), and in what order.
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource (prior to any content encoding applied for sending).
+            Expires:
+              schema:
+                type: string
+              description: Contains the date/time after which the response is considered expired.
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - batches
+      parameters:
+      - in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '2023-02-28'
+      - in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: '00'
+      - in: path
+        name: identifier
+        required: true
+        description: Batch identifier.
+        schema:
+          type: string
+          minLength: 1
+      - in: header
+        name: Range
+        description: The Range HTTP request header indicates the part of a document that the server should return.
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    batch:
+      type: object
+      properties:
+        identifier:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        in_language:
+          $ref: '#/components/schemas/language'
+        is_part_of:
+          $ref: '#/components/schemas/project'
+        namespace:
+          $ref: '#/components/schemas/article_namespace'
+        size:
+          $ref: '#/components/schemas/size'
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

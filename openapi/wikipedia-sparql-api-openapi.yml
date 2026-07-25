@@ -1,25 +1,35 @@
 openapi: 3.0.3
 info:
-  title: Wikidata Query Service SPARQL API
-  description: 'SPARQL 1.1 endpoint for Wikidata - the structured knowledge graph underpinning Wikipedia infoboxes, Wikimedia Commons captions, and 100M+ items.
+  title: MediaWiki Action articles SPARQL API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
 
 
-    Requests are limited to 60 seconds per query and 5 concurrent queries per IP. Set a contactable User-Agent. Heavy / federated workloads should use the Scholarly or non-Scholarly split graphs at query-scholarly.wikidata.org
-    and query-main.wikidata.org.'
-  version: 1.0.0
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
   x-generated-from: documentation
-  x-source-url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
   x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
   license:
-    name: CC0 1.0
-    url: https://creativecommons.org/publicdomain/zero/1.0/
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
 servers:
-- url: https://query.wikidata.org
-  description: Wikidata Query Service - full graph
-- url: https://query-main.wikidata.org
-  description: WDQS - non-scholarly (main) graph split
-- url: https://query-scholarly.wikidata.org
-  description: WDQS - scholarly graph split
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
 tags:
 - name: SPARQL
   description: SPARQL 1.1 query endpoint
@@ -28,8 +38,7 @@ paths:
     get:
       operationId: executeSparqlQueryGet
       summary: Wikidata Query Service SPARQL Execute a SPARQL Query (GET)
-      description: Execute a SPARQL 1.1 SELECT/ASK/CONSTRUCT/DESCRIBE query against the Wikidata graph. Pass the query in the 'query' parameter. Use Accept header to control result format (JSON, XML, 
-        CSV, TSV, RDF/XML, Turtle).
+      description: Execute a SPARQL 1.1 SELECT/ASK/CONSTRUCT/DESCRIBE query against the Wikidata graph. Pass the query in the 'query' parameter. Use Accept header to control result format (JSON, XML, CSV, TSV, RDF/XML, Turtle).
       tags:
       - SPARQL
       parameters:
@@ -168,3 +177,13 @@ components:
           type: boolean
           description: Result of an ASK query
           nullable: true
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

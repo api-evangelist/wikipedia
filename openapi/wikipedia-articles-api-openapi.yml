@@ -1,0 +1,680 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: articles
+  description: On-demand API
+  externalDocs:
+    description: enterprise docs - on-demand api
+    url: https://enterprise.wikimedia.com/docs/on-demand/
+paths:
+  /v2/articles/{name}:
+    summary: Article Lookup
+    description: Most current revision of an article.
+    get:
+      tags:
+      - articles
+      parameters:
+      - in: path
+        name: name
+        description: Article name.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: limit
+        description: Limit of articles to return.
+        schema:
+          type: integer
+          default: 3
+      - in: query
+        name: fields
+        description: Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      - in: query
+        name: filters
+        description: Select which projects and languages to receive in your response.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/filter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/article'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '[{"identifier":0,"name":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"},"is_part_of":{"identifier":"string","code":"string","name":"string","url":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"}},"namespace":{"identifier":0,"name":"string","description":"string"},"main_entity":{"identifier":"string","url":"string"}}] [{"identifier":0,"name":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"},"is_part_of":{"identifier":"string","code":"string","name":"string","url":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"}},"namespace":{"identifier":0,"name":"string","description":"string"},"main_entity":{"identifier":"string","url":"string"}}]
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - articles
+      parameters:
+      - in: path
+        name: name
+        description: Article name.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  example: '["name","identifier"]'
+                  description: Select which fields to receive in your response, using JSON dot notation.
+                  items:
+                    type: string
+                filters:
+                  type: array
+                  description: Select which projects and languages to receive in your response.
+                  items:
+                    $ref: '#/components/schemas/filter'
+                  example: '[{"field": "in_language.identifier", "value": "en"}]'
+                limit:
+                  type: integer
+                  description: Limit of articles to return.
+                  default: 3
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/article'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '[{"identifier":0,"name":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"},"is_part_of":{"identifier":"string","code":"string","name":"string","url":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"}},"namespace":{"identifier":0,"name":"string","description":"string"},"main_entity":{"identifier":"string","url":"string"}}] [{"identifier":0,"name":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"},"is_part_of":{"identifier":"string","code":"string","name":"string","url":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"}},"namespace":{"identifier":0,"name":"string","description":"string"},"main_entity":{"identifier":"string","url":"string"}}]
+
+                  '
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 401}
+
+                  '
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 403}
+
+                  '
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status": 404}
+
+                  '
+        422:
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":422}
+
+                  '
+        500:
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: '{"message":"string","status":500}
+
+                  '
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    version:
+      properties:
+        comment:
+          type: string
+        editor:
+          $ref: '#/components/schemas/editor'
+        identifier:
+          type: integer
+        is_flagged_stable:
+          type: boolean
+        is_minor_edit:
+          type: boolean
+        noindex:
+          type: boolean
+        scores:
+          $ref: '#/components/schemas/scores'
+        maintenance_tags:
+          $ref: '#/components/schemas/maintenance_tags'
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    citation:
+      type: object
+      properties:
+        identifier:
+          type: string
+        group:
+          type: string
+        text:
+          type: string
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    entity:
+      type: object
+      properties:
+        identifier:
+          type: string
+        url:
+          type: string
+    article_body:
+      properties:
+        html:
+          type: string
+        wikitext:
+          type: string
+      type: object
+    event:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: f7c737db-4b50-4982-8804-7c2b9fa89020
+        type:
+          type: string
+          example: update
+          enum:
+          - update
+          - delete
+        date_created:
+          type: string
+          example: 2026-03-18 12:38:23.437225+00:00
+    article:
+      properties:
+        event:
+          $ref: '#/components/schemas/event'
+        additional_entities:
+          items:
+            $ref: '#/components/schemas/entity'
+          type: array
+        article_body:
+          $ref: '#/components/schemas/article_body'
+        has_parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/part'
+        categories:
+          items:
+            $ref: '#/components/schemas/category'
+          type: array
+        date_modified:
+          type: string
+        identifier:
+          type: integer
+        in_language:
+          $ref: '#/components/schemas/language'
+        is_part_of:
+          $ref: '#/components/schemas/project'
+        license:
+          items:
+            $ref: '#/components/schemas/license'
+          type: array
+        main_entity:
+          $ref: '#/components/schemas/entity'
+        name:
+          type: string
+        abstract:
+          type: string
+        namespace:
+          $ref: '#/components/schemas/article_namespace'
+        protection:
+          items:
+            $ref: '#/components/schemas/protection'
+          type: array
+        redirects:
+          items:
+            $ref: '#/components/schemas/redirect'
+          type: array
+        templates:
+          items:
+            $ref: '#/components/schemas/template'
+          type: array
+        url:
+          type: string
+        version:
+          $ref: '#/components/schemas/version'
+        visibility:
+          $ref: '#/components/schemas/visibility'
+      type: object
+    maintenance_tags:
+      properties:
+        citation_needed_count:
+          type: integer
+        pov_count:
+          type: integer
+        clarification_needed_count:
+          type: integer
+        update_count:
+          type: integer
+      type: object
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    category:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    scores:
+      properties:
+        revertrisk:
+          $ref: '#/components/schemas/revertrisk'
+        referencerisk:
+          $ref: '#/components/schemas/referencerisk'
+        referenceneed:
+          $ref: '#/components/schemas/referenceneed'
+      type: object
+    referenceneed:
+      properties:
+        reference_need_score:
+          type: number
+      type: object
+    referencerisk:
+      properties:
+        reference_risk_score:
+          type: number
+      type: object
+    image:
+      type: object
+      properties:
+        content_url:
+          description: Image URL
+          format: uri
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png
+        identifier:
+          type: string
+          format: uuid
+          description: Unique identifier for the image
+          example: 6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0
+        name:
+          type: string
+          description: Filename of the image
+          example: ./File:Flag_of_Italy.svg
+        width:
+          description: image width in pixels
+          type: integer
+          example: 156
+        height:
+          description: image height in pixels
+          type: integer
+          example: 255
+        thumbnail:
+          $ref: '#/components/schemas/thumbnail'
+        caption:
+          type: string
+          description: caption describing the image
+          example: Flag of Italy
+        alternative_text:
+          type: string
+          description: Alternative text description of the image for accessibility
+          example: a flag divided in three vertical sections colored green, white, and red from left to right
+        encoding_format:
+          type: string
+          format: mime_type
+          description: MIME type or encoding format of the image, constructed from the url
+          example: image/png
+        media_type:
+          type: string
+          enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
+          description: Mediawiki media type of the image
+          example: drawing
+    part:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        has_parts:
+          type: array
+          items:
+            type: object
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/citation'
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    revertrisk:
+      properties:
+        prediction:
+          type: boolean
+        probability:
+          properties:
+            'false':
+              type: number
+            'true':
+              type: number
+          type: object
+      type: object
+    editor:
+      properties:
+        date_started:
+          type: string
+        edit_count:
+          type: integer
+        groups:
+          items:
+            type: string
+          type: array
+        identifier:
+          type: integer
+        is_anonymous:
+          type: boolean
+        is_bot:
+          type: boolean
+        name:
+          type: string
+      type: object
+    visibility:
+      type: object
+      properties:
+        comment:
+          type: boolean
+          example: true
+        text:
+          type: boolean
+          example: true
+        user:
+          type: boolean
+          example: false
+    redirect:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    link:
+      type: object
+      properties:
+        url:
+          type: string
+        text:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+    license:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: CC-BY-SA-4.0
+        name:
+          type: string
+          example: Creative Commons Attribution-ShareAlike License 4.0
+        url:
+          type: string
+          example: https://creativecommons.org/licenses/by-sa/4.0/
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+    thumbnail:
+      type: object
+      properties:
+        contentUrl:
+          type: string
+          format: uri
+          description: Thumbnail URL
+        width:
+          description: Thumbnail width in pixels
+          type: integer
+          example: 156
+        height:
+          description: Thumbnail height in pixels
+          type: integer
+          example: 255
+    template:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    protection:
+      type: object
+      properties:
+        expiry:
+          type: string
+          enum:
+          - infinite
+          - indefinite
+          - infinity
+          - never
+          example: infinity
+        level:
+          type: string
+          example: extendedconfirmed
+        type:
+          type: string
+          example: edit
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin

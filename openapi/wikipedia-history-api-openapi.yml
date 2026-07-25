@@ -1,0 +1,232 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Action articles History API
+  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+
+
+    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  version: '1.45'
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w
+  description: Per-language Wikipedia
+  variables:
+    lang:
+      default: en
+      description: Language code
+- url: https://commons.wikimedia.org/w
+  description: Wikimedia Commons
+- url: https://www.wikidata.org/w
+  description: Wikidata
+- url: https://www.mediawiki.org/w
+  description: MediaWiki.org
+tags:
+- name: History
+  description: Page revision history and edit statistics
+paths:
+  /page/{title}/history:
+    get:
+      operationId: getPageHistory
+      summary: MediaWiki Core REST Get Page Revision History
+      description: Retrieve the revision history for a page.
+      tags:
+      - History
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: title
+        in: path
+        required: true
+        schema:
+          type: string
+        description: URL-encoded page title
+        example: Earth
+      - name: older_than
+        in: query
+        schema:
+          type: integer
+        description: Return revisions older than this ID
+      - name: newer_than
+        in: query
+        schema:
+          type: integer
+      - name: filter
+        in: query
+        schema:
+          type: string
+          enum:
+          - reverted
+          - anonymous
+          - bot
+          - minor
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /page/{title}/history/counts/{type}:
+    get:
+      operationId: getPageHistoryCounts
+      summary: MediaWiki Core REST Get Edit Statistics for a Page
+      description: Get edit count statistics for a page by category.
+      tags:
+      - History
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: title
+        in: path
+        required: true
+        schema:
+          type: string
+        description: URL-encoded page title
+        example: Earth
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - anonymous
+          - bot
+          - editors
+          - edits
+          - minor
+          - reverted
+        description: Type of count to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditCounts'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
+    EditCounts:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Edit count of requested type
+        limit:
+          type: boolean
+          description: Whether the count was truncated
+    HistoryResponse:
+      type: object
+      properties:
+        revisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Revision'
+        latest:
+          type: string
+          format: uri
+          description: Link to latest revisions page
+        older:
+          type: string
+          format: uri
+          nullable: true
+        newer:
+          type: string
+          format: uri
+          nullable: true
+    Revision:
+      type: object
+      description: A page revision.
+      properties:
+        id:
+          type: integer
+          example: 1356767710
+        page:
+          type: object
+          properties:
+            id:
+              type: integer
+            title:
+              type: string
+        size:
+          type: integer
+          description: Byte size of revision
+        minor:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        content_model:
+          type: string
+          example: wikitext
+        license:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+            title:
+              type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+              example: Jimbo Wales
+        comment:
+          type: string
+          description: Edit summary
+        delta:
+          type: integer
+          description: Byte delta from previous revision
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token from meta.wikimedia.org
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: '{wiki}wikiUserID'
+      description: Session cookie obtained via action=login or action=clientlogin
