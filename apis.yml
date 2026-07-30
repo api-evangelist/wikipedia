@@ -11,6 +11,19 @@ description: >-
   governed by the Wikimedia API usage guidelines: contactable User-Agent, serial requests,
   maxlag for bots.
 url: https://api.wikimedia.org/wiki/Main_Page
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/120px-Wikipedia-logo-v2.svg.png
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -29,134 +42,1458 @@ tags:
   - Open Source
   - Non-Profit
 apis:
-  - name: MediaWiki Action API
-    description: >-
-      The original programmatic interface to MediaWiki, exposed at /w/api.php on every
-      MediaWiki installation. Operations are dispatched via the action= query parameter
-      (query, parse, edit, upload, login, patrol, ...). JSON is the recommended format.
-      Primary write surface for Wikimedia projects.
-    humanURL: https://www.mediawiki.org/wiki/API:Main_page
-    baseURL: https://en.wikipedia.org/w/api.php
-    tags:
-      - Action API
-      - Read
-      - Write
-      - Edit
-      - Search
-    properties:
-      - type: Documentation
-        url: https://www.mediawiki.org/wiki/API:Main_page
-      - type: Sandbox
-        url: https://en.wikipedia.org/wiki/Special:ApiSandbox
-      - type: OpenAPI
-        url: openapi/wikipedia-mediawiki-action-api-openapi.yaml
-      - type: Tutorials
-        url: https://www.mediawiki.org/wiki/API:Tutorial
-      - type: Etiquette
-        url: https://www.mediawiki.org/wiki/API:Etiquette
-
-  - name: MediaWiki Core REST API
-    description: >-
-      Modern REST surface on every MediaWiki installation under /w/rest.php/v1/. Provides
-      page CRUD, full-text search, file metadata, history, individual revision retrieval,
-      revision comparison, and wikitext <-> HTML transforms. Mirrored at
-      api.wikimedia.org/core/v1/wikipedia/{lang}/.
-    humanURL: https://www.mediawiki.org/wiki/API:REST_API
-    baseURL: https://en.wikipedia.org/w/rest.php/v1
-    tags:
-      - REST API
-      - Core
-      - Pages
-      - Search
-      - Transforms
-    properties:
-      - type: Documentation
-        url: https://www.mediawiki.org/wiki/API:REST_API/Reference
-      - type: OpenAPI
-        url: openapi/wikipedia-mediawiki-core-rest-openapi.yaml
-      - type: APIPortal
-        url: https://api.wikimedia.org/wiki/Core_REST_API
-
-  - name: Wikimedia REST API v1
-    description: >-
-      Caching-optimized REST API for high-volume, anonymous read traffic. Provides page
-      summaries, mobile-tailored HTML, media lists, citation extraction, math rendering,
-      content transforms, page recommendations, and reading lists. Limit clients to no more
-      than 200 requests/s and provide a contactable User-Agent.
-    humanURL: https://en.wikipedia.org/api/rest_v1/
-    baseURL: https://en.wikipedia.org/api/rest_v1
-    tags:
-      - REST API
-      - Cached
-      - Summaries
-      - Mobile
-      - Citation
-      - Math
-    properties:
-      - type: Documentation
-        url: https://en.wikipedia.org/api/rest_v1/
-      - type: OpenAPI
-        url: openapi/wikipedia-rest-v1-openapi.yaml
-      - type: Specification
-        url: https://en.wikipedia.org/api/rest_v1/?spec
-
-  - name: Wikidata Query Service (SPARQL)
-    description: >-
-      SPARQL 1.1 endpoint for Wikidata - the structured knowledge graph behind Wikipedia
-      infoboxes, Commons captions, and 100M+ items. Single endpoint /sparql accepts SELECT,
-      ASK, CONSTRUCT, DESCRIBE queries. 60s query timeout, 5 concurrent queries per IP. Has
-      a 'main' / 'scholarly' graph split available at separate hostnames for heavy workloads.
-    humanURL: https://query.wikidata.org
-    baseURL: https://query.wikidata.org
-    tags:
-      - SPARQL
-      - Knowledge Graph
-      - Linked Data
-      - Wikidata
-    properties:
-      - type: Documentation
-        url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
-      - type: OpenAPI
-        url: openapi/wikipedia-wikidata-sparql-openapi.yaml
-      - type: QueryHelp
-        url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
-      - type: Editor
-        url: https://query.wikidata.org
-
-  - name: Wikimedia Enterprise API
-    description: >-
-      Commercial, SLA-backed Wikimedia data feed run by Wikimedia LLC (the Foundation's
-      subsidiary). Provides Snapshot (bulk twice-monthly or daily), On-demand (per-article
-      structured contents), and Realtime (streaming updates) APIs. Free developer tier
-      includes 5,000 on-demand requests/month and 15 snapshot/month. Paid plans add
-      unlimited usage and realtime streams.
-    humanURL: https://enterprise.wikimedia.com/
-    baseURL: https://api.enterprise.wikimedia.com
-    tags:
-      - Enterprise
-      - Commercial
-      - Snapshot
-      - On-Demand
-      - Realtime
-      - Structured Contents
-    properties:
-      - type: Documentation
-        url: https://enterprise.wikimedia.com/docs/
-      - type: OpenAPI
-        url: openapi/wikipedia-wikimedia-enterprise-openapi.yaml
-      - type: DataDictionary
-        url: https://enterprise.wikimedia.com/docs/data-dictionary/
-      - type: Pricing
-        url: https://enterprise.wikimedia.com/pricing/
-      - type: SDKs
-        title: Python SDK
-        url: https://github.com/wikimedia-enterprise/wme-sdk-python
-      - type: SDKs
-        title: Go SDK
-        url: https://github.com/wikimedia-enterprise/wme-sdk-go
-      - type: Postman
-        url: https://github.com/wikimedia-enterprise/postman
-
+- aid: wikipedia:wikipedia-articles-api
+  name: Wikipedia / MediaWiki articles API
+  description: On-demand API
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - articles
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-articles-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-authentication-api
+  name: Wikipedia / MediaWiki Authentication API
+  description: Login, logout, token retrieval (action=login, clientlogin, logout, query&meta=tokens)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-batches-api
+  name: Wikipedia / MediaWiki batches API
+  description: Realtime Batch API
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - batches
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-batches-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-citation-api
+  name: Wikipedia / MediaWiki Citation API
+  description: generation of citation data
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Citation
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-citation-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-codes-api
+  name: Wikipedia / MediaWiki codes API
+  description: Metadata
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - codes
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-codes-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-edit-api
+  name: Wikipedia / MediaWiki Edit API
+  description: Create/modify page content (action=edit)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Edit
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-edit-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-files-api
+  name: Wikipedia / MediaWiki Files API
+  description: Media file metadata
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-files-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-history-api
+  name: Wikipedia / MediaWiki History API
+  description: Page revision history and edit statistics
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-history-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-languages-api
+  name: Wikipedia / MediaWiki languages API
+  description: Metadata
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - languages
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-languages-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-links-api
+  name: Wikipedia / MediaWiki Links API
+  description: Page relationships - language and media links
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Links
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-links-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-math-api
+  name: Wikipedia / MediaWiki Math API
+  description: formula rendering
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Math
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-math-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-meta-api
+  name: Wikipedia / MediaWiki Meta API
+  description: Metadata operations (action=opensearch, action=feedrecentchanges)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Meta
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-meta-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-mobile-api
+  name: Wikipedia / MediaWiki Mobile API
+  description: The Mobile API from Wikipedia / MediaWiki — 3 operation(s) for mobile.
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Mobile
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-mobile-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-namespaces-api
+  name: Wikipedia / MediaWiki namespaces API
+  description: Metadata
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - namespaces
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-namespaces-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-offline-api
+  name: Wikipedia / MediaWiki offline API
+  description: The offline API from Wikipedia / MediaWiki — 2 operation(s) for offline.
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - offline
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-offline-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-page-content-api
+  name: Wikipedia / MediaWiki Page content API
+  description: page content in different formats
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Page content
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-page-content-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-pages-api
+  name: Wikipedia / MediaWiki Pages API
+  description: Page metadata, HTML, source, create, update
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-pages-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-parse-api
+  name: Wikipedia / MediaWiki Parse API
+  description: Wikitext parsing (action=parse)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Parse
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-parse-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-patrol-api
+  name: Wikipedia / MediaWiki Patrol API
+  description: Mark edits as patrolled (action=patrol)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Patrol
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-patrol-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-projects-api
+  name: Wikipedia / MediaWiki projects API
+  description: Metadata
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-query-api
+  name: Wikipedia / MediaWiki Query API
+  description: Read-only data retrieval (action=query) — pages, revisions, links, search
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-query-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-reading-lists-api
+  name: Wikipedia / MediaWiki Reading lists API
+  description: Private lists of selected pages
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Reading lists
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-reading-lists-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-recommendation-api
+  name: Wikipedia / MediaWiki Recommendation API
+  description: contribution recommendations
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Recommendation
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-recommendation-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-revisions-api
+  name: Wikipedia / MediaWiki Revisions API
+  description: Individual revision retrieval and comparison
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Revisions
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-revisions-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-search-api
+  name: Wikipedia / MediaWiki Search API
+  description: Title and full-text search
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-snapshots-api
+  name: Wikipedia / MediaWiki snapshots API
+  description: Snapshot API
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-sparql-api
+  name: Wikipedia / MediaWiki SPARQL API
+  description: SPARQL 1.1 query endpoint
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - SPARQL
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-sparql-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-structured-contents-api
+  name: Wikipedia / MediaWiki structured-contents API
+  description: (Beta) Structured Contents On-demand API
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - structured-contents
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-structured-contents-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-structured-snapshots-api
+  name: Wikipedia / MediaWiki structured-snapshots API
+  description: (BETA) Structured Contents Snapshot API
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - structured-snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-structured-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-talk-pages-api
+  name: Wikipedia / MediaWiki Talk pages API
+  description: The Talk pages API from Wikipedia / MediaWiki — 2 operation(s) for talk pages.
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Talk pages
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-talk-pages-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-transforms-api
+  name: Wikipedia / MediaWiki Transforms API
+  description: Wikitext <-> HTML transformation
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Transforms
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-transforms-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-upload-api
+  name: Wikipedia / MediaWiki Upload API
+  description: File upload (action=upload)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-upload-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-wikidata-api
+  name: Wikipedia / MediaWiki wikidata API
+  description: The wikidata API from Wikipedia / MediaWiki — 3 operation(s) for wikidata.
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - wikidata
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-wikidata-api-openapi.yml
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Sandbox
+    url: https://en.wikipedia.org/wiki/Special:ApiSandbox
+  - type: Tutorials
+    url: https://www.mediawiki.org/wiki/API:Tutorial
+  - type: Etiquette
+    url: https://www.mediawiki.org/wiki/API:Etiquette
+  - type: Documentation
+    url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  - type: APIPortal
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  - type: Documentation
+    url: https://en.wikipedia.org/api/rest_v1/
+  - type: Specification
+    url: https://en.wikipedia.org/api/rest_v1/?spec
+  - type: Documentation
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service
+  - type: QueryHelp
+    url: https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help
+  - type: Editor
+    url: https://query.wikidata.org
+  - type: Documentation
+    url: https://enterprise.wikimedia.com/docs/
+  - type: DataDictionary
+    url: https://enterprise.wikimedia.com/docs/data-dictionary/
+  - type: Pricing
+    url: https://enterprise.wikimedia.com/pricing/
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-python
+  - type: SDKs
+    url: https://github.com/wikimedia-enterprise/wme-sdk-go
+  - type: Postman
+    url: https://github.com/wikimedia-enterprise/postman
 common:
   - type: AgenticAccess
     url: agentic-access/wikipedia-agentic-access.yml
