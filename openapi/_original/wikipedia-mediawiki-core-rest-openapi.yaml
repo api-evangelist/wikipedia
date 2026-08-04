@@ -1,0 +1,1065 @@
+openapi: 3.0.3
+info:
+  title: MediaWiki Core REST API
+  description: 'MediaWiki Core REST API exposed by every MediaWiki installation under /w/rest.php/v1/. Provides page CRUD, search, files, history, revisions, and content transforms. On Wikimedia projects
+    this endpoint serves Wikipedia, Wiktionary, Wikibooks, etc. in 300+ languages.
+
+
+    All endpoints require a meaningful User-Agent header; write endpoints require OAuth 2.0 (or a logged-in session).'
+  version: 1.0.0
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w/rest.php/v1
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w/rest.php/v1
+  description: Per-language Wikipedia (en, de, fr, es, ja, zh, ...)
+  variables:
+    lang:
+      default: en
+      description: Language subdomain
+- url: https://api.wikimedia.org/core/v1/wikipedia/{lang}
+  description: Wikimedia API Gateway equivalent of the Core REST API
+  variables:
+    lang:
+      default: en
+      description: Language code
+tags:
+- name: Pages
+  description: Page metadata, HTML, source, create, update
+- name: Search
+  description: Title and full-text search
+- name: Files
+  description: Media file metadata
+- name: History
+  description: Page revision history and edit statistics
+- name: Revisions
+  description: Individual revision retrieval and comparison
+- name: Transforms
+  description: Wikitext <-> HTML transformation
+- name: Links
+  description: Page relationships - language and media links
+paths:
+  /page/{title}:
+    get:
+      operationId: getPage
+      summary: MediaWiki Core REST Get Page Source and Metadata
+      description: Retrieve a wiki page including its wikitext source and metadata.
+      tags:
+      - Pages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - &id001
+        name: title
+        in: path
+        required: true
+        schema:
+          type: string
+        description: URL-encoded page title
+        example: Earth
+      - name: redirect
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          - 'no'
+        description: Whether to resolve redirects
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updatePage
+      summary: MediaWiki Core REST Update or Create a Page
+      description: Update an existing page, or create one if it does not exist. Optimistic concurrency via latest.id.
+      tags:
+      - Pages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BearerAuth: []
+  /page/{title}/bare:
+    get:
+      operationId: getPageBare
+      summary: MediaWiki Core REST Get Page Metadata Without Content
+      description: Retrieve metadata about a page including a link to its rendered HTML.
+      tags:
+      - Pages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /page/{title}/html:
+    get:
+      operationId: getPageHtml
+      summary: MediaWiki Core REST Get Page as HTML
+      description: Retrieve the rendered HTML for a page.
+      tags:
+      - Pages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      responses:
+        '200':
+          description: Rendered HTML
+          content:
+            text/html:
+              schema:
+                type: string
+  /page/{title}/with_html:
+    get:
+      operationId: getPageWithHtml
+      summary: MediaWiki Core REST Get Page Metadata and HTML
+      description: Retrieve page metadata together with rendered HTML.
+      tags:
+      - Pages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /page:
+    post:
+      operationId: createPage
+      summary: MediaWiki Core REST Create a New Wiki Page
+      description: Create a new wiki page. Requires OAuth bearer token and a CSRF token.
+      tags:
+      - Pages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePageRequest'
+      responses:
+        '201':
+          description: Page created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+      security:
+      - BearerAuth: []
+  /search/page:
+    get:
+      operationId: searchPages
+      summary: MediaWiki Core REST Search Page Titles and Contents
+      description: Full-text search of wiki page titles and contents.
+      tags:
+      - Search
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Search query
+        example: climate change
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        description: Result count limit
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /search/title:
+    get:
+      operationId: searchTitles
+      summary: MediaWiki Core REST Search Page Titles
+      description: Auto-complete search of wiki page titles (prefix match).
+      tags:
+      - Search
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Title prefix
+        example: Earth
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /file/{title}:
+    get:
+      operationId: getFile
+      summary: MediaWiki Core REST Get File Metadata and Download Links
+      description: Retrieve metadata for a media file including download URLs at multiple sizes.
+      tags:
+      - Files
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: title
+        in: path
+        required: true
+        schema:
+          type: string
+        example: File:Earth_Eastern_Hemisphere.jpg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /page/{title}/history:
+    get:
+      operationId: getPageHistory
+      summary: MediaWiki Core REST Get Page Revision History
+      description: Retrieve the revision history for a page.
+      tags:
+      - History
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      - name: older_than
+        in: query
+        schema:
+          type: integer
+        description: Return revisions older than this ID
+      - name: newer_than
+        in: query
+        schema:
+          type: integer
+      - name: filter
+        in: query
+        schema:
+          type: string
+          enum:
+          - reverted
+          - anonymous
+          - bot
+          - minor
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /page/{title}/history/counts/{type}:
+    get:
+      operationId: getPageHistoryCounts
+      summary: MediaWiki Core REST Get Edit Statistics for a Page
+      description: Get edit count statistics for a page by category.
+      tags:
+      - History
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - anonymous
+          - bot
+          - editors
+          - edits
+          - minor
+          - reverted
+        description: Type of count to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditCounts'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}:
+    get:
+      operationId: getRevision
+      summary: MediaWiki Core REST Get Revision with HTML Link
+      description: Retrieve a revision and a link to its rendered HTML.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}/bare:
+    get:
+      operationId: getRevisionBare
+      summary: MediaWiki Core REST Get Revision Metadata
+      description: Retrieve revision metadata without source or HTML.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}/source:
+    get:
+      operationId: getRevisionSource
+      summary: MediaWiki Core REST Get Revision Wikitext Source
+      description: Retrieve the wikitext source for a specific revision.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}/html:
+    get:
+      operationId: getRevisionHtml
+      summary: MediaWiki Core REST Get Revision as HTML
+      description: Retrieve the rendered HTML for a specific revision.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: HTML for the revision
+          content:
+            text/html:
+              schema:
+                type: string
+  /revision/{id}/with_html:
+    get:
+      operationId: getRevisionWithHtml
+      summary: MediaWiki Core REST Get Revision Metadata and HTML
+      description: Retrieve revision metadata together with rendered HTML.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{from}/compare/{to}:
+    post:
+      operationId: compareRevisions
+      summary: MediaWiki Core REST Compare Two Revisions
+      description: Produce a structured diff between two revisions of the same page.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: from
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: From revision ID
+      - name: to
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: To revision ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompareResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /transform/wikitext/to/html/{title}:
+    post:
+      operationId: transformWikitextToHtml
+      summary: MediaWiki Core REST Transform Wikitext to HTML
+      description: Convert wikitext into rendered HTML in the context of a given title.
+      tags:
+      - Transforms
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - wikitext
+              properties:
+                wikitext:
+                  type: string
+                  example: '''''''Hello, world.'''''''
+                body_only:
+                  type: boolean
+      responses:
+        '200':
+          description: HTML output
+          content:
+            text/html:
+              schema:
+                type: string
+  /transform/html/to/wikitext/{title}:
+    post:
+      operationId: transformHtmlToWikitext
+      summary: MediaWiki Core REST Transform HTML to Wikitext
+      description: Convert HTML into wikitext in the context of a given title.
+      tags:
+      - Transforms
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - html
+              properties:
+                html:
+                  type: string
+                body_only:
+                  type: boolean
+      responses:
+        '200':
+          description: Wikitext output
+          content:
+            text/plain:
+              schema:
+                type: string
+  /transform/wikitext/to/lint/{title}:
+    post:
+      operationId: transformWikitextToLint
+      summary: MediaWiki Core REST Lint Wikitext for Errors
+      description: Identify lint errors in wikitext (e.g. broken HTML, deprecated syntax).
+      tags:
+      - Transforms
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - wikitext
+              properties:
+                wikitext:
+                  type: string
+      responses:
+        '200':
+          description: List of lint errors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /page/{title}/links/language:
+    get:
+      operationId: getPageLanguageLinks
+      summary: MediaWiki Core REST Get Language Links for a Page
+      description: Return interlanguage links (same topic in other languages) for a page.
+      tags:
+      - Links
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      responses:
+        '200':
+          description: Language links
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LanguageLink'
+  /page/{title}/links/media:
+    get:
+      operationId: getPageMediaLinks
+      summary: MediaWiki Core REST Get Media Files Used on a Page
+      description: List media files referenced from a page.
+      tags:
+      - Links
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - *id001
+      responses:
+        '200':
+          description: Files used on the page
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/File'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token issued via api.wikimedia.org. Required for write operations.
+  schemas:
+    Page:
+      type: object
+      description: A MediaWiki page object.
+      properties:
+        id:
+          type: integer
+          example: 9228
+          description: Page ID
+        key:
+          type: string
+          example: Earth
+          description: Page DB key (URL form)
+        title:
+          type: string
+          example: Earth
+          description: Display title
+        latest:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1356767710
+              description: Revision ID
+            timestamp:
+              type: string
+              format: date-time
+              example: '2026-05-29T18:21:47Z'
+        content_model:
+          type: string
+          example: wikitext
+        license:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://creativecommons.org/licenses/by-sa/4.0/
+            title:
+              type: string
+              example: Creative Commons Attribution-Share Alike 4.0
+        html_url:
+          type: string
+          format: uri
+        source:
+          type: string
+          description: Page wikitext source
+        html:
+          type: string
+          description: Rendered HTML
+    Revision:
+      type: object
+      description: A page revision.
+      properties:
+        id:
+          type: integer
+          example: 1356767710
+        page:
+          type: object
+          properties:
+            id:
+              type: integer
+            title:
+              type: string
+        size:
+          type: integer
+          description: Byte size of revision
+        minor:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        content_model:
+          type: string
+          example: wikitext
+        license:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+            title:
+              type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+              example: Jimbo Wales
+        comment:
+          type: string
+          description: Edit summary
+        delta:
+          type: integer
+          description: Byte delta from previous revision
+    SearchResult:
+      type: object
+      description: A search result page entry.
+      properties:
+        id:
+          type: integer
+        key:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+          description: HTML snippet with <span class="searchmatch"> highlights
+        matched_title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        thumbnail:
+          type: object
+          nullable: true
+          properties:
+            url:
+              type: string
+              format: uri
+            width:
+              type: integer
+            height:
+              type: integer
+            mimetype:
+              type: string
+              example: image/jpeg
+    SearchResponse:
+      type: object
+      properties:
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    File:
+      type: object
+      description: A media file descriptor.
+      properties:
+        title:
+          type: string
+          example: File:Earth_Eastern_Hemisphere.jpg
+        file_description_url:
+          type: string
+          format: uri
+        latest:
+          type: object
+          properties:
+            timestamp:
+              type: string
+              format: date-time
+            user:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+        preferred:
+          type: object
+          properties:
+            mediatype:
+              type: string
+              example: BITMAP
+            size:
+              type: integer
+            width:
+              type: integer
+            height:
+              type: integer
+            url:
+              type: string
+              format: uri
+        original:
+          type: object
+          properties:
+            mediatype:
+              type: string
+            size:
+              type: integer
+            width:
+              type: integer
+            height:
+              type: integer
+            url:
+              type: string
+              format: uri
+    HistoryResponse:
+      type: object
+      properties:
+        revisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Revision'
+        latest:
+          type: string
+          format: uri
+          description: Link to latest revisions page
+        older:
+          type: string
+          format: uri
+          nullable: true
+        newer:
+          type: string
+          format: uri
+          nullable: true
+    EditCounts:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Edit count of requested type
+        limit:
+          type: boolean
+          description: Whether the count was truncated
+    LanguageLink:
+      type: object
+      properties:
+        code:
+          type: string
+          example: de
+          description: Language code
+        name:
+          type: string
+          example: Deutsch
+        key:
+          type: string
+          example: Erde
+        title:
+          type: string
+          example: Erde
+    CompareResponse:
+      type: object
+      description: Comparison between two revisions.
+      properties:
+        from:
+          $ref: '#/components/schemas/Revision'
+        to:
+          $ref: '#/components/schemas/Revision'
+        diff:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: integer
+                description: 0 context, 1 add line, 2 delete line, 3 in-line change, 4 moved paragraph, 5 paragraph moved into place
+              lineNumber:
+                type: integer
+              text:
+                type: string
+              offset:
+                type: object
+                properties:
+                  from:
+                    type: integer
+                  to:
+                    type: integer
+              highlightRanges:
+                type: array
+                items:
+                  type: object
+    CreatePageRequest:
+      type: object
+      required:
+      - source
+      - title
+      - comment
+      properties:
+        source:
+          type: string
+          description: Wikitext source for the new page
+          example: '''''''Hello, world.'''''''
+        title:
+          type: string
+          description: New page title
+          example: User:Example/Sandbox
+        comment:
+          type: string
+          description: Edit summary
+          example: Creating sandbox page
+        content_model:
+          type: string
+          example: wikitext
+        token:
+          type: string
+          description: CSRF token from Action API
+    UpdatePageRequest:
+      type: object
+      required:
+      - source
+      - comment
+      - latest
+      properties:
+        source:
+          type: string
+        comment:
+          type: string
+        content_model:
+          type: string
+        latest:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: integer
+              description: Latest revision ID known to the client (for optimistic concurrency)
+        token:
+          type: string
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found

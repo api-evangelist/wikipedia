@@ -1,0 +1,2420 @@
+openapi: 3.1.0
+info:
+  title: Wikimedia Enterprise API spec
+  description: |
+    OpenAPI 3.0 specification for the Metadata, On-demand, Snapshot, and Realtime Batch API(s) of WME.
+
+    While we provide this swagger spec for quick reference, our official documentation is located on our website:
+
+    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
+  version: 2.0.0
+servers:
+- url: https://api.enterprise.wikimedia.com
+tags:
+- name: codes
+  description: Metadata
+  externalDocs:
+    description: enterprise docs - metadata
+    url: https://enterprise.wikimedia.com/docs/metadata/
+- name: languages
+  description: Metadata
+  externalDocs:
+    description: enterprise docs - metadata
+    url: https://enterprise.wikimedia.com/docs/metadata/
+- name: projects
+  description: Metadata
+  externalDocs:
+    description: enterprise docs - metadata
+    url: https://enterprise.wikimedia.com/docs/metadata/
+- name: namespaces
+  description: Metadata
+  externalDocs:
+    description: enterprise docs - metadata
+    url: https://enterprise.wikimedia.com/docs/metadata/
+- name: snapshots
+  description: Snapshot API
+  externalDocs:
+    description: enterprise docs - snapshot api
+    url: https://enterprise.wikimedia.com/docs/snapshot/
+- name: structured-snapshots
+  description: (BETA) Structured Contents Snapshot API
+  externalDocs:
+    description: enterprise docs - structured snapshot api
+    url: https://enterprise.wikimedia.com/docs/snapshot/
+- name: articles
+  description: On-demand API
+  externalDocs:
+    description: enterprise docs - on-demand api
+    url: https://enterprise.wikimedia.com/docs/on-demand/
+- name: structured-contents
+  description: (Beta) Structured Contents On-demand API
+  externalDocs:
+    description: enterprise docs - on-demand api
+    url: https://enterprise.wikimedia.com/docs/on-demand/
+- name: batches
+  description: Realtime Batch API
+  externalDocs:
+    description: enterprise docs - realtime api
+    url: https://enterprise.wikimedia.com/docs/realtime/
+security:
+- bearerAuth: []
+paths:
+  #-------------------------
+  # Codes
+  #-------------------------
+  /v2/codes:
+    summary: &codes_summary Project Codes Available
+    description: &codes_description >
+      Lists available project codes (types). Includes project code (type) identifier, name and description.
+    get:
+      tags:
+      - codes
+      parameters:
+      - &fields_query
+        in: query
+        name: fields
+        description: &fields_description Select which fields to receive in your response, using JSON dot notation.
+        schema:
+          type: array
+          items:
+            type: string
+            example: name
+      - &filters_query
+        in: query
+        name: filters
+        description: &filters_description Select which projects and languages to receive in your response.
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/filter"
+      responses: &codes_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/code"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier":"string","name":"string","description":"string"}
+                  {"identifier":"string","name":"string","description":"string"}
+        401: &unauthorized_error
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"message":"string","status": 401}
+        404: &not_found_error
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"message":"string","status": 404}
+        403: &forbidden_error
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"message":"string","status": 403}
+        422: &unprocessable_entity_error
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"message":"string","status":422}
+        500: &internal_server_error
+          description: Internal Server Error, Retry Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"message":"string","status":500}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - codes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: &fields_body
+                  type: array
+                  example: '["name","identifier"]' #using single quotes to prevent escaping issues
+                  description: *fields_description
+                  items:
+                    type: string
+                filters:
+                  type: &filters_body_type array
+                  description: *filters_description
+                  items: &filters_body_items
+                    $ref: "#/components/schemas/filter"
+                  example: '[{"field": "identifier", "value": "wiki"}]' #same as above line 178, encasing in single quotes to fix encoding errors when not escaping backslashes and newlines
+      responses: *codes_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/codes/{identifier}:
+    summary: &code_summary Project Code Info
+    description: &code_description Information on a specific project code (type). Includes identifier, name and description.
+    get:
+      tags:
+      - codes
+      parameters:
+      - &code_identifier_param
+        in: path
+        name: identifier
+        description: Identifier of the code.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: &code_response
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/code"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier":"string","name": "string","description": "string"}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - codes
+      parameters:
+      - *code_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *code_response
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Languages
+  #-------------------------
+  /v2/languages:
+    summary: &languages_summary Languages Available
+    description: &languages_description >
+      Lists of available languages. Includes language identifier, name, direction and other relevant metadata.
+    get:
+      tags:
+      - languages
+      parameters:
+      - *fields_query
+      - *filters_query
+      responses: &languages_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/language"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier": "string","name": "string","alternate_name": "string","direction": "string"}
+                  {"identifier": "string","name": "string","alternate_name": "string","direction": "string"}
+        401: *unauthorized_error
+        403: *forbidden_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - languages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "identifier","value": "en"}]'
+      responses: *languages_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/languages/{identifier}:
+    summary: &language_summary Language Info
+    description: &language_description Information on specific language. Includes identifier, name, direction and other relevant metadata.
+    get:
+      tags:
+      - languages
+      parameters:
+      - &language_identifier
+        in: path
+        name: identifier
+        required: true
+        description: Identifier of the language.
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: &language_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/language"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier": "string","name": "string","alternate_name": "string","direction": "string"}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - languages
+      parameters:
+      - *language_identifier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *language_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Projects
+  #-------------------------
+  /v2/projects:
+    summary: &projects_summary Projects Available
+    description: &projects_description List of available projects. Includes project identifier, name, language and other relevant metadata.
+    get:
+      tags:
+      - projects
+      parameters:
+      - *fields_query
+      - *filters_query
+      responses: &projects_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/project"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+                  {"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+        401: *unauthorized_error
+        403: *forbidden_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "identifier","value": "enwiki"}]'
+      responses: *projects_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/projects/{identifier}:
+    summary: &project_summary Project Info
+    description: &project_description Information on specific project. Includes identifier, name, language and other relevant metadata.
+    get:
+      tags:
+      - projects
+      parameters:
+      - &project_identifier_param
+        in: path
+        name: identifier
+        description: Project identifier.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: &project_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/project"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier":"string","code":"string","name":"string","alternate_name":"string","in_language":{"identifier":"string"}}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - projects
+      parameters:
+      - *project_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *project_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Namespaces
+  #-------------------------
+  /v2/namespaces:
+    summary: &namespaces_summary Namespaces Available
+    description: &namespaces_description List of available namespaces. Includes name, identifier and description.
+    get:
+      tags:
+      - namespaces
+      parameters:
+      - *fields_query
+      - *filters_query
+      responses: &namespaces_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/namespace"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier": 0,"name": "string","description": "string"}
+                  {"identifier": 0,"name": "string","description": "string"}
+        401: *unauthorized_error
+        403: *forbidden_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - namespaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "identifier","value": 0}]'
+      responses: *namespaces_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/namespaces/{identifier}:
+    summary: &namespace_summary Namespace Info
+    description: &namespace_description Information on specific namespace. Includes name, identifier and description.
+    get:
+      tags:
+      - namespaces
+      parameters:
+      - &namespace_identifier_param
+        in: path
+        name: identifier
+        description: Namespace identifier.
+        required: true
+        schema:
+          type: integer
+      - *fields_query
+      responses: &namespace_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/namespace"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier":0,"name":"string","description":"string"}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - namespaces
+      parameters:
+      - *namespace_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *namespace_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Batches
+  #-------------------------
+  /v2/batches/{date}/{hour}:
+    summary: &batches_summary Hourly Batch Files Available
+    description: &batches_description Returns a list of available Realtime (Batch) bundles by date and hour (00, 01, ..., 23). Includes identifiers, file sizes and other relevant metadata.
+    get:
+      tags:
+      - batches
+      parameters:
+      - &batches_date_param
+        in: path
+        name: date
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: "2023-02-28"
+      - &batches_hour_param
+        in: path
+        name: hour
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          default: "00"
+      - *fields_query
+      - *filters_query
+      responses: &batches_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/batch"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+                  {"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - batches
+      parameters:
+      - *batches_date_param
+      - *batches_hour_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "namespace.identifier","value": 0}]'
+      responses: *batches_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/batches/{date}/{hour}/{identifier}:
+    summary: &batch_summary Hourly Batch File Info
+    description: &batch_description Information on specific hourly batch. Includes identifier, file size and other relevant metadata.
+    get:
+      tags:
+      - batches
+      parameters:
+      - *batches_date_param
+      - *batches_hour_param
+      - &batch_identifier_param
+        in: path
+        name: identifier
+        required: true
+        description: Batch identifier.
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: &batch_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/batch"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier": "string","code": "string","name": "string","version": "string","is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - batches
+      parameters:
+      - *batches_date_param
+      - *batches_hour_param
+      - *batch_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *batch_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/batches/{date}/{hour}/{identifier}/download:
+    summary: Hourly Batch File Download
+    description: Downloadable bundle of updated articles by project, namespace, date, and hour. Generated hourly starting at 00:00 UTC each day.
+    head:
+      summary: Wikimedia Enterprise Project Updates (Batch) Headers
+      description: Set of headers that describe the hourly download.
+      tags:
+      - batches
+      parameters:
+      - *batches_date_param
+      - *batches_hour_param
+      - *batch_identifier_param
+      responses:
+        200:
+          description: OK
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+              description: HTTP response header is a marker used by the server to advertise its support for partial requests.
+            Last-Modified:
+              schema:
+                type: string
+              description: Response HTTP header contains a date and time when the origin server believes the resource was last modified.
+            Content-Length:
+              schema:
+                type: string
+              description: Header indicates the size of the message body, in bytes, sent to the recipient.
+            ETag:
+              schema:
+                type: string
+              description: Entity tag - HTTP response header is an identifier for a specific version of a resource.
+            Content-Disposition:
+              schema:
+                type: string
+              description: Header indicating if the content is expected to be displayed in the browser  or as an attachment, that is downloaded and saved locally.
+            Content-Encoding:
+              schema:
+                type: string
+              description: Lists any encodings that have been applied to the representation (message payload), and in what order.
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource (prior to any content encoding applied for sending).
+            Expires:
+              schema:
+                type: string
+              description: Contains the date/time after which the response is considered expired.
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - batches
+      parameters:
+      - *batches_date_param
+      - *batches_hour_param
+      - *batch_identifier_param
+      - &range_header_param
+        in: header
+        name: Range
+        description: The Range HTTP request header indicates the part of a document that the server should return.
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Snapshots
+  #-------------------------
+  /v2/snapshots:
+    summary: &snapshots_summary Snapshots Available
+    description: &snapshots_description Returns a list of available project snapshots by namespace. Includes identifiers, file sizes and other relevant metadata.
+    get:
+      tags:
+      - snapshots
+      parameters:
+      - *fields_query
+      - *filters_query
+      responses: &snapshots_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/snapshot"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  [{"identifier": "string","version": "string","date_modified": "string","is_part_of": {"identifier": "string"},"in_language": {"identifier": "string"},"namespace": {"identifier": integer},"size":
+                  {"value": float,"unit_text": "string"},"chunks": ["string"]}]
+        401: *unauthorized_error
+        403: *forbidden_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: |
+                    [{"field": "namespace.identifier", "value": 0}]
+      responses: *snapshots_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/{identifier}:
+    summary: &snapshot_summary Snapshot Info
+    description: &snapshot_description Information on a specific Snapshot bundle. Includes identifiers, file sizes and other relevant metadata.
+    get:
+      tags:
+      - snapshots
+      parameters:
+      - &snapshots_identifier_param
+        in: path
+        name: identifier
+        description: "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads
+          articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available
+          for configuration."
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: &snapshot_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/snapshot"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  [{"identifier": "string","version": "string","date_modified": "string","is_part_of": {"identifier": "string"},"in_language": {"identifier": "string"},"namespace": {"identifier": integer},"size":
+                  {"value": float,"unit_text": "string"},"chunks": ["string"]}]
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - snapshots
+      parameters:
+      - *snapshots_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/{identifier}/download:
+    summary: &snapshot_download_summary Snapshot Download
+    description: &snapshots_download_description Downloadable bundle of all current revisions in a specified project and namespace. Updated daily at 12:00 UTC.
+    head:
+      summary: Wikimedia Enterprise Project Snapshot Headers
+      description: Set of headers that describe the snapshot download.
+      tags:
+      - snapshots
+      parameters:
+      - *snapshots_identifier_param
+      responses: &head_snapshot_responses
+        200:
+          description: OK
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+              description: HTTP response header is a marker used by the server to advertise its support for partial requests.
+            Last-Modified:
+              schema:
+                type: string
+              description: Response HTTP header contains a date and time when the origin server believes the resource was last modified.
+            Content-Length:
+              schema:
+                type: string
+              description: Header indicates the size of the message body, in bytes, sent to the recipient.
+            ETag:
+              schema:
+                type: string
+              description: Entity tag - HTTP response header is an identifier for a specific version of a resource.
+            Content-Disposition:
+              schema:
+                type: string
+              description: Header indicating if the content is expected to be displayed in the browser  or as an attachment, that is downloaded and saved locally.
+            Content-Encoding:
+              schema:
+                type: string
+              description: Lists any encodings that have been applied to the representation (message payload), and in what order.
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource (prior to any content encoding applied for sending).
+            Expires:
+              schema:
+                type: string
+              description: Contains the date/time after which the response is considered expired.
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - snapshots
+      parameters:
+      - *snapshots_identifier_param
+      - *range_header_param
+      responses: &get_snapshot_responses
+        200:
+          description: OK
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/{snapshot_identifier}/chunks:
+    summary: &chunks_summary Snapshot Chunks Available
+    description: &chunks_description Returns a list of available chunks for a specific snapshot. Includes chunk identifiers and other relevant metadata.
+    get:
+      tags:
+      - snapshots
+      parameters:
+      - &snapshot_identifier_param
+        in: path
+        name: snapshot_identifier
+        description: "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads
+          articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available
+          for configuration."
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      - *filters_query
+      responses: *snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - snapshots
+      parameters:
+      - *snapshot_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "identifier","value": "hiwiki_namespace_0_chunk_0"}]'
+      responses: *snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/{snapshot_identifier}/chunks/{identifier}:
+    summary: &chunk_summary Snapshot Chunk Info
+    description: &chunk_description Information on a specific chunk of a snapshot. Includes chunk identifier, size, and other relevant metadata.
+    get:
+      tags:
+      - snapshots
+      parameters:
+      - *snapshot_identifier_param
+      - &chunk_identifier_param
+        in: path
+        name: identifier
+        description: Chunk identifier or index.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: *snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - snapshots
+      parameters:
+      - *snapshot_identifier_param
+      - *chunk_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+
+  /v2/snapshots/{snapshot_identifier}/chunks/{identifier}/download:
+    summary: &chunk_download_summary Snapshot Chunk Download
+    description: &chunk_download_description Downloadable bundle of a specific chunk from a snapshot. Returns a zipped tar file.
+    head:
+      summary: Wikimedia Enterprise Snapshot Chunk Download Headers
+      description: Set of headers that describe the snapshot chunk download.
+      tags:
+      - snapshots
+      parameters:
+      - *snapshot_identifier_param
+      - *chunk_identifier_param
+      responses: *head_snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - snapshots
+      parameters:
+      - *snapshot_identifier_param
+      - *chunk_identifier_param
+      - *range_header_param
+      responses: *get_snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Structured Snapshots
+  #-------------------------
+  /v2/snapshots/structured-contents:
+    summary: &structured_snapshots_summary Structured Contents Snapshots Available (Beta)
+    description: &structured_snapshots_description Returns a list of available project structured contents snapshots.
+    get:
+      tags:
+      - structured-snapshots
+      parameters:
+      - *fields_query
+      - *filters_query
+      responses: &structured_snapshots_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/snapshot"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  {"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size":
+                  {"value": "float" , "unit_text": "string"}}
+                  {"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size":
+                  {"value": "float" , "unit_text": "string"}}
+        401: *unauthorized_error
+        403: *forbidden_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - structured-snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "is_part_of.identifier","value": "enwiki"}]'
+      responses: *structured_snapshots_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/structured-contents/{identifier}:
+    summary: &structured_snapshot_summary Structured Contents Snapshot Info (Beta)
+    description: &structured_snapshot_description Information on a specific structured contents snapshot bundle.
+    get:
+      tags:
+      - structured-snapshots
+      parameters:
+      - &structured_snapshots_identifier_param
+        in: path
+        name: identifier
+        description: "Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org,
+          `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`,
+          `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`."
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - *fields_query
+      responses: &structured_snapshot_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/snapshot"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+              example: >
+                {"identifier": "string", "version": "string", "date_modified": "string" , "is_part_of":{"identifier":"string"},"namespace":{"identifier":0},"in_language":{"identifier":"string"}, "size":
+                {"value": "float" , "unit_text": "string"}}
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - structured-snapshots
+      parameters:
+      - *structured_snapshots_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *structured_snapshot_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/snapshots/structured-contents/{identifier}/download:
+    summary: &structured_snapshot_download_summary Structured Contents Snapshot Download (Beta)
+    description: &structured_snapshots_download_description Downloadable bundle of structured contents of all current revisions in a specified project and namespace. Updated daily at 12:00 UTC.
+    head:
+      summary: Wikimedia Enterprise Project Structured Contents Snapshot Headers
+      description: Set of headers that describe the structured contents snapshot download.
+      tags:
+      - structured-snapshots
+      parameters:
+      - *snapshots_identifier_param
+      responses:
+        200:
+          description: OK
+          headers:
+            Accept-Ranges:
+              schema:
+                type: string
+              description: HTTP response header is a marker used by the server to advertise its support for partial requests.
+            Last-Modified:
+              schema:
+                type: string
+              description: Response HTTP header contains a date and time when the origin server believes the resource was last modified.
+            Content-Length:
+              schema:
+                type: string
+              description: Header indicates the size of the message body, in bytes, sent to the recipient.
+            ETag:
+              schema:
+                type: string
+              description: Entity tag - HTTP response header is an identifier for a specific version of a resource.
+            Content-Disposition:
+              schema:
+                type: string
+              description: Header indicating if the content is expected to be displayed in the browser  or as an attachment, that is downloaded and saved locally.
+            Content-Encoding:
+              schema:
+                type: string
+              description: Lists any encodings that have been applied to the representation (message payload), and in what order.
+            Content-Type:
+              schema:
+                type: string
+              description: Indicates the original media type of the resource (prior to any content encoding applied for sending).
+            Expires:
+              schema:
+                type: string
+              description: Contains the date/time after which the response is considered expired.
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - structured-snapshots
+      parameters:
+      - *structured_snapshots_identifier_param
+      - *range_header_param
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Articles
+  #-------------------------
+  /v2/articles/{name}:
+    summary: &articles_summary Article Lookup
+    description: Most current revision of an article.
+    get:
+      tags:
+      - articles
+      parameters:
+      - &article_name_param
+        in: path
+        name: name
+        description: Article name.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: limit
+        description: &article_limit_description Limit of articles to return.
+        schema:
+          type: integer
+          default: 3
+      - *fields_query
+      - *filters_query
+      responses: &article_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/article"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  [{"identifier":0,"name":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"},"is_part_of":{"identifier":"string","code":"string","name":"string","url":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"}},"namespace":{"identifier":0,"name":"string","description":"string"},"main_entity":{"identifier":"string","url":"string"}}]
+                  [{"identifier":0,"name":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"},"is_part_of":{"identifier":"string","code":"string","name":"string","url":"string","in_language":{"identifier":"string","name":"string","alternate_name":"string","direction":"string"}},"namespace":{"identifier":0,"name":"string","description":"string"},"main_entity":{"identifier":"string","url":"string"}}]
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - articles
+      parameters:
+      - *article_name_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "in_language.identifier", "value": "en"}]'
+                limit:
+                  type: integer
+                  description: *article_limit_description
+                  default: 3
+      responses: *article_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Structured Contents
+  #-------------------------
+  /v2/structured-contents/{name}:
+    summary: &contents_summary Structured Contents Article Lookup (Beta)
+    description: &contents_description Lookup for the structured representation of the Article.
+    get:
+      tags:
+      - structured-contents
+      parameters:
+      - &contents_name_param
+        in: path
+        name: name
+        description: Article name.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: limit
+        description: *article_limit_description
+        schema:
+          type: integer
+          default: 3
+      - *fields_query
+      - *filters_query
+      responses: &contents_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: "#/components/schemas/structured-content"
+            application/x-ndjson:
+              schema:
+                type: string
+                format: ndjson
+                example: >
+                  [{"identifier":0,"name":"string","in_language":{"identifier":"string"},"is_part_of":{"identifier":"string"},"infoboxes":[],"main_entity":{"identifier":"string","url":"string"},{"name":"Abstract","type":"section","has_parts":[{"type":"paragraph","value":"string","links":[{"url":"string","text":"string"},{"url":"string","text":"string"}]},{
+                  "type": "table", "table_references": [{ "identifier": "string", "confidence_score": 1}]},{"name":"string","type":"section","has_parts":[{"type":"list","has_parts":[{"type":"list_item","value":"string"},{"type":"list_item","value":"string","links":[{"url":"string","text":"string"}]}]}]}]}}]
+                  [{"identifier":0,"name":"string","in_language":{"identifier":"string"},"is_part_of":{"identifier":"string"},"infoboxes":[],"main_entity":{"identifier":"string","url":"string"},{"name":"Abstract","type":"section","has_parts":[{"type":"paragraph","value":"string","links":[{"url":"string","text":"string"},{"url":"string","text":"string"}]},{
+                  "type": "table", "table_references": [{ "identifier": "string", "confidence_score": 1}]},{"name":"string","type":"section","has_parts":[{"type":"list","has_parts":[{"type":"list_item","value":"string"},{"type":"list_item","value":"string","links":[{"url":"string","text":"string"}]}]}]}]}}]
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - structured-contents
+      parameters:
+      - *contents_name_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+                filters:
+                  type: *filters_body_type
+                  description: *filters_description
+                  items: *filters_body_items
+                  example: '[{"field": "in_language.identifier","value": "en"}]'
+                limit:
+                  type: integer
+                  description: *article_limit_description
+                  default: 3
+      responses: *contents_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Wikidata
+  # note: 'item' refers to a Q-number, 'property' refers to a P-number, and 'entity' refers to any single Wikidata entity, which can be a Q-number, P-number, or lexeme.
+  #-------------------------
+  /v2/wikidata/items/{identifier}:
+    summary: &wikidata_item_summary Wikidata Item Lookup (Beta)
+    description: &wikidata_item_description Returns data and metadata about the last revision of a given Wikidata Item identifier (Q-number, e.g. Q42). Only gives access to the Main Wikidata graph.
+    get:
+      tags:
+      - wikidata
+      parameters:
+      - &wikidata_item_identifier_param
+        in: path
+        name: identifier
+        description: &wikidata_item_description_param Wikidata Item identifier (Q-number, e.g. Q42).
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: Q42
+      - *fields_query
+      responses: &wikidata_entity_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: "#/components/schemas/wikidata_article"
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: "#/components/schemas/wikidata_article"
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - wikidata
+      parameters:
+      - *wikidata_item_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *wikidata_entity_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/wikidata/properties/{identifier}:
+    summary: &wikidata_property_summary Wikidata Property Lookup (Beta)
+    description: &wikidata_property_description Returns data and metadata about the last revision of a given Wikidata Property identifier (P-number, e.g. P31).
+    get:
+      tags:
+      - wikidata
+      parameters:
+      - &wikidata_property_identifier_param
+        in: path
+        name: identifier
+        description: &wikidata_property_description_param Wikidata Property identifier (P-number, e.g. P31).
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: P31
+      - *fields_query
+      responses: *wikidata_entity_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - wikidata
+      parameters:
+      - *wikidata_property_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *wikidata_entity_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/wikidata/labels/{identifier}:
+    summary: &wikidata_label_summary Wikidata Labels List (Beta)
+    description: &wikidata_label_description Returns a single JSON object of key-value pairs, where the key is the Wikimedia language code and the value is the label for that language code. Works for 
+      Wikidata item identifiers (Q-number) and property identifiers (P-number). Only gives access to the Main Wikidata graph for item identifiers. Gives access to all property identifiers.
+    get:
+      tags:
+      - wikidata
+      parameters:
+      - &wikidata_entity_identifier_param
+        in: path
+        name: identifier
+        description: &wikidata_entity_description_param Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          example: Q42
+      - *fields_query
+      responses: &wikidata_labels_responses
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                format: json
+                items:
+                  $ref: "#/components/schemas/wikidata_labels"
+            application/x-ndjson:
+              schema:
+                type: array
+                format: ndjson
+                items:
+                  $ref: "#/components/schemas/wikidata_labels"
+        401: *unauthorized_error
+        403: *forbidden_error
+        404: *not_found_error
+        422: *unprocessable_entity_error
+        500: *internal_server_error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - wikidata
+      parameters:
+      - *wikidata_entity_identifier_param
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields: *fields_body
+      responses: *wikidata_labels_responses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  #-------------------------
+  # Components
+  #-------------------------
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+
+
+    code:
+      type: object
+      properties:
+        identifier:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: "https://en.wikipedia.org"
+        in_language:
+          $ref: "#/components/schemas/language"
+
+    batch:
+      type: object
+      properties:
+        identifier:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        in_language:
+          $ref: "#/components/schemas/language"
+        is_part_of:
+          $ref: "#/components/schemas/project"
+        namespace:
+          $ref: "#/components/schemas/article_namespace"
+        size:
+          $ref: "#/components/schemas/size"
+
+    snapshot:
+      type: object
+      properties:
+        identifier:
+          type: string
+        version:
+          type: string
+        date_modified:
+          type: string
+        in_language:
+          $ref: "#/components/schemas/language"
+        is_part_of:
+          $ref: "#/components/schemas/project"
+        namespace:
+          $ref: "#/components/schemas/article_namespace"
+        size:
+          $ref: "#/components/schemas/size"
+        chunks:
+          type: array
+          items:
+            type: string
+
+    namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+        name:
+          type: string
+          example: Article
+        description:
+          type: string
+          example: "The Article namespace, also known as the main or mainspace, is where a project's primary content resides, whether articles, entries, or main documents depending on the Wikimedia project."
+
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+
+    entity:
+      type: object
+      properties:
+        identifier:
+          type: string
+        url:
+          type: string
+
+    article:
+      properties:
+        event:
+          $ref: "#/components/schemas/event"
+        additional_entities:
+          items:
+            $ref: "#/components/schemas/entity"
+          type: array
+        article_body:
+          $ref: "#/components/schemas/article_body"
+        has_parts:
+          type: array
+          items:
+            $ref: "#/components/schemas/part"
+        categories:
+          items:
+            $ref: "#/components/schemas/category"
+          type: array
+        date_modified:
+          type: string
+        identifier:
+          type: integer
+        in_language:
+          $ref: "#/components/schemas/language"
+        is_part_of:
+          $ref: "#/components/schemas/project"
+        license:
+          items:
+            $ref: "#/components/schemas/license"
+          type: array
+        main_entity:
+          $ref: "#/components/schemas/entity"
+        name:
+          type: string
+        abstract:
+          type: string
+        namespace:
+          $ref: "#/components/schemas/article_namespace"
+        protection:
+          items:
+            $ref: "#/components/schemas/protection"
+          type: array
+        redirects:
+          items:
+            $ref: "#/components/schemas/redirect"
+          type: array
+        templates:
+          items:
+            $ref: "#/components/schemas/template"
+          type: array
+        url:
+          type: string
+        version:
+          $ref: "#/components/schemas/version"
+        visibility:
+          $ref: "#/components/schemas/visibility"
+      type: object
+
+    structured-content:
+      properties:
+        name:
+          type: string
+        identifier:
+          type: integer
+        abstract:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        date_created:
+          type: string
+        date_modified:
+          type: string
+        infoboxes:
+          type: array
+          items:
+            $ref: "#/components/schemas/part"
+        sections:
+          type: array
+          items:
+            $ref: "#/components/schemas/part"
+        main_entity:
+          $ref: "#/components/schemas/entity"
+        additional_entities:
+          type: array
+          items:
+            $ref: "#/components/schemas/entity"
+        image:
+          $ref: "#/components/schemas/image"
+        version:
+          $ref: "#/components/schemas/version"
+        is_part_of:
+          $ref: "#/components/schemas/project"
+        in_language:
+          $ref: "#/components/schemas/language"
+        license:
+          $ref: "#/components/schemas/license"
+        references:
+          $ref: "#/components/schemas/reference"
+        tables:
+          $ref: "#/components/schemas/table"
+      type: object
+
+    part:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        has_parts:
+          type: array
+          items:
+            type: object
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/image"
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/link"
+        citations:
+          type: array
+          items:
+            $ref: "#/components/schemas/citation"
+    image:
+      type: object
+      properties:
+        content_url:
+          description: Image URL
+          format: uri
+          type: string
+          example: "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png"
+        identifier:
+          type: string
+          format: uuid
+          description: Unique identifier for the image
+          example: "6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0"
+        name:
+          type: string
+          description: Filename of the image
+          example: "./File:Flag_of_Italy.svg"
+        width:
+          description: image width in pixels
+          type: integer
+          example: 156
+        height:
+          description: image height in pixels
+          type: integer
+          example: 255
+        thumbnail:
+          $ref: "#/components/schemas/thumbnail"
+        caption:
+          type: string
+          description: caption describing the image
+          example: "Flag of Italy"
+        alternative_text:
+          type: string
+          description: "Alternative text description of the image for accessibility"
+          example: "a flag divided in three vertical sections colored green, white, and red from left to right"
+        encoding_format:
+          type: string
+          format: mime_type
+          description: MIME type or encoding format of the image, constructed from the url
+          example: "image/png"
+        media_type:
+          type: string
+          enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
+          description: Mediawiki media type of the image
+          example: drawing
+
+    thumbnail:
+      type: object
+      properties:
+        contentUrl:
+          type: string
+          format: uri
+          description: Thumbnail URL
+        width:
+          description: Thumbnail width in pixels
+          type: integer
+          example: 156
+        height:
+          description: Thumbnail height in pixels
+          type: integer
+          example: 255
+
+    link:
+      type: object
+      properties:
+        url:
+          type: string
+        text:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/image"
+
+    visibility:
+      type: object
+      properties:
+        comment:
+          type: boolean
+          example: true
+        text:
+          type: boolean
+          example: true
+        user:
+          type: boolean
+          example: false
+
+
+    version:
+      properties:
+        comment:
+          type: string
+        editor:
+          $ref: "#/components/schemas/editor"
+        identifier:
+          type: integer
+        is_flagged_stable:
+          type: boolean
+        is_minor_edit:
+          type: boolean
+        noindex:
+          type: boolean
+        scores:
+          $ref: "#/components/schemas/scores"
+        maintenance_tags:
+          $ref: "#/components/schemas/maintenance_tags"
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+
+    editor:
+      properties:
+        date_started:
+          type: string
+        edit_count:
+          type: integer
+        groups:
+          items:
+            type: string
+          type: array
+        identifier:
+          type: integer
+        is_anonymous:
+          type: boolean
+        is_bot:
+          type: boolean
+        name:
+          type: string
+      type: object
+
+    maintenance_tags:
+      properties:
+        citation_needed_count:
+          type: integer
+        pov_count:
+          type: integer
+        clarification_needed_count:
+          type: integer
+        update_count:
+          type: integer
+      type: object
+
+    scores:
+      properties:
+        revertrisk:
+          $ref: "#/components/schemas/revertrisk"
+        referencerisk:
+          $ref: "#/components/schemas/referencerisk"
+        referenceneed:
+          $ref: "#/components/schemas/referenceneed"
+      type: object
+
+    revertrisk:
+      properties:
+        prediction:
+          type: boolean
+        probability:
+          properties:
+            "false":
+              type: number
+            "true":
+              type: number
+          type: object
+      type: object
+
+    referencerisk:
+      properties:
+        reference_risk_score:
+          type: number
+      type: object
+
+    referenceneed:
+      properties:
+        reference_need_score:
+          type: number
+      type: object
+
+    event:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: "f7c737db-4b50-4982-8804-7c2b9fa89020"
+        type:
+          type: string
+          example: update
+          enum: [update, delete]
+        date_created:
+          type: string
+          example: 2026-03-18T12:38:23.437225Z
+
+
+    article_body:
+      properties:
+        html:
+          type: string
+        wikitext:
+          type: string
+      type: object
+
+    category:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+
+    license:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: "CC-BY-SA-4.0"
+        name:
+          type: string
+          example: "Creative Commons Attribution-ShareAlike License 4.0"
+        url:
+          type: string
+          example: "https://creativecommons.org/licenses/by-sa/4.0/"
+
+
+    protection:
+      type: object
+      properties:
+        expiry:
+          type: string
+          enum: [infinite, indefinite, infinity, never]
+          example: infinity
+        level:
+          type: string
+          example: extendedconfirmed
+        type:
+          type: string
+          example: edit
+
+
+    redirect:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+
+    template:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+
+
+
+    citation:
+      type: object
+      properties:
+        identifier:
+          type: string
+        group:
+          type: string
+        text:
+          type: string
+
+    reference:
+      type: object
+      properties:
+        identifier:
+          type: string
+        group:
+          type: string
+        type:
+          type: string
+        metadata:
+          type: object
+        text:
+          type: object
+          properties:
+            value:
+              type: string
+            links:
+              type: array
+              items:
+                $ref: "#/components/schemas/link"
+        source:
+          type: object
+          properties:
+            value:
+              type: string
+            links:
+              type: array
+              items:
+                $ref: "#/components/schemas/link"
+        parent_reference:
+          type: string
+
+    table:
+      type: object
+      properties:
+        identifier:
+          type: string
+        headers:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                value:
+                  type: string
+        rows:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                value:
+                  type: string
+        confidence_score:
+          type: number
+          minimum: 0
+          maximum: 1
+
+    wikidata_article:
+      type: object
+      required:
+      - name
+      - identifier
+      - url
+      - protection
+      - redirects
+      - license
+      properties:
+        name:
+          type: string
+          example: "P31"
+          description: *wikidata_entity_description_param
+        identifier:
+          type: integer
+          format: uuid
+          description: unique numeric identifier of the article
+          example: 104546757
+        date_created:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the article was first created
+          example: "2024-04-01T12:00:00Z"
+        date_modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the article was last modified
+          example: "2024-06-01T12:00:00Z"
+        date_previously_modified:
+          type: string
+          format: date-time
+          description: Timestamp of the before-last revision in RFC3339 format
+          example: "2024-05-01T12:00:00Z"
+        protection:
+          $ref: "#/components/schemas/protection"
+        url:
+          type: string
+          format: uri
+          description: URL to the article
+          example: "https://www.wikidata.org/wiki/Q109388644"
+        namespace:
+          $ref: "#/components/schemas/article_namespace"
+        is_part_of:
+          $ref: "#/components/schemas/project"
+        entity:
+          $ref: "#/components/schemas/wikidata_entity"
+        visibility:
+          $ref: "#/components/schemas/visibility"
+        license:
+          $ref: "#/components/schemas/license"
+        event:
+          $ref: "#/components/schemas/event"
+
+    wikidata_statements:
+      type: array
+      description: Array of statement objects for this property
+      items:
+        $ref: "#/components/schemas/wikidata_statement"
+
+    wikidata_statement:
+      type: object
+      description: Statement connecting a value to a Wikidata entity through a property. Each statement corresponds to a single claim on the Wikidata entity, and includes the value of the claim and 
+        metadata about the claim such as references, qualifiers, and ranks
+      required:
+      - identifier
+      - rank
+      - property
+      - value
+      - qualifiers
+      - references
+      properties:
+        identifier:
+          type: string
+          format: uuid
+          description: Unique identifier for the statement
+          example: Q56603478$B070CCDB-B608-492C-B15A-4ABC5CED7AF6
+        rank:
+          type: string
+          description: Rank of the statement among other similar statements. Possible values are normal, preferred, and deprecated
+          enum: [normal, preferred, deprecated]
+          example: normal
+        property:
+          $ref: "#/components/schemas/wikidata_entity_property"
+        value:
+          $ref: "#/components/schemas/wikidata_entity_value"
+        qualifiers:
+          $ref: "#/components/schemas/wikidata_entity_qualifier"
+        references:
+          $ref: "#/components/schemas/wikidata_entity_statement_reference"
+
+    wikidata_entity:
+      type: object
+      required:
+      - identifier
+      - type
+      properties:
+        identifier:
+          type: string
+          description: *wikidata_entity_description_param
+          example: Q42
+        type:
+          type: string
+          enum: [item, property]
+          description: The type of entity, either "item" or "property"
+          example: item
+        labels:
+          $ref: "#/components/schemas/wikidata_labels"
+        descriptions:
+          type: object
+          description: Key-value pairs with descriptions in different languages
+          example: {"en": "Championship held at Balbir Singh Juneja Indoor Stadium"}
+        aliases:
+          type: object
+          description: Key-value pairs with aliases in different languages. Every language may have multiple aliases
+          example: {"eo": ["Douglas ADAMS", "Douglas Noel ADAMS"]}
+        statements:
+          $ref: "#/components/schemas/wikidata_statements"
+        sitelinks:
+          $ref: "#/components/schemas/wikidata_sitelinks"
+
+    wikidata_entity_property:
+      type: object
+      required:
+      - identifier
+      - data_type
+      properties:
+        identifier:
+          type: string
+          description: *wikidata_property_description_param
+          example: P31
+        data_type:
+          type: string
+          description: The expected data type of the value for this property, e.g. time, quantity, wikibase-item, url, string. The actual data type of the value for this property is found in 
+            statements.PID.property.value.type
+          example: time
+        labels:
+          type: object
+          description: Key-value pairs with property labels in different languages
+          example: {"en": "instance of", "de": "Instanz von", "fr": "instance de"}
+
+    wikidata_entity_value:
+      type: object
+      description: This object represents the actual value in a statement or qualifier
+      required:
+      - type
+      - labels
+      properties:
+        content:
+          type: string
+          description: String representation of the value. If the value is too complex to represent as a string or integer, this will be replaced by statements.PID.value.content_data
+          example: Adams, Douglas (1952-2001)
+        type:
+          type: string
+          description: The actual data type of the value for this property. Should match statements.PID.property.data_type, but might not.
+          example: wikibase-item
+        content_data:
+          type: object
+          description: An object holding the representation of the value. If the value can be represented simply as a string or integer, this will be replaced by statements.PID.value.content
+          example: {"after": "0", "before": "0", "Calendarmodel": "http://www.wikidata.org/entity/Q1985727", "precision": "9", "Time": "+1861-00-00T00:00:00Z", "timezone": "0"}
+        labels:
+          $ref: "#/components/schemas/wikidata_labels"
+
+    wikidata_entity_qualifier:
+      type: object
+      description: Qualifier further describing or refining the value of a property in a statement
+      required:
+      - property
+      - value
+      properties:
+        property:
+          $ref: "#/components/schemas/wikidata_entity_property"
+        value:
+          $ref: "#/components/schemas/wikidata_entity_value"
+
+    wikidata_entity_statement_reference:
+      type: object
+      description: Reference supporting a Wikidata statement
+      required:
+      - identifier
+      - parts
+      properties:
+        identifier:
+          type: string
+          description: unique identifier for the reference
+          example: 63309730314f4c20bf6b1008fe8ffd2b155272b3
+        parts:
+          type: array
+          description: Parts that make up this reference
+          items:
+            $ref: "#/components/schemas/wikidata_entity_reference_part"
+
+    wikidata_entity_reference_part:
+      type: object
+      required:
+      - property
+      - value
+      properties:
+        property:
+          description: The property this reference part refers to. Has the same substructure as statements.PID.property
+          $ref: "#/components/schemas/wikidata_entity_property"
+        value:
+          description: The value of the reference part. Has the same substructure as statements.PROPERTYID.value
+          $ref: "#/components/schemas/wikidata_entity_value"
+
+    wikidata_sitelinks:
+      type: object
+      description: Mapping of this Wikidata item to other Wikimedia project site URLs
+      required:
+      - title
+      - badges
+      - url
+      properties:
+        title:
+          type: string
+          description: Title of the linked page
+          example: Pentominium
+        badges:
+          type: array
+          description: Badge identifiers for this sitelink
+          example: ["Q17437796", "Q6540326"]
+        url:
+          type: string
+          format: uri
+          description: URL to the linked page
+          example: https://de.wikipedia.org/wiki/Pentominium
+
+    wikidata_labels:
+      type: object
+      description: key-value pairs with labels in different languages
+      example: {"ce": "Оьзлер", "en": "Özler"}
