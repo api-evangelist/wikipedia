@@ -1581,14 +1581,6 @@ common:
     url: rate-limits/wikipedia-rate-limits.yml
   - type: FinOps
     url: finops/wikipedia-finops.yml
-  - type: X-NaftikoCapability
-    url: capabilities/wikipedia-knowledge-research.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/wikipedia-content-authoring.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/wikipedia-knowledge-graph.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/wikipedia-enterprise-snapshot.yaml
   - type: Rules
     url: rules/wikipedia-spectral-rules.yml
   - type: Vocabulary
