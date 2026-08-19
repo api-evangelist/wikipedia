@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles structured-snapshots API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "structured-snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v2/snapshots/structured-contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/structured-contents",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Select which projects and languages to receive in your response."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/snapshots/structured-contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/structured-contents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/structured-contents/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/structured-contents/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`, `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/snapshots/structured-contents/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/structured-contents/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`, `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/structured-contents/{identifier}/download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/structured-contents/:identifier/download",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Structured Contents Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_0` downloads structured_contents used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org. Note: the Structured Contents Beta supports nine projects: `enwiki_namespace_0`, `dewiki_namespace_0`, `frwiki_namespace_0`, `eswiki_namespace_0`, `ptwiki_namespace_0`, `itwiki_namespace_0`, `nlwiki_namespace_0`, `cywiki_namespace_0`, and `idwiki_namespace_0`."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Wikimedia Enterprise Project Structured Contents Snapshot Headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/structured-contents/:identifier/download",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              }
+            ]
+          },
+          "docs": "Set of headers that describe the structured contents snapshot download."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

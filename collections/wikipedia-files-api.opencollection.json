@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles Files API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get File Metadata and Download Links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/file/:title",
+            "params": [
+              {
+                "name": "title",
+                "value": "File:Earth_Eastern_Hemisphere.jpg",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve metadata for a media file including download URLs at multiple sizes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

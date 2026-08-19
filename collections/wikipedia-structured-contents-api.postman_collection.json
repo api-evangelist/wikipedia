@@ -1,0 +1,874 @@
+{
+  "item": [
+    {
+      "id": "21d46aff-ae1f-4338-bc66-24c7eec07fa3",
+      "name": "structured-contents",
+      "description": {
+        "content": "(Beta) Structured Contents On-demand API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "420bf0a7-1796-4a6b-8a42-cd26563f3959",
+          "name": "/v2/structured-contents/:name",
+          "request": {
+            "name": "/v2/structured-contents/:name",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "structured-contents",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "3",
+                  "description": "Limit of articles to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Select which fields to receive in your response, using JSON dot notation."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Select which fields to receive in your response, using JSON dot notation."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "{\"field\":\"<string>\",\"value\":\"<string>\"}",
+                  "description": "Select which projects and languages to receive in your response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "{\"field\":\"<string>\",\"value\":\"<string>\"}",
+                  "description": "Select which projects and languages to receive in your response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Article name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "785639af-69d2-4eb4-bfad-e2d0f7cc0f35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"identifier\": 1625,\n    \"abstract\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"string\",\n    \"date_created\": \"string\",\n    \"date_modified\": \"string\",\n    \"infoboxes\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"9a64a073-019b-211b-4e44-b6cb264eed1c\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"695e5944-a93f-9610-5a35-6c09d64dbc52\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"980da092-0517-b795-d224-e6b2d3e5efdf\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"cbab8a51-2fb5-4b59-2621-06586ec0c2fc\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"sections\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"3813fff5-b406-7969-2037-196d297a7831\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"3c77e99e-c4ea-521b-b322-547785dd2450\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"bfbda0a0-75b6-968c-c3c5-39f5ee611bcc\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"638ea80a-7e20-e90b-38fe-5d939b672be4\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"main_entity\": {\n      \"identifier\": \"string\",\n      \"url\": \"string\"\n    },\n    \"additional_entities\": [\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"image\": {\n      \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n      \"identifier\": \"c4ec619b-f9af-58b2-ea83-cf91faf22bf4\",\n      \"name\": \"./File:Flag_of_Italy.svg\",\n      \"width\": 156,\n      \"height\": 255,\n      \"thumbnail\": {\n        \"contentUrl\": \"https://comprEIwRSnCWfAlNUcpscasR.dgxyPRINaofKD2jO6mHe9nrTnsGxAje2QQziwTgBkAjcRipT.i7qCEUUe6URVqWlDm4VV\",\n        \"width\": 156,\n        \"height\": 255\n      },\n      \"caption\": \"Flag of Italy\",\n      \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n      \"encoding_format\": \"image/png\",\n      \"media_type\": \"drawing\"\n    },\n    \"version\": {\n      \"comment\": \"string\",\n      \"editor\": {\n        \"date_started\": \"string\",\n        \"edit_count\": 5057,\n        \"groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"identifier\": 8681,\n        \"is_anonymous\": true,\n        \"is_bot\": true,\n        \"name\": \"string\"\n      },\n      \"identifier\": 6420,\n      \"is_flagged_stable\": true,\n      \"is_minor_edit\": true,\n      \"noindex\": true,\n      \"scores\": {\n        \"revertrisk\": {\n          \"prediction\": false,\n          \"probability\": {\n            \"false\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"true\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"referencerisk\": {\n          \"reference_risk_score\": 6889.976071536284\n        },\n        \"referenceneed\": {\n          \"reference_need_score\": 5202.862177060891\n        }\n      },\n      \"maintenance_tags\": {\n        \"citation_needed_count\": 5377,\n        \"pov_count\": 9914,\n        \"clarification_needed_count\": 7048,\n        \"update_count\": 6083\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"is_part_of\": {\n      \"identifier\": \"enwiki\",\n      \"code\": \"wiki\",\n      \"name\": \"Wikipedia\",\n      \"url\": \"https://en.wikipedia.org\",\n      \"in_language\": {\n        \"identifier\": \"en\",\n        \"name\": \"English\",\n        \"alternate_name\": \"English\",\n        \"direction\": \"ltr\"\n      }\n    },\n    \"in_language\": {\n      \"identifier\": \"en\",\n      \"name\": \"English\",\n      \"alternate_name\": \"English\",\n      \"direction\": \"ltr\"\n    },\n    \"license\": {\n      \"identifier\": \"CC-BY-SA-4.0\",\n      \"name\": \"Creative Commons Attribution-ShareAlike License 4.0\",\n      \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\"\n    },\n    \"references\": {\n      \"identifier\": \"string\",\n      \"group\": \"string\",\n      \"type\": \"string\",\n      \"metadata\": {},\n      \"text\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"source\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"parent_reference\": \"string\"\n    },\n    \"tables\": {\n      \"identifier\": \"string\",\n      \"headers\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"rows\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"confidence_score\": 0.19275199536113863\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"identifier\": 1407,\n    \"abstract\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"string\",\n    \"date_created\": \"string\",\n    \"date_modified\": \"string\",\n    \"infoboxes\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"558a887e-5f8f-0ae5-9723-9fef3c31d9f3\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"91b17b46-bde5-be66-b23a-7c69cf8bff84\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"945d4fcf-863b-f492-8a96-69bdebc08729\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"6bc97061-fef1-4b39-7140-726c5b6962f7\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"sections\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"a4ec8ed6-87e1-f888-38c6-72b44e69badd\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"fc812090-0900-b89f-ce4e-d3ad498ce47a\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"90eef410-12ba-c33f-657d-4a32f76686ad\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"1e1182ca-aab0-ef42-e91e-d4a64f518a8f\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"main_entity\": {\n      \"identifier\": \"string\",\n      \"url\": \"string\"\n    },\n    \"additional_entities\": [\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"image\": {\n      \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n      \"identifier\": \"c0a1869b-8515-43ee-4ab6-9338229243e3\",\n      \"name\": \"./File:Flag_of_Italy.svg\",\n      \"width\": 156,\n      \"height\": 255,\n      \"thumbnail\": {\n        \"contentUrl\": \"https://dRIriWJJNtaKcVfWm.svxLDoFwGgJMK,dg\",\n        \"width\": 156,\n        \"height\": 255\n      },\n      \"caption\": \"Flag of Italy\",\n      \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n      \"encoding_format\": \"image/png\",\n      \"media_type\": \"drawing\"\n    },\n    \"version\": {\n      \"comment\": \"string\",\n      \"editor\": {\n        \"date_started\": \"string\",\n        \"edit_count\": 192,\n        \"groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"identifier\": 9506,\n        \"is_anonymous\": false,\n        \"is_bot\": false,\n        \"name\": \"string\"\n      },\n      \"identifier\": 3416,\n      \"is_flagged_stable\": true,\n      \"is_minor_edit\": false,\n      \"noindex\": true,\n      \"scores\": {\n        \"revertrisk\": {\n          \"prediction\": false,\n          \"probability\": {\n            \"false\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"true\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"referencerisk\": {\n          \"reference_risk_score\": 6132.656428334133\n        },\n        \"referenceneed\": {\n          \"reference_need_score\": 264.81686856930196\n        }\n      },\n      \"maintenance_tags\": {\n        \"citation_needed_count\": 2824,\n        \"pov_count\": 6,\n        \"clarification_needed_count\": 8501,\n        \"update_count\": 1144\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"is_part_of\": {\n      \"identifier\": \"enwiki\",\n      \"code\": \"wiki\",\n      \"name\": \"Wikipedia\",\n      \"url\": \"https://en.wikipedia.org\",\n      \"in_language\": {\n        \"identifier\": \"en\",\n        \"name\": \"English\",\n        \"alternate_name\": \"English\",\n        \"direction\": \"ltr\"\n      }\n    },\n    \"in_language\": {\n      \"identifier\": \"en\",\n      \"name\": \"English\",\n      \"alternate_name\": \"English\",\n      \"direction\": \"ltr\"\n    },\n    \"license\": {\n      \"identifier\": \"CC-BY-SA-4.0\",\n      \"name\": \"Creative Commons Attribution-ShareAlike License 4.0\",\n      \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\"\n    },\n    \"references\": {\n      \"identifier\": \"string\",\n      \"group\": \"string\",\n      \"type\": \"string\",\n      \"metadata\": {},\n      \"text\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"source\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"parent_reference\": \"string\"\n    },\n    \"tables\": {\n      \"identifier\": \"string\",\n      \"headers\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"rows\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"confidence_score\": 0.9186388284430651\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2207f1b-b6f1-4af8-87e0-7073b203ea46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "670db015-245a-4516-b5b5-bcde3009cbf5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a383581-c5e3-4bc8-86fe-b1167d0b9b0e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "334abb7e-3218-4482-89af-e10b77b5836c",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b22dc43-472e-4f54-b124-328eb728e833",
+              "name": "Internal Server Error, Retry Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "[object Object]"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fd67c4d-7afd-4337-9b16-c69bd06d21a6",
+          "name": "/v2/structured-contents/:name",
+          "request": {
+            "name": "/v2/structured-contents/:name",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "structured-contents",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Article name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a5a8099-a309-4a1b-ad9d-3763fd6c3c73",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"identifier\": 2953,\n    \"abstract\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"string\",\n    \"date_created\": \"string\",\n    \"date_modified\": \"string\",\n    \"infoboxes\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"d79a83ea-4346-8e55-b810-4736284f693a\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"f03726bc-f82f-43cb-2f66-72495ea4653a\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"c53c33e2-e498-b6c4-3794-8632b4a1628f\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"e208aa9a-c2a8-7b49-4a69-38218cc2fc73\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"sections\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"380049d1-bc37-c5bf-449d-558c70e5d255\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"b6f881f8-51f4-a884-125e-16f8e7fb2080\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"ad8968a8-83bd-7608-8a56-63b18a441756\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"e3ea76e8-0fab-158d-0b3c-31adcd4f81f8\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"main_entity\": {\n      \"identifier\": \"string\",\n      \"url\": \"string\"\n    },\n    \"additional_entities\": [\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"image\": {\n      \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n      \"identifier\": \"cf34a1f0-a584-6021-d890-89343be810ab\",\n      \"name\": \"./File:Flag_of_Italy.svg\",\n      \"width\": 156,\n      \"height\": 255,\n      \"thumbnail\": {\n        \"contentUrl\": \"http://afYallBlgQBa.lcqaZHtFGr0gu2c0IjjhghSkwp\",\n        \"width\": 156,\n        \"height\": 255\n      },\n      \"caption\": \"Flag of Italy\",\n      \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n      \"encoding_format\": \"image/png\",\n      \"media_type\": \"drawing\"\n    },\n    \"version\": {\n      \"comment\": \"string\",\n      \"editor\": {\n        \"date_started\": \"string\",\n        \"edit_count\": 6382,\n        \"groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"identifier\": 7190,\n        \"is_anonymous\": true,\n        \"is_bot\": true,\n        \"name\": \"string\"\n      },\n      \"identifier\": 790,\n      \"is_flagged_stable\": true,\n      \"is_minor_edit\": true,\n      \"noindex\": true,\n      \"scores\": {\n        \"revertrisk\": {\n          \"prediction\": true,\n          \"probability\": {\n            \"false\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"true\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"referencerisk\": {\n          \"reference_risk_score\": 3352.596701064879\n        },\n        \"referenceneed\": {\n          \"reference_need_score\": 8205.183062525477\n        }\n      },\n      \"maintenance_tags\": {\n        \"citation_needed_count\": 7832,\n        \"pov_count\": 9659,\n        \"clarification_needed_count\": 9993,\n        \"update_count\": 4315\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"is_part_of\": {\n      \"identifier\": \"enwiki\",\n      \"code\": \"wiki\",\n      \"name\": \"Wikipedia\",\n      \"url\": \"https://en.wikipedia.org\",\n      \"in_language\": {\n        \"identifier\": \"en\",\n        \"name\": \"English\",\n        \"alternate_name\": \"English\",\n        \"direction\": \"ltr\"\n      }\n    },\n    \"in_language\": {\n      \"identifier\": \"en\",\n      \"name\": \"English\",\n      \"alternate_name\": \"English\",\n      \"direction\": \"ltr\"\n    },\n    \"license\": {\n      \"identifier\": \"CC-BY-SA-4.0\",\n      \"name\": \"Creative Commons Attribution-ShareAlike License 4.0\",\n      \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\"\n    },\n    \"references\": {\n      \"identifier\": \"string\",\n      \"group\": \"string\",\n      \"type\": \"string\",\n      \"metadata\": {},\n      \"text\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"source\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"parent_reference\": \"string\"\n    },\n    \"tables\": {\n      \"identifier\": \"string\",\n      \"headers\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"rows\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"confidence_score\": 0.9247973610314802\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"identifier\": 351,\n    \"abstract\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"string\",\n    \"date_created\": \"string\",\n    \"date_modified\": \"string\",\n    \"infoboxes\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"c3e579dd-f09c-0a3e-984f-acbd6d0f37cb\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"419ff9be-9df2-5c13-6fe8-b8cc46227c91\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"e1a55203-ea6b-b60e-990c-331faec35667\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"ffc35349-5a5e-12a4-d6f9-57b3f87749a6\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"sections\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"c21a3fe8-2625-e027-2950-0668a9e33a87\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"12b4046a-4791-bc8b-b19c-6b92026579ab\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ],\n        \"images\": [\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"7da2f515-e72e-64f2-84b5-7f6af4c435c0\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          },\n          {\n            \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n            \"identifier\": \"92430901-21fd-a4b0-a6bb-0dec326b2217\",\n            \"name\": \"./File:Flag_of_Italy.svg\",\n            \"width\": 156,\n            \"height\": 255,\n            \"thumbnail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"caption\": \"Flag of Italy\",\n            \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n            \"encoding_format\": \"image/png\",\n            \"media_type\": \"drawing\"\n          }\n        ],\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"citations\": [\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          },\n          {\n            \"identifier\": \"string\",\n            \"group\": \"string\",\n            \"text\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"main_entity\": {\n      \"identifier\": \"string\",\n      \"url\": \"string\"\n    },\n    \"additional_entities\": [\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"identifier\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"image\": {\n      \"content_url\": \"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png\",\n      \"identifier\": \"c7a775aa-e834-4a99-3c37-f856755dce50\",\n      \"name\": \"./File:Flag_of_Italy.svg\",\n      \"width\": 156,\n      \"height\": 255,\n      \"thumbnail\": {\n        \"contentUrl\": \"http://NazHsYsMy.ezhmLFHOGluvR4U-SkBjlCM3U,\",\n        \"width\": 156,\n        \"height\": 255\n      },\n      \"caption\": \"Flag of Italy\",\n      \"alternative_text\": \"a flag divided in three vertical sections colored green, white, and red from left to right\",\n      \"encoding_format\": \"image/png\",\n      \"media_type\": \"drawing\"\n    },\n    \"version\": {\n      \"comment\": \"string\",\n      \"editor\": {\n        \"date_started\": \"string\",\n        \"edit_count\": 1608,\n        \"groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"identifier\": 4344,\n        \"is_anonymous\": true,\n        \"is_bot\": true,\n        \"name\": \"string\"\n      },\n      \"identifier\": 7117,\n      \"is_flagged_stable\": true,\n      \"is_minor_edit\": false,\n      \"noindex\": true,\n      \"scores\": {\n        \"revertrisk\": {\n          \"prediction\": true,\n          \"probability\": {\n            \"false\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"true\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"referencerisk\": {\n          \"reference_risk_score\": 9714.352948517679\n        },\n        \"referenceneed\": {\n          \"reference_need_score\": 7956.524890630133\n        }\n      },\n      \"maintenance_tags\": {\n        \"citation_needed_count\": 8675,\n        \"pov_count\": 2708,\n        \"clarification_needed_count\": 6192,\n        \"update_count\": 6750\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"is_part_of\": {\n      \"identifier\": \"enwiki\",\n      \"code\": \"wiki\",\n      \"name\": \"Wikipedia\",\n      \"url\": \"https://en.wikipedia.org\",\n      \"in_language\": {\n        \"identifier\": \"en\",\n        \"name\": \"English\",\n        \"alternate_name\": \"English\",\n        \"direction\": \"ltr\"\n      }\n    },\n    \"in_language\": {\n      \"identifier\": \"en\",\n      \"name\": \"English\",\n      \"alternate_name\": \"English\",\n      \"direction\": \"ltr\"\n    },\n    \"license\": {\n      \"identifier\": \"CC-BY-SA-4.0\",\n      \"name\": \"Creative Commons Attribution-ShareAlike License 4.0\",\n      \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\"\n    },\n    \"references\": {\n      \"identifier\": \"string\",\n      \"group\": \"string\",\n      \"type\": \"string\",\n      \"metadata\": {},\n      \"text\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"source\": {\n        \"value\": \"string\",\n        \"links\": [\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"url\": \"string\",\n            \"text\": \"string\",\n            \"images\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"parent_reference\": \"string\"\n    },\n    \"tables\": {\n      \"identifier\": \"string\",\n      \"headers\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"rows\": [\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ],\n        [\n          {\n            \"value\": \"string\"\n          },\n          {\n            \"value\": \"string\"\n          }\n        ]\n      ],\n      \"confidence_score\": 0.15476738526869538\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f77b7747-f1f9-4981-834c-ee726f2f8771",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58fe4d04-ec66-4321-a7aa-42271a7f0ba7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67a4b919-2b26-4700-a55d-34d902293a7d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16402178-7d3e-4f08-8881-0dae72bb7aba",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7ad03cc-e2c6-4bed-a275-d50f1e0c65b9",
+              "name": "Internal Server Error, Retry Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "structured-contents",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Article name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 3997\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c2b9e4d1-f4f5-4c96-abb4-5b5f7b8499e0",
+    "name": "MediaWiki Action articles structured-contents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}

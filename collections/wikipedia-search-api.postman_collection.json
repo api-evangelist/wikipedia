@@ -1,0 +1,309 @@
+{
+  "item": [
+    {
+      "id": "6a51a178-1484-45e0-bf41-ec992e0d7654",
+      "name": "Search",
+      "description": {
+        "content": "Title and full-text search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad9cad6e-ef31-4914-a389-648c91f91d5b",
+          "name": "MediaWiki Core REST Search Page Titles and Contents",
+          "request": {
+            "name": "MediaWiki Core REST Search Page Titles and Contents",
+            "description": {
+              "content": "Full-text search of wiki page titles and contents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search query"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Result count limit"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85a99b57-8142-4c61-b7f1-a2914c26b8c7",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "climate change"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pages\": [\n    {\n      \"id\": 1065,\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"excerpt\": \"string\",\n      \"matched_title\": \"string\",\n      \"description\": \"string\",\n      \"thumbnail\": {\n        \"url\": \"https://YwsRp.vjt9vo5kraH9v0vPCRE+LRlsAm30TClWV9mZIZn6af4,ptnftdYuMyEGGDExEWP7WKy.CraT8nMUY1\",\n        \"width\": 463,\n        \"height\": 6222,\n        \"mimetype\": \"image/jpeg\"\n      }\n    },\n    {\n      \"id\": 2940,\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"excerpt\": \"string\",\n      \"matched_title\": \"string\",\n      \"description\": \"string\",\n      \"thumbnail\": {\n        \"url\": \"https://UeoWdZjBtONEjuhrQmlKATAHWteWFGQSX.zmaH7iZfrEwUg8W7jKys+zgkD-8X0nUdqUw-agKey-DSzRd.r3v3.LXpU4\",\n        \"width\": 1308,\n        \"height\": 2709,\n        \"mimetype\": \"image/jpeg\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0dd0552-5715-40de-aadc-f1520bdb50fc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "climate change"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45491a89-7a03-4d71-b107-87485c76ce85",
+          "name": "MediaWiki Core REST Search Page Titles",
+          "request": {
+            "name": "MediaWiki Core REST Search Page Titles",
+            "description": {
+              "content": "Auto-complete search of wiki page titles (prefix match).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "title"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Title prefix"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6206b59-3ad7-40a2-a848-02b40d0e120c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "Earth"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pages\": [\n    {\n      \"id\": 1841,\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"excerpt\": \"string\",\n      \"matched_title\": \"string\",\n      \"description\": \"string\",\n      \"thumbnail\": {\n        \"url\": \"https://pbnXjCjaAE.jnbalBvFhM5xCU0xUjr0KjBttItIOQVy,AudqssOrE877DdyqWrVl7WAHN6\",\n        \"width\": 3841,\n        \"height\": 1526,\n        \"mimetype\": \"image/jpeg\"\n      }\n    },\n    {\n      \"id\": 3383,\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"excerpt\": \"string\",\n      \"matched_title\": \"string\",\n      \"description\": \"string\",\n      \"thumbnail\": {\n        \"url\": \"https://VbCoNmLOjRFTbhJvoUeXUDoD.aozhs9kq4zYk\",\n        \"width\": 4631,\n        \"height\": 5102,\n        \"mimetype\": \"image/jpeg\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9cd3814-c3ad-4812-96e1-54ce0616dcbc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "Earth"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e73a8a00-0116-48be-8565-bd5e78c8ac44",
+    "name": "MediaWiki Action articles Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}

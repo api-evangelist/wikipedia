@@ -1,0 +1,274 @@
+{
+  "item": [
+    {
+      "id": "9596bf39-b561-49d6-a480-b326a0e0ca32",
+      "name": "Meta",
+      "description": {
+        "content": "Metadata operations (action=opensearch, action=feedrecentchanges)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "240d5ad8-11ad-475a-843d-1ec4e2e69f85",
+          "name": "MediaWiki Action Dispatch an Action API Call (GET)",
+          "request": {
+            "name": "MediaWiki Action Dispatch an Action API Call (GET)",
+            "description": {
+              "content": "Generic dispatch endpoint for read operations. Use ?action=query for data retrieval, ?action=parse to parse wikitext, ?action=opensearch for auto-complete. Always include format=json. Combine multiple titles with the pipe character (titles=A|B|C). Use the maxlag parameter for non-interactive jobs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) API action to dispatch"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "(Required) Response format. Always use json."
+                },
+                {
+                  "disabled": false,
+                  "key": "titles",
+                  "value": "<string>",
+                  "description": "Pipe-separated list of titles"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageids",
+                  "value": "<string>",
+                  "description": "Pipe-separated list of page IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "prop",
+                  "value": "<string>",
+                  "description": "Properties to fetch (info|revisions|links|categories|images|extracts|...)"
+                },
+                {
+                  "disabled": false,
+                  "key": "list",
+                  "value": "<string>",
+                  "description": "List generators (allpages|search|recentchanges|categorymembers|...)"
+                },
+                {
+                  "disabled": false,
+                  "key": "meta",
+                  "value": "<string>",
+                  "description": "Meta queries (siteinfo|userinfo|tokens|...)"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxlag",
+                  "value": "<integer>",
+                  "description": "Maximum replication lag in seconds before the request is rejected. Required for bots."
+                },
+                {
+                  "disabled": false,
+                  "key": "smaxage",
+                  "value": "<integer>",
+                  "description": "Shared-cache max-age in seconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxage",
+                  "value": "<integer>",
+                  "description": "Cache max-age in seconds"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd74b1b1-90a5-4097-bbb1-4262c0cad560",
+              "name": "Action result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "query"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "titles",
+                      "value": "Earth|Mars|Venus"
+                    },
+                    {
+                      "key": "pageids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prop",
+                      "value": "info|revisions"
+                    },
+                    {
+                      "key": "list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meta",
+                      "value": "tokens"
+                    },
+                    {
+                      "key": "maxlag",
+                      "value": "5"
+                    },
+                    {
+                      "key": "smaxage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batchcomplete\": \"string\",\n  \"continue\": {},\n  \"query\": {},\n  \"parse\": {},\n  \"edit\": {},\n  \"login\": {},\n  \"error\": {\n    \"code\": \"ratelimited\",\n    \"info\": \"string\",\n    \"*\": \"string\",\n    \"docref\": \"string\"\n  },\n  \"warnings\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "468fba96-8353-427f-bfc7-6220bb3fa19e",
+              "name": "Rate limited - retry with exponential backoff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "query"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "titles",
+                      "value": "Earth|Mars|Venus"
+                    },
+                    {
+                      "key": "pageids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prop",
+                      "value": "info|revisions"
+                    },
+                    {
+                      "key": "list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meta",
+                      "value": "tokens"
+                    },
+                    {
+                      "key": "maxlag",
+                      "value": "5"
+                    },
+                    {
+                      "key": "smaxage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "466490c9-26f4-4f0f-a560-26c73f2b7e70",
+    "name": "MediaWiki Action articles Meta API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}

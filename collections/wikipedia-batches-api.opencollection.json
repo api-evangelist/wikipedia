@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles batches API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "batches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v2/batches/{date}/{hour}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/batches/:date/:hour",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Select which projects and languages to receive in your response."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/batches/{date}/{hour}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/batches/:date/:hour",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/batches/{date}/{hour}/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/batches/:date/:hour/:identifier",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Batch identifier."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/batches/{date}/{hour}/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/batches/:date/:hour/:identifier",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Batch identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/batches/{date}/{hour}/{identifier}/download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/batches/:date/:hour/:identifier/download",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Batch identifier."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Wikimedia Enterprise Project Updates (Batch) Headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://en.wikipedia.org/w/v2/batches/:date/:hour/:identifier/download",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Batch identifier."
+              }
+            ]
+          },
+          "docs": "Set of headers that describe the hourly download."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

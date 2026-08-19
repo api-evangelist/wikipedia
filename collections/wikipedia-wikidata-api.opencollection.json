@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles wikidata API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "wikidata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v2/wikidata/items/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/wikidata/items/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Wikidata Item identifier (Q-number, e.g. Q42)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/wikidata/items/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/wikidata/items/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Wikidata Item identifier (Q-number, e.g. Q42)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/wikidata/properties/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/wikidata/properties/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Wikidata Property identifier (P-number, e.g. P31)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/wikidata/properties/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/wikidata/properties/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Wikidata Property identifier (P-number, e.g. P31)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/wikidata/labels/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/wikidata/labels/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/wikidata/labels/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/wikidata/labels/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Wikidata item identifier (Q-number, e.g. Q42), or property identifier (P-number, e.g. P31)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

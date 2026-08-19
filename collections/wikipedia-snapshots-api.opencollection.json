@@ -1,0 +1,310 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles snapshots API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /v2/snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Select which projects and languages to receive in your response."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/snapshots",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/snapshots/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/{identifier}/download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:identifier/download",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Wikimedia Enterprise Project Snapshot Headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:identifier/download",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              }
+            ]
+          },
+          "docs": "Set of headers that describe the snapshot download."
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/{snapshot_identifier}/chunks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:snapshot_identifier/chunks",
+            "params": [
+              {
+                "name": "snapshot_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Select which projects and languages to receive in your response."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/snapshots/{snapshot_identifier}/chunks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:snapshot_identifier/chunks",
+            "params": [
+              {
+                "name": "snapshot_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/{snapshot_identifier}/chunks/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:snapshot_identifier/chunks/:identifier",
+            "params": [
+              {
+                "name": "snapshot_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Chunk identifier or index."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select which fields to receive in your response, using JSON dot notation."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /v2/snapshots/{snapshot_identifier}/chunks/{identifier}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:snapshot_identifier/chunks/:identifier",
+            "params": [
+              {
+                "name": "snapshot_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Chunk identifier or index."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /v2/snapshots/{snapshot_identifier}/chunks/{identifier}/download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:snapshot_identifier/chunks/:identifier/download",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "snapshot_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Chunk identifier or index."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Wikimedia Enterprise Snapshot Chunk Download Headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://en.wikipedia.org/w/v2/snapshots/:snapshot_identifier/chunks/:identifier/download",
+            "params": [
+              {
+                "name": "snapshot_identifier",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot identifier looks like `<language><project_name>_namespace_<number>`, examples: `dewiki_namespace_14` downloads categories used in de.wikipedia.org, `enwiki_namespace_0` downloads articles used in en.wikipedia.org, `frwikivoyage_namespace_10` downloads wikitext templates used in fr.wikivoyage.org. See our Metadata Endpoints for language, projects, and namespaces available for configuration."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "Chunk identifier or index."
+              }
+            ]
+          },
+          "docs": "Set of headers that describe the snapshot chunk download."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

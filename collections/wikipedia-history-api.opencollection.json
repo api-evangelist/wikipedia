@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles History API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Page Revision History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/history",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              },
+              {
+                "name": "older_than",
+                "value": "",
+                "type": "query",
+                "description": "Return revisions older than this ID"
+              },
+              {
+                "name": "newer_than",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve the revision history for a page."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Edit Statistics for a Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/history/counts/:type",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Type of count to return"
+              }
+            ]
+          },
+          "docs": "Get edit count statistics for a page by category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles Pages API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Page Source and Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              },
+              {
+                "name": "redirect",
+                "value": "",
+                "type": "query",
+                "description": "Whether to resolve redirects"
+              }
+            ]
+          },
+          "docs": "Retrieve a wiki page including its wikitext source and metadata."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Update or Create a Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://en.wikipedia.org/w/page/:title",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing page, or create one if it does not exist. Optimistic concurrency via latest.id."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Page Metadata Without Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/bare",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              }
+            ]
+          },
+          "docs": "Retrieve metadata about a page including a link to its rendered HTML."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Page as HTML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/html",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              }
+            ]
+          },
+          "docs": "Retrieve the rendered HTML for a page."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Page Metadata and HTML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/with_html",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              }
+            ]
+          },
+          "docs": "Retrieve page metadata together with rendered HTML."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Create a New Wiki Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/page",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new wiki page. Requires OAuth bearer token and a CSRF token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

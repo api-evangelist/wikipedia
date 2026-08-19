@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles SPARQL API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SPARQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Wikidata Query Service SPARQL Execute a SPARQL Query (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/sparql",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q146 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } LIMIT 10",
+                "type": "query",
+                "description": "SPARQL query text"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Optional inline format override"
+              }
+            ]
+          },
+          "docs": "Execute a SPARQL 1.1 SELECT/ASK/CONSTRUCT/DESCRIBE query against the Wikidata graph. Pass the query in the 'query' parameter. Use Accept header to control result format (JSON, XML, CSV, TSV, RDF/XML, Turtle)."
+        },
+        {
+          "info": {
+            "name": "Wikidata Query Service SPARQL Execute a SPARQL Query (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://en.wikipedia.org/w/sparql",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "query",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submit a SPARQL query in the request body. Useful when the query is too long for a URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

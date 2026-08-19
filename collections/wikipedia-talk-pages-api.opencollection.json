@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles Talk pages API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Talk pages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Wikimedia REST Get Structured Talk Page Contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/talk/:title",
+            "params": [
+              {
+                "name": "title",
+                "value": "",
+                "type": "path",
+                "description": "Page title. Use underscores instead of spaces. Use percent-encoding. Example: `Main_Page`."
+              },
+              {
+                "name": "redirect",
+                "value": "",
+                "type": "query",
+                "description": "Requests for [redirect pages](https://www.mediawiki.org/wiki/Help:Redirects) return HTTP 302 with a redirect target in `Location` header and content in the body.\nTo get a 200 response instead, supply `false` to the `redirect` parameter.\n"
+              }
+            ]
+          },
+          "docs": "Gets structured talk page contents for the provided title.\n\nStability: [experimental](https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team/API_endpoint_stability_policy#Experimental)\n"
+        },
+        {
+          "info": {
+            "name": "Wikimedia REST Get Structured Talk Page Contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/talk/:title/:revision",
+            "params": [
+              {
+                "name": "title",
+                "value": "",
+                "type": "path",
+                "description": "Page title. Use underscores instead of spaces. Use percent-encoding. Example: `Main_Page`."
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "Optional page revision. Note that older revisions are not stored, so request latency with the revision would be higher.\n"
+              },
+              {
+                "name": "redirect",
+                "value": "",
+                "type": "query",
+                "description": "Requests for [redirect pages](https://www.mediawiki.org/wiki/Help:Redirects) return HTTP 302 with a redirect target in `Location` header and content in the body.\nTo get a 200 response instead, supply `false` to the `redirect` parameter.\n"
+              }
+            ]
+          },
+          "docs": "Gets structured talk page contents for the provided title.\n\nStability: [experimental](https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team/API_endpoint_stability_policy#Experimental)\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

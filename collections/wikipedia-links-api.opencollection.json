@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles Links API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Language Links for a Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/links/language",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              }
+            ]
+          },
+          "docs": "Return interlanguage links (same topic in other languages) for a page."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Get Media Files Used on a Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/page/:title/links/media",
+            "params": [
+              {
+                "name": "title",
+                "value": "Earth",
+                "type": "path",
+                "description": "URL-encoded page title"
+              }
+            ]
+          },
+          "docs": "List media files referenced from a page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

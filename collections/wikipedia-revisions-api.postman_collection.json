@@ -1,0 +1,818 @@
+{
+  "item": [
+    {
+      "id": "be072d51-450a-4356-9461-6ba21b78456c",
+      "name": "Revisions",
+      "description": {
+        "content": "Individual revision retrieval and comparison",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "97e80e9c-68e4-43b0-867e-984bd28d9ae2",
+          "name": "MediaWiki Core REST Get Revision with HTML Link",
+          "request": {
+            "name": "MediaWiki Core REST Get Revision with HTML Link",
+            "description": {
+              "content": "Retrieve a revision and a link to its rendered HTML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revision",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Revision identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a68f397-44e7-4e58-9dcb-12b2054fbe3e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1356767710,\n  \"page\": {\n    \"id\": 7877,\n    \"title\": \"string\"\n  },\n  \"size\": 4757,\n  \"minor\": false,\n  \"timestamp\": \"2023-04-11T13:24:04.263Z\",\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"http://tWdblVNUbkAOME.xvaghIJhBvFEvpnAZ7evYuG4DbleNSDEZ15.2lqSDAtwSzS\",\n    \"title\": \"string\"\n  },\n  \"user\": {\n    \"id\": 9145,\n    \"name\": \"Jimbo Wales\"\n  },\n  \"comment\": \"string\",\n  \"delta\": 6053\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39bf8b9d-5b91-4676-9a7e-77700f621360",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19161464-11a7-44c4-8dee-dc87690a729c",
+          "name": "MediaWiki Core REST Get Revision Metadata",
+          "request": {
+            "name": "MediaWiki Core REST Get Revision Metadata",
+            "description": {
+              "content": "Retrieve revision metadata without source or HTML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revision",
+                ":id",
+                "bare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Revision identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c601616-2ce1-4288-88ab-b745086f5f02",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "bare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1356767710,\n  \"page\": {\n    \"id\": 7877,\n    \"title\": \"string\"\n  },\n  \"size\": 4757,\n  \"minor\": false,\n  \"timestamp\": \"2023-04-11T13:24:04.263Z\",\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"http://tWdblVNUbkAOME.xvaghIJhBvFEvpnAZ7evYuG4DbleNSDEZ15.2lqSDAtwSzS\",\n    \"title\": \"string\"\n  },\n  \"user\": {\n    \"id\": 9145,\n    \"name\": \"Jimbo Wales\"\n  },\n  \"comment\": \"string\",\n  \"delta\": 6053\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30b5f47e-0bed-4e49-afc0-757abd25929d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "bare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "352f8f96-3444-4211-b586-b35ca811aeb1",
+          "name": "MediaWiki Core REST Get Revision Wikitext Source",
+          "request": {
+            "name": "MediaWiki Core REST Get Revision Wikitext Source",
+            "description": {
+              "content": "Retrieve the wikitext source for a specific revision.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revision",
+                ":id",
+                "source"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Revision identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb02e7e3-f110-46cd-abe3-66acf8e471fd",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "source"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1356767710,\n  \"page\": {\n    \"id\": 7877,\n    \"title\": \"string\"\n  },\n  \"size\": 4757,\n  \"minor\": false,\n  \"timestamp\": \"2023-04-11T13:24:04.263Z\",\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"http://tWdblVNUbkAOME.xvaghIJhBvFEvpnAZ7evYuG4DbleNSDEZ15.2lqSDAtwSzS\",\n    \"title\": \"string\"\n  },\n  \"user\": {\n    \"id\": 9145,\n    \"name\": \"Jimbo Wales\"\n  },\n  \"comment\": \"string\",\n  \"delta\": 6053\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6158bbc8-0c90-4d16-9512-02b00da6afce",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "source"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6ac7bca-4da2-4b9b-9609-9054452a99c2",
+          "name": "MediaWiki Core REST Get Revision as HTML",
+          "request": {
+            "name": "MediaWiki Core REST Get Revision as HTML",
+            "description": {
+              "content": "Retrieve the rendered HTML for a specific revision.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revision",
+                ":id",
+                "html"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Revision identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eebb3929-3e39-4995-8ce8-610839aa936e",
+              "name": "HTML for the revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cc405d1-c471-4c6e-8594-cc9e183fac5e",
+          "name": "MediaWiki Core REST Get Revision Metadata and HTML",
+          "request": {
+            "name": "MediaWiki Core REST Get Revision Metadata and HTML",
+            "description": {
+              "content": "Retrieve revision metadata together with rendered HTML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revision",
+                ":id",
+                "with_html"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Revision identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55a78781-af88-442c-8b0c-2ac456c3c4fa",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "with_html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1356767710,\n  \"page\": {\n    \"id\": 7877,\n    \"title\": \"string\"\n  },\n  \"size\": 4757,\n  \"minor\": false,\n  \"timestamp\": \"2023-04-11T13:24:04.263Z\",\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"http://tWdblVNUbkAOME.xvaghIJhBvFEvpnAZ7evYuG4DbleNSDEZ15.2lqSDAtwSzS\",\n    \"title\": \"string\"\n  },\n  \"user\": {\n    \"id\": 9145,\n    \"name\": \"Jimbo Wales\"\n  },\n  \"comment\": \"string\",\n  \"delta\": 6053\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aff03d60-d482-47b3-a180-58d860706918",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":id",
+                    "with_html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Revision identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a6505a2-0047-47f0-b0bc-0bbb62a6bdba",
+          "name": "MediaWiki Core REST Compare Two Revisions",
+          "request": {
+            "name": "MediaWiki Core REST Compare Two Revisions",
+            "description": {
+              "content": "Produce a structured diff between two revisions of the same page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revision",
+                ":from",
+                "compare",
+                ":to"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "from",
+                  "description": "(Required) From revision ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "to",
+                  "description": "(Required) To revision ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e9d8ee0-8f27-45a7-b255-885714eb4879",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":from",
+                    "compare",
+                    ":to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "from",
+                      "description": "(Required) From revision ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "to",
+                      "description": "(Required) To revision ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": {\n    \"id\": 1356767710,\n    \"page\": {\n      \"id\": 8380,\n      \"title\": \"string\"\n    },\n    \"size\": 8190,\n    \"minor\": false,\n    \"timestamp\": \"1963-04-17T22:21:51.554Z\",\n    \"content_model\": \"wikitext\",\n    \"license\": {\n      \"url\": \"http://iOXUzcKhTMAogCULERPeWjyEzopIsNRK.hzwgLHD-rFgsbAZoH,wTfUzt4lvoV9xHZ0OFg4a-a8aMM\",\n      \"title\": \"string\"\n    },\n    \"user\": {\n      \"id\": 2801,\n      \"name\": \"Jimbo Wales\"\n    },\n    \"comment\": \"string\",\n    \"delta\": 2938\n  },\n  \"to\": {\n    \"id\": 1356767710,\n    \"page\": {\n      \"id\": 5048,\n      \"title\": \"string\"\n    },\n    \"size\": 7023,\n    \"minor\": false,\n    \"timestamp\": \"1947-06-02T08:52:21.663Z\",\n    \"content_model\": \"wikitext\",\n    \"license\": {\n      \"url\": \"https://BLYjPWWILw.vjsgTwhyNyeXDYN868irgIRG8jlfQl5S7EQR1X5v5b\",\n      \"title\": \"string\"\n    },\n    \"user\": {\n      \"id\": 2293,\n      \"name\": \"Jimbo Wales\"\n    },\n    \"comment\": \"string\",\n    \"delta\": 6744\n  },\n  \"diff\": [\n    {\n      \"type\": 4627,\n      \"lineNumber\": 3841,\n      \"text\": \"string\",\n      \"offset\": {\n        \"from\": 720,\n        \"to\": 3323\n      }\n    },\n    {\n      \"type\": 8505,\n      \"lineNumber\": 736,\n      \"text\": \"string\",\n      \"offset\": {\n        \"from\": 6034,\n        \"to\": 2223\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0722db72-00a9-443a-a874-6303bedea0cd",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revision",
+                    ":from",
+                    "compare",
+                    ":to"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "from",
+                      "description": "(Required) From revision ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "to",
+                      "description": "(Required) To revision ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a92b8a5b-491e-4f49-bb2e-0567759c0ede",
+    "name": "MediaWiki Action articles Revisions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}

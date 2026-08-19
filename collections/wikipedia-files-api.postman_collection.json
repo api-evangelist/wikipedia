@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "c088f753-00bc-4eae-9bc7-244362f23bab",
+      "name": "Files",
+      "description": {
+        "content": "Media file metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ceaf443-4bb2-44e8-8f04-fb7482a1e477",
+          "name": "MediaWiki Core REST Get File Metadata and Download Links",
+          "request": {
+            "name": "MediaWiki Core REST Get File Metadata and Download Links",
+            "description": {
+              "content": "Retrieve metadata for a media file including download URLs at multiple sizes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "file",
+                ":title"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ac983de-9325-4175-a05c-659d3844912e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "file",
+                    ":title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"File:Earth_Eastern_Hemisphere.jpg\",\n  \"file_description_url\": \"http://rvkGTLHKOELxFKUkdLDhFjHr.rrsjD,TMeNw3d3\",\n  \"latest\": {\n    \"timestamp\": \"2013-01-09T21:12:54.393Z\",\n    \"user\": {\n      \"id\": 7823,\n      \"name\": \"string\"\n    }\n  },\n  \"preferred\": {\n    \"mediatype\": \"BITMAP\",\n    \"size\": 4553,\n    \"width\": 9276,\n    \"height\": 6608,\n    \"url\": \"http://JvzbyfQ.vxwoZUy-yMNV17.xT09FsZM4UnrfA.ztvj1vUtT8YdGoFd\"\n  },\n  \"original\": {\n    \"mediatype\": \"string\",\n    \"size\": 6370,\n    \"width\": 721,\n    \"height\": 2922,\n    \"url\": \"http://GeIumNwhetwXKvkigXtqg.utziCiQ5UrFlg\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94078cdf-ffa1-4759-a130-cc4820c4ae76",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "file",
+                    ":title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "17e727c0-b874-416c-bd8e-d2203d975b5a",
+    "name": "MediaWiki Action articles Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}

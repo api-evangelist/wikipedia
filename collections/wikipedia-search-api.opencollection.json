@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MediaWiki Action articles Search API",
+    "version": "1.45"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "MediaWiki Core REST Search Page Titles and Contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/search/page",
+            "params": [
+              {
+                "name": "q",
+                "value": "climate change",
+                "type": "query",
+                "description": "Search query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Result count limit"
+              }
+            ]
+          },
+          "docs": "Full-text search of wiki page titles and contents."
+        },
+        {
+          "info": {
+            "name": "MediaWiki Core REST Search Page Titles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://en.wikipedia.org/w/search/title",
+            "params": [
+              {
+                "name": "q",
+                "value": "Earth",
+                "type": "query",
+                "description": "Title prefix"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Auto-complete search of wiki page titles (prefix match)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

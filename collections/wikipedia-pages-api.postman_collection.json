@@ -1,0 +1,833 @@
+{
+  "item": [
+    {
+      "id": "c278cfbe-f9ba-463f-926e-f1f2136f8e44",
+      "name": "Pages",
+      "description": {
+        "content": "Page metadata, HTML, source, create, update",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86dea0bd-028f-4097-8e85-842b623683ad",
+          "name": "MediaWiki Core REST Get Page Source and Metadata",
+          "request": {
+            "name": "MediaWiki Core REST Get Page Source and Metadata",
+            "description": {
+              "content": "Retrieve a wiki page including its wikitext source and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "redirect",
+                  "value": "<string>",
+                  "description": "Whether to resolve redirects"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66ce5cf8-274d-49fb-ac14-8f6005ad285f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "redirect",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9228,\n  \"key\": \"Earth\",\n  \"title\": \"Earth\",\n  \"latest\": {\n    \"id\": 1356767710,\n    \"timestamp\": \"2026-05-29T18:21:47Z\"\n  },\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\",\n    \"title\": \"Creative Commons Attribution-Share Alike 4.0\"\n  },\n  \"html_url\": \"https://V.qpzq\",\n  \"source\": \"string\",\n  \"html\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae4f34b3-3c9c-4ee8-ae71-107d97c977e3",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "redirect",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cd920ad-f4d2-49f6-81ea-e338c1b28b7e",
+          "name": "MediaWiki Core REST Update or Create a Page",
+          "request": {
+            "name": "MediaWiki Core REST Update or Create a Page",
+            "description": {
+              "content": "Update an existing page, or create one if it does not exist. Optimistic concurrency via latest.id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"latest\": {\n    \"id\": \"<integer>\"\n  },\n  \"content_model\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec2fe56b-237a-4011-a97b-bb2357eb5669",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"latest\": {\n    \"id\": \"<integer>\"\n  },\n  \"content_model\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9228,\n  \"key\": \"Earth\",\n  \"title\": \"Earth\",\n  \"latest\": {\n    \"id\": 1356767710,\n    \"timestamp\": \"2026-05-29T18:21:47Z\"\n  },\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\",\n    \"title\": \"Creative Commons Attribution-Share Alike 4.0\"\n  },\n  \"html_url\": \"https://V.qpzq\",\n  \"source\": \"string\",\n  \"html\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02639f85-346f-409c-b522-5e5cb5f195cc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"latest\": {\n    \"id\": \"<integer>\"\n  },\n  \"content_model\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a677d87-a4c7-439c-8d28-52428b8109c7",
+          "name": "MediaWiki Core REST Get Page Metadata Without Content",
+          "request": {
+            "name": "MediaWiki Core REST Get Page Metadata Without Content",
+            "description": {
+              "content": "Retrieve metadata about a page including a link to its rendered HTML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title",
+                "bare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d68660e1-cfc8-4e45-b551-f3e0e17a5ca6",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "bare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9228,\n  \"key\": \"Earth\",\n  \"title\": \"Earth\",\n  \"latest\": {\n    \"id\": 1356767710,\n    \"timestamp\": \"2026-05-29T18:21:47Z\"\n  },\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\",\n    \"title\": \"Creative Commons Attribution-Share Alike 4.0\"\n  },\n  \"html_url\": \"https://V.qpzq\",\n  \"source\": \"string\",\n  \"html\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "389e6499-c35d-41a2-91d9-9fe86d08a6b4",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "bare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7b3c6df-df89-4e23-9599-b6a314b22d89",
+          "name": "MediaWiki Core REST Get Page as HTML",
+          "request": {
+            "name": "MediaWiki Core REST Get Page as HTML",
+            "description": {
+              "content": "Retrieve the rendered HTML for a page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title",
+                "html"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6e9ca96-462f-42f2-a003-ce10c5c630cf",
+              "name": "Rendered HTML",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c181443-16ef-41d2-b312-6329aebb7ea3",
+          "name": "MediaWiki Core REST Get Page Metadata and HTML",
+          "request": {
+            "name": "MediaWiki Core REST Get Page Metadata and HTML",
+            "description": {
+              "content": "Retrieve page metadata together with rendered HTML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title",
+                "with_html"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1bae2d4-95a8-4f13-931e-7653d6dad2d6",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "with_html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9228,\n  \"key\": \"Earth\",\n  \"title\": \"Earth\",\n  \"latest\": {\n    \"id\": 1356767710,\n    \"timestamp\": \"2026-05-29T18:21:47Z\"\n  },\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\",\n    \"title\": \"Creative Commons Attribution-Share Alike 4.0\"\n  },\n  \"html_url\": \"https://V.qpzq\",\n  \"source\": \"string\",\n  \"html\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57ce8151-228e-49d7-81c8-22e3d2c02a7d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "with_html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5cec5ad-081f-4bc9-86c2-774f7917f380",
+          "name": "MediaWiki Core REST Create a New Wiki Page",
+          "request": {
+            "name": "MediaWiki Core REST Create a New Wiki Page",
+            "description": {
+              "content": "Create a new wiki page. Requires OAuth bearer token and a CSRF token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"title\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"content_model\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e168e14-e664-40c6-b3df-e4a4f5b10c8f",
+              "name": "Page created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"'''Hello, world.'''\",\n  \"title\": \"User:Example/Sandbox\",\n  \"comment\": \"Creating sandbox page\",\n  \"content_model\": \"wikitext\",\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9228,\n  \"key\": \"Earth\",\n  \"title\": \"Earth\",\n  \"latest\": {\n    \"id\": 1356767710,\n    \"timestamp\": \"2026-05-29T18:21:47Z\"\n  },\n  \"content_model\": \"wikitext\",\n  \"license\": {\n    \"url\": \"https://creativecommons.org/licenses/by-sa/4.0/\",\n    \"title\": \"Creative Commons Attribution-Share Alike 4.0\"\n  },\n  \"html_url\": \"https://V.qpzq\",\n  \"source\": \"string\",\n  \"html\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a411bc5b-8601-4924-bd81-9c5dd3cc7227",
+    "name": "MediaWiki Action articles Pages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "item": [
+    {
+      "id": "ea4b3ef8-cf0c-4a4f-ada1-59aa5e25dfe2",
+      "name": "History",
+      "description": {
+        "content": "Page revision history and edit statistics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2b9beb0-6384-4efc-8373-1b58076ae607",
+          "name": "MediaWiki Core REST Get Page Revision History",
+          "request": {
+            "name": "MediaWiki Core REST Get Page Revision History",
+            "description": {
+              "content": "Retrieve the revision history for a page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "older_than",
+                  "value": "<integer>",
+                  "description": "Return revisions older than this ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "newer_than",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3abe47c2-6483-4933-9376-fa755665f087",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "older_than",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newer_than",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"revisions\": [\n    {\n      \"id\": 1356767710,\n      \"page\": {\n        \"id\": 3362,\n        \"title\": \"string\"\n      },\n      \"size\": 5491,\n      \"minor\": true,\n      \"timestamp\": \"1962-09-29T15:17:18.270Z\",\n      \"content_model\": \"wikitext\",\n      \"license\": {\n        \"url\": \"https://VzrvmclqtOJcccJidHrOp.wmkH,TSybSMY\",\n        \"title\": \"string\"\n      },\n      \"user\": {\n        \"id\": 6921,\n        \"name\": \"Jimbo Wales\"\n      },\n      \"comment\": \"string\",\n      \"delta\": 7899\n    },\n    {\n      \"id\": 1356767710,\n      \"page\": {\n        \"id\": 7548,\n        \"title\": \"string\"\n      },\n      \"size\": 4734,\n      \"minor\": false,\n      \"timestamp\": \"1983-10-19T00:47:19.314Z\",\n      \"content_model\": \"wikitext\",\n      \"license\": {\n        \"url\": \"https://Qq.zyjiVGSU4S\",\n        \"title\": \"string\"\n      },\n      \"user\": {\n        \"id\": 2788,\n        \"name\": \"Jimbo Wales\"\n      },\n      \"comment\": \"string\",\n      \"delta\": 3203\n    }\n  ],\n  \"latest\": \"http://IEjtWBhSPHZprdposYZqAmMbVFMM.cgPdD\",\n  \"older\": \"http://ylnmlpognJiOJgjTDszHysnGAOOzObP.ipaSTF7rNie7EgTLjOn46+GSMVQ-xDiV2a7gt\",\n  \"newer\": \"http://RiSiLVmtyiOMOMrVRzKXTeUkDxgNkqOnA.qjHYRKOi-4AMKiBuXhESwBbLABiEic7TaG9n\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "652b1235-0e88-46fa-a781-045c53cfbf84",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "older_than",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "newer_than",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cca6e38-2d3b-4813-91bf-51550050f3d1",
+          "name": "MediaWiki Core REST Get Edit Statistics for a Page",
+          "request": {
+            "name": "MediaWiki Core REST Get Edit Statistics for a Page",
+            "description": {
+              "content": "Get edit count statistics for a page by category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page",
+                ":title",
+                "history",
+                "counts",
+                ":type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "title",
+                  "description": "(Required) URL-encoded page title"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Type of count to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec317e97-4a6f-42b3-abdc-1b8d027d9138",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "history",
+                    "counts",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of count to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1281,\n  \"limit\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b04d411f-6a2c-426a-bd70-6eeecc059448",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page",
+                    ":title",
+                    "history",
+                    "counts",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "title",
+                      "description": "(Required) URL-encoded page title"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Type of count to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"rest-no-match\",\n  \"messageTranslations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"httpCode\": 404,\n  \"httpReason\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://en.wikipedia.org/w",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b034cdb3-dfe6-47b8-9d12-8902f689a428",
+    "name": "MediaWiki Action articles History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.\n\nWikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.\n\nContact Support:\n Name: Wikimedia Foundation",
+      "type": "text/plain"
+    }
+  }
+}
