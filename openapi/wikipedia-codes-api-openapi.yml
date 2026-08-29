@@ -448,6 +448,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
     code:
       type: object
       properties:
@@ -457,20 +471,6 @@ components:
           type: string
         description:
           type: string
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http

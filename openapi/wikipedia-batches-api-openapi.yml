@@ -743,6 +743,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
     filter:
       type: object
       properties:
@@ -756,32 +780,6 @@ components:
         identifier:
           type: number
           example: 0
-    size:
-      type: object
-      properties:
-        unit_text:
-          type: string
-          example: B
-        value:
-          type: number
-          example: 76760
-    project:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: enwiki
-        code:
-          type: string
-          example: wiki
-        name:
-          type: string
-          example: Wikipedia
-        url:
-          type: string
-          example: https://en.wikipedia.org
-        in_language:
-          $ref: '#/components/schemas/language'
     batch:
       type: object
       properties:
@@ -806,21 +804,23 @@ components:
           type: string
         status:
           type: integer
-    language:
+    project:
       type: object
       properties:
         identifier:
           type: string
-          example: en
+          example: enwiki
+        code:
+          type: string
+          example: wiki
         name:
           type: string
-          example: English
-        alternate_name:
+          example: Wikipedia
+        url:
           type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
   securitySchemes:
     bearerAuth:
       type: http

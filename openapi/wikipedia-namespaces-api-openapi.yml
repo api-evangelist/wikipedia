@@ -418,20 +418,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     namespace:
       type: object
       properties:
@@ -444,6 +430,20 @@ components:
         description:
           type: string
           example: The Article namespace, also known as the main or mainspace, is where a project's primary content resides, whether articles, entries, or main documents depending on the Wikimedia project.
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

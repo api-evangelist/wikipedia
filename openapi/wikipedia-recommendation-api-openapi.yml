@@ -162,21 +162,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    morelike_result:
-      type: array
-      description: the prioritized list of Wikidata IDs recommended for creation as Wikipedia articles
-      items:
-        type: object
-        properties:
-          wikidata_id:
-            type: string
-            description: Wikidata ID for the item
-          score:
-            type: number
-            description: Score of the recommendation. The higher the score, the more important the recommendation is.
-          source_language:
-            type: string
-            description: Source of the recommendation -- which wiki is recommending the current article.
     problem:
       required:
       - type
@@ -211,5 +196,20 @@ components:
               sitelink_count:
                 type: integer
                 description: count of sites the wikidata item is linked to
+    morelike_result:
+      type: array
+      description: the prioritized list of Wikidata IDs recommended for creation as Wikipedia articles
+      items:
+        type: object
+        properties:
+          wikidata_id:
+            type: string
+            description: Wikidata ID for the item
+          score:
+            type: number
+            description: Score of the recommendation. The higher the score, the more important the recommendation is.
+          source_language:
+            type: string
+            description: Source of the recommendation -- which wiki is recommending the current article.
 x-host-basePath: /api/rest_v1
 x-default-params: {}

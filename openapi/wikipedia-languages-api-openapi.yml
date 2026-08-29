@@ -422,20 +422,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     language:
       type: object
       properties:
@@ -451,6 +437,20 @@ components:
         direction:
           type: string
           example: ltr
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

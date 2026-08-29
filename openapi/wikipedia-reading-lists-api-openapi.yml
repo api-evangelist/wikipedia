@@ -818,6 +818,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    list_entry_write:
+      type: object
+      properties:
+        project:
+          type: string
+          description: Domain of the wiki containing the page.
+          example: https://en.wikipedia.org
+        title:
+          type: string
+          description: Title of the page containing the page, in database format.
+          example: Barack_Obama
+      required:
+      - project
+      - title
     list_read:
       title: list
       type: object
@@ -844,33 +858,6 @@ components:
       - name
       - created
       - updated
-    problem:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        instance:
-          type: string
-    list_entry_write:
-      type: object
-      properties:
-        project:
-          type: string
-          description: Domain of the wiki containing the page.
-          example: https://en.wikipedia.org
-        title:
-          type: string
-          description: Title of the page containing the page, in database format.
-          example: Barack_Obama
-      required:
-      - project
-      - title
     list_entry_read:
       title: list_entry
       type: object
@@ -906,5 +893,18 @@ components:
           example: Planets of the Solar System
       required:
       - name
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
 x-host-basePath: /api/rest_v1
 x-default-params: {}

@@ -1319,31 +1319,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    revision:
-      description: Result format for revision items
-      required:
-      - count
-      - items
+    titles_set:
       type: object
       properties:
-        count:
-          type: integer
-          format: int32
-        items:
-          $ref: '#/components/schemas/revisionInfo'
-    problem:
+        canonical:
+          type: string
+          description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
+        normalized:
+          type: string
+          description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
+        display:
+          type: string
+          description: the title as it should be displayed to the user
       required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        instance:
-          type: string
+      - canonical
+      - normalized
+      - display
+      description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
     revisionInfo:
       type: object
       description: Complete information about the revision
@@ -1380,24 +1372,53 @@ components:
           type: boolean
         page_language:
           type: string
-    media_list:
-      type: object
-      properties:
-        revision:
-          type: string
-          description: the revision ID used to create the list
-        tid:
-          type: string
-          description: the time uuid of the page rendering used to create the list
-        items:
-          type: array
-          description: a list of media items
-          items:
-            $ref: '#/components/schemas/media_item'
+    listing:
+      description: The result format for listings
       required:
       - items
-      - revision
-      - tid
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: string
+        _links:
+          type: object
+          properties:
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+                  description: Relative link to next result page.
+    originalimage:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Original image URI
+        width:
+          type: integer
+          description: Original image width
+        height:
+          type: integer
+          description: Original image height
+      required:
+      - height
+      - source
+      - width
+    revision:
+      description: Result format for revision items
+      required:
+      - count
+      - items
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        items:
+          $ref: '#/components/schemas/revisionInfo'
     thumbnail:
       type: object
       properties:
@@ -1414,47 +1435,6 @@ components:
       - height
       - source
       - width
-    media_item:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The file page title
-        type:
-          type: string
-          enum:
-          - image
-          - video
-          - audio
-        section_id:
-          type: integer
-          description: section ID in which the item is found on the page
-        showInGallery:
-          type: boolean
-          description: whether the client should show the file in an image gallery presentation
-        caption:
-          type: object
-          properties:
-            html:
-              type: string
-              description: on-wiki caption for the media item, including all HTML markup
-            text:
-              type: string
-              description: plain text of the on-wiki caption for the media item
-        original:
-          type: object
-          description: reference to a Mathoid-rendered math formula image
-          properties:
-            source:
-              type: string
-              description: Mathoid image render URL
-            mime:
-              type: string
-              description: the Mathoid image mime type
-      required:
-      - type
-      - section_id
-      - showInGallery
     summary:
       type: object
       properties:
@@ -1523,57 +1503,77 @@ components:
       - extract
       - lang
       - titles
-    titles_set:
+    problem:
+      required:
+      - type
       type: object
       properties:
-        canonical:
+        type:
           type: string
-          description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
-        normalized:
+        title:
           type: string
-          description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
-        display:
+        detail:
           type: string
-          description: the title as it should be displayed to the user
-      required:
-      - canonical
-      - normalized
-      - display
-      description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
-    originalimage:
+        instance:
+          type: string
+    media_list:
       type: object
       properties:
-        source:
+        revision:
           type: string
-          description: Original image URI
-        width:
-          type: integer
-          description: Original image width
-        height:
-          type: integer
-          description: Original image height
-      required:
-      - height
-      - source
-      - width
-    listing:
-      description: The result format for listings
-      required:
-      - items
-      type: object
-      properties:
+          description: the revision ID used to create the list
+        tid:
+          type: string
+          description: the time uuid of the page rendering used to create the list
         items:
           type: array
+          description: a list of media items
           items:
-            type: string
-        _links:
+            $ref: '#/components/schemas/media_item'
+      required:
+      - items
+      - revision
+      - tid
+    media_item:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The file page title
+        type:
+          type: string
+          enum:
+          - image
+          - video
+          - audio
+        section_id:
+          type: integer
+          description: section ID in which the item is found on the page
+        showInGallery:
+          type: boolean
+          description: whether the client should show the file in an image gallery presentation
+        caption:
           type: object
           properties:
-            next:
-              type: object
-              properties:
-                href:
-                  type: string
-                  description: Relative link to next result page.
+            html:
+              type: string
+              description: on-wiki caption for the media item, including all HTML markup
+            text:
+              type: string
+              description: plain text of the on-wiki caption for the media item
+        original:
+          type: object
+          description: reference to a Mathoid-rendered math formula image
+          properties:
+            source:
+              type: string
+              description: Mathoid image render URL
+            mime:
+              type: string
+              description: the Mathoid image mime type
+      required:
+      - type
+      - section_id
+      - showInGallery
 x-host-basePath: /api/rest_v1
 x-default-params: {}

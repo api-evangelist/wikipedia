@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  title: MediaWiki Core REST Revisions API
+  description: 'MediaWiki Core REST API exposed by every MediaWiki installation under /w/rest.php/v1/. Provides page CRUD, search, files, history, revisions, and content transforms. On Wikimedia projects this endpoint serves Wikipedia, Wiktionary, Wikibooks, etc. in 300+ languages.
+
+
+    All endpoints require a meaningful User-Agent header; write endpoints require OAuth 2.0 (or a logged-in session).'
+  version: 1.0.0
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w/rest.php/v1
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w/rest.php/v1
+  description: Per-language Wikipedia (en, de, fr, es, ja, zh, ...)
+  variables:
+    lang:
+      default: en
+      description: Language subdomain
+- url: https://api.wikimedia.org/core/v1/wikipedia/{lang}
+  description: Wikimedia API Gateway equivalent of the Core REST API
+  variables:
+    lang:
+      default: en
+      description: Language code
+tags:
+- name: Revisions
+  description: Individual revision retrieval and comparison
+paths:
+  /revision/{id}:
+    get:
+      operationId: getRevision
+      summary: MediaWiki Core REST Get Revision with HTML Link
+      description: Retrieve a revision and a link to its rendered HTML.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}/bare:
+    get:
+      operationId: getRevisionBare
+      summary: MediaWiki Core REST Get Revision Metadata
+      description: Retrieve revision metadata without source or HTML.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}/source:
+    get:
+      operationId: getRevisionSource
+      summary: MediaWiki Core REST Get Revision Wikitext Source
+      description: Retrieve the wikitext source for a specific revision.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{id}/html:
+    get:
+      operationId: getRevisionHtml
+      summary: MediaWiki Core REST Get Revision as HTML
+      description: Retrieve the rendered HTML for a specific revision.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: HTML for the revision
+          content:
+            text/html:
+              schema:
+                type: string
+  /revision/{id}/with_html:
+    get:
+      operationId: getRevisionWithHtml
+      summary: MediaWiki Core REST Get Revision Metadata and HTML
+      description: Retrieve revision metadata together with rendered HTML.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision identifier
+        example: 1356767710
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /revision/{from}/compare/{to}:
+    post:
+      operationId: compareRevisions
+      summary: MediaWiki Core REST Compare Two Revisions
+      description: Produce a structured diff between two revisions of the same page.
+      tags:
+      - Revisions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: from
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: From revision ID
+      - name: to
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: To revision ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompareResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Revision:
+      type: object
+      description: A page revision.
+      properties:
+        id:
+          type: integer
+          example: 1356767710
+        page:
+          type: object
+          properties:
+            id:
+              type: integer
+            title:
+              type: string
+        size:
+          type: integer
+          description: Byte size of revision
+        minor:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        content_model:
+          type: string
+          example: wikitext
+        license:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+            title:
+              type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+              example: Jimbo Wales
+        comment:
+          type: string
+          description: Edit summary
+        delta:
+          type: integer
+          description: Byte delta from previous revision
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
+    CompareResponse:
+      type: object
+      description: Comparison between two revisions.
+      properties:
+        from:
+          $ref: '#/components/schemas/Revision'
+        to:
+          $ref: '#/components/schemas/Revision'
+        diff:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: integer
+                description: 0 context, 1 add line, 2 delete line, 3 in-line change, 4 moved paragraph, 5 paragraph moved into place
+              lineNumber:
+                type: integer
+              text:
+                type: string
+              offset:
+                type: object
+                properties:
+                  from:
+                    type: integer
+                  to:
+                    type: integer
+              highlightRanges:
+                type: array
+                items:
+                  type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token issued via api.wikimedia.org. Required for write operations.

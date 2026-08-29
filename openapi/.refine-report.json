@@ -2,7 +2,10 @@
   "provider": "wikipedia",
   "sources": [
     "_original/wikipedia-rest-v1-openapi.yaml",
-    "_original/wikipedia-wikimedia-enterprise-openapi.yaml"
+    "_original/wikipedia-wikimedia-enterprise-openapi.yaml",
+    "_ae-authored/wikipedia-mediawiki-action-api-openapi.yaml",
+    "_ae-authored/wikipedia-mediawiki-core-rest-openapi.yaml",
+    "_ae-authored/wikipedia-wikidata-sparql-openapi.yaml"
   ],
   "outputs": [
     "wikipedia-citation-api-openapi.yml",
@@ -23,7 +26,16 @@
     "wikipedia-snapshots-api-openapi.yml",
     "wikipedia-structured-contents-api-openapi.yml",
     "wikipedia-structured-snapshots-api-openapi.yml",
-    "wikipedia-wikidata-api-openapi.yml"
+    "wikipedia-wikidata-api-openapi.yml",
+    "wikipedia-edit-api-openapi.yml",
+    "wikipedia-query-api-openapi.yml",
+    "wikipedia-files-api-openapi.yml",
+    "wikipedia-history-api-openapi.yml",
+    "wikipedia-links-api-openapi.yml",
+    "wikipedia-pages-api-openapi.yml",
+    "wikipedia-revisions-api-openapi.yml",
+    "wikipedia-search-api-openapi.yml",
+    "wikipedia-sparql-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
@@ -35,41 +47,32 @@
     "wikipedia-rest-v1-openapi.yaml: declared missing tag: Talk pages",
     "wikipedia-rest-v1-openapi.yaml: declared missing tag: offline",
     "wikipedia-wikimedia-enterprise-openapi.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "wikipedia-wikimedia-enterprise-openapi.yaml: declared missing tag: wikidata"
+    "wikipedia-wikimedia-enterprise-openapi.yaml: declared missing tag: wikidata",
+    "wikipedia-mediawiki-action-api-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "wikipedia-mediawiki-action-api-openapi.yaml: multi-axis tagging (7 tags, 2 first tags, 3.50x duplication over 2 operations) \u2014 split on first tag, 2 operations narrowed",
+    "wikipedia-mediawiki-core-rest-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "wikipedia-wikidata-sparql-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Transforms' spans 2 source specs (wikipedia-rest-v1-openapi.yaml, wikipedia-mediawiki-core-rest-openapi.yaml): per-path servers applied"
   ],
   "skipped": [
     "wikipedia-articles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-batches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-citation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-edit-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-languages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-math-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-mobile-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-namespaces-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-offline-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-page-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-parse-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-patrol-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-query-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-reading-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-recommendation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-revisions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-snapshots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-sparql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-structured-contents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-structured-snapshots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-talk-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-transforms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "wikipedia-upload-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "wikipedia-wikidata-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

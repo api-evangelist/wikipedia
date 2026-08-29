@@ -1305,19 +1305,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    article_namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
     size:
       type: object
       properties:
@@ -1327,23 +1314,6 @@ components:
         value:
           type: number
           example: 76760
-    project:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: enwiki
-        code:
-          type: string
-          example: wiki
-        name:
-          type: string
-          example: Wikipedia
-        url:
-          type: string
-          example: https://en.wikipedia.org
-        in_language:
-          $ref: '#/components/schemas/language'
     snapshot:
       type: object
       properties:
@@ -1365,13 +1335,6 @@ components:
           type: array
           items:
             type: string
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     language:
       type: object
       properties:
@@ -1387,6 +1350,43 @@ components:
         direction:
           type: string
           example: ltr
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
   securitySchemes:
     bearerAuth:
       type: http

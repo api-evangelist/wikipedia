@@ -1,0 +1,179 @@
+openapi: 3.2.0
+info:
+  title: MediaWiki Core REST Search API
+  description: 'MediaWiki Core REST API exposed by every MediaWiki installation under /w/rest.php/v1/. Provides page CRUD, search, files, history, revisions, and content transforms. On Wikimedia projects this endpoint serves Wikipedia, Wiktionary, Wikibooks, etc. in 300+ languages.
+
+
+    All endpoints require a meaningful User-Agent header; write endpoints require OAuth 2.0 (or a logged-in session).'
+  version: 1.0.0
+  x-generated-from: documentation
+  x-source-url: https://www.mediawiki.org/wiki/API:REST_API/Reference
+  x-last-validated: '2026-05-29'
+  contact:
+    name: Wikimedia Foundation
+    url: https://api.wikimedia.org/wiki/Core_REST_API
+  license:
+    name: CC BY-SA 4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+servers:
+- url: https://en.wikipedia.org/w/rest.php/v1
+  description: English Wikipedia
+- url: https://{lang}.wikipedia.org/w/rest.php/v1
+  description: Per-language Wikipedia (en, de, fr, es, ja, zh, ...)
+  variables:
+    lang:
+      default: en
+      description: Language subdomain
+- url: https://api.wikimedia.org/core/v1/wikipedia/{lang}
+  description: Wikimedia API Gateway equivalent of the Core REST API
+  variables:
+    lang:
+      default: en
+      description: Language code
+tags:
+- name: Search
+  description: Title and full-text search
+paths:
+  /search/page:
+    get:
+      operationId: searchPages
+      summary: MediaWiki Core REST Search Page Titles and Contents
+      description: Full-text search of wiki page titles and contents.
+      tags:
+      - Search
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Search query
+        example: climate change
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        description: Result count limit
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /search/title:
+    get:
+      operationId: searchTitles
+      summary: MediaWiki Core REST Search Page Titles
+      description: Auto-complete search of wiki page titles (prefix match).
+      tags:
+      - Search
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Title prefix
+        example: Earth
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    SearchResponse:
+      type: object
+      properties:
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
+    SearchResult:
+      type: object
+      description: A search result page entry.
+      properties:
+        id:
+          type: integer
+        key:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+          description: HTML snippet with <span class="searchmatch"> highlights
+        matched_title:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        thumbnail:
+          type:
+          - object
+          - 'null'
+          properties:
+            url:
+              type: string
+              format: uri
+            width:
+              type: integer
+            height:
+              type: integer
+            mimetype:
+              type: string
+              example: image/jpeg
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 bearer token issued via api.wikimedia.org. Required for write operations.

@@ -262,6 +262,46 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    entity:
+      type: object
+      properties:
+        identifier:
+          type: string
+        url:
+          type: string
+    revertrisk:
+      properties:
+        prediction:
+          type: boolean
+        probability:
+          properties:
+            'false':
+              type: number
+            'true':
+              type: number
+          type: object
+      type: object
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    thumbnail:
+      type: object
+      properties:
+        contentUrl:
+          type: string
+          format: uri
+          description: Thumbnail URL
+        width:
+          description: Thumbnail width in pixels
+          type: integer
+          example: 156
+        height:
+          description: Thumbnail height in pixels
+          type: integer
+          example: 255
     visibility:
       type: object
       properties:
@@ -274,6 +314,84 @@ components:
         user:
           type: boolean
           example: false
+    editor:
+      properties:
+        date_started:
+          type: string
+        edit_count:
+          type: integer
+        groups:
+          items:
+            type: string
+          type: array
+        identifier:
+          type: integer
+        is_anonymous:
+          type: boolean
+        is_bot:
+          type: boolean
+        name:
+          type: string
+      type: object
+    license:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: CC-BY-SA-4.0
+        name:
+          type: string
+          example: Creative Commons Attribution-ShareAlike License 4.0
+        url:
+          type: string
+          example: https://creativecommons.org/licenses/by-sa/4.0/
+    referenceneed:
+      properties:
+        reference_need_score:
+          type: number
+      type: object
+    link:
+      type: object
+      properties:
+        url:
+          type: string
+        text:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    category:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
     citation:
       type: object
       properties:
@@ -283,171 +401,6 @@ components:
           type: string
         text:
           type: string
-    part:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        value:
-          type: string
-        values:
-          type: array
-          items:
-            type: string
-        has_parts:
-          type: array
-          items:
-            type: object
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/image'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        citations:
-          type: array
-          items:
-            $ref: '#/components/schemas/citation'
-    category:
-      properties:
-        name:
-          type: string
-        url:
-          type: string
-      type: object
-    image:
-      type: object
-      properties:
-        content_url:
-          description: Image URL
-          format: uri
-          type: string
-          example: https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png
-        identifier:
-          type: string
-          format: uuid
-          description: Unique identifier for the image
-          example: 6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0
-        name:
-          type: string
-          description: Filename of the image
-          example: ./File:Flag_of_Italy.svg
-        width:
-          description: image width in pixels
-          type: integer
-          example: 156
-        height:
-          description: image height in pixels
-          type: integer
-          example: 255
-        thumbnail:
-          $ref: '#/components/schemas/thumbnail'
-        caption:
-          type: string
-          description: caption describing the image
-          example: Flag of Italy
-        alternative_text:
-          type: string
-          description: Alternative text description of the image for accessibility
-          example: a flag divided in three vertical sections colored green, white, and red from left to right
-        encoding_format:
-          type: string
-          format: mime_type
-          description: MIME type or encoding format of the image, constructed from the url
-          example: image/png
-        media_type:
-          type: string
-          enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
-          description: Mediawiki media type of the image
-          example: drawing
-    referenceneed:
-      properties:
-        reference_need_score:
-          type: number
-      type: object
-    referencerisk:
-      properties:
-        reference_risk_score:
-          type: number
-      type: object
-    scores:
-      properties:
-        revertrisk:
-          $ref: '#/components/schemas/revertrisk'
-        referencerisk:
-          $ref: '#/components/schemas/referencerisk'
-        referenceneed:
-          $ref: '#/components/schemas/referenceneed'
-      type: object
-    protection:
-      type: object
-      properties:
-        expiry:
-          type: string
-          enum:
-          - infinite
-          - indefinite
-          - infinity
-          - never
-          example: infinity
-        level:
-          type: string
-          example: extendedconfirmed
-        type:
-          type: string
-          example: edit
-    maintenance_tags:
-      properties:
-        citation_needed_count:
-          type: integer
-        pov_count:
-          type: integer
-        clarification_needed_count:
-          type: integer
-        update_count:
-          type: integer
-      type: object
-    version:
-      properties:
-        comment:
-          type: string
-        editor:
-          $ref: '#/components/schemas/editor'
-        identifier:
-          type: integer
-        is_flagged_stable:
-          type: boolean
-        is_minor_edit:
-          type: boolean
-        noindex:
-          type: boolean
-        scores:
-          $ref: '#/components/schemas/scores'
-        maintenance_tags:
-          $ref: '#/components/schemas/maintenance_tags'
-        tags:
-          items:
-            type: string
-          type: array
-      type: object
-    template:
-      properties:
-        name:
-          type: string
-        url:
-          type: string
-      type: object
-    redirect:
-      properties:
-        name:
-          type: string
-        url:
-          type: string
-      type: object
     language:
       type: object
       properties:
@@ -463,40 +416,13 @@ components:
         direction:
           type: string
           example: ltr
-    event:
-      type: object
+    template:
       properties:
-        identifier:
-          type: string
-          example: f7c737db-4b50-4982-8804-7c2b9fa89020
-        type:
-          type: string
-          example: update
-          enum:
-          - update
-          - delete
-        date_created:
-          type: string
-          example: 2026-03-18 12:38:23.437225+00:00
-    article_body:
-      properties:
-        html:
-          type: string
-        wikitext:
-          type: string
-      type: object
-    license:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: CC-BY-SA-4.0
         name:
           type: string
-          example: Creative Commons Attribution-ShareAlike License 4.0
         url:
           type: string
-          example: https://creativecommons.org/licenses/by-sa/4.0/
+      type: object
     article:
       properties:
         event:
@@ -554,34 +480,124 @@ components:
         visibility:
           $ref: '#/components/schemas/visibility'
       type: object
-    project:
+    protection:
       type: object
       properties:
+        expiry:
+          type: string
+          enum:
+          - infinite
+          - indefinite
+          - infinity
+          - never
+          example: infinity
+        level:
+          type: string
+          example: extendedconfirmed
+        type:
+          type: string
+          example: edit
+    image:
+      type: object
+      properties:
+        content_url:
+          description: Image URL
+          format: uri
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png
         identifier:
           type: string
-          example: enwiki
-        code:
-          type: string
-          example: wiki
+          format: uuid
+          description: Unique identifier for the image
+          example: 6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0
         name:
           type: string
-          example: Wikipedia
+          description: Filename of the image
+          example: ./File:Flag_of_Italy.svg
+        width:
+          description: image width in pixels
+          type: integer
+          example: 156
+        height:
+          description: image height in pixels
+          type: integer
+          example: 255
+        thumbnail:
+          $ref: '#/components/schemas/thumbnail'
+        caption:
+          type: string
+          description: caption describing the image
+          example: Flag of Italy
+        alternative_text:
+          type: string
+          description: Alternative text description of the image for accessibility
+          example: a flag divided in three vertical sections colored green, white, and red from left to right
+        encoding_format:
+          type: string
+          format: mime_type
+          description: MIME type or encoding format of the image, constructed from the url
+          example: image/png
+        media_type:
+          type: string
+          enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
+          description: Mediawiki media type of the image
+          example: drawing
+    redirect:
+      properties:
+        name:
+          type: string
         url:
           type: string
-          example: https://en.wikipedia.org
-        in_language:
-          $ref: '#/components/schemas/language'
-    link:
+      type: object
+    part:
       type: object
       properties:
-        url:
+        name:
           type: string
-        text:
+        type:
           type: string
+        value:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        has_parts:
+          type: array
+          items:
+            type: object
         images:
           type: array
           items:
             $ref: '#/components/schemas/image'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/citation'
+    maintenance_tags:
+      properties:
+        citation_needed_count:
+          type: integer
+        pov_count:
+          type: integer
+        clarification_needed_count:
+          type: integer
+        update_count:
+          type: integer
+      type: object
+    scores:
+      properties:
+        revertrisk:
+          $ref: '#/components/schemas/revertrisk'
+        referencerisk:
+          $ref: '#/components/schemas/referencerisk'
+        referenceneed:
+          $ref: '#/components/schemas/referenceneed'
+      type: object
     filter:
       type: object
       properties:
@@ -589,72 +605,56 @@ components:
           type: string
         value:
           type: string
-    entity:
-      type: object
+    version:
       properties:
+        comment:
+          type: string
+        editor:
+          $ref: '#/components/schemas/editor'
         identifier:
-          type: string
-        url:
-          type: string
-    article_namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
-    thumbnail:
-      type: object
-      properties:
-        contentUrl:
-          type: string
-          format: uri
-          description: Thumbnail URL
-        width:
-          description: Thumbnail width in pixels
           type: integer
-          example: 156
-        height:
-          description: Thumbnail height in pixels
-          type: integer
-          example: 255
-    revertrisk:
-      properties:
-        prediction:
+        is_flagged_stable:
           type: boolean
-        probability:
-          properties:
-            'false':
-              type: number
-            'true':
-              type: number
-          type: object
-      type: object
-    editor:
-      properties:
-        date_started:
-          type: string
-        edit_count:
-          type: integer
-        groups:
+        is_minor_edit:
+          type: boolean
+        noindex:
+          type: boolean
+        scores:
+          $ref: '#/components/schemas/scores'
+        maintenance_tags:
+          $ref: '#/components/schemas/maintenance_tags'
+        tags:
           items:
             type: string
           type: array
-        identifier:
-          type: integer
-        is_anonymous:
-          type: boolean
-        is_bot:
-          type: boolean
-        name:
-          type: string
       type: object
-    error:
+    event:
       type: object
       properties:
-        message:
+        identifier:
           type: string
-        status:
-          type: integer
+          example: f7c737db-4b50-4982-8804-7c2b9fa89020
+        type:
+          type: string
+          example: update
+          enum:
+          - update
+          - delete
+        date_created:
+          type: string
+          example: 2026-03-18 12:38:23.437225+00:00
+    article_body:
+      properties:
+        html:
+          type: string
+        wikitext:
+          type: string
+      type: object
+    referencerisk:
+      properties:
+        reference_risk_score:
+          type: number
+      type: object
   securitySchemes:
     bearerAuth:
       type: http
