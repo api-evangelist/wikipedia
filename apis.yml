@@ -11,6 +11,18 @@ description: >-
   governed by the Wikimedia API usage guidelines: contactable User-Agent, serial requests,
   maxlag for bots.
 url: https://api.wikimedia.org/wiki/Main_Page
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
