@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MediaWiki Action articles Links API
+  title: MediaWiki Action articles Files API
   description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
 
 
@@ -31,16 +31,16 @@ servers:
 - url: https://www.mediawiki.org/w
   description: MediaWiki.org
 tags:
-- name: Links
-  description: Page relationships - language and media links
+- name: Files
+  description: Media file metadata
 paths:
-  /page/{title}/links/language:
+  /file/{title}:
     get:
-      operationId: getPageLanguageLinks
-      summary: MediaWiki Core REST Get Language Links for a Page
-      description: Return interlanguage links (same topic in other languages) for a page.
+      operationId: getFile
+      summary: MediaWiki Core REST Get File Metadata and Download Links
+      description: Retrieve metadata for a media file including download URLs at multiple sizes.
       tags:
-      - Links
+      - Files
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
@@ -50,65 +50,22 @@ paths:
         required: true
         schema:
           type: string
-        description: URL-encoded page title
-        example: Earth
+        example: File:Earth_Eastern_Hemisphere.jpg
       responses:
         '200':
-          description: Language links
+          description: Successful response
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LanguageLink'
-  /page/{title}/links/media:
-    get:
-      operationId: getPageMediaLinks
-      summary: MediaWiki Core REST Get Media Files Used on a Page
-      description: List media files referenced from a page.
-      tags:
-      - Links
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-      parameters:
-      - name: title
-        in: path
-        required: true
-        schema:
-          type: string
-        description: URL-encoded page title
-        example: Earth
-      responses:
-        '200':
-          description: Files used on the page
+                $ref: '#/components/schemas/File'
+        '404':
+          description: Not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  files:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/File'
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LanguageLink:
-      type: object
-      properties:
-        code:
-          type: string
-          example: de
-          description: Language code
-        name:
-          type: string
-          example: Deutsch
-        key:
-          type: string
-          example: Erde
-        title:
-          type: string
-          example: Erde
     File:
       type: object
       description: A media file descriptor.
@@ -161,6 +118,22 @@ components:
             url:
               type: string
               format: uri
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
   securitySchemes:
     BearerAuth:
       type: http

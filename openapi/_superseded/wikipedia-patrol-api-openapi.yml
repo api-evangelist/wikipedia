@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MediaWiki Action articles Edit API
+  title: MediaWiki Action articles Patrol API
   description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
 
 
@@ -31,8 +31,8 @@ servers:
 - url: https://www.mediawiki.org/w
   description: MediaWiki.org
 tags:
-- name: Edit
-  description: Create/modify page content (action=edit)
+- name: Patrol
+  description: Mark edits as patrolled (action=patrol)
 paths:
   /api.php:
     post:
@@ -40,7 +40,7 @@ paths:
       summary: MediaWiki Action Dispatch an Action API Call (POST)
       description: Generic dispatch endpoint for write operations. Use ?action=edit to create/modify pages, ?action=upload for files, ?action=login or ?action=clientlogin to authenticate. All write operations require a CSRF token from action=query&meta=tokens. POSTs are not cached - use them for writes only.
       tags:
-      - Edit
+      - Patrol
       parameters:
       - name: action
         in: query

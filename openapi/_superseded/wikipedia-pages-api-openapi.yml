@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MediaWiki Action articles Pages API
   description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
@@ -226,54 +226,6 @@ paths:
       - BearerAuth: []
 components:
   schemas:
-    UpdatePageRequest:
-      type: object
-      required:
-      - source
-      - comment
-      - latest
-      properties:
-        source:
-          type: string
-        comment:
-          type: string
-        content_model:
-          type: string
-        latest:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: integer
-              description: Latest revision ID known to the client (for optimistic concurrency)
-        token:
-          type: string
-    CreatePageRequest:
-      type: object
-      required:
-      - source
-      - title
-      - comment
-      properties:
-        source:
-          type: string
-          description: Wikitext source for the new page
-          example: '''''''Hello, world.'''''''
-        title:
-          type: string
-          description: New page title
-          example: User:Example/Sandbox
-        comment:
-          type: string
-          description: Edit summary
-          example: Creating sandbox page
-        content_model:
-          type: string
-          example: wikitext
-        token:
-          type: string
-          description: CSRF token from Action API
     Page:
       type: object
       description: A MediaWiki page object.
@@ -323,6 +275,31 @@ components:
         html:
           type: string
           description: Rendered HTML
+    CreatePageRequest:
+      type: object
+      required:
+      - source
+      - title
+      - comment
+      properties:
+        source:
+          type: string
+          description: Wikitext source for the new page
+          example: '''''''Hello, world.'''''''
+        title:
+          type: string
+          description: New page title
+          example: User:Example/Sandbox
+        comment:
+          type: string
+          description: Edit summary
+          example: Creating sandbox page
+        content_model:
+          type: string
+          example: wikitext
+        token:
+          type: string
+          description: CSRF token from Action API
     Error:
       type: object
       properties:
@@ -339,6 +316,29 @@ components:
         httpReason:
           type: string
           example: Not Found
+    UpdatePageRequest:
+      type: object
+      required:
+      - source
+      - comment
+      - latest
+      properties:
+        source:
+          type: string
+        comment:
+          type: string
+        content_model:
+          type: string
+        latest:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: integer
+              description: Latest revision ID known to the client (for optimistic concurrency)
+        token:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,35 +1,22 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MediaWiki Action articles batches API
-  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+  title: Wikimedia Enterprise API spec Batches API
+  description: 'OpenAPI 3.0 specification for the Metadata, On-demand, Snapshot, and Realtime Batch API(s) of WME.
 
 
-    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
-  version: '1.45'
-  x-generated-from: documentation
-  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
-  x-last-validated: '2026-05-29'
-  contact:
-    name: Wikimedia Foundation
-    url: https://www.mediawiki.org/wiki/API:Etiquette
-  license:
-    name: CC BY-SA 4.0
-    url: https://creativecommons.org/licenses/by-sa/4.0/
+    While we provide this swagger spec for quick reference, our official documentation is located on our website:
+
+
+    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+
+    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
+
+    '
+  version: 2.0.0
 servers:
-- url: https://en.wikipedia.org/w
-  description: English Wikipedia
-- url: https://{lang}.wikipedia.org/w
-  description: Per-language Wikipedia
-  variables:
-    lang:
-      default: en
-      description: Language code
-- url: https://commons.wikimedia.org/w
-  description: Wikimedia Commons
-- url: https://www.wikidata.org/w
-  description: Wikidata
-- url: https://www.mediawiki.org/w
-  description: MediaWiki.org
+- url: https://api.enterprise.wikimedia.com
+security:
+- bearerAuth: []
 tags:
 - name: batches
   description: Realtime Batch API
@@ -763,51 +750,12 @@ components:
           type: string
         value:
           type: string
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     article_namespace:
       type: object
       properties:
         identifier:
           type: number
           example: 0
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    batch:
-      type: object
-      properties:
-        identifier:
-          type: string
-        name:
-          type: string
-        version:
-          type: string
-        in_language:
-          $ref: '#/components/schemas/language'
-        is_part_of:
-          $ref: '#/components/schemas/project'
-        namespace:
-          $ref: '#/components/schemas/article_namespace'
-        size:
-          $ref: '#/components/schemas/size'
     size:
       type: object
       properties:
@@ -834,13 +782,47 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    batch:
+      type: object
+      properties:
+        identifier:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        in_language:
+          $ref: '#/components/schemas/language'
+        is_part_of:
+          $ref: '#/components/schemas/project'
+        namespace:
+          $ref: '#/components/schemas/article_namespace'
+        size:
+          $ref: '#/components/schemas/size'
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
-      description: OAuth 2.0 bearer token from meta.wikimedia.org
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: '{wiki}wikiUserID'
-      description: Session cookie obtained via action=login or action=clientlogin
+      bearerFormat: JWT

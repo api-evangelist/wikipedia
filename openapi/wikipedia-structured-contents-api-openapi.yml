@@ -1,35 +1,22 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MediaWiki Action articles structured-contents API
-  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+  title: Wikimedia Enterprise API spec Structured Contents API
+  description: 'OpenAPI 3.0 specification for the Metadata, On-demand, Snapshot, and Realtime Batch API(s) of WME.
 
 
-    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
-  version: '1.45'
-  x-generated-from: documentation
-  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
-  x-last-validated: '2026-05-29'
-  contact:
-    name: Wikimedia Foundation
-    url: https://www.mediawiki.org/wiki/API:Etiquette
-  license:
-    name: CC BY-SA 4.0
-    url: https://creativecommons.org/licenses/by-sa/4.0/
+    While we provide this swagger spec for quick reference, our official documentation is located on our website:
+
+
+    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+
+    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
+
+    '
+  version: 2.0.0
 servers:
-- url: https://en.wikipedia.org/w
-  description: English Wikipedia
-- url: https://{lang}.wikipedia.org/w
-  description: Per-language Wikipedia
-  variables:
-    lang:
-      default: en
-      description: Language code
-- url: https://commons.wikimedia.org/w
-  description: Wikimedia Commons
-- url: https://www.wikidata.org/w
-  description: Wikidata
-- url: https://www.mediawiki.org/w
-  description: MediaWiki.org
+- url: https://api.enterprise.wikimedia.com
+security:
+- bearerAuth: []
 tags:
 - name: structured-contents
   description: (Beta) Structured Contents On-demand API
@@ -277,78 +264,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    version:
-      properties:
-        comment:
-          type: string
-        editor:
-          $ref: '#/components/schemas/editor'
-        identifier:
-          type: integer
-        is_flagged_stable:
-          type: boolean
-        is_minor_edit:
-          type: boolean
-        noindex:
-          type: boolean
-        scores:
-          $ref: '#/components/schemas/scores'
-        maintenance_tags:
-          $ref: '#/components/schemas/maintenance_tags'
-        tags:
-          items:
-            type: string
-          type: array
-      type: object
-    citation:
-      type: object
-      properties:
-        identifier:
-          type: string
-        group:
-          type: string
-        text:
-          type: string
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    entity:
-      type: object
-      properties:
-        identifier:
-          type: string
-        url:
-          type: string
-    maintenance_tags:
-      properties:
-        citation_needed_count:
-          type: integer
-        pov_count:
-          type: integer
-        clarification_needed_count:
-          type: integer
-        update_count:
-          type: integer
-      type: object
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     structured-content:
       properties:
         name:
@@ -394,25 +309,71 @@ components:
         tables:
           $ref: '#/components/schemas/table'
       type: object
-    scores:
-      properties:
-        revertrisk:
-          $ref: '#/components/schemas/revertrisk'
-        referencerisk:
-          $ref: '#/components/schemas/referencerisk'
-        referenceneed:
-          $ref: '#/components/schemas/referenceneed'
+    citation:
       type: object
-    referencerisk:
       properties:
-        reference_risk_score:
+        identifier:
+          type: string
+        group:
+          type: string
+        text:
+          type: string
+    part:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        has_parts:
+          type: array
+          items:
+            type: object
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/citation'
+    table:
+      type: object
+      properties:
+        identifier:
+          type: string
+        headers:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                value:
+                  type: string
+        rows:
+          type: array
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                value:
+                  type: string
+        confidence_score:
           type: number
-      type: object
-    referenceneed:
-      properties:
-        reference_need_score:
-          type: number
-      type: object
+          minimum: 0
+          maximum: 1
     image:
       type: object
       properties:
@@ -458,100 +419,6 @@ components:
           enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
           description: Mediawiki media type of the image
           example: drawing
-    part:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        value:
-          type: string
-        values:
-          type: array
-          items:
-            type: string
-        has_parts:
-          type: array
-          items:
-            type: object
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/image'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        citations:
-          type: array
-          items:
-            $ref: '#/components/schemas/citation'
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    table:
-      type: object
-      properties:
-        identifier:
-          type: string
-        headers:
-          type: array
-          items:
-            type: array
-            items:
-              type: object
-              properties:
-                value:
-                  type: string
-        rows:
-          type: array
-          items:
-            type: array
-            items:
-              type: object
-              properties:
-                value:
-                  type: string
-        confidence_score:
-          type: number
-          minimum: 0
-          maximum: 1
-    revertrisk:
-      properties:
-        prediction:
-          type: boolean
-        probability:
-          properties:
-            'false':
-              type: number
-            'true':
-              type: number
-          type: object
-      type: object
-    editor:
-      properties:
-        date_started:
-          type: string
-        edit_count:
-          type: integer
-        groups:
-          items:
-            type: string
-          type: array
-        identifier:
-          type: integer
-        is_anonymous:
-          type: boolean
-        is_bot:
-          type: boolean
-        name:
-          type: string
-      type: object
     reference:
       type: object
       properties:
@@ -583,17 +450,74 @@ components:
                 $ref: '#/components/schemas/link'
         parent_reference:
           type: string
-    link:
+    referenceneed:
+      properties:
+        reference_need_score:
+          type: number
+      type: object
+    referencerisk:
+      properties:
+        reference_risk_score:
+          type: number
+      type: object
+    scores:
+      properties:
+        revertrisk:
+          $ref: '#/components/schemas/revertrisk'
+        referencerisk:
+          $ref: '#/components/schemas/referencerisk'
+        referenceneed:
+          $ref: '#/components/schemas/referenceneed'
+      type: object
+    maintenance_tags:
+      properties:
+        citation_needed_count:
+          type: integer
+        pov_count:
+          type: integer
+        clarification_needed_count:
+          type: integer
+        update_count:
+          type: integer
+      type: object
+    version:
+      properties:
+        comment:
+          type: string
+        editor:
+          $ref: '#/components/schemas/editor'
+        identifier:
+          type: integer
+        is_flagged_stable:
+          type: boolean
+        is_minor_edit:
+          type: boolean
+        noindex:
+          type: boolean
+        scores:
+          $ref: '#/components/schemas/scores'
+        maintenance_tags:
+          $ref: '#/components/schemas/maintenance_tags'
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    language:
       type: object
       properties:
-        url:
+        identifier:
           type: string
-        text:
+          example: en
+        name:
           type: string
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/image'
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
     license:
       type: object
       properties:
@@ -623,6 +547,31 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    link:
+      type: object
+      properties:
+        url:
+          type: string
+        text:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    entity:
+      type: object
+      properties:
+        identifier:
+          type: string
+        url:
+          type: string
     thumbnail:
       type: object
       properties:
@@ -638,13 +587,46 @@ components:
           description: Thumbnail height in pixels
           type: integer
           example: 255
+    revertrisk:
+      properties:
+        prediction:
+          type: boolean
+        probability:
+          properties:
+            'false':
+              type: number
+            'true':
+              type: number
+          type: object
+      type: object
+    editor:
+      properties:
+        date_started:
+          type: string
+        edit_count:
+          type: integer
+        groups:
+          items:
+            type: string
+          type: array
+        identifier:
+          type: integer
+        is_anonymous:
+          type: boolean
+        is_bot:
+          type: boolean
+        name:
+          type: string
+      type: object
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
-      description: OAuth 2.0 bearer token from meta.wikimedia.org
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: '{wiki}wikiUserID'
-      description: Session cookie obtained via action=login or action=clientlogin
+      bearerFormat: JWT

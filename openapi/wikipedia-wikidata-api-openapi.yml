@@ -1,35 +1,22 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MediaWiki Action articles wikidata API
-  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
+  title: Wikimedia Enterprise API spec Wikidata API
+  description: 'OpenAPI 3.0 specification for the Metadata, On-demand, Snapshot, and Realtime Batch API(s) of WME.
 
 
-    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
-  version: '1.45'
-  x-generated-from: documentation
-  x-source-url: https://www.mediawiki.org/wiki/API:Main_page
-  x-last-validated: '2026-05-29'
-  contact:
-    name: Wikimedia Foundation
-    url: https://www.mediawiki.org/wiki/API:Etiquette
-  license:
-    name: CC BY-SA 4.0
-    url: https://creativecommons.org/licenses/by-sa/4.0/
+    While we provide this swagger spec for quick reference, our official documentation is located on our website:
+
+
+    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+
+    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
+
+    '
+  version: 2.0.0
 servers:
-- url: https://en.wikipedia.org/w
-  description: English Wikipedia
-- url: https://{lang}.wikipedia.org/w
-  description: Per-language Wikipedia
-  variables:
-    lang:
-      default: en
-      description: Language code
-- url: https://commons.wikimedia.org/w
-  description: Wikimedia Commons
-- url: https://www.wikidata.org/w
-  description: Wikidata
-- url: https://www.mediawiki.org/w
-  description: MediaWiki.org
+- url: https://api.enterprise.wikimedia.com
+security:
+- bearerAuth: []
 tags:
 - name: wikidata
 paths:
@@ -680,70 +667,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    wikidata_entity_property:
-      type: object
-      required:
-      - identifier
-      - data_type
-      properties:
-        identifier:
-          type: string
-          description: Wikidata Property identifier (P-number, e.g. P31).
-          example: P31
-        data_type:
-          type: string
-          description: The expected data type of the value for this property, e.g. time, quantity, wikibase-item, url, string. The actual data type of the value for this property is found in statements.PID.property.value.type
-          example: time
-        labels:
-          type: object
-          description: Key-value pairs with property labels in different languages
-          example:
-            en: instance of
-            de: Instanz von
-            fr: instance de
-    article_namespace:
+    visibility:
       type: object
       properties:
-        identifier:
-          type: number
-          example: 0
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    event:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: f7c737db-4b50-4982-8804-7c2b9fa89020
-        type:
-          type: string
-          example: update
-          enum:
-          - update
-          - delete
-        date_created:
-          type: string
-          example: 2026-03-18 12:38:23.437225+00:00
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
+        comment:
+          type: boolean
+          example: true
+        text:
+          type: boolean
+          example: true
+        user:
+          type: boolean
+          example: false
+    wikidata_statements:
+      type: array
+      description: Array of statement objects for this property
+      items:
+        $ref: '#/components/schemas/wikidata_statement'
     wikidata_article:
       type: object
       required:
@@ -829,41 +769,6 @@ components:
           $ref: '#/components/schemas/wikidata_entity_qualifier'
         references:
           $ref: '#/components/schemas/wikidata_entity_statement_reference'
-    wikidata_entity_reference_part:
-      type: object
-      required:
-      - property
-      - value
-      properties:
-        property:
-          description: The property this reference part refers to. Has the same substructure as statements.PID.property
-          $ref: '#/components/schemas/wikidata_entity_property'
-        value:
-          description: The value of the reference part. Has the same substructure as statements.PROPERTYID.value
-          $ref: '#/components/schemas/wikidata_entity_value'
-    wikidata_sitelinks:
-      type: object
-      description: Mapping of this Wikidata item to other Wikimedia project site URLs
-      required:
-      - title
-      - badges
-      - url
-      properties:
-        title:
-          type: string
-          description: Title of the linked page
-          example: Pentominium
-        badges:
-          type: array
-          description: Badge identifiers for this sitelink
-          example:
-          - Q17437796
-          - Q6540326
-        url:
-          type: string
-          format: uri
-          description: URL to the linked page
-          example: https://de.wikipedia.org/wiki/Pentominium
     wikidata_entity_statement_reference:
       type: object
       description: Reference supporting a Wikidata statement
@@ -915,69 +820,23 @@ components:
           $ref: '#/components/schemas/wikidata_statements'
         sitelinks:
           $ref: '#/components/schemas/wikidata_sitelinks'
-    visibility:
+    protection:
       type: object
       properties:
-        comment:
-          type: boolean
-          example: true
-        text:
-          type: boolean
-          example: true
-        user:
-          type: boolean
-          example: false
-    license:
-      type: object
-      properties:
-        identifier:
+        expiry:
           type: string
-          example: CC-BY-SA-4.0
-        name:
+          enum:
+          - infinite
+          - indefinite
+          - infinity
+          - never
+          example: infinity
+        level:
           type: string
-          example: Creative Commons Attribution-ShareAlike License 4.0
-        url:
+          example: extendedconfirmed
+        type:
           type: string
-          example: https://creativecommons.org/licenses/by-sa/4.0/
-    wikidata_entity_qualifier:
-      type: object
-      description: Qualifier further describing or refining the value of a property in a statement
-      required:
-      - property
-      - value
-      properties:
-        property:
-          $ref: '#/components/schemas/wikidata_entity_property'
-        value:
-          $ref: '#/components/schemas/wikidata_entity_value'
-    project:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: enwiki
-        code:
-          type: string
-          example: wiki
-        name:
-          type: string
-          example: Wikipedia
-        url:
-          type: string
-          example: https://en.wikipedia.org
-        in_language:
-          $ref: '#/components/schemas/language'
-    wikidata_statements:
-      type: array
-      description: Array of statement objects for this property
-      items:
-        $ref: '#/components/schemas/wikidata_statement'
-    wikidata_labels:
-      type: object
-      description: key-value pairs with labels in different languages
-      example:
-        ce: Оьзлер
-        en: Özler
+          example: edit
     wikidata_entity_value:
       type: object
       description: This object represents the actual value in a statement or qualifier
@@ -1005,30 +864,153 @@ components:
             timezone: '0'
         labels:
           $ref: '#/components/schemas/wikidata_labels'
-    protection:
+    language:
       type: object
       properties:
-        expiry:
+        identifier:
           type: string
-          enum:
-          - infinite
-          - indefinite
-          - infinity
-          - never
-          example: infinity
-        level:
+          example: en
+        name:
           type: string
-          example: extendedconfirmed
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    event:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: f7c737db-4b50-4982-8804-7c2b9fa89020
         type:
           type: string
-          example: edit
+          example: update
+          enum:
+          - update
+          - delete
+        date_created:
+          type: string
+          example: 2026-03-18 12:38:23.437225+00:00
+    license:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: CC-BY-SA-4.0
+        name:
+          type: string
+          example: Creative Commons Attribution-ShareAlike License 4.0
+        url:
+          type: string
+          example: https://creativecommons.org/licenses/by-sa/4.0/
+    wikidata_entity_property:
+      type: object
+      required:
+      - identifier
+      - data_type
+      properties:
+        identifier:
+          type: string
+          description: Wikidata Property identifier (P-number, e.g. P31).
+          example: P31
+        data_type:
+          type: string
+          description: The expected data type of the value for this property, e.g. time, quantity, wikibase-item, url, string. The actual data type of the value for this property is found in statements.PID.property.value.type
+          example: time
+        labels:
+          type: object
+          description: Key-value pairs with property labels in different languages
+          example:
+            en: instance of
+            de: Instanz von
+            fr: instance de
+    project:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+    wikidata_entity_qualifier:
+      type: object
+      description: Qualifier further describing or refining the value of a property in a statement
+      required:
+      - property
+      - value
+      properties:
+        property:
+          $ref: '#/components/schemas/wikidata_entity_property'
+        value:
+          $ref: '#/components/schemas/wikidata_entity_value'
+    wikidata_entity_reference_part:
+      type: object
+      required:
+      - property
+      - value
+      properties:
+        property:
+          description: The property this reference part refers to. Has the same substructure as statements.PID.property
+          $ref: '#/components/schemas/wikidata_entity_property'
+        value:
+          description: The value of the reference part. Has the same substructure as statements.PROPERTYID.value
+          $ref: '#/components/schemas/wikidata_entity_value'
+    wikidata_sitelinks:
+      type: object
+      description: Mapping of this Wikidata item to other Wikimedia project site URLs
+      required:
+      - title
+      - badges
+      - url
+      properties:
+        title:
+          type: string
+          description: Title of the linked page
+          example: Pentominium
+        badges:
+          type: array
+          description: Badge identifiers for this sitelink
+          example:
+          - Q17437796
+          - Q6540326
+        url:
+          type: string
+          format: uri
+          description: URL to the linked page
+          example: https://de.wikipedia.org/wiki/Pentominium
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    wikidata_labels:
+      type: object
+      description: key-value pairs with labels in different languages
+      example:
+        ce: Оьзлер
+        en: Özler
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
-      description: OAuth 2.0 bearer token from meta.wikimedia.org
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: '{wiki}wikiUserID'
-      description: Session cookie obtained via action=login or action=clientlogin
+      bearerFormat: JWT
