@@ -204,7 +204,7 @@ apis:
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
   tags:
-  - Codes
+  - codes
   tags_raw:
   - codes
   properties:
@@ -250,7 +250,7 @@ apis:
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
   tags:
-  - Language
+  - languages
   tags_raw:
   - languages
   properties:
@@ -384,7 +384,7 @@ apis:
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
   tags:
-  - Namespaces
+  - namespaces
   tags_raw:
   - namespaces
   properties:
@@ -430,7 +430,7 @@ apis:
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
   tags:
-  - Offline
+  - offline
   tags_raw:
   - offline
   properties:
@@ -700,6 +700,8 @@ apis:
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
   tags:
+  - Structured Contents
+  tags_raw:
   - structured-contents
   properties:
   - type: OpenAPI
