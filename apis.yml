@@ -918,6 +918,96 @@ apis:
     url: https://github.com/wikimedia-enterprise/wme-sdk-go
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
+- aid: wikipedia:wikipedia-edit-api
+  name: Wikipedia / MediaWiki Edit API
+  description: Create/modify page content (action=edit)
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Edit
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-edit-api-openapi.yml
+- aid: wikipedia:wikipedia-files-api
+  name: Wikipedia / MediaWiki Files API
+  description: Media file metadata
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-files-api-openapi.yml
+- aid: wikipedia:wikipedia-history-api
+  name: Wikipedia / MediaWiki History API
+  description: Page revision history and edit statistics
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-history-api-openapi.yml
+- aid: wikipedia:wikipedia-links-api
+  name: Wikipedia / MediaWiki Links API
+  description: Page relationships - language and media links
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Links
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-links-api-openapi.yml
+- aid: wikipedia:wikipedia-pages-api
+  name: Wikipedia / MediaWiki Pages API
+  description: Page metadata, HTML, source, create, update
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-pages-api-openapi.yml
+- aid: wikipedia:wikipedia-query-api
+  name: Wikipedia / MediaWiki Query API
+  description: Read-only data retrieval (action=query) — pages, revisions, links, search
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-query-api-openapi.yml
+- aid: wikipedia:wikipedia-revisions-api
+  name: Wikipedia / MediaWiki Revisions API
+  description: Individual revision retrieval and comparison
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Revisions
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-revisions-api-openapi.yml
+- aid: wikipedia:wikipedia-search-api
+  name: Wikipedia / MediaWiki Search API
+  description: Title and full-text search
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-search-api-openapi.yml
+- aid: wikipedia:wikipedia-sparql-api
+  name: Wikipedia / MediaWiki SPARQL API
+  description: SPARQL 1.1 query endpoint
+  humanURL: https://www.mediawiki.org/wiki/API:Main_page
+  baseURL: https://en.wikipedia.org/w/api.php
+  tags:
+  - SPARQL
+  properties:
+  - type: OpenAPI
+    url: openapi/wikipedia-sparql-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/wikipedia-agentic-access.yml
