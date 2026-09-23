@@ -7,11 +7,9 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
@@ -117,6 +115,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots structured contents
+      x-summary-source: derived
+      operationId: getV2SnapshotsStructuredContents
+      x-operation-id-source: derived
     post:
       tags:
       - structured-snapshots
@@ -209,6 +211,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create snapshots structured contents
+      x-summary-source: derived
+      operationId: postV2SnapshotsStructuredContents
+      x-operation-id-source: derived
   /v2/snapshots/structured-contents/{identifier}:
     summary: Structured Contents Snapshot Info (Beta)
     description: Information on a specific structured contents snapshot bundle.
@@ -313,6 +319,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots structured contents by identifier
+      x-summary-source: derived
+      operationId: getV2SnapshotsStructuredContentsByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
       - structured-snapshots
@@ -418,6 +428,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create snapshots structured contents by identifier
+      x-summary-source: derived
+      operationId: postV2SnapshotsStructuredContentsByIdentifier
+      x-operation-id-source: derived
   /v2/snapshots/structured-contents/{identifier}/download:
     summary: Structured Contents Snapshot Download (Beta)
     description: Downloadable bundle of structured contents of all current revisions in a specified project and namespace. Updated daily at 12:00 UTC.
@@ -538,6 +552,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: headV2SnapshotsStructuredContentsByIdentifierDownload
+      x-operation-id-source: derived
     get:
       tags:
       - structured-snapshots
@@ -630,17 +646,34 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots structured contents by identifier download
+      x-summary-source: derived
+      operationId: getV2SnapshotsStructuredContentsByIdentifierDownload
+      x-operation-id-source: derived
 components:
   schemas:
-    size:
+    error:
       type: object
       properties:
-        unit_text:
+        message:
           type: string
-          example: B
-        value:
-          type: number
-          example: 76760
+        status:
+          type: integer
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
     snapshot:
       type: object
       properties:
@@ -662,41 +695,6 @@ components:
           type: array
           items:
             type: string
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    article_namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     project:
       type: object
       properties:
@@ -714,6 +712,28 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
   securitySchemes:
     bearerAuth:
       type: http

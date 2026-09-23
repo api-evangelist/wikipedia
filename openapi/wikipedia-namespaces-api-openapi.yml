@@ -7,18 +7,16 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
 security:
 - bearerAuth: []
 tags:
-- name: namespaces
+- name: Namespaces
   description: Metadata
   externalDocs:
     description: enterprise docs - metadata
@@ -29,7 +27,7 @@ paths:
     description: List of available namespaces. Includes name, identifier and description.
     get:
       tags:
-      - namespaces
+      - Namespaces
       parameters:
       - in: query
         name: fields
@@ -117,9 +115,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get namespaces
+      x-summary-source: derived
+      operationId: getV2Namespaces
+      x-operation-id-source: derived
     post:
       tags:
-      - namespaces
+      - Namespaces
       requestBody:
         content:
           application/json:
@@ -209,12 +211,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create namespaces
+      x-summary-source: derived
+      operationId: postV2Namespaces
+      x-operation-id-source: derived
   /v2/namespaces/{identifier}:
     summary: Namespace Info
     description: Information on specific namespace. Includes name, identifier and description.
     get:
       tags:
-      - namespaces
+      - Namespaces
       parameters:
       - in: path
         name: identifier
@@ -312,9 +318,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get namespaces by identifier
+      x-summary-source: derived
+      operationId: getV2NamespacesByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - namespaces
+      - Namespaces
       parameters:
       - in: path
         name: identifier
@@ -416,20 +426,12 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create namespaces by identifier
+      x-summary-source: derived
+      operationId: postV2NamespacesByIdentifier
+      x-operation-id-source: derived
 components:
   schemas:
-    namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
-        name:
-          type: string
-          example: Article
-        description:
-          type: string
-          example: The Article namespace, also known as the main or mainspace, is where a project's primary content resides, whether articles, entries, or main documents depending on the Wikimedia project.
     error:
       type: object
       properties:
@@ -444,6 +446,18 @@ components:
           type: string
         value:
           type: string
+    namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+        name:
+          type: string
+          example: Article
+        description:
+          type: string
+          example: The Article namespace, also known as the main or mainspace, is where a project's primary content resides, whether articles, entries, or main documents depending on the Wikimedia project.
   securitySchemes:
     bearerAuth:
       type: http

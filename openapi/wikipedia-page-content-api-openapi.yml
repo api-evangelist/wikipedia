@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   version: 1.0.0
   title: Wikimedia REST Page content API
-  description: "This API provides cacheable and straightforward access to Wikimedia content and data, in machine-readable formats.\n### Global Rules\n- Limit your clients to no more than 200 requests/s to this API.\n  Each API endpoint's documentation may detail more specific usage limits.\n- Set a unique `User-Agent` or `Api-User-Agent` header that\n  allows us to contact you quickly. Email addresses or URLs\n  of contact pages work well.\n\nBy using this API, you agree to Wikimedia's [Terms of Use](https://wikimediafoundation.org/wiki/Terms_of_Use) and [Privacy Policy](https://wikimediafoundation.org/wiki/Privacy_policy). Unless otherwise specified in the endpoint documentation below, content accessed via this API is licensed under the [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) and [GFDL](https://www.gnu.org/copyleft/fdl.html) licenses, and you irrevocably agree to release modifications or additions made through this API under these licenses. Check the [Wikimedia REST API documentation](https://www.mediawiki.org/wiki/Wikimedia_REST_API) for background and details.\n### Endpoint documentation\nPlease consult each endpoint's documentation for details on:\n- Licensing information for the specific type of content\n  and data served via the endpoint.\n- Stability markers to inform you about development status and\n  change policy, according to\n  [our API version policy](https://www.mediawiki.org/wiki/API_versioning).\n- Endpoint specific usage limits.\n"
+  description: This API provides cacheable and straightforward access to Wikimedia content and data, in machine-readable formats.
   termsOfService: https://wikimediafoundation.org/wiki/Terms_of_Use
   contact:
     name: the Wikimedia Services team
@@ -22,17 +22,15 @@ servers:
       default: en
       description: Language code (e.g. en, de, fr, es, ja)
 tags:
-- name: Page content
+- name: Page Content
   description: page content in different formats
 paths:
   /page/:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST List Page-related API Entry Points.
-      description: 'Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
-
-        '
+      - Page Content
+      summary: Wikimedia REST List Page-related API Entry Points
+      description: 'Stability: stable'
       responses:
         '200':
           description: A list of page-related API end points.
@@ -50,19 +48,19 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPage
+      x-operation-id-source: derived
   /page/title/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Revision Metadata for a Title.
+      - Page Content
+      summary: Wikimedia REST Get Revision Metadata for a Title
       description: 'Returns the revision metadata for the given title. If a revision ID is provided,
 
         metadata for that revision is returned, otherwise the latest revision ID is assumed.
 
 
-        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
-
-        '
+        Stability: stable.'
       parameters:
       - name: title
         in: path
@@ -137,19 +135,19 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageTitleByTitle
+      x-operation-id-source: derived
   /page/title/{title}/{revision}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Revision Metadata for a Title.
+      - Page Content
+      summary: Wikimedia REST Get Revision Metadata for a Title
       description: 'Returns the revision metadata for the given title. If a revision ID is provided,
 
         metadata for that revision is returned, otherwise the latest revision ID is assumed.
 
 
-        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
-
-        '
+        Stability: stable.'
       parameters:
       - name: title
         in: path
@@ -230,14 +228,14 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageTitleByTitleByRevision
+      x-operation-id-source: derived
   /page/html/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Latest HTML for a Title.
-      description: 'Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
-
-        '
+      - Page Content
+      summary: Wikimedia REST Get Latest HTML for a Title
+      description: 'Stability: stable'
       parameters:
       - name: title
         in: path
@@ -367,14 +365,14 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageHtmlByTitle
+      x-operation-id-source: derived
   /page/html/{title}/{revision}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get HTML for a Specific Title/revision & Optionally Timeuuid.
-      description: 'Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
-
-        '
+      - Page Content
+      summary: Wikimedia REST Get HTML for a Specific Title/revision & Optionally Timeuuid
+      description: 'Stability: stable'
       operationId: getFormatRevision
       parameters:
       - name: title
@@ -522,11 +520,9 @@ paths:
   /page/lint/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get the Linter Errors for a Specific Title/revision.
-      description: 'Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-
-        '
+      - Page Content
+      summary: Wikimedia REST Get the Linter Errors for a Specific Title/revision
+      description: 'Stability: experimental'
       parameters:
       - name: title
         in: path
@@ -602,14 +598,14 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageLintByTitle
+      x-operation-id-source: derived
   /page/lint/{title}/{revision}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get the Linter Errors for a Specific Title/revision.
-      description: 'Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-
-        '
+      - Page Content
+      summary: Wikimedia REST Get the Linter Errors for a Specific Title/revision
+      description: 'Stability: experimental'
       parameters:
       - name: title
         in: path
@@ -691,11 +687,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageLintByTitleByRevision
+      x-operation-id-source: derived
   /page/summary/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Basic Metadata and Simplified Article Introduction.
+      - Page Content
+      summary: Wikimedia REST Get Basic Metadata and Simplified Article Introduction
       description: 'The summary response includes an extract of the first paragraph of the page in plain text
 
         and HTML as well as the type of page. This is useful for page previews (fka. Hovercards,
@@ -703,12 +701,10 @@ paths:
         aka. Popups) on the web and link previews in the apps.
 
 
-        Stability: [stable](https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team/API_endpoint_stability_policy#Stable)
+        Stability: stable
 
 
-        Please follow [wikitech-l](https://lists.wikimedia.org/mailman/listinfo/wikitech-l) or [mediawiki-api-announce](https://lists.wikimedia.org/mailman/listinfo/mediawiki-api-announce) for announcements of breaking changes.
-
-        '
+        Please follow wikitech-l or mediawiki-api-announce for announcements of breaking changes.'
       parameters:
       - name: title
         in: path
@@ -809,22 +805,22 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageSummaryByTitle
+      x-operation-id-source: derived
   /page/media-list/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get List of Media Files Used on a Page.
+      - Page Content
+      summary: Wikimedia REST Get List of Media Files Used on a Page
       description: 'Gets the list of media items (images, audio, and video) in the order in which they appear on a
 
         given wiki page.
 
 
-        Stability: [unstable](https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team/API_endpoint_stability_policy#Unstable)
+        Stability: unstable
 
 
-        Please follow [wikitech-l](https://lists.wikimedia.org/mailman/listinfo/wikitech-l) or [mediawiki-api-announce](https://lists.wikimedia.org/mailman/listinfo/mediawiki-api-announce) for announcements of breaking changes.
-
-        '
+        Please follow wikitech-l or mediawiki-api-announce for announcements of breaking changes.'
       parameters:
       - name: title
         in: path
@@ -919,19 +915,17 @@ paths:
   /page/media-list/{title}/{revision}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get List of Media Files Used on a Page.
+      - Page Content
+      summary: Wikimedia REST Get List of Media Files Used on a Page
       description: 'Gets the list of media items (images, audio, and video) in the order in which they appear on a
 
         given wiki page.
 
 
-        Stability: [unstable](https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team/API_endpoint_stability_policy#Unstable)
+        Stability: unstable
 
 
-        Please follow [wikitech-l](https://lists.wikimedia.org/mailman/listinfo/wikitech-l) or [mediawiki-api-announce](https://lists.wikimedia.org/mailman/listinfo/mediawiki-api-announce) for announcements of breaking changes.
-
-        '
+        Please follow wikitech-l or mediawiki-api-announce for announcements of breaking changes.'
       parameters:
       - name: title
         in: path
@@ -1034,9 +1028,66 @@ paths:
   /page/mobile-html/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Page Content HTML Optimized for Mobile Consumption.
-      description: "Gets the content HTML optimized for mobile consumption for the given page. This content\nis derived from Parsoid HTML (see `/page/html/{title}` endpoint).\nThe difference to Parsoid HTML is roughly:\n* Some elements and attributes not needed for the reading case are removed.\n* LeadIntroductionTransform: The introductory paragraph is moved before an infobox.\n* RedLinks: Red links are flattened (=turned into span elements).\n* WidenImage: images that should be displayed in gallery are widened.\n* Section headings are slightly changed by wrapping the headings inside a div and adding\n  a span element inside the new div for the edit buttons.\n* Additional classes are added to img elements to fix issues with non-white backgrounds.\n  See Theme support below for instructions on how to enable that.\n* Pagelib CSS files needed to display the content are referenced.\n* LazyLoadTransform: server-side portion/prep for lazy loading of images.\n* CollapseTable: server-side portion/prep for collapsing tables.\n\nWhat's not included? What parts of the PageLibrary does a client still have to do?\n* Theme support: Themes can be turned on by adding a theme class to the root <html> tag.\n  Possible class names are:\n  * `pagelib_theme_default`\n  * `pagelib_theme_dark`\n  * `pagelib_theme_black`\n  * `pagelib_theme_sepia`\n\n  The pagelib JS has functionality to do that: ThemeTransform.setTheme(document, theme).\n* Dim images: DimImagesTransform.dim(window, enable)\n* PlatformTransform.classify(window) to trigger Android and iOS app specific CSS rules\n* LazyLoadTransformer: client side companion of LazyLoadTransform (note the extra *er*\nhere)\n* FooterTransformer: seems to be more UI than content, requires I18N, too\n\nStability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n"
+      - Page Content
+      summary: Wikimedia REST Get Page Content HTML Optimized for Mobile Consumption
+      description: 'Gets the content HTML optimized for mobile consumption for the given page. This content
+
+        is derived from Parsoid HTML (see `/page/html/{title}` endpoint).
+
+        The difference to Parsoid HTML is roughly:
+
+        * Some elements and attributes not needed for the reading case are removed.
+
+        * LeadIntroductionTransform: The introductory paragraph is moved before an infobox.
+
+        * RedLinks: Red links are flattened (=turned into span elements).
+
+        * WidenImage: images that should be displayed in gallery are widened.
+
+        * Section headings are slightly changed by wrapping the headings inside a div and adding
+
+        a span element inside the new div for the edit buttons.
+
+        * Additional classes are added to img elements to fix issues with non-white backgrounds.
+
+        See Theme support below for instructions on how to enable that.
+
+        * Pagelib CSS files needed to display the content are referenced.
+
+        * LazyLoadTransform: server-side portion/prep for lazy loading of images.
+
+        * CollapseTable: server-side portion/prep for collapsing tables.
+
+
+        What''s not included? What parts of the PageLibrary does a client still have to do?
+
+        * Theme support: Themes can be turned on by adding a theme class to the root tag.
+
+        Possible class names are:
+
+        * `pagelib_theme_default`
+
+        * `pagelib_theme_dark`
+
+        * `pagelib_theme_black`
+
+        * `pagelib_theme_sepia`
+
+
+        The pagelib JS has functionality to do that: ThemeTransform.setTheme(document, theme).
+
+        * Dim images: DimImagesTransform.dim(window, enable)
+
+        * PlatformTransform.classify(window) to trigger Android and iOS app specific CSS rules
+
+        * LazyLoadTransformer: client side companion of LazyLoadTransform (note the extra *er*
+
+        here)
+
+        * FooterTransformer: seems to be more UI than content, requires I18N, too
+
+
+        Stability: experimental'
       parameters:
       - name: title
         in: path
@@ -1125,9 +1176,66 @@ paths:
   /page/mobile-html/{title}/{revision}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Page Content HTML Optimized for Mobile Consumption.
-      description: "Gets the content HTML optimized for mobile consumption for the given page. This content\nis derived from Parsoid HTML (see `/page/html/{title}` endpoint).\nThe difference to Parsoid HTML is roughly:\n* Some elements and attributes not needed for the reading case are removed.\n* LeadIntroductionTransform: The introductory paragraph is moved before an infobox.\n* RedLinks: Red links are flattened (=turned into span elements).\n* WidenImage: images that should be displayed in gallery are widened.\n* Section headings are slightly changed by wrapping the headings inside a div and adding\n  a span element inside the new div for the edit buttons.\n* Additional classes are added to img elements to fix issues with non-white backgrounds.\n  See Theme support below for instructions on how to enable that.\n* Pagelib CSS files needed to display the content are referenced.\n* LazyLoadTransform: server-side portion/prep for lazy loading of images.\n* CollapseTable: server-side portion/prep for collapsing tables.\n\nWhat's not included? What parts of the PageLibrary does a client still have to do?\n* Theme support: Themes can be turned on by adding a theme class to the root <html> tag.\n  Possible class names are:\n  * `pagelib_theme_default`\n  * `pagelib_theme_dark`\n  * `pagelib_theme_black`\n  * `pagelib_theme_sepia`\n\n  The pagelib JS has functionality to do that: ThemeTransform.setTheme(document, theme).\n* Dim images: DimImagesTransform.dim(window, enable)\n* PlatformTransform.classify(window) to trigger Android and iOS app specific CSS rules\n* LazyLoadTransformer: client side companion of LazyLoadTransform (note the extra *er*\nhere)\n* FooterTransformer: seems to be more UI than content, requires I18N, too\n\nStability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n"
+      - Page Content
+      summary: Wikimedia REST Get Page Content HTML Optimized for Mobile Consumption
+      description: 'Gets the content HTML optimized for mobile consumption for the given page. This content
+
+        is derived from Parsoid HTML (see `/page/html/{title}` endpoint).
+
+        The difference to Parsoid HTML is roughly:
+
+        * Some elements and attributes not needed for the reading case are removed.
+
+        * LeadIntroductionTransform: The introductory paragraph is moved before an infobox.
+
+        * RedLinks: Red links are flattened (=turned into span elements).
+
+        * WidenImage: images that should be displayed in gallery are widened.
+
+        * Section headings are slightly changed by wrapping the headings inside a div and adding
+
+        a span element inside the new div for the edit buttons.
+
+        * Additional classes are added to img elements to fix issues with non-white backgrounds.
+
+        See Theme support below for instructions on how to enable that.
+
+        * Pagelib CSS files needed to display the content are referenced.
+
+        * LazyLoadTransform: server-side portion/prep for lazy loading of images.
+
+        * CollapseTable: server-side portion/prep for collapsing tables.
+
+
+        What''s not included? What parts of the PageLibrary does a client still have to do?
+
+        * Theme support: Themes can be turned on by adding a theme class to the root tag.
+
+        Possible class names are:
+
+        * `pagelib_theme_default`
+
+        * `pagelib_theme_dark`
+
+        * `pagelib_theme_black`
+
+        * `pagelib_theme_sepia`
+
+
+        The pagelib JS has functionality to do that: ThemeTransform.setTheme(document, theme).
+
+        * Dim images: DimImagesTransform.dim(window, enable)
+
+        * PlatformTransform.classify(window) to trigger Android and iOS app specific CSS rules
+
+        * LazyLoadTransformer: client side companion of LazyLoadTransform (note the extra *er*
+
+        here)
+
+        * FooterTransformer: seems to be more UI than content, requires I18N, too
+
+
+        Stability: experimental'
       parameters:
       - name: title
         in: path
@@ -1224,14 +1332,12 @@ paths:
   /page/mobile-html-offline-resources/{title}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Styles and Scripts for Offline Consumption of Mobile-html-formatted Pages
+      - Page Content
+      summary: Wikimedia REST Get Styles and Scripts for Offline Consumption of…
       description: 'Provides links to scripts and styles needed for viewing mobile-html-formatted pages offline.
 
 
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-
-        '
+        Stability: experimental'
       parameters:
       - name: title
         in: path
@@ -1265,17 +1371,17 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageMobileHtmlOfflineResourcesByTitle
+      x-operation-id-source: derived
   /page/mobile-html-offline-resources/{title}/{revision}:
     get:
       tags:
-      - Page content
-      summary: Wikimedia REST Get Styles and Scripts for Offline Consumption of Mobile-html-formatted Pages
+      - Page Content
+      summary: Wikimedia REST Get Styles and Scripts for Offline Consumption of…
       description: 'Provides links to scripts and styles needed for viewing mobile-html-formatted pages offline.
 
 
-        Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
-
-        '
+        Stability: experimental'
       parameters:
       - name: title
         in: path
@@ -1317,25 +1423,39 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: getPageMobileHtmlOfflineResourcesByTitleByRevision
+      x-operation-id-source: derived
 components:
   schemas:
-    titles_set:
+    thumbnail:
       type: object
       properties:
-        canonical:
+        source:
           type: string
-          description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
-        normalized:
-          type: string
-          description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
-        display:
-          type: string
-          description: the title as it should be displayed to the user
+          description: Thumbnail image URI
+        width:
+          type: integer
+          description: Thumbnail width
+        height:
+          type: integer
+          description: Thumnail height
       required:
-      - canonical
-      - normalized
-      - display
-      description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
+      - height
+      - source
+      - width
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
     revisionInfo:
       type: object
       description: Complete information about the revision
@@ -1372,6 +1492,63 @@ components:
           type: boolean
         page_language:
           type: string
+    media_item:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The file page title
+        type:
+          type: string
+          enum:
+          - image
+          - video
+          - audio
+        section_id:
+          type: integer
+          description: section ID in which the item is found on the page
+        showInGallery:
+          type: boolean
+          description: whether the client should show the file in an image gallery presentation
+        caption:
+          type: object
+          properties:
+            html:
+              type: string
+              description: on-wiki caption for the media item, including all HTML markup
+            text:
+              type: string
+              description: plain text of the on-wiki caption for the media item
+        original:
+          type: object
+          description: reference to a Mathoid-rendered math formula image
+          properties:
+            source:
+              type: string
+              description: Mathoid image render URL
+            mime:
+              type: string
+              description: the Mathoid image mime type
+      required:
+      - type
+      - section_id
+      - showInGallery
+    originalimage:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Original image URI
+        width:
+          type: integer
+          description: Original image width
+        height:
+          type: integer
+          description: Original image height
+      required:
+      - height
+      - source
+      - width
     listing:
       description: The result format for listings
       required:
@@ -1391,22 +1568,6 @@ components:
                 href:
                   type: string
                   description: Relative link to next result page.
-    originalimage:
-      type: object
-      properties:
-        source:
-          type: string
-          description: Original image URI
-        width:
-          type: integer
-          description: Original image width
-        height:
-          type: integer
-          description: Original image height
-      required:
-      - height
-      - source
-      - width
     revision:
       description: Result format for revision items
       required:
@@ -1419,22 +1580,41 @@ components:
           format: int32
         items:
           $ref: '#/components/schemas/revisionInfo'
-    thumbnail:
+    titles_set:
       type: object
       properties:
-        source:
+        canonical:
           type: string
-          description: Thumbnail image URI
-        width:
-          type: integer
-          description: Thumbnail width
-        height:
-          type: integer
-          description: Thumnail height
+          description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
+        normalized:
+          type: string
+          description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
+        display:
+          type: string
+          description: the title as it should be displayed to the user
       required:
-      - height
-      - source
-      - width
+      - canonical
+      - normalized
+      - display
+      description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
+    media_list:
+      type: object
+      properties:
+        revision:
+          type: string
+          description: the revision ID used to create the list
+        tid:
+          type: string
+          description: the time uuid of the page rendering used to create the list
+        items:
+          type: array
+          description: a list of media items
+          items:
+            $ref: '#/components/schemas/media_item'
+      required:
+      - items
+      - revision
+      - tid
     summary:
       type: object
       properties:
@@ -1503,77 +1683,5 @@ components:
       - extract
       - lang
       - titles
-    problem:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        instance:
-          type: string
-    media_list:
-      type: object
-      properties:
-        revision:
-          type: string
-          description: the revision ID used to create the list
-        tid:
-          type: string
-          description: the time uuid of the page rendering used to create the list
-        items:
-          type: array
-          description: a list of media items
-          items:
-            $ref: '#/components/schemas/media_item'
-      required:
-      - items
-      - revision
-      - tid
-    media_item:
-      type: object
-      properties:
-        title:
-          type: string
-          description: The file page title
-        type:
-          type: string
-          enum:
-          - image
-          - video
-          - audio
-        section_id:
-          type: integer
-          description: section ID in which the item is found on the page
-        showInGallery:
-          type: boolean
-          description: whether the client should show the file in an image gallery presentation
-        caption:
-          type: object
-          properties:
-            html:
-              type: string
-              description: on-wiki caption for the media item, including all HTML markup
-            text:
-              type: string
-              description: plain text of the on-wiki caption for the media item
-        original:
-          type: object
-          description: reference to a Mathoid-rendered math formula image
-          properties:
-            source:
-              type: string
-              description: Mathoid image render URL
-            mime:
-              type: string
-              description: the Mathoid image mime type
-      required:
-      - type
-      - section_id
-      - showInGallery
 x-host-basePath: /api/rest_v1
 x-default-params: {}

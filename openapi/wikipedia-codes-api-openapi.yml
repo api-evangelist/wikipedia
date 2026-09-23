@@ -7,18 +7,16 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
 security:
 - bearerAuth: []
 tags:
-- name: codes
+- name: Codes
   description: Metadata
   externalDocs:
     description: enterprise docs - metadata
@@ -31,7 +29,7 @@ paths:
       '
     get:
       tags:
-      - codes
+      - Codes
       parameters:
       - in: query
         name: fields
@@ -132,9 +130,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get codes
+      x-summary-source: derived
+      operationId: getV2Codes
+      x-operation-id-source: derived
     post:
       tags:
-      - codes
+      - Codes
       requestBody:
         content:
           application/json:
@@ -237,12 +239,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create codes
+      x-summary-source: derived
+      operationId: postV2Codes
+      x-operation-id-source: derived
   /v2/codes/{identifier}:
     summary: Project Code Info
     description: Information on a specific project code (type). Includes identifier, name and description.
     get:
       tags:
-      - codes
+      - Codes
       parameters:
       - in: path
         name: identifier
@@ -341,9 +347,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get codes by identifier
+      x-summary-source: derived
+      operationId: getV2CodesByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - codes
+      - Codes
       parameters:
       - in: path
         name: identifier
@@ -446,6 +456,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create codes by identifier
+      x-summary-source: derived
+      operationId: postV2CodesByIdentifier
+      x-operation-id-source: derived
 components:
   schemas:
     error:

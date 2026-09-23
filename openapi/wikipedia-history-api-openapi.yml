@@ -192,6 +192,15 @@ components:
         httpReason:
           type: string
           example: Not Found
+    EditCounts:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Edit count of requested type
+        limit:
+          type: boolean
+          description: Whether the count was truncated
     HistoryResponse:
       type: object
       properties:
@@ -213,15 +222,6 @@ components:
           - string
           - 'null'
           format: uri
-    EditCounts:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Edit count of requested type
-        limit:
-          type: boolean
-          description: Whether the count was truncated
   securitySchemes:
     BearerAuth:
       type: http

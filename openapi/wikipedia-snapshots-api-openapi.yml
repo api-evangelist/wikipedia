@@ -7,18 +7,16 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
 security:
 - bearerAuth: []
 tags:
-- name: snapshots
+- name: Snapshots
   description: Snapshot API
   externalDocs:
     description: enterprise docs - snapshot api
@@ -29,7 +27,7 @@ paths:
     description: Returns a list of available project snapshots by namespace. Includes identifiers, file sizes and other relevant metadata.
     get:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: query
         name: fields
@@ -117,9 +115,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots
+      x-summary-source: derived
+      operationId: getV2Snapshots
+      x-operation-id-source: derived
     post:
       tags:
-      - snapshots
+      - Snapshots
       requestBody:
         content:
           application/json:
@@ -211,12 +213,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create snapshots
+      x-summary-source: derived
+      operationId: postV2Snapshots
+      x-operation-id-source: derived
   /v2/snapshots/{identifier}:
     summary: Snapshot Info
     description: Information on a specific Snapshot bundle. Includes identifiers, file sizes and other relevant metadata.
     get:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: identifier
@@ -315,9 +321,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots by identifier
+      x-summary-source: derived
+      operationId: getV2SnapshotsByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: identifier
@@ -420,6 +430,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create snapshots by identifier
+      x-summary-source: derived
+      operationId: postV2SnapshotsByIdentifier
+      x-operation-id-source: derived
   /v2/snapshots/{identifier}/download:
     summary: Snapshot Download
     description: Downloadable bundle of all current revisions in a specified project and namespace. Updated daily at 12:00 UTC.
@@ -427,7 +441,7 @@ paths:
       summary: Wikimedia Enterprise Project Snapshot Headers
       description: Set of headers that describe the snapshot download.
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: identifier
@@ -540,9 +554,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: headV2SnapshotsByIdentifierDownload
+      x-operation-id-source: derived
     get:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: identifier
@@ -632,12 +648,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots by identifier download
+      x-summary-source: derived
+      operationId: getV2SnapshotsByIdentifierDownload
+      x-operation-id-source: derived
   /v2/snapshots/{snapshot_identifier}/chunks:
     summary: Snapshot Chunks Available
     description: Returns a list of available chunks for a specific snapshot. Includes chunk identifiers and other relevant metadata.
     get:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: snapshot_identifier
@@ -743,9 +763,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots by snapshot identifier chunks
+      x-summary-source: derived
+      operationId: getV2SnapshotsBySnapshotIdentifierChunks
+      x-operation-id-source: derived
     post:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: snapshot_identifier
@@ -854,12 +878,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create snapshots by snapshot identifier chunks
+      x-summary-source: derived
+      operationId: postV2SnapshotsBySnapshotIdentifierChunks
+      x-operation-id-source: derived
   /v2/snapshots/{snapshot_identifier}/chunks/{identifier}:
     summary: Snapshot Chunk Info
     description: Information on a specific chunk of a snapshot. Includes chunk identifier, size, and other relevant metadata.
     get:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: snapshot_identifier
@@ -965,9 +993,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots by snapshot identifier chunks by identifier
+      x-summary-source: derived
+      operationId: getV2SnapshotsBySnapshotIdentifierChunksByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: snapshot_identifier
@@ -1077,6 +1109,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create snapshots by snapshot identifier chunks by identifier
+      x-summary-source: derived
+      operationId: postV2SnapshotsBySnapshotIdentifierChunksByIdentifier
+      x-operation-id-source: derived
   /v2/snapshots/{snapshot_identifier}/chunks/{identifier}/download:
     summary: Snapshot Chunk Download
     description: Downloadable bundle of a specific chunk from a snapshot. Returns a zipped tar file.
@@ -1084,7 +1120,7 @@ paths:
       summary: Wikimedia Enterprise Snapshot Chunk Download Headers
       description: Set of headers that describe the snapshot chunk download.
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: snapshot_identifier
@@ -1204,9 +1240,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: headV2SnapshotsBySnapshotIdentifierChunksByIdentifierDownload
+      x-operation-id-source: derived
     get:
       tags:
-      - snapshots
+      - Snapshots
       parameters:
       - in: path
         name: snapshot_identifier
@@ -1303,17 +1341,34 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get snapshots by snapshot identifier chunks by identifier download
+      x-summary-source: derived
+      operationId: getV2SnapshotsBySnapshotIdentifierChunksByIdentifierDownload
+      x-operation-id-source: derived
 components:
   schemas:
-    size:
+    error:
       type: object
       properties:
-        unit_text:
+        message:
           type: string
-          example: B
-        value:
-          type: number
-          example: 76760
+        status:
+          type: integer
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
     snapshot:
       type: object
       properties:
@@ -1335,41 +1390,6 @@ components:
           type: array
           items:
             type: string
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    article_namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     project:
       type: object
       properties:
@@ -1387,6 +1407,28 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
   securitySchemes:
     bearerAuth:
       type: http

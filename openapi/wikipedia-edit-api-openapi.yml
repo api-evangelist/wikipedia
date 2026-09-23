@@ -1,10 +1,7 @@
 openapi: 3.2.0
 info:
   title: MediaWiki Action Edit API
-  description: 'The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation. All operations dispatch via the ?action= query parameter. The API supports JSON, XML, and PHP serialization; JSON is the recommended format.
-
-
-    Wikimedia projects strongly recommend serial (not parallel) calls, the use of maxlag for non-interactive jobs, and a contactable User-Agent header. The Action API remains the primary write interface (edit, upload, login, patrol) even where the Core REST API is also available.'
+  description: The MediaWiki Action API is the original programmatic interface to MediaWiki, exposed under /w/api.php on every MediaWiki installation.
   version: '1.45'
   x-generated-from: documentation
   x-source-url: https://www.mediawiki.org/wiki/API:Main_page

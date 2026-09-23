@@ -7,18 +7,16 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
 security:
 - bearerAuth: []
 tags:
-- name: languages
+- name: Languages
   description: Metadata
   externalDocs:
     description: enterprise docs - metadata
@@ -31,7 +29,7 @@ paths:
       '
     get:
       tags:
-      - languages
+      - Languages
       parameters:
       - in: query
         name: fields
@@ -119,9 +117,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get languages
+      x-summary-source: derived
+      operationId: getV2Languages
+      x-operation-id-source: derived
     post:
       tags:
-      - languages
+      - Languages
       requestBody:
         content:
           application/json:
@@ -211,12 +213,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create languages
+      x-summary-source: derived
+      operationId: postV2Languages
+      x-operation-id-source: derived
   /v2/languages/{identifier}:
     summary: Language Info
     description: Information on specific language. Includes identifier, name, direction and other relevant metadata.
     get:
       tags:
-      - languages
+      - Languages
       parameters:
       - in: path
         name: identifier
@@ -315,9 +321,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get languages by identifier
+      x-summary-source: derived
+      operationId: getV2LanguagesByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - languages
+      - Languages
       parameters:
       - in: path
         name: identifier
@@ -420,6 +430,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create languages by identifier
+      x-summary-source: derived
+      operationId: postV2LanguagesByIdentifier
+      x-operation-id-source: derived
 components:
   schemas:
     language:

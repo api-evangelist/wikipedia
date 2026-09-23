@@ -7,18 +7,16 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
 security:
 - bearerAuth: []
 tags:
-- name: batches
+- name: Batches
   description: Realtime Batch API
   externalDocs:
     description: enterprise docs - realtime api
@@ -29,7 +27,7 @@ paths:
     description: Returns a list of available Realtime (Batch) bundles by date and hour (00, 01, ..., 23). Includes identifiers, file sizes and other relevant metadata.
     get:
       tags:
-      - batches
+      - Batches
       parameters:
       - in: path
         name: date
@@ -144,9 +142,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get batches by date by hour
+      x-summary-source: derived
+      operationId: getV2BatchesByDateByHour
+      x-operation-id-source: derived
     post:
       tags:
-      - batches
+      - Batches
       parameters:
       - in: path
         name: date
@@ -264,12 +266,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create batches by date by hour
+      x-summary-source: derived
+      operationId: postV2BatchesByDateByHour
+      x-operation-id-source: derived
   /v2/batches/{date}/{hour}/{identifier}:
     summary: Hourly Batch File Info
     description: Information on specific hourly batch. Includes identifier, file size and other relevant metadata.
     get:
       tags:
-      - batches
+      - Batches
       parameters:
       - in: path
         name: date
@@ -382,9 +388,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get batches by date by hour by identifier
+      x-summary-source: derived
+      operationId: getV2BatchesByDateByHourByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - batches
+      - Batches
       parameters:
       - in: path
         name: date
@@ -501,6 +511,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create batches by date by hour by identifier
+      x-summary-source: derived
+      operationId: postV2BatchesByDateByHourByIdentifier
+      x-operation-id-source: derived
   /v2/batches/{date}/{hour}/{identifier}/download:
     summary: Hourly Batch File Download
     description: Downloadable bundle of updated articles by project, namespace, date, and hour. Generated hourly starting at 00:00 UTC each day.
@@ -508,7 +522,7 @@ paths:
       summary: Wikimedia Enterprise Project Updates (Batch) Headers
       description: Set of headers that describe the hourly download.
       tags:
-      - batches
+      - Batches
       parameters:
       - in: path
         name: date
@@ -635,9 +649,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: headV2BatchesByDateByHourByIdentifierDownload
+      x-operation-id-source: derived
     get:
       tags:
-      - batches
+      - Batches
       parameters:
       - in: path
         name: date
@@ -741,17 +757,19 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get batches by date by hour by identifier download
+      x-summary-source: derived
+      operationId: getV2BatchesByDateByHourByIdentifierDownload
+      x-operation-id-source: derived
 components:
   schemas:
-    size:
+    error:
       type: object
       properties:
-        unit_text:
+        message:
           type: string
-          example: B
-        value:
-          type: number
-          example: 76760
+        status:
+          type: integer
     language:
       type: object
       properties:
@@ -767,19 +785,6 @@ components:
         direction:
           type: string
           example: ltr
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    article_namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
     batch:
       type: object
       properties:
@@ -797,13 +802,6 @@ components:
           $ref: '#/components/schemas/article_namespace'
         size:
           $ref: '#/components/schemas/size'
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     project:
       type: object
       properties:
@@ -821,6 +819,28 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    size:
+      type: object
+      properties:
+        unit_text:
+          type: string
+          example: B
+        value:
+          type: number
+          example: 76760
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
   securitySchemes:
     bearerAuth:
       type: http

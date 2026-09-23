@@ -7,18 +7,16 @@ info:
     While we provide this swagger spec for quick reference, our official documentation is located on our website:
 
 
-    - [Official Documentation](https://enterprise.wikimedia.com/docs/)
+    - Official Documentation
 
-    - [Data Dictionary & Schema](https://enterprise.wikimedia.com/docs/data-dictionary/)
-
-    '
+    - Data Dictionary & Schema'
   version: 2.0.0
 servers:
 - url: https://api.enterprise.wikimedia.com
 security:
 - bearerAuth: []
 tags:
-- name: projects
+- name: Projects
   description: Metadata
   externalDocs:
     description: enterprise docs - metadata
@@ -29,7 +27,7 @@ paths:
     description: List of available projects. Includes project identifier, name, language and other relevant metadata.
     get:
       tags:
-      - projects
+      - Projects
       parameters:
       - in: query
         name: fields
@@ -117,9 +115,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get projects
+      x-summary-source: derived
+      operationId: getV2Projects
+      x-operation-id-source: derived
     post:
       tags:
-      - projects
+      - Projects
       requestBody:
         content:
           application/json:
@@ -209,12 +211,16 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create projects
+      x-summary-source: derived
+      operationId: postV2Projects
+      x-operation-id-source: derived
   /v2/projects/{identifier}:
     summary: Project Info
     description: Information on specific project. Includes identifier, name, language and other relevant metadata.
     get:
       tags:
-      - projects
+      - Projects
       parameters:
       - in: path
         name: identifier
@@ -313,9 +319,13 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Get projects by identifier
+      x-summary-source: derived
+      operationId: getV2ProjectsByIdentifier
+      x-operation-id-source: derived
     post:
       tags:
-      - projects
+      - Projects
       parameters:
       - in: path
         name: identifier
@@ -418,6 +428,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      summary: Create projects by identifier
+      x-summary-source: derived
+      operationId: postV2ProjectsByIdentifier
+      x-operation-id-source: derived
 components:
   schemas:
     language:
@@ -435,13 +449,6 @@ components:
         direction:
           type: string
           example: ltr
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     project:
       type: object
       properties:
@@ -459,6 +466,13 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     filter:
       type: object
       properties:

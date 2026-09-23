@@ -251,22 +251,6 @@ components:
         token:
           type: string
           description: CSRF token from Action API
-    Error:
-      type: object
-      properties:
-        errorKey:
-          type: string
-          example: rest-no-match
-        messageTranslations:
-          type: object
-          additionalProperties:
-            type: string
-        httpCode:
-          type: integer
-          example: 404
-        httpReason:
-          type: string
-          example: Not Found
     UpdatePageRequest:
       type: object
       required:
@@ -290,6 +274,22 @@ components:
               description: Latest revision ID known to the client (for optimistic concurrency)
         token:
           type: string
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
     Page:
       type: object
       description: A MediaWiki page object.

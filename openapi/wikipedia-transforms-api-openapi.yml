@@ -39,7 +39,7 @@ paths:
       tags:
       - Transforms
       summary: Wikimedia REST Transform HTML to Wikitext
-      description: 'Transform [Parsoid HTML](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec)
+      description: 'Transform Parsoid HTML
 
         to Wikitext.
 
@@ -48,18 +48,16 @@ paths:
 
         pass in the `title`, `revision`, and `If-Match` header. This lets
 
-        [Parsoid](https://www.mediawiki.org/wiki/Parsoid) preserve small
+        Parsoid preserve small
 
         syntactic variations in wikitext, which ensures that diffs are
 
         readable.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: stable
 
-        - Rate limit: 25 req/s
-
-        '
+        - Rate limit: 25 req/s'
       parameters:
       - name: if-match
         in: header
@@ -126,6 +124,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformHtmlToWikitext
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -140,7 +140,7 @@ paths:
       tags:
       - Transforms
       summary: Wikimedia REST Transform HTML to Wikitext
-      description: 'Transform [Parsoid HTML](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec)
+      description: 'Transform Parsoid HTML
 
         to Wikitext.
 
@@ -149,18 +149,16 @@ paths:
 
         pass in the `title`, `revision`, and `If-Match` header. This lets
 
-        [Parsoid](https://www.mediawiki.org/wiki/Parsoid) preserve small
+        Parsoid preserve small
 
         syntactic variations in wikitext, which ensures that diffs are
 
         readable.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: stable
 
-        - Rate limit: 25 req/s
-
-        '
+        - Rate limit: 25 req/s'
       parameters:
       - name: title
         in: path
@@ -233,6 +231,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformHtmlToWikitextByTitle
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -247,7 +247,7 @@ paths:
       tags:
       - Transforms
       summary: Wikimedia REST Transform HTML to Wikitext
-      description: 'Transform [Parsoid HTML](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec)
+      description: 'Transform Parsoid HTML
 
         to Wikitext.
 
@@ -256,18 +256,16 @@ paths:
 
         pass in the `title`, `revision`, and `If-Match` header. This lets
 
-        [Parsoid](https://www.mediawiki.org/wiki/Parsoid) preserve small
+        Parsoid preserve small
 
         syntactic variations in wikitext, which ensures that diffs are
 
         readable.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: stable
 
-        - Rate limit: 25 req/s
-
-        '
+        - Rate limit: 25 req/s'
       parameters:
       - name: title
         in: path
@@ -346,6 +344,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformHtmlToWikitextByTitleByRevision
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -365,11 +365,9 @@ paths:
         also need to supply the title.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: stable
 
-        - Rate limit: 25 req/s (5 req/s when `stash: true`)
-
-        '
+        - Rate limit: 25 req/s (5 req/s when `stash: true`)'
       requestBody:
         content:
           multipart/form-data:
@@ -429,6 +427,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformWikitextToHtml
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -448,11 +448,9 @@ paths:
         also need to supply the title.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: stable
 
-        - Rate limit: 25 req/s (5 req/s when `stash: true`)
-
-        '
+        - Rate limit: 25 req/s (5 req/s when `stash: true`)'
       requestBody:
         content:
           multipart/form-data:
@@ -533,6 +531,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformWikitextToHtmlByTitle
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -552,11 +552,9 @@ paths:
         also need to supply the title.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Stability: stable
 
-        - Rate limit: 25 req/s (5 req/s when `stash: true`)
-
-        '
+        - Rate limit: 25 req/s (5 req/s when `stash: true`)'
       requestBody:
         content:
           multipart/form-data:
@@ -629,6 +627,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformWikitextToHtmlByTitleByRevision
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -646,11 +646,9 @@ paths:
       description: 'Parse the supplied wikitext and check it for lint errors.
 
 
-        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Stability: experimental
 
-        - Rate limit: 25 req/s
-
-        '
+        - Rate limit: 25 req/s'
       requestBody:
         content:
           multipart/form-data:
@@ -707,6 +705,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformWikitextToLint
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -724,11 +724,9 @@ paths:
       description: 'Parse the supplied wikitext and check it for lint errors.
 
 
-        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Stability: experimental
 
-        - Rate limit: 25 req/s
-
-        '
+        - Rate limit: 25 req/s'
       requestBody:
         content:
           multipart/form-data:
@@ -783,6 +781,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformWikitextToLintByTitle
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -800,11 +800,9 @@ paths:
       description: 'Parse the supplied wikitext and check it for lint errors.
 
 
-        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Stability: experimental
 
-        - Rate limit: 25 req/s
-
-        '
+        - Rate limit: 25 req/s'
       requestBody:
         content:
           multipart/form-data:
@@ -865,6 +863,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      operationId: postTransformWikitextToLintByTitleByRevision
+      x-operation-id-source: derived
     servers:
     - url: https://en.wikipedia.org/api/rest_v1
       description: English Wikipedia REST v1 endpoint
@@ -882,14 +882,12 @@ paths:
       description: 'Transform wikitext to Mobile HTML.
 
 
-        - Stability: [stable](https://www.mediawiki.org/wiki/Wikimedia_Product/Wikimedia_Product_Infrastructure_team/API_endpoint_stability_policy#Stable)
+        - Stability: stable
 
         - Rate limit: 25 req/s (5 req/s when `stash: true`)
 
 
-        Please follow [wikitech-l](https://lists.wikimedia.org/mailman/listinfo/wikitech-l) or [mediawiki-api-announce](https://lists.wikimedia.org/mailman/listinfo/mediawiki-api-announce) for announcements of breaking changes.
-
-        '
+        Please follow wikitech-l or mediawiki-api-announce for announcements of breaking changes.'
       parameters:
       - name: title
         in: path
