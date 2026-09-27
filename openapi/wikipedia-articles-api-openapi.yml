@@ -268,156 +268,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    license:
+    visibility:
       type: object
       properties:
-        identifier:
-          type: string
-          example: CC-BY-SA-4.0
-        name:
-          type: string
-          example: Creative Commons Attribution-ShareAlike License 4.0
-        url:
-          type: string
-          example: https://creativecommons.org/licenses/by-sa/4.0/
-    image:
-      type: object
-      properties:
-        content_url:
-          description: Image URL
-          format: uri
-          type: string
-          example: https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png
-        identifier:
-          type: string
-          format: uuid
-          description: Unique identifier for the image
-          example: 6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0
-        name:
-          type: string
-          description: Filename of the image
-          example: ./File:Flag_of_Italy.svg
-        width:
-          description: image width in pixels
-          type: integer
-          example: 156
-        height:
-          description: image height in pixels
-          type: integer
-          example: 255
-        thumbnail:
-          $ref: '#/components/schemas/thumbnail'
-        caption:
-          type: string
-          description: caption describing the image
-          example: Flag of Italy
-        alternative_text:
-          type: string
-          description: Alternative text description of the image for accessibility
-          example: a flag divided in three vertical sections colored green, white, and red from left to right
-        encoding_format:
-          type: string
-          format: mime_type
-          description: MIME type or encoding format of the image, constructed from the url
-          example: image/png
-        media_type:
-          type: string
-          enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
-          description: Mediawiki media type of the image
-          example: drawing
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    template:
-      properties:
-        name:
-          type: string
-        url:
-          type: string
-      type: object
-    part:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        value:
-          type: string
-        values:
-          type: array
-          items:
-            type: string
-        has_parts:
-          type: array
-          items:
-            type: object
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/image'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        citations:
-          type: array
-          items:
-            $ref: '#/components/schemas/citation'
-    editor:
-      properties:
-        date_started:
-          type: string
-        edit_count:
-          type: integer
-        groups:
-          items:
-            type: string
-          type: array
-        identifier:
-          type: integer
-        is_anonymous:
+        comment:
           type: boolean
-        is_bot:
-          type: boolean
-        name:
-          type: string
-      type: object
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
-    citation:
-      type: object
-      properties:
-        identifier:
-          type: string
-        group:
-          type: string
+          example: true
         text:
-          type: string
+          type: boolean
+          example: true
+        user:
+          type: boolean
+          example: false
     article:
       properties:
         event:
@@ -475,13 +337,68 @@ components:
         visibility:
           $ref: '#/components/schemas/visibility'
       type: object
-    entity:
+    referenceneed:
+      properties:
+        reference_need_score:
+          type: number
+      type: object
+    image:
       type: object
       properties:
+        content_url:
+          description: Image URL
+          format: uri
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/40px-Flag_of_Italy.svg.png
         identifier:
           type: string
-        url:
+          format: uuid
+          description: Unique identifier for the image
+          example: 6c71e85942c77b40266b6d6150405719897682f4b56989100f7c5de97fa631d0
+        name:
           type: string
+          description: Filename of the image
+          example: ./File:Flag_of_Italy.svg
+        width:
+          description: image width in pixels
+          type: integer
+          example: 156
+        height:
+          description: image height in pixels
+          type: integer
+          example: 255
+        thumbnail:
+          $ref: '#/components/schemas/thumbnail'
+        caption:
+          type: string
+          description: caption describing the image
+          example: Flag of Italy
+        alternative_text:
+          type: string
+          description: Alternative text description of the image for accessibility
+          example: a flag divided in three vertical sections colored green, white, and red from left to right
+        encoding_format:
+          type: string
+          format: mime_type
+          description: MIME type or encoding format of the image, constructed from the url
+          example: image/png
+        media_type:
+          type: string
+          enum: unknown, bitmap, drawing, audio, video, multimedia, office, text, executable, archive
+          description: Mediawiki media type of the image
+          example: drawing
+    revertrisk:
+      properties:
+        prediction:
+          type: boolean
+        probability:
+          properties:
+            'false':
+              type: number
+            'true':
+              type: number
+          type: object
+      type: object
     project:
       type: object
       properties:
@@ -499,6 +416,199 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
+    scores:
+      properties:
+        revertrisk:
+          $ref: '#/components/schemas/revertrisk'
+        referencerisk:
+          $ref: '#/components/schemas/referencerisk'
+        referenceneed:
+          $ref: '#/components/schemas/referenceneed'
+      type: object
+    protection:
+      type: object
+      properties:
+        expiry:
+          type: string
+          enum:
+          - infinite
+          - indefinite
+          - infinity
+          - never
+          example: infinity
+        level:
+          type: string
+          example: extendedconfirmed
+        type:
+          type: string
+          example: edit
+    version:
+      properties:
+        comment:
+          type: string
+        editor:
+          $ref: '#/components/schemas/editor'
+        identifier:
+          type: integer
+        is_flagged_stable:
+          type: boolean
+        is_minor_edit:
+          type: boolean
+        noindex:
+          type: boolean
+        scores:
+          $ref: '#/components/schemas/scores'
+        maintenance_tags:
+          $ref: '#/components/schemas/maintenance_tags'
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    article_body:
+      properties:
+        html:
+          type: string
+        wikitext:
+          type: string
+      type: object
+    redirect:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    thumbnail:
+      type: object
+      properties:
+        contentUrl:
+          type: string
+          format: uri
+          description: Thumbnail URL
+        width:
+          description: Thumbnail width in pixels
+          type: integer
+          example: 156
+        height:
+          description: Thumbnail height in pixels
+          type: integer
+          example: 255
+    referencerisk:
+      properties:
+        reference_risk_score:
+          type: number
+      type: object
+    license:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: CC-BY-SA-4.0
+        name:
+          type: string
+          example: Creative Commons Attribution-ShareAlike License 4.0
+        url:
+          type: string
+          example: https://creativecommons.org/licenses/by-sa/4.0/
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    part:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+        has_parts:
+          type: array
+          items:
+            type: object
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/citation'
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
+    citation:
+      type: object
+      properties:
+        identifier:
+          type: string
+        group:
+          type: string
+        text:
+          type: string
+    maintenance_tags:
+      properties:
+        citation_needed_count:
+          type: integer
+        pov_count:
+          type: integer
+        clarification_needed_count:
+          type: integer
+        update_count:
+          type: integer
+      type: object
+    template:
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    entity:
+      type: object
+      properties:
+        identifier:
+          type: string
+        url:
+          type: string
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     link:
       type: object
       properties:
@@ -525,133 +635,23 @@ components:
         date_created:
           type: string
           example: 2026-03-18 12:38:23.437225+00:00
-    thumbnail:
-      type: object
+    editor:
       properties:
-        contentUrl:
+        date_started:
           type: string
-          format: uri
-          description: Thumbnail URL
-        width:
-          description: Thumbnail width in pixels
+        edit_count:
           type: integer
-          example: 156
-        height:
-          description: Thumbnail height in pixels
-          type: integer
-          example: 255
-    maintenance_tags:
-      properties:
-        citation_needed_count:
-          type: integer
-        pov_count:
-          type: integer
-        clarification_needed_count:
-          type: integer
-        update_count:
-          type: integer
-      type: object
-    version:
-      properties:
-        comment:
-          type: string
-        editor:
-          $ref: '#/components/schemas/editor'
-        identifier:
-          type: integer
-        is_flagged_stable:
-          type: boolean
-        is_minor_edit:
-          type: boolean
-        noindex:
-          type: boolean
-        scores:
-          $ref: '#/components/schemas/scores'
-        maintenance_tags:
-          $ref: '#/components/schemas/maintenance_tags'
-        tags:
+        groups:
           items:
             type: string
           type: array
-      type: object
-    referenceneed:
-      properties:
-        reference_need_score:
-          type: number
-      type: object
-    article_namespace:
-      type: object
-      properties:
         identifier:
-          type: number
-          example: 0
-    referencerisk:
-      properties:
-        reference_risk_score:
-          type: number
-      type: object
-    scores:
-      properties:
-        revertrisk:
-          $ref: '#/components/schemas/revertrisk'
-        referencerisk:
-          $ref: '#/components/schemas/referencerisk'
-        referenceneed:
-          $ref: '#/components/schemas/referenceneed'
-      type: object
-    revertrisk:
-      properties:
-        prediction:
+          type: integer
+        is_anonymous:
           type: boolean
-        probability:
-          properties:
-            'false':
-              type: number
-            'true':
-              type: number
-          type: object
-      type: object
-    article_body:
-      properties:
-        html:
-          type: string
-        wikitext:
-          type: string
-      type: object
-    protection:
-      type: object
-      properties:
-        expiry:
-          type: string
-          enum:
-          - infinite
-          - indefinite
-          - infinity
-          - never
-          example: infinity
-        level:
-          type: string
-          example: extendedconfirmed
-        type:
-          type: string
-          example: edit
-    visibility:
-      type: object
-      properties:
-        comment:
+        is_bot:
           type: boolean
-          example: true
-        text:
-          type: boolean
-          example: true
-        user:
-          type: boolean
-          example: false
-    redirect:
-      properties:
         name:
-          type: string
-        url:
           type: string
       type: object
     category:

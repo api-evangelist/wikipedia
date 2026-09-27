@@ -51,7 +51,7 @@ tags:
   - Open Knowledge
   - Encyclopedia
   - Knowledge Graph
-  - Open-Source
+  - Open Source
   - Non-Profit
 tags_raw:
   - Open Data
@@ -61,6 +61,7 @@ tags_raw:
   - Knowledge Graph
   - Open Source
   - Non-Profit
+  - Open-Source
 apis:
 - aid: wikipedia:wikipedia-articles-api
   name: Wikipedia / MediaWiki articles API
@@ -201,7 +202,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-codes-api
-  name: Wikipedia / MediaWiki codes API
+  name: Wikipedia / MediaWiki Codes API
   description: Metadata
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -247,7 +248,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-languages-api
-  name: Wikipedia / MediaWiki languages API
+  name: Wikipedia / MediaWiki Languages API
   description: Metadata
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -381,7 +382,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-namespaces-api
-  name: Wikipedia / MediaWiki namespaces API
+  name: Wikipedia / MediaWiki Namespaces API
   description: Metadata
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -427,7 +428,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-offline-api
-  name: Wikipedia / MediaWiki offline API
+  name: Wikipedia / MediaWiki Offline API
   description: The offline API from Wikipedia / MediaWiki — 2 operation(s) for offline.
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -517,7 +518,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-projects-api
-  name: Wikipedia / MediaWiki projects API
+  name: Wikipedia / MediaWiki Projects API
   description: Metadata
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -655,7 +656,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-snapshots-api
-  name: Wikipedia / MediaWiki snapshots API
+  name: Wikipedia / MediaWiki Snapshots API
   description: Snapshot API
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -701,7 +702,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-structured-contents-api
-  name: Wikipedia / MediaWiki structured-contents API
+  name: Wikipedia / MediaWiki Structured Contents API
   description: (Beta) Structured Contents On-demand API
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -747,7 +748,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-structured-snapshots-api
-  name: Wikipedia / MediaWiki structured-snapshots API
+  name: Wikipedia / MediaWiki Structured Snapshots API
   description: (BETA) Structured Contents Snapshot API
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php
@@ -879,7 +880,7 @@ apis:
   - type: Postman
     url: https://github.com/wikimedia-enterprise/postman
 - aid: wikipedia:wikipedia-wikidata-api
-  name: Wikipedia / MediaWiki wikidata API
+  name: Wikipedia / MediaWiki Wikidata API
   description: The wikidata API from Wikipedia / MediaWiki — 3 operation(s) for wikidata.
   humanURL: https://www.mediawiki.org/wiki/API:Main_page
   baseURL: https://en.wikipedia.org/w/api.php

@@ -839,31 +839,6 @@ components:
           type: string
           format: date-time
           description: Last modification date (in ISO 8601)
-    problem:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        instance:
-          type: string
-    list_write:
-      title: list
-      type: object
-      properties:
-        name:
-          type: string
-          example: Planets
-        description:
-          type: string
-          example: Planets of the Solar System
-      required:
-      - name
     list_read:
       title: list
       type: object
@@ -904,5 +879,30 @@ components:
       required:
       - project
       - title
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+    list_write:
+      title: list
+      type: object
+      properties:
+        name:
+          type: string
+          example: Planets
+        description:
+          type: string
+          example: Planets of the Solar System
+      required:
+      - name
 x-host-basePath: /api/rest_v1
 x-default-params: {}

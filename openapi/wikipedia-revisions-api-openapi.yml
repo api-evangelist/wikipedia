@@ -268,22 +268,6 @@ components:
         delta:
           type: integer
           description: Byte delta from previous revision
-    Error:
-      type: object
-      properties:
-        errorKey:
-          type: string
-          example: rest-no-match
-        messageTranslations:
-          type: object
-          additionalProperties:
-            type: string
-        httpCode:
-          type: integer
-          example: 404
-        httpReason:
-          type: string
-          example: Not Found
     CompareResponse:
       type: object
       description: Comparison between two revisions.
@@ -315,6 +299,22 @@ components:
                 type: array
                 items:
                   type: object
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
   securitySchemes:
     BearerAuth:
       type: http

@@ -652,28 +652,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
-    language:
+    project:
       type: object
       properties:
         identifier:
           type: string
-          example: en
+          example: enwiki
+        code:
+          type: string
+          example: wiki
         name:
           type: string
-          example: English
-        alternate_name:
+          example: Wikipedia
+        url:
           type: string
-          example: English
-        direction:
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
+    filter:
+      type: object
+      properties:
+        field:
           type: string
-          example: ltr
+        value:
+          type: string
     snapshot:
       type: object
       properties:
@@ -695,23 +697,28 @@ components:
           type: array
           items:
             type: string
-    project:
+    language:
       type: object
       properties:
         identifier:
           type: string
-          example: enwiki
-        code:
-          type: string
-          example: wiki
+          example: en
         name:
           type: string
-          example: Wikipedia
-        url:
+          example: English
+        alternate_name:
           type: string
-          example: https://en.wikipedia.org
-        in_language:
-          $ref: '#/components/schemas/language'
+          example: English
+        direction:
+          type: string
+          example: ltr
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     size:
       type: object
       properties:
@@ -721,13 +728,6 @@ components:
         value:
           type: number
           example: 76760
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
     article_namespace:
       type: object
       properties:

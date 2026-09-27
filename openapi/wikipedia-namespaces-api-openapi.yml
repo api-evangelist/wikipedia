@@ -432,13 +432,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     filter:
       type: object
       properties:
@@ -446,6 +439,13 @@ components:
           type: string
         value:
           type: string
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     namespace:
       type: object
       properties:
