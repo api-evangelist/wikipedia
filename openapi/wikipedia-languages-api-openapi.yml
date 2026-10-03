@@ -436,6 +436,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     language:
       type: object
       properties:
@@ -451,13 +458,6 @@ components:
         direction:
           type: string
           example: ltr
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     filter:
       type: object
       properties:

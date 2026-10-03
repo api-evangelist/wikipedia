@@ -652,6 +652,41 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    article_namespace:
+      type: object
+      properties:
+        identifier:
+          type: number
+          example: 0
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+    language:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: en
+        name:
+          type: string
+          example: English
+        alternate_name:
+          type: string
+          example: English
+        direction:
+          type: string
+          example: ltr
     project:
       type: object
       properties:
@@ -669,13 +704,6 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
     snapshot:
       type: object
       properties:
@@ -697,28 +725,6 @@ components:
           type: array
           items:
             type: string
-    language:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: en
-        name:
-          type: string
-          example: English
-        alternate_name:
-          type: string
-          example: English
-        direction:
-          type: string
-          example: ltr
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     size:
       type: object
       properties:
@@ -728,12 +734,6 @@ components:
         value:
           type: number
           example: 76760
-    article_namespace:
-      type: object
-      properties:
-        identifier:
-          type: number
-          example: 0
   securitySchemes:
     bearerAuth:
       type: http

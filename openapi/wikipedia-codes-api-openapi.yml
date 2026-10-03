@@ -462,13 +462,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
     error:
       type: object
       properties:
@@ -484,6 +477,13 @@ components:
         name:
           type: string
         description:
+          type: string
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
           type: string
   securitySchemes:
     bearerAuth:

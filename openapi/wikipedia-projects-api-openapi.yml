@@ -434,6 +434,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     project:
       type: object
       properties:
@@ -451,20 +458,6 @@ components:
           example: https://en.wikipedia.org
         in_language:
           $ref: '#/components/schemas/language'
-    error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
-    filter:
-      type: object
-      properties:
-        field:
-          type: string
-        value:
-          type: string
     language:
       type: object
       properties:
@@ -480,6 +473,13 @@ components:
         direction:
           type: string
           example: ltr
+    filter:
+      type: object
+      properties:
+        field:
+          type: string
+        value:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -113,29 +113,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SearchResponse:
-      type: object
-      properties:
-        pages:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-    Error:
-      type: object
-      properties:
-        errorKey:
-          type: string
-          example: rest-no-match
-        messageTranslations:
-          type: object
-          additionalProperties:
-            type: string
-        httpCode:
-          type: integer
-          example: 404
-        httpReason:
-          type: string
-          example: Not Found
     SearchResult:
       type: object
       description: A search result page entry.
@@ -172,6 +149,29 @@ components:
             mimetype:
               type: string
               example: image/jpeg
+    SearchResponse:
+      type: object
+      properties:
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    Error:
+      type: object
+      properties:
+        errorKey:
+          type: string
+          example: rest-no-match
+        messageTranslations:
+          type: object
+          additionalProperties:
+            type: string
+        httpCode:
+          type: integer
+          example: 404
+        httpReason:
+          type: string
+          example: Not Found
   securitySchemes:
     BearerAuth:
       type: http

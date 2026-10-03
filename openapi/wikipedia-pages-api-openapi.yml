@@ -226,6 +226,54 @@ paths:
       - BearerAuth: []
 components:
   schemas:
+    UpdatePageRequest:
+      type: object
+      required:
+      - source
+      - comment
+      - latest
+      properties:
+        source:
+          type: string
+        comment:
+          type: string
+        content_model:
+          type: string
+        latest:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: integer
+              description: Latest revision ID known to the client (for optimistic concurrency)
+        token:
+          type: string
+    CreatePageRequest:
+      type: object
+      required:
+      - source
+      - title
+      - comment
+      properties:
+        source:
+          type: string
+          description: Wikitext source for the new page
+          example: '''''''Hello, world.'''''''
+        title:
+          type: string
+          description: New page title
+          example: User:Example/Sandbox
+        comment:
+          type: string
+          description: Edit summary
+          example: Creating sandbox page
+        content_model:
+          type: string
+          example: wikitext
+        token:
+          type: string
+          description: CSRF token from Action API
     Page:
       type: object
       description: A MediaWiki page object.
@@ -291,54 +339,6 @@ components:
         httpReason:
           type: string
           example: Not Found
-    CreatePageRequest:
-      type: object
-      required:
-      - source
-      - title
-      - comment
-      properties:
-        source:
-          type: string
-          description: Wikitext source for the new page
-          example: '''''''Hello, world.'''''''
-        title:
-          type: string
-          description: New page title
-          example: User:Example/Sandbox
-        comment:
-          type: string
-          description: Edit summary
-          example: Creating sandbox page
-        content_model:
-          type: string
-          example: wikitext
-        token:
-          type: string
-          description: CSRF token from Action API
-    UpdatePageRequest:
-      type: object
-      required:
-      - source
-      - comment
-      - latest
-      properties:
-        source:
-          type: string
-        comment:
-          type: string
-        content_model:
-          type: string
-        latest:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: integer
-              description: Latest revision ID known to the client (for optimistic concurrency)
-        token:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

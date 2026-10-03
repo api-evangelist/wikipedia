@@ -162,19 +162,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    problem:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        instance:
-          type: string
     recommendation_result:
       type: object
       properties:
@@ -211,5 +198,18 @@ components:
           source_language:
             type: string
             description: Source of the recommendation -- which wiki is recommending the current article.
+    problem:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
 x-host-basePath: /api/rest_v1
 x-default-params: {}

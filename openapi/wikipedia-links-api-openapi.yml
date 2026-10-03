@@ -93,22 +93,6 @@ paths:
                       $ref: '#/components/schemas/File'
 components:
   schemas:
-    LanguageLink:
-      type: object
-      properties:
-        code:
-          type: string
-          example: de
-          description: Language code
-        name:
-          type: string
-          example: Deutsch
-        key:
-          type: string
-          example: Erde
-        title:
-          type: string
-          example: Erde
     File:
       type: object
       description: A media file descriptor.
@@ -161,6 +145,22 @@ components:
             url:
               type: string
               format: uri
+    LanguageLink:
+      type: object
+      properties:
+        code:
+          type: string
+          example: de
+          description: Language code
+        name:
+          type: string
+          example: Deutsch
+        key:
+          type: string
+          example: Erde
+        title:
+          type: string
+          example: Erde
   securitySchemes:
     BearerAuth:
       type: http
