@@ -129,27 +129,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    HistoryResponse:
-      type: object
-      properties:
-        revisions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Revision'
-        latest:
-          type: string
-          format: uri
-          description: Link to latest revisions page
-        older:
-          type:
-          - string
-          - 'null'
-          format: uri
-        newer:
-          type:
-          - string
-          - 'null'
-          format: uri
     Revision:
       type: object
       description: A page revision.
@@ -197,15 +176,27 @@ components:
         delta:
           type: integer
           description: Byte delta from previous revision
-    EditCounts:
+    HistoryResponse:
       type: object
       properties:
-        count:
-          type: integer
-          description: Edit count of requested type
-        limit:
-          type: boolean
-          description: Whether the count was truncated
+        revisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Revision'
+        latest:
+          type: string
+          format: uri
+          description: Link to latest revisions page
+        older:
+          type:
+          - string
+          - 'null'
+          format: uri
+        newer:
+          type:
+          - string
+          - 'null'
+          format: uri
     Error:
       type: object
       properties:
@@ -222,6 +213,15 @@ components:
         httpReason:
           type: string
           example: Not Found
+    EditCounts:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Edit count of requested type
+        limit:
+          type: boolean
+          description: Whether the count was truncated
   securitySchemes:
     BearerAuth:
       type: http

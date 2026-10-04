@@ -763,13 +763,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    error:
+    size:
       type: object
       properties:
-        message:
+        unit_text:
           type: string
-        status:
-          type: integer
+          example: B
+        value:
+          type: number
+          example: 76760
     article_namespace:
       type: object
       properties:
@@ -783,6 +785,13 @@ components:
           type: string
         value:
           type: string
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     language:
       type: object
       properties:
@@ -798,23 +807,6 @@ components:
         direction:
           type: string
           example: ltr
-    project:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: enwiki
-        code:
-          type: string
-          example: wiki
-        name:
-          type: string
-          example: Wikipedia
-        url:
-          type: string
-          example: https://en.wikipedia.org
-        in_language:
-          $ref: '#/components/schemas/language'
     batch:
       type: object
       properties:
@@ -832,15 +824,23 @@ components:
           $ref: '#/components/schemas/article_namespace'
         size:
           $ref: '#/components/schemas/size'
-    size:
+    project:
       type: object
       properties:
-        unit_text:
+        identifier:
           type: string
-          example: B
-        value:
-          type: number
-          example: 76760
+          example: enwiki
+        code:
+          type: string
+          example: wiki
+        name:
+          type: string
+          example: Wikipedia
+        url:
+          type: string
+          example: https://en.wikipedia.org
+        in_language:
+          $ref: '#/components/schemas/language'
   securitySchemes:
     bearerAuth:
       type: http

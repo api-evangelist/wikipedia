@@ -226,29 +226,6 @@ paths:
       - BearerAuth: []
 components:
   schemas:
-    UpdatePageRequest:
-      type: object
-      required:
-      - source
-      - comment
-      - latest
-      properties:
-        source:
-          type: string
-        comment:
-          type: string
-        content_model:
-          type: string
-        latest:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: integer
-              description: Latest revision ID known to the client (for optimistic concurrency)
-        token:
-          type: string
     CreatePageRequest:
       type: object
       required:
@@ -339,6 +316,29 @@ components:
         httpReason:
           type: string
           example: Not Found
+    UpdatePageRequest:
+      type: object
+      required:
+      - source
+      - comment
+      - latest
+      properties:
+        source:
+          type: string
+        comment:
+          type: string
+        content_model:
+          type: string
+        latest:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: integer
+              description: Latest revision ID known to the client (for optimistic concurrency)
+        token:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

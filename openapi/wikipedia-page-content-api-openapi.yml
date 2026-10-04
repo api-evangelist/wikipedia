@@ -1427,19 +1427,41 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    problem:
-      required:
-      - type
+    thumbnail:
       type: object
       properties:
-        type:
+        source:
           type: string
-        title:
-          type: string
-        detail:
-          type: string
-        instance:
-          type: string
+          description: Thumbnail image URI
+        width:
+          type: integer
+          description: Thumbnail width
+        height:
+          type: integer
+          description: Thumnail height
+      required:
+      - height
+      - source
+      - width
+    listing:
+      description: The result format for listings
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: string
+        _links:
+          type: object
+          properties:
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+                  description: Relative link to next result page.
     media_item:
       type: object
       properties:
@@ -1481,59 +1503,6 @@ components:
       - type
       - section_id
       - showInGallery
-    originalimage:
-      type: object
-      properties:
-        source:
-          type: string
-          description: Original image URI
-        width:
-          type: integer
-          description: Original image width
-        height:
-          type: integer
-          description: Original image height
-      required:
-      - height
-      - source
-      - width
-    listing:
-      description: The result format for listings
-      required:
-      - items
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: string
-        _links:
-          type: object
-          properties:
-            next:
-              type: object
-              properties:
-                href:
-                  type: string
-                  description: Relative link to next result page.
-    media_list:
-      type: object
-      properties:
-        revision:
-          type: string
-          description: the revision ID used to create the list
-        tid:
-          type: string
-          description: the time uuid of the page rendering used to create the list
-        items:
-          type: array
-          description: a list of media items
-          items:
-            $ref: '#/components/schemas/media_item'
-      required:
-      - items
-      - revision
-      - tid
     revisionInfo:
       type: object
       description: Complete information about the revision
@@ -1570,6 +1539,41 @@ components:
           type: boolean
         page_language:
           type: string
+    titles_set:
+      type: object
+      properties:
+        canonical:
+          type: string
+          description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
+        normalized:
+          type: string
+          description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
+        display:
+          type: string
+          description: the title as it should be displayed to the user
+      required:
+      - canonical
+      - normalized
+      - display
+      description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
+    media_list:
+      type: object
+      properties:
+        revision:
+          type: string
+          description: the revision ID used to create the list
+        tid:
+          type: string
+          description: the time uuid of the page rendering used to create the list
+        items:
+          type: array
+          description: a list of media items
+          items:
+            $ref: '#/components/schemas/media_item'
+      required:
+      - items
+      - revision
+      - tid
     revision:
       description: Result format for revision items
       required:
@@ -1582,22 +1586,19 @@ components:
           format: int32
         items:
           $ref: '#/components/schemas/revisionInfo'
-    thumbnail:
+    problem:
+      required:
+      - type
       type: object
       properties:
-        source:
+        type:
           type: string
-          description: Thumbnail image URI
-        width:
-          type: integer
-          description: Thumbnail width
-        height:
-          type: integer
-          description: Thumnail height
-      required:
-      - height
-      - source
-      - width
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
     summary:
       type: object
       properties:
@@ -1666,22 +1667,21 @@ components:
       - extract
       - lang
       - titles
-    titles_set:
+    originalimage:
       type: object
       properties:
-        canonical:
+        source:
           type: string
-          description: the DB key (non-prefixed), e.g. may have _ instead of spaces, best for making request URIs, still requires Percent-encoding
-        normalized:
-          type: string
-          description: the normalized title (https://www.mediawiki.org/wiki/API:Query#Example_2:_Title_normalization), e.g. may have spaces instead of _
-        display:
-          type: string
-          description: the title as it should be displayed to the user
+          description: Original image URI
+        width:
+          type: integer
+          description: Original image width
+        height:
+          type: integer
+          description: Original image height
       required:
-      - canonical
-      - normalized
-      - display
-      description: a good example of the differences can be seen in https://en.wikipedia.org/api/rest_v1/page/summary/IOS_13
+      - height
+      - source
+      - width
 x-host-basePath: /api/rest_v1
 x-default-params: {}
