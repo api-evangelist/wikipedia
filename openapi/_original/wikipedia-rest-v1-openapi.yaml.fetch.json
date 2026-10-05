@@ -1,0 +1,12 @@
+{
+ "url": "https://en.wikipedia.org/api/rest_v1/?spec",
+ "requested_url": "https://en.wikipedia.org/api/rest_v1/?spec",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 106848,
+ "sha256": "becc6060586499ef407f8ecf62661ab4d828e92ebe1d6ef4e0b60c1b82eee639",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
